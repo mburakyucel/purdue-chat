@@ -18,9 +18,14 @@
             </mat-form-field>
           </div>
         </div>
+        <div class="row">
+          <div class="col">
+            <mat-progress-bar color="accent" *ngIf="this.loading" mode="indeterminate"></mat-progress-bar>
+          </div>
+        </div>
         <div class="row justify-content-center">
           <div class="col-auto">
-            <button mat-raised-button color="accent" (click)="this.register()">Register with email</button>
+            <button [disabled]="this.loading || !registerForm.valid" mat-raised-button color="accent" (click)="this.register()">Register</button>
           </div>
         </div>
       </form>

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-register',
@@ -13,18 +16,28 @@ export class RegisterComponent implements OnInit {
     email: new FormControl(''),
     password: new FormControl('')
   });
-  constructor(public authService: AuthService) { }
+  loading = false;
+  constructor(
+    public authService: AuthService,
+    private router: Router, 
+    private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
 
   async register() {
+    this.loading = true;
     (await this.authService.register(this.email.value, this.password.value)).subscribe(
       () => {
-        console.log("Success");
+        this._snackBar.open('Registration successful', 'Close', {
+          duration: 2000,
+        });
+        this.loading = false;
+        this.router.navigate(['login']);
       },
       (error) => {
         console.log(error)
+        this.loading = false
       }
     )
   }
