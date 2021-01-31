@@ -3,13 +3,12 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class RegisterComponent implements OnInit {
-
-  registerForm = new FormGroup({
+export class LoginComponent implements OnInit {
+  loginForm = new FormGroup({
     email: new FormControl(''),
     password: new FormControl('')
   });
@@ -18,8 +17,8 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  async register() {
-    (await this.authService.register(this.email.value, this.password.value)).subscribe(
+  async login() {
+    (await this.authService.login(this.email.value, this.password.value)).subscribe(
       () => {
         console.log("Success");
       },
@@ -30,11 +29,11 @@ export class RegisterComponent implements OnInit {
   }
 
   get email() {
-    return this.registerForm.get('email');
+    return this.loginForm.get('email');
   }
 
   get password() {
-    return this.registerForm.get('password');
+    return this.loginForm.get('password');
   }
 
 }
