@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col col-lg-6">
+      <form [formGroup]="loginForm">
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="w-100">
+              <mat-label>Email</mat-label>
+              <input matInput type="text" formControlName="email" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="w-100">
+              <mat-label>Password</mat-label>
+              <input matInput type="text" formControlName="password" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-auto">
+            <button mat-raised-button color="accent" (click)="this.login()">Login</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
