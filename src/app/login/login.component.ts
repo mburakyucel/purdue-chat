@@ -7,21 +7,20 @@ import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
   loading = false;
   loginForm = new FormGroup({
     email: new FormControl(''),
-    password: new FormControl('')
+    password: new FormControl(''),
   });
   constructor(
     public authService: AuthService,
     private _snackBar: MatSnackBar,
     private router: Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   async login() {
     this.loading = true;
@@ -37,7 +36,7 @@ export class LoginComponent implements OnInit {
         console.log(error)
         this.loading = false;
       }
-    )
+    );
   }
 
   get email() {
@@ -47,5 +46,4 @@ export class LoginComponent implements OnInit {
   get password() {
     return this.loginForm.get('password');
   }
-
 }

@@ -7,7 +7,7 @@ import { Observable, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
 
@@ -35,7 +35,10 @@ export class AuthService {
 
   async register(email: string, password: string) {
     try {
-      const credential = await this.afAuth.createUserWithEmailAndPassword(email, password);
+      const credential = await this.afAuth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
       this.updateUserData(credential.user);
       return of(true);
     } catch (error) {
@@ -64,10 +67,12 @@ export class AuthService {
   }
 
   private updateUserData(user: any) {
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(
+      `users/${user.uid}`
+    );
     const data = {
       uid: user.uid,
-      email: user.email
+      email: user.email,
     };
 
     return userRef.set(data, { merge: true });
