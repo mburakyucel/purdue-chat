@@ -26,10 +26,12 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   sendMessage() {
-    this.chatService.sendMessage(this.messageControl.value);
-    this.inputMessage.nativeElement.value = '';
-    this.messageControl.setValue('');
-    console.log("Sent");
+    if(this.messageControl.value.trim()) {
+      this.chatService.sendMessage(this.messageControl.value);
+      this.inputMessage.nativeElement.value = '';
+      this.messageControl.setValue('');
+      console.log("Sent");
+    }
   }
 
   ngOnDestroy() {
