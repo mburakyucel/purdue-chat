@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ChatService } from '../services/chat.service';
@@ -11,19 +11,24 @@ import { ChatService } from '../services/chat.service';
 export class ChatComponent implements OnInit, OnDestroy {
 
   messages: any[] = [];
-  message = new FormControl('');
+  messageControl = new FormControl('');
   subs: Subscription;
-  constructor(public chatService: ChatService) { }
+  @ViewChild("inputMessage") inputMessage: ElementRef<HTMLInputElement>;
+  constructor(
+    public chatService: ChatService,
+  ) { }
 
   ngOnInit(): void {
     this.subs = this.chatService.getMessages('8YInfRqTJccFbh8FmlqR').subscribe(data => {
       console.log(data);
-      this.messages = data;
+      this.messages = data.sort((m1, m2) => m1.createdAt - m2.createdAt);
     });
   }
 
   sendMessage() {
-    this.chatService.sendMessage(this.message.value);
+    this.chatService.sendMessage(this.messageControl.value);
+    this.inputMessage.nativeElement.value = '';
+    this.messageControl.setValue('');
     console.log("Sent");
   }
 

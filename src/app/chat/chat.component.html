@@ -6,16 +6,29 @@
   </div>
   <div class="row">
     <div class="col">
-      <mat-form-field>
-        <mat-label>Message</mat-label>
-        <input matInput type="text" [formControl]="message" />
-      </mat-form-field>
-  
-      <button mat-raised-button color="accent" (click)="this.sendMessage()">Send</button>
-  
-      <div *ngFor="let msg of messages">
-        {{msg.message}}
+      <div class="row" *ngFor="let msg of messages">
+        <div class="col-auto">{{msg.uid}}</div>
+        <div class="col">
+          <p>
+            {{msg.message}}
+          </p>
+        </div>
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="w-100" [style.fontSize]="'20px'">
+        <mat-label>Input message</mat-label>
+        <textarea #inputMessage matInput 
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="3"
+        cdkAutosizeMaxRows="5"
+        [formControl]="messageControl" (keydown.enter)="sendMessage()" autocomplete="off"></textarea>
+        <button mat-icon-button matSuffix (click)="sendMessage()">
+          <mat-icon>send</mat-icon>
+        </button>
+      </mat-form-field>
     </div>
   </div>
 </div>
