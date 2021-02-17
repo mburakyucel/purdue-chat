@@ -22,16 +22,15 @@ export class ChatService {
       .valueChanges();
   }
 
-  sendMessage(message: string) {
+  sendMessage(message: string, chatId: string) {
     const uid = this.authService.getUid();
-    const chat_id = '8YInfRqTJccFbh8FmlqR';
     const data = {
       uid,
       message,
       createdAt: Date.now()
     };
 
-    const ref = this.afs.collection('chats').doc(chat_id).collection('messages');
+    const ref = this.afs.collection('chats').doc(chatId).collection('messages');
     return ref.add(data);
   }
 }

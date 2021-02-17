@@ -20,13 +20,16 @@ import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { ChatComponent } from './chat/chat.component';
+import { ChatListComponent } from './chat-list/chat-list.component';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     LoginComponent,
-    ChatComponent
+    ChatComponent,
+    ChatListComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ import { ChatComponent } from './chat/chat.component';
     MatSnackBarModule,
     MatProgressBarModule,
     MatIconModule,
-    TextFieldModule
+    TextFieldModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent],

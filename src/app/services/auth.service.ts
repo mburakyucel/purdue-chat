@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { User } from 'src/app/models/user.model';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { switchMap } from 'rxjs/operators';
@@ -22,7 +21,6 @@ export class AuthService {
       switchMap(user => {
         console.log(user);
         if (user) {
-          console.log(user.uid);
           this.uid = user.uid;
           return this.afs.doc<any>(`users/${user.uid}`).valueChanges();
         } else {
@@ -30,7 +28,6 @@ export class AuthService {
         }
       })
     );
-    this.user$.subscribe();
   }
 
   async register(email: string, password: string) {
@@ -67,12 +64,12 @@ export class AuthService {
   }
 
   private updateUserData(user: any) {
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
     const data = {
       uid: user.uid,
-      email: user.email,
+      email: user.email
     };
 
     return userRef.set(data, { merge: true });

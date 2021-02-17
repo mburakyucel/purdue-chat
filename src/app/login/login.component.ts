@@ -26,11 +26,11 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     (await this.authService.login(this.email.value, this.password.value)).subscribe(
       () => {
-          this._snackBar.open('Registration successful', 'Close', {
+          this._snackBar.open('Login successful', 'Close', {
             duration: 2000,
           });
           this.loading = false;
-          this.router.navigate(['login']);
+          this.router.navigate(['chat']);
       },
       (error) => {
         console.log(error)
