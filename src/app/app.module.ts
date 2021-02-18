@@ -24,12 +24,12 @@ import { SubsFirestoreService } from './services/subs-firestore.service';
 
 @NgModule({
   declarations: [
-    AppComponent, 
-    RegisterComponent, 
+    AppComponent,
+    RegisterComponent,
     LoginComponent,
     SubListComponent,
     ClassColComponent,
-    ],
+  ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),

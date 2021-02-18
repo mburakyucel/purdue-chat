@@ -1,12 +1,18 @@
 <h2>Your Subscriptions</h2>
 <div *ngIf="subs?.length > 0; else noSubs">
-	<h3>CRN:</h3>
-	<ul class="classes" style="list-style-type:none;">
-		<li (dblclick)="rmSub($event, sub)" *ngFor="let sub of subs" class="collection-sub"><strong>{{sub.CRN}}</strong></li>
-	</ul>
+  <h3>CRN:</h3>
+  <ul class="classes" style="list-style-type: none">
+    <li
+      (dblclick)="rmSub($event, sub)"
+      *ngFor="let sub of subs"
+      class="collection-sub"
+    >
+      <strong>{{ sub.CRN }}</strong>
+    </li>
+  </ul>
 </div>
 
 <ng-template #noSubs>
-	<hr>
-	<h5> You are not subscribed to any class</h5> 
+  <hr />
+  <h5>You are not subscribed to any class</h5>
 </ng-template>

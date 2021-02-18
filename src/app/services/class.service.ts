@@ -8,16 +8,15 @@ import { Class, Sub } from '../../assets/class';
 import { CLASSES } from '../../assets/mock-classes';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ClassService {
+  private subsUrl = 'api/subs'; // URL to web api
 
-  private subsUrl = 'api/subs';  // URL to web api
+  constructor() {}
 
-  constructor() { }
-
-	//Show all available classes
+  //Show all available classes
   getClasses(): Observable<Class[]> {
-  return of(CLASSES);
-	}
+    return of(CLASSES);
+  }
 }

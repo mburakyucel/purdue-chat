@@ -1,10 +1,10 @@
 export interface Class {
-    CRN: number;
-    subj: string;
-    crse: number;
-  }
+  CRN: number;
+  subj: string;
+  crse: number;
+}
 
 export interface Sub {
-	id?:string;
-	CRN?:number;
+  id?: string;
+  CRN?: number;
 }

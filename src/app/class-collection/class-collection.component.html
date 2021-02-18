@@ -1,15 +1,24 @@
 <h2>Class List</h2>
-<ul class="classes" style="list-style-type:none;">
-  <li *ngFor="let class of classes"
+<ul class="classes" style="list-style-type: none">
+  <li
+    *ngFor="let class of classes"
     [class.selected]="class === selectedClass"
-    (click)="onSelect(class)">
-    <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-    {{class.subj}} {{class.crse}}
+    (click)="onSelect(class)"
+  >
+    <svg
+      class="material-icons"
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+    >
+      <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+    </svg>
+    {{ class.subj }} {{ class.crse }}
   </li>
 </ul>
 
 <div *ngIf="selectedClass">
-  <h2>Subscribed to {{selectedClass.subj}} {{selectedClass.crse}}</h2>
-  <div><span>CRN: </span>{{selectedClass.CRN}}</div>
-
+  <h2>Subscribed to {{ selectedClass.subj }} {{ selectedClass.crse }}</h2>
+  <div><span>CRN: </span>{{ selectedClass.CRN }}</div>
 </div>
