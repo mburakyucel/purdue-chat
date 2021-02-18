@@ -1,4 +1,4 @@
 /* This is a hack to avoid unnecessary scroll. Refer to: https://github.com/angular/components/issues/12902 */
 textarea.mat-input-element.cdk-textarea-autosize {
-    box-sizing: content-box;
-  }
+  box-sizing: content-box;
+}

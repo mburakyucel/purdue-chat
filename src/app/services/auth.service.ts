@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+} from '@angular/fire/firestore';
 import { switchMap } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
@@ -9,7 +12,6 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-
   private uid: string = '';
   user$: Observable<any>;
   constructor(
@@ -18,7 +20,7 @@ export class AuthService {
     private router: Router
   ) {
     this.user$ = this.afAuth.authState.pipe(
-      switchMap(user => {
+      switchMap((user) => {
         console.log(user);
         if (user) {
           this.uid = user.uid;
@@ -69,7 +71,7 @@ export class AuthService {
     );
     const data = {
       uid: user.uid,
-      email: user.email
+      email: user.email,
     };
 
     return userRef.set(data, { merge: true });

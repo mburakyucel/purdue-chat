@@ -1,24 +1,24 @@
 <mat-toolbar>
-    <a class="text-reset" routerLink="/login">
-        <button mat-button class="p-1 p-lg-3">
-            <span>Login</span>
-        </button>
-    </a>
-    <a class="text-reset" routerLink="/register">
-        <button mat-button class="p-1 p-lg-3">
-            <span>Register</span>
-        </button>
-    </a>
-    <a class="text-reset" routerLink="/chat">
-        <button mat-button class="p-1 p-lg-3">
-            <span>Chat</span>
-        </button>
-    </a>
-    <a class="text-reset" routerLink="/chat-list">
-        <button mat-button class="p-1 p-lg-3">
-            <span>Chat List</span>
-        </button>
-    </a>
-    <button mat-button (click)="this.authService.logout()">Logout</button>
+  <a class="text-reset" routerLink="/login">
+    <button mat-button class="p-1 p-lg-3">
+      <span>Login</span>
+    </button>
+  </a>
+  <a class="text-reset" routerLink="/register">
+    <button mat-button class="p-1 p-lg-3">
+      <span>Register</span>
+    </button>
+  </a>
+  <a class="text-reset" routerLink="/chat">
+    <button mat-button class="p-1 p-lg-3">
+      <span>Chat</span>
+    </button>
+  </a>
+  <a class="text-reset" routerLink="/chat-list">
+    <button mat-button class="p-1 p-lg-3">
+      <span>Chat List</span>
+    </button>
+  </a>
+  <button mat-button (click)="this.authService.logout()">Logout</button>
 </mat-toolbar>
 <router-outlet></router-outlet>

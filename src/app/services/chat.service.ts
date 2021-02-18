@@ -5,14 +5,13 @@ import { map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ChatService {
-
   constructor(
     private afs: AngularFirestore,
     private authService: AuthService
-  ) { }
+  ) {}
 
   getMessages(chatId: string) {
     return this.afs
@@ -27,7 +26,7 @@ export class ChatService {
     const data = {
       uid,
       message,
-      createdAt: Date.now()
+      createdAt: Date.now(),
     };
 
     const ref = this.afs.collection('chats').doc(chatId).collection('messages');

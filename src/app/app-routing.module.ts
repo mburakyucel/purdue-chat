@@ -7,10 +7,10 @@ import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent },  
-  { path: 'chat', component: ChatComponent },  
-  { path: 'chat/:chatId', component: ChatComponent },  
-  { path: 'chat-list', component: ChatListComponent },  
+  { path: 'login', component: LoginComponent },
+  { path: 'chat', component: ChatComponent },
+  { path: 'chat/:chatId', component: ChatComponent },
+  { path: 'chat-list', component: ChatListComponent },
 ];
 
 @NgModule({

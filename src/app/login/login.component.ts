@@ -18,22 +18,25 @@ export class LoginComponent implements OnInit {
   constructor(
     public authService: AuthService,
     private _snackBar: MatSnackBar,
-    private router: Router) { }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
   async login() {
     this.loading = true;
-    (await this.authService.login(this.email.value, this.password.value)).subscribe(
+    (
+      await this.authService.login(this.email.value, this.password.value)
+    ).subscribe(
       () => {
-          this._snackBar.open('Login successful', 'Close', {
-            duration: 2000,
-          });
-          this.loading = false;
-          this.router.navigate(['chat']);
+        this._snackBar.open('Login successful', 'Close', {
+          duration: 2000,
+        });
+        this.loading = false;
+        this.router.navigate(['chat']);
       },
       (error) => {
-        console.log(error)
+        console.log(error);
         this.loading = false;
       }
     );

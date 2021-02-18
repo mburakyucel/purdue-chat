@@ -6,16 +6,16 @@
     <div class="col">
       <div class="row">
         <div class="col">
-          <h1>Group Id: {{chatId}}</h1>
+          <h1>Group Id: {{ chatId }}</h1>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <div class="row" *ngFor="let msg of messages">
-            <div class="col-auto">{{msg.uid}}</div>
+            <div class="col-auto">{{ msg.uid }}</div>
             <div class="col">
               <p>
-                {{msg.message}}
+                {{ msg.message }}
               </p>
             </div>
           </div>
@@ -25,8 +25,16 @@
         <div class="col">
           <mat-form-field class="w-100" [style.fontSize]="'20px'">
             <mat-label>Input message</mat-label>
-            <textarea #inputMessage matInput cdkTextareaAutosize cdkAutosizeMinRows="3" cdkAutosizeMaxRows="5"
-              [formControl]="messageControl" (keydown.enter)="sendMessage()" autocomplete="off"></textarea>
+            <textarea
+              #inputMessage
+              matInput
+              cdkTextareaAutosize
+              cdkAutosizeMinRows="3"
+              cdkAutosizeMaxRows="5"
+              [formControl]="messageControl"
+              (keydown.enter)="sendMessage()"
+              autocomplete="off"
+            ></textarea>
             <button mat-icon-button matSuffix (click)="sendMessage()">
               <mat-icon>send</mat-icon>
             </button>
