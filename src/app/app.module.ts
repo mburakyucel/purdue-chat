@@ -17,9 +17,19 @@ import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
+import { SubListComponent } from './sub-list/sub-list.component';
+import { ClassColComponent } from './class-collection/class-collection.component';
+
+import { SubsFirestoreService } from './services/subs-firestore.service';
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, LoginComponent],
+  declarations: [
+    AppComponent, 
+    RegisterComponent, 
+    LoginComponent,
+    SubListComponent,
+    ClassColComponent,
+    ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -36,7 +46,7 @@ import { LoginComponent } from './login/login.component';
     MatSnackBarModule,
     MatProgressBarModule,
   ],
-  providers: [],
+  providers: [SubsFirestoreService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

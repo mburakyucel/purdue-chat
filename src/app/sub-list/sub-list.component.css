@@ -1,0 +1,21 @@
+.classes {
+    margin: 0 0 2em 0;
+    list-style-type: none;
+    padding: 0;
+    width: 5em;
+}
+.classes li {
+    cursor: pointer;
+    position: relative;
+    left: 0.5em;
+    background-color: rgb(245, 227, 66);
+    margin: .5em;
+    padding: -.4em;
+    height: 1.6em;
+    border-radius: 4px;
+}
+.classes li:hover {
+    color: #000000;
+    background-color: rgb(245, 161, 66);
+    left: .1em;
+}
