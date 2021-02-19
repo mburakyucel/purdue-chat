@@ -6,6 +6,7 @@ import * as Croppie from 'croppie';
 import { CroppieOptions, ResultOptions, CropData } from 'croppie';
 
 import { ImageUploadService } from 'src/app/services/image-upload.service'
+import { AuthService } from 'src/app/services/auth.service'
 
 export type Type = 'canvas' | 'base64' | 'html' | 'blob' | 'rawcanvas';
 
@@ -35,7 +36,7 @@ export class CropComponent implements OnInit {
 	private task: AngularFireUploadTask;
 	private outputFormatOptions: ResultOptions = { type: 'base64', size: 'viewport' };
 
-	constructor(private storage: AngularFireStorage, private uploadService:ImageUploadService) { }
+	constructor(private storage: AngularFireStorage, private uploadService:ImageUploadService, private auth: AuthService) { }
 
 	ngOnInit(): void {
 	}
@@ -123,12 +124,11 @@ export class CropComponent implements OnInit {
 		this._croppie.result(this.outputFormatOptions).then(result => {
 			this.uploadService.uploadImage(String(result)).subscribe((url:string) => {
 				console.log(url)
-				this.uploadService.uploadProfileImage(url, 'aMVNTbTZffgXHenLYHwbS4vHA003').subscribe((check:number) => {
+				this.uploadService.uploadProfileImage(url, this.auth.getUid()).subscribe((check:number) => {
 					console.log(check)
 				})
 			})
-
-
+			
 			this._croppie.destroy()
 			this._croppie = null
 		});

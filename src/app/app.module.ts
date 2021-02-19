@@ -11,6 +11,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatIconModule } from '@angular/material/icon';
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -21,9 +23,20 @@ import { ProfilepageComponent } from './profilepage/profilepage.component';
 import { CropComponent } from './crop/crop.component';
 
 import { NgxCroppieModule } from 'ngx-croppie'
+import { ChatComponent } from './chat/chat.component';
+import { ChatListComponent } from './chat-list/chat-list.component';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, LoginComponent, ProfilepageComponent, CropComponent],
+  declarations: [
+    AppComponent,
+    RegisterComponent,
+    LoginComponent,
+    ChatComponent,
+    ProfilepageComponent,
+    CropComponent,
+    ChatListComponent,
+  ],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -40,6 +53,9 @@ import { NgxCroppieModule } from 'ngx-croppie'
     MatSnackBarModule,
     MatProgressBarModule,
     NgxCroppieModule,
+    MatIconModule,
+    TextFieldModule,
+    MatListModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
