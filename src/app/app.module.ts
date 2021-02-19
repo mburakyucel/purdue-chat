@@ -11,16 +11,22 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatIconModule } from '@angular/material/icon';
+import { TextFieldModule } from '@angular/cdk/text-field';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
+
 import { SubListComponent } from './sub-list/sub-list.component';
 import { ClassColComponent } from './class-collection/class-collection.component';
-
 import { SubsFirestoreService } from './services/subs-firestore.service';
+
+import { ChatComponent } from './chat/chat.component';
+import { ChatListComponent } from './chat-list/chat-list.component';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -29,6 +35,8 @@ import { SubsFirestoreService } from './services/subs-firestore.service';
     LoginComponent,
     SubListComponent,
     ClassColComponent,
+    ChatComponent,
+    ChatListComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +53,9 @@ import { SubsFirestoreService } from './services/subs-firestore.service';
     MatToolbarModule,
     MatSnackBarModule,
     MatProgressBarModule,
+    MatIconModule,
+    TextFieldModule,
+    MatListModule,
   ],
   providers: [SubsFirestoreService],
   bootstrap: [AppComponent],
