@@ -123,7 +123,7 @@ export class CropComponent implements OnInit {
 		this._croppie.result(this.outputFormatOptions).then(result => {
 			this.uploadService.uploadImage(String(result)).subscribe((url:string) => {
 				console.log(url)
-				this.uploadService.uploadProfileImage(url, 'DWXPHe1SegckGVBTURwvEQIDb6i1').subscribe((check:number) => {
+				this.uploadService.uploadProfileImage(url, 'aMVNTbTZffgXHenLYHwbS4vHA003').subscribe((check:number) => {
 					console.log(check)
 				})
 			})

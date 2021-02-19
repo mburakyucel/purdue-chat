@@ -14,7 +14,8 @@ export class ImageUploadService {
   private task: AngularFireUploadTask;
   public downloadURL: any;
 
-  constructor(private storage: AngularFireStorage,
+  constructor(
+    private storage: AngularFireStorage,
     private afs: AngularFirestore) { }
 
   uploadImage(imageData: string): Observable<any> {
@@ -38,7 +39,8 @@ export class ImageUploadService {
   }
 
   uploadProfileImage(downloadURL:string, id:string): Observable<any>{
-    this.afs.collection('user').doc(id).update({profileImageURL: downloadURL})
+    console.log(downloadURL)
+    this.afs.collection('users').doc(id).update({profileImage: downloadURL})
     return of(1)
   }
 }
