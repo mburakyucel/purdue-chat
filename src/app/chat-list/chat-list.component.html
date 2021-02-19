@@ -1,0 +1,9 @@
+<mat-action-list>
+  <button
+    mat-list-item
+    *ngFor="let chatId of chats"
+    (click)="onChatSelect(chatId)"
+  >
+    {{ chatId }}
+  </button>
+</mat-action-list>
