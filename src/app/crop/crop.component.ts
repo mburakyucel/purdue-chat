@@ -110,7 +110,7 @@ export class CropComponent implements OnInit {
 
 			this.task.snapshotChanges().pipe(finalize(() => {
 				this.ref.getDownloadURL().subscribe(downloadURL => {
-					console.log(downloadURL)
+					//console.log(downloadURL)
 				})
 			})).subscribe()
 			//------ End of Firbase stuff ------
@@ -123,12 +123,10 @@ export class CropComponent implements OnInit {
 	newSubmit():void{
 		this._croppie.result(this.outputFormatOptions).then(result => {
 			this.uploadService.uploadImage(String(result)).subscribe((url:string) => {
-				console.log(url)
-				this.uploadService.uploadProfileImage(url, this.auth.getUid()).subscribe((check:number) => {
-					console.log(check)
-				})
+				//console.log(url)
+				this.uploadService.uploadProfileImage(url, this.auth.getUid()).subscribe()
 			})
-			
+
 			this._croppie.destroy()
 			this._croppie = null
 		});

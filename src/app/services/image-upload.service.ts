@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 import { finalize, switchMap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -39,8 +39,12 @@ export class ImageUploadService {
   }
 
   uploadProfileImage(downloadURL:string, id:string): Observable<any>{
-    console.log(downloadURL)
-    this.afs.collection('users').doc(id).update({profileImage: downloadURL})
-    return of(1)
+    //console.log(downloadURL)
+    return from(this.afs.collection('users').doc(id).update({profileImage: downloadURL}).then(() => {
+      console.log("done")
+    })
+    .catch((error) => {
+      console.log("Error in updating user profile image")
+    }))
   }
 }
