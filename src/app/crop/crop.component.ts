@@ -1,6 +1,4 @@
 import { Component, OnInit, Input, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
-import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
-import { finalize } from 'rxjs/operators';
 
 import * as Croppie from 'croppie';
 import { CroppieOptions, ResultOptions, CropData } from 'croppie';
@@ -32,11 +30,9 @@ export class CropComponent implements OnInit {
 	private _croppie: Croppie;
   	private file:any;
 	private imgUrl: string;
-	private ref: AngularFireStorageReference;
-	private task: AngularFireUploadTask;
 	private outputFormatOptions: ResultOptions = { type: 'base64', size: 'viewport' };
 
-	constructor(private storage: AngularFireStorage, private uploadService:ImageUploadService, private auth: AuthService) { }
+	constructor(private uploadService:ImageUploadService, private auth: AuthService) { }
 
 	ngOnInit(): void {
 	}
@@ -101,27 +97,6 @@ export class CropComponent implements OnInit {
 
 	submit():void{
 		this._croppie.result(this.outputFormatOptions).then(result => {
-
-			//-------Start Firebase stuff ------
-			const randomId = Math.random().toString(36).substring(2);
-			this.ref = this.storage.ref(randomId);
-			var img = String(result)
-			this.task = this.ref.putString(img.split(',')[1], 'base64')
-
-			this.task.snapshotChanges().pipe(finalize(() => {
-				this.ref.getDownloadURL().subscribe(downloadURL => {
-					//console.log(downloadURL)
-				})
-			})).subscribe()
-			//------ End of Firbase stuff ------
-
-			this._croppie.destroy()
-			this._croppie = null
-		});
-	}
-
-	newSubmit():void{
-		this._croppie.result(this.outputFormatOptions).then(result => {
 			this.uploadService.uploadImage(String(result)).subscribe((url:string) => {
 				//console.log(url)
 				this.uploadService.uploadProfileImage(url, this.auth.getUid()).subscribe()
@@ -130,6 +105,5 @@ export class CropComponent implements OnInit {
 			this._croppie.destroy()
 			this._croppie = null
 		});
-
 	}
 }

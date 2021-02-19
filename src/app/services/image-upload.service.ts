@@ -16,7 +16,8 @@ export class ImageUploadService {
 
   constructor(
     private storage: AngularFireStorage,
-    private afs: AngularFirestore) { }
+    private afs: AngularFirestore
+  ) { }
 
   uploadImage(imageData: string): Observable<any> {
     return new Observable<any>((subscriber) => {
@@ -44,7 +45,7 @@ export class ImageUploadService {
       console.log("done")
     })
     .catch((error) => {
-      console.log("Error in updating user profile image")
+      console.log("Error in updating user profile image: ", error)
     }))
   }
 }
