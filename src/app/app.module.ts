@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { environment } from '../environments/environment';
+import { environment } from 'src/environments/environments';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -17,9 +17,13 @@ import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
+import { ProfilepageComponent } from './profilepage/profilepage.component';
+import { CropComponent } from './crop/crop.component';
+
+import { NgxCroppieModule } from 'ngx-croppie'
 
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, LoginComponent],
+  declarations: [AppComponent, RegisterComponent, LoginComponent, ProfilepageComponent, CropComponent],
   imports: [
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -35,6 +39,7 @@ import { LoginComponent } from './login/login.component';
     MatToolbarModule,
     MatSnackBarModule,
     MatProgressBarModule,
+    NgxCroppieModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
