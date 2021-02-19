@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
-
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
+import { finalize } from 'rxjs/operators';
 
 import * as Croppie from 'croppie';
 import { CroppieOptions, ResultOptions, CropData } from 'croppie';
 
-import { finalize } from 'rxjs/operators';
+import { ImageUploadService } from 'src/app/services/image-upload.service'
 
 export type Type = 'canvas' | 'base64' | 'html' | 'blob' | 'rawcanvas';
 
@@ -35,7 +35,7 @@ export class CropComponent implements OnInit {
 	private task: AngularFireUploadTask;
 	private outputFormatOptions: ResultOptions = { type: 'base64', size: 'viewport' };
 
-	constructor(private storage: AngularFireStorage) { }
+	constructor(private storage: AngularFireStorage, private uploadService:ImageUploadService) { }
 
 	ngOnInit(): void {
 	}
@@ -117,5 +117,17 @@ export class CropComponent implements OnInit {
 			this._croppie.destroy()
 			this._croppie = null
 		});
+	}
+
+	newSubmit():void{
+		this._croppie.result(this.outputFormatOptions).then(result => {
+			this.uploadService.uploadImage(String(result)).subscribe((url:string) => {
+				console.log(url)
+			})
+
+			this._croppie.destroy()
+			this._croppie = null
+		});
+
 	}
 }
