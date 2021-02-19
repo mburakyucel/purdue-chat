@@ -22,6 +22,7 @@ export class ImageUploadService {
       const randomId = Math.random().toString(36).substring(2);
       this.ref = this.storage.ref(randomId);
       this.task = this.ref.putString(imageData.split(',')[1], 'base64')
+
       this.task.snapshotChanges().subscribe(
         () => {},
         (err) => subscriber.error(err),
@@ -34,38 +35,10 @@ export class ImageUploadService {
         }
       );
     });
+  }
 
-    // const randomId = Math.random().toString(36).substring(2);
-    // this.ref = this.storage.ref(randomId);
-    // this.task = this.ref.putString(imageUrl.split(',')[1], 'base64')
-
-
-    // return this.task.snapshotChanges().pipe(finalize(() => {
-    //   return this.ref.getDownloadURL()
-    // }),
-    //   switchMap(data => {
-    //     console.log(data);
-    //     return this.afs.collection('users').doc('DWXPHe1SegckGVBTURwvEQIDb6i1').update({profileImageURL: data});
-    //   })
-    // )
-
-    // return this.task.snapshotChanges().pipe(finalize(async () => {
-    //   return await this.ref.getDownloadURL().toPromise();
-    //   // this.ref.getDownloadURL().subscribe(downloadURL => {
-    //   //   this.download = downloadURL
-    //this.downloadURL.emit(this.downloadURL)
-    //download = new EventEmitter
-    //   //   console.log(this.download)
-    //   // })
-    // }),
-    //   switchMap(data => {
-    //     console.log(data);
-    //     return this.afs.collection('users').doc('DWXPHe1SegckGVBTURwvEQIDb6i1').update({profileImageURL: data});
-    //   })
-    // )
-
-    //this.download = of("help")
-    // console.log(this.downloadURL)
-    // return this.downloadURL
+  uploadProfileImage(downloadURL:string, id:string): Observable<any>{
+    this.afs.collection('user').doc(id).update({profileImageURL: downloadURL})
+    return of(1)
   }
 }
