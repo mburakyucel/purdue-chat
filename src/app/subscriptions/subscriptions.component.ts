@@ -5,7 +5,6 @@ import { SubscriptionService } from '../services/subscription.service';
 
 import { DocumentData } from '@angular/fire/firestore';
 
-
 @Component({
   selector: 'app-subscriptions',
   templateUrl: './subscriptions.component.html',
@@ -26,5 +25,9 @@ export class SubListComponent implements OnInit {
 
   removeSubscription(event: any, sub: string) {
     this.subService.removeSubscription(sub);
+  }
+
+  ngOnDestroy() {
+    console.log('onDestroy');
   }
 }

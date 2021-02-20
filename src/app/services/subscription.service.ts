@@ -15,7 +15,6 @@ import { AuthService } from '../services/auth.service';
 import { Class } from '../../assets/class';
 import { CLASSES } from '../../assets/mock-classes';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -43,7 +42,7 @@ export class SubscriptionService {
       }));
 
     //To obtain the list of subscriptions from user document
-    this.userDoc = this.afs.collection('users').doc("PZWgJPuvlZhvfhvSLVOh7fY2D4v1");
+    this.userDoc = this.afs.collection('users').doc(this.authService.getUid());
     this.subs = this.userDoc.valueChanges().pipe(map(doc => {
       return doc.chats; 
     }));
@@ -60,7 +59,8 @@ export class SubscriptionService {
       chats: firebase.firestore.FieldValue.arrayUnion(classID)
     });
   }
-  
+
+  //Remove a subscription from the user chats array
   removeSubscription(classID: string) {
     this.userDoc.update({
       chats: firebase.firestore.FieldValue.arrayRemove(classID)

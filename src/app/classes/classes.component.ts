@@ -44,4 +44,8 @@ export class ClassColComponent implements OnInit {
       if (chk == 0) this.subService.addSubscription(myclass.id);
     }
   }
+
+  ngOnDestroy() {
+    console.log('onDestroy');
+  }
 }
