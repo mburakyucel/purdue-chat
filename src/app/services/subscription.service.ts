@@ -42,19 +42,10 @@ export class SubscriptionService {
         });
       }));
 
-    /*
-     this.userDoc = this.afs.collection('users').doc("PZWgJPuvlZhvfhvSLVOh7fY2D4v1");
-    this.subs = from(this.userDoc.valueChanges().toPromise().then((doc) => {
-      if (doc.exists) console.log(doc.data()); 
-      else console.log("No such document!");
-    }));
-    */
-
     //To obtain the list of subscriptions from user document
     this.userDoc = this.afs.collection('users').doc("PZWgJPuvlZhvfhvSLVOh7fY2D4v1");
-    this.subs = from(this.userDoc.get().toPromise().then((doc) => {
-      if (doc.exists) return doc.get('chats'); 
-      else console.log("No such document!");
+    this.subs = this.userDoc.valueChanges().pipe(map(doc => {
+      return doc.chats; 
     }));
   }
 
@@ -65,20 +56,16 @@ export class SubscriptionService {
 
   //Add a subscription to the user chats array
   addSubscription(classID: string) {
-
-    /*
-    this.afs.collection('users').doc(this.authService.getUid()).update(
-      {chats: [classID]});
-    */
+    this.userDoc.update({
+      chats: firebase.firestore.FieldValue.arrayUnion(classID)
+    });
   }
   
-  removeSubscription(sub: string) {
-    /*
-    this.subDoc = this.afs.doc(`subs/${sub.id}`);
-    this.subDoc.delete();
-    */
+  removeSubscription(classID: string) {
+    this.userDoc.update({
+      chats: firebase.firestore.FieldValue.arrayRemove(classID)
+    });
   }
-  
 
   //Show all available classes
   getClasses(): Observable<Class[]> {

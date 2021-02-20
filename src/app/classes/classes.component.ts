@@ -19,12 +19,7 @@ export class ClassColComponent implements OnInit {
 
   ngOnInit() {
     this.getClasses();
-    //this.subService.getSubscriptions()
-    /*
-    this.subService.getSubscriptions().subscribe((subs) => {
-      this.subs = subs;
-    });
-    */
+    this.subService.getSubscriptions().subscribe((subs) => this.subs = subs);
   }
 
   //Method to retrieve the classes from the service
