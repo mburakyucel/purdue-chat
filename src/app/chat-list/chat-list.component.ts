@@ -14,7 +14,7 @@ export class ChatListComponent implements OnInit {
   ngOnInit(): void {
     this.authService.user$.subscribe((data) => {
       console.log(data);
-      this.chats = data.chats;
+      if(data.chats.length > 0 && data != null) this.chats = data.chats;
     });
   }
 

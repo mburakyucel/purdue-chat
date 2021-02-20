@@ -14,11 +14,11 @@
     >
       <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
     </svg>
-    {{ class.subj }} {{ class.crse }}
+    {{ class.subject }} {{ class.course }}
   </li>
 </ul>
 
 <div *ngIf="selectedClass">
-  <h2>Subscribed to {{ selectedClass.subj }} {{ selectedClass.crse }}</h2>
-  <div><span>CRN: </span>{{ selectedClass.CRN }}</div>
+  <h2>Subscribed to {{ selectedClass.subject }} {{ selectedClass.course }}</h2>
+  <div>{{ selectedClass.id }}</div>
 </div>

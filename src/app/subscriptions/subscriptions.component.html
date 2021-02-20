@@ -1,13 +1,13 @@
 <h2>Your Subscriptions</h2>
 <div *ngIf="subs?.length > 0; else noSubs">
-  <h3>CRN:</h3>
+  <h3>ID:</h3>
   <ul class="classes" style="list-style-type: none">
     <li
-      (dblclick)="rmSub($event, sub)"
+      (dblclick)="removeSubscription($event, sub)"
       *ngFor="let sub of subs"
       class="collection-sub"
     >
-      <strong>{{ sub.CRN }}</strong>
+      <strong>{{sub}}</strong>
     </li>
   </ul>
 </div>

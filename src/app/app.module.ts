@@ -20,9 +20,8 @@ import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 
-import { SubListComponent } from './sub-list/sub-list.component';
-import { ClassColComponent } from './class-collection/class-collection.component';
-import { SubsFirestoreService } from './services/subs-firestore.service';
+import { SubListComponent } from './subscriptions/subscriptions.component';
+import { ClassColComponent } from './classes/classes.component';
 
 import { ChatComponent } from './chat/chat.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
@@ -57,7 +56,7 @@ import { MatListModule } from '@angular/material/list';
     TextFieldModule,
     MatListModule,
   ],
-  providers: [SubsFirestoreService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
