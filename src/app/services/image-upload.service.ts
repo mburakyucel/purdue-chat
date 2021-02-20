@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { from, Observable, of } from 'rxjs';
 import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
-import { finalize, switchMap } from 'rxjs/operators';
 import { AngularFirestore } from '@angular/fire/firestore';
-//import * as EventEmitter from 'events';
-
 
 @Injectable({
   providedIn: 'root'
