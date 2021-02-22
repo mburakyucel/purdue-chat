@@ -38,31 +38,28 @@ export class SubscriptionService {
         });
       })
     );
+  }
 
-    //To obtain the list of subscriptions from user document
+  //Show all classes a user is subscribed too
+  getSubscriptions(): Observable<any> {
     this.userDoc = this.afs.collection('users').doc(this.authService.getUid());
-    this.subs = this.userDoc.valueChanges().pipe(
+    return this.subs = this.userDoc.valueChanges().pipe(
       map((doc) => {
         return doc.chats;
       })
     );
   }
 
-  //Show all classes a user is subscribed too
-  getSubscriptions(): Observable<any> {
-    return this.subs;
-  }
-
   //Add a subscription to the user chats array
   addSubscription(classID: string) {
-    this.userDoc.update({
+    this.afs.collection('users').doc(this.authService.getUid()).update({
       chats: firebase.firestore.FieldValue.arrayUnion(classID),
     });
   }
 
   //Remove a subscription from the user chats array
   removeSubscription(classID: string) {
-    this.userDoc.update({
+    this.afs.collection('users').doc(this.authService.getUid()).update({
       chats: firebase.firestore.FieldValue.arrayRemove(classID),
     });
   }
