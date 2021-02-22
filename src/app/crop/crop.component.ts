@@ -24,9 +24,9 @@ export class CropComponent implements OnInit {
 		enableZoom: true
 	};
 
-	@Input() points: number[];
-	@Input() defaultZoom = 0;
-	@Output() result: EventEmitter<string | HTMLElement | Blob | HTMLCanvasElement> = new EventEmitter<string | HTMLElement | Blob | HTMLCanvasElement>();
+	private points: number[];
+	private defaultZoom = 0;
+	public result: EventEmitter<string | HTMLElement | Blob | HTMLCanvasElement> = new EventEmitter<string | HTMLElement | Blob | HTMLCanvasElement>();
 	private _croppie: Croppie;
   	private file:any;
 	private imgUrl: string;
@@ -84,7 +84,7 @@ export class CropComponent implements OnInit {
 		}
     
 		this.file = event.target.files[0];
-		var reader = new FileReader();
+		const reader = new FileReader();
 
 		this._croppie = new Croppie(this.imageEdit.nativeElement, this.croppieOptions);
 

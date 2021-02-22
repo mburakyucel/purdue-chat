@@ -22,10 +22,10 @@ import { LoginComponent } from './login/login.component';
 import { ProfilepageComponent } from './profilepage/profilepage.component';
 import { CropComponent } from './crop/crop.component';
 
-import { NgxCroppieModule } from 'ngx-croppie'
 import { ChatComponent } from './chat/chat.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { MatListModule } from '@angular/material/list';
+
 
 @NgModule({
   declarations: [
@@ -52,7 +52,6 @@ import { MatListModule } from '@angular/material/list';
     MatToolbarModule,
     MatSnackBarModule,
     MatProgressBarModule,
-    NgxCroppieModule,
     MatIconModule,
     TextFieldModule,
     MatListModule,
