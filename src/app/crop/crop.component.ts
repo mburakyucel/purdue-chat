@@ -41,7 +41,7 @@ export class CropComponent implements OnInit {
 		return this.imgUrl;
 	}
   
-	@Input() set imageUrl(url: string) {
+	set imageUrl(url: string) {
 		if(this.imgUrl === url) { 
 			return; 
 		}
