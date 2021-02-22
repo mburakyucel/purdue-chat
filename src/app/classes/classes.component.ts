@@ -13,24 +13,19 @@ export class ClassColComponent implements OnInit {
   selectedClass: Class;
   subs: string[];
 
-  constructor(
-    private subService: SubscriptionService,
-  ) {}
+  constructor(private subService: SubscriptionService) {}
 
   ngOnInit() {
     this.getClasses();
-    this.subService.getSubscriptions().subscribe((subs) => this.subs = subs);
+    this.subService.getSubscriptions().subscribe((subs) => (this.subs = subs));
   }
 
   //Method to retrieve the classes from the service
   getClasses(): void {
-    this.subService
-      .getClasses()
-      .subscribe(
-        (classes) => {
-          this.classes = classes;
-          if (this.classes.length == 0) this.subService.addClassesToDatabase();
-        });
+    this.subService.getClasses().subscribe((classes) => {
+      this.classes = classes;
+      if (this.classes.length == 0) this.subService.addClassesToDatabase();
+    });
   }
 
   onSelect(myclass: Class): void {

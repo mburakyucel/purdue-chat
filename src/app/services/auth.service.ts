@@ -76,7 +76,7 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
     };
-    
+
     return userRef.set(data, { merge: true });
   }
 }

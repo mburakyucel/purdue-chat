@@ -4,10 +4,10 @@ import {
   AngularFirestoreCollection,
   AngularFirestoreDocument,
 } from '@angular/fire/firestore';
-import firebase from 'firebase/app'
+import firebase from 'firebase/app';
 import { DocumentData } from '@angular/fire/firestore';
 
-import { Observable, of, from} from 'rxjs';
+import { Observable, of, from } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { AuthService } from '../services/auth.service';
@@ -24,14 +24,11 @@ export class SubscriptionService {
   userDoc: AngularFirestoreDocument<any>;
   subs: Observable<any>;
 
-  constructor(
-    public afs: AngularFirestore,
-    public authService: AuthService
-    ) {
-
+  constructor(public afs: AngularFirestore, public authService: AuthService) {
     //To obtain the list of classes from database
     this.classesCollection = this.afs.collection('classes', (ref) =>
-      ref.orderBy('course', 'asc'));
+      ref.orderBy('course', 'asc')
+    );
     this.classes = this.classesCollection.snapshotChanges().pipe(
       map((changes) => {
         return changes.map((a) => {
@@ -39,13 +36,16 @@ export class SubscriptionService {
           data.id = a.payload.doc.id;
           return data;
         });
-      }));
+      })
+    );
 
     //To obtain the list of subscriptions from user document
     this.userDoc = this.afs.collection('users').doc(this.authService.getUid());
-    this.subs = this.userDoc.valueChanges().pipe(map(doc => {
-      return doc.chats; 
-    }));
+    this.subs = this.userDoc.valueChanges().pipe(
+      map((doc) => {
+        return doc.chats;
+      })
+    );
   }
 
   //Show all classes a user is subscribed too
@@ -56,14 +56,14 @@ export class SubscriptionService {
   //Add a subscription to the user chats array
   addSubscription(classID: string) {
     this.userDoc.update({
-      chats: firebase.firestore.FieldValue.arrayUnion(classID)
+      chats: firebase.firestore.FieldValue.arrayUnion(classID),
     });
   }
 
   //Remove a subscription from the user chats array
   removeSubscription(classID: string) {
     this.userDoc.update({
-      chats: firebase.firestore.FieldValue.arrayRemove(classID)
+      chats: firebase.firestore.FieldValue.arrayRemove(classID),
     });
   }
 
@@ -73,7 +73,6 @@ export class SubscriptionService {
   }
 
   addClassesToDatabase() {
-    for(let entry of CLASSES)this.classesCollection.add(entry);
+    for (let entry of CLASSES) this.classesCollection.add(entry);
   }
-
 }

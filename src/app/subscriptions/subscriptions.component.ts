@@ -20,7 +20,7 @@ export class SubListComponent implements OnInit {
   }
 
   getSubscriptions(): void {
-    this.subService.getSubscriptions().subscribe((subs) => this.subs = subs);
+    this.subService.getSubscriptions().subscribe((subs) => (this.subs = subs));
   }
 
   removeSubscription(event: any, sub: string) {
