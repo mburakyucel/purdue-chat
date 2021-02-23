@@ -50,16 +50,22 @@ export class SubscriptionService {
 
   //Add a subscription to the user chats array
   addSubscription(classID: string) {
-    this.afs.collection('users').doc(this.authService.getUid()).update({
-      chats: firebase.firestore.FieldValue.arrayUnion(classID),
-    });
+    this.afs
+      .collection('users')
+      .doc(this.authService.getUid())
+      .update({
+        chats: firebase.firestore.FieldValue.arrayUnion(classID),
+      });
   }
 
   //Remove a subscription from the user chats array
   removeSubscription(classID: string) {
-    this.afs.collection('users').doc(this.authService.getUid()).update({
-      chats: firebase.firestore.FieldValue.arrayRemove(classID),
-    });
+    this.afs
+      .collection('users')
+      .doc(this.authService.getUid())
+      .update({
+        chats: firebase.firestore.FieldValue.arrayRemove(classID),
+      });
   }
 
   //Show all available classes
