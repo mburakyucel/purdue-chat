@@ -32,15 +32,13 @@ export class ImageUploadComponent implements OnInit {
 
   private points: number[];
   private defaultZoom = 0;
-  public result: EventEmitter<
-    string | HTMLElement | Blob | HTMLCanvasElement
-  > = new EventEmitter<string | HTMLElement | Blob | HTMLCanvasElement>();
   private _croppie: Croppie;
   private file: any;
-  private imgUrl: string;
+  private imageUrl: string;
   private outputFormatOptions: ResultOptions = {
     type: 'base64',
     size: 'viewport',
+    circle: false,
   };
 
   constructor(
@@ -50,47 +48,12 @@ export class ImageUploadComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  get imageUrl(): string {
-    return this.imgUrl;
-  }
-
-  set imageUrl(url: string) {
-    if (this.imgUrl === url) {
-      return;
-    }
-
-    this.imgUrl = url;
-
-    if (this._croppie) {
-      this.bindToCroppie(this.imageUrl, this.points, this.defaultZoom);
-    }
-  }
-
   enterImage(): any {
     this._croppie = new Croppie(
       this.imageEdit.nativeElement,
       this.croppieOptions
     );
-    this.bindToCroppie(this.imageUrl, this.points, this.defaultZoom);
-  }
-
-  private bindToCroppie(url: string, points: number[], zoom: number) {
-    this._croppie.bind({ url, points, zoom });
-  }
-
-  newResult() {
-    this._croppie.result(this.outputFormatOptions).then((res) => {
-      this.result.emit(res);
-    });
-  }
-
-  rotate(degrees: 90 | 180 | 270 | -90 | -180 | -270) {
-    this._croppie.rotate(degrees);
-  }
-
-  get(): CropData {
-    console.log(this._croppie.result({ type: 'base64', circle: true }));
-    return this._croppie.get();
+    this._croppie.bind({url: this.imageUrl, points: this.points, zoom: this.defaultZoom})
   }
 
   onInputChange(event: any): void {
@@ -107,20 +70,24 @@ export class ImageUploadComponent implements OnInit {
     );
 
     reader.onload = (e1: any) => {
-      this.bindToCroppie(e1.target.result, this.points, this.defaultZoom);
+      this._croppie.bind({url: e1.target.result, points: this.points, zoom: this.defaultZoom})
     };
 
     reader.readAsDataURL(this.file);
   }
 
   submit(): void {
+    // console.log(this._croppie.result(this.outputFormatOptions));
     this._croppie.result(this.outputFormatOptions).then((result: any) => {
+      console.log(result);
       this.uploadService
-        .uploadImage(String(result))
+        .uploadImage(result)
         .subscribe((url: string) => {
+          console.log(url);
           this.uploadService
             .uploadProfileImage(url, this.auth.getUid())
-            .subscribe();
+            .then(data => console.log(data))
+            .catch(error => console.log(error))
         });
 
       this._croppie.destroy();

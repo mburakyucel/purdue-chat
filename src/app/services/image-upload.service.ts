@@ -23,8 +23,8 @@ export class ImageUploadService {
   uploadImage(imageData: string): Observable<any> {
     return new Observable<any>((subscriber) => {
       const randomId = Math.random().toString(36).substring(2);
-      this.ref = this.storage.ref(randomId);
-      this.task = this.ref.putString(imageData.split(',')[1], 'base64');
+      this.ref = this.storage.ref(`${randomId}.png`);
+      this.task = this.ref.putString(imageData.split(',')[1], 'data_url');
 
       this.task.snapshotChanges().subscribe(
         () => {},
@@ -40,19 +40,10 @@ export class ImageUploadService {
     });
   }
 
-  uploadProfileImage(downloadURL: string, id: string): Observable<any> {
-    //console.log(downloadURL)
-    return from(
-      this.afs
+  uploadProfileImage(downloadURL: string, id: string): Promise<any> {
+    return this.afs
         .collection('users')
         .doc(id)
-        .update({ profileImage: downloadURL })
-        .then(() => {
-          console.log('done');
-        })
-        .catch((error) => {
-          console.log('Error in updating user profile image: ', error);
-        })
-    );
+        .update({ profileImage: downloadURL });
   }
 }
