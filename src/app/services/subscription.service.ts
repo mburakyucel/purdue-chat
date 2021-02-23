@@ -16,9 +16,8 @@ import { Class } from '../../assets/class';
   providedIn: 'root',
 })
 export class SubscriptionService {
-  userDoc: AngularFirestoreDocument<any>;
 
-  constructor(public afs: AngularFirestore, public authService: AuthService) { }
+  constructor(public afs: AngularFirestore, public authService: AuthService) {}
 
   //Show all classes a user is subscribed too
   getSubscriptions(): Observable<any> {
@@ -47,6 +46,17 @@ export class SubscriptionService {
 
   //Show all available classes
   getClasses(): Observable<any> {
+<<<<<<< HEAD
     return this.afs.collection('classes').valueChanges({idField: 'id'});
+=======
+    return this.afs
+      .collection('classes')
+      .valueChanges({ idField: 'id' })
+      .pipe(
+        map((doc) => {
+          return doc;
+        })
+      );
+>>>>>>> 8c6c24612c059a121f56867df735414865d09c34
   }
 }
