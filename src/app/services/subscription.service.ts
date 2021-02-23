@@ -22,10 +22,7 @@ export class SubscriptionService {
 
   //Show all classes a user is subscribed too
   getSubscriptions(): Observable<any> {
-    this.userDoc = this.afs.collection('users').doc(this.authService.getUid());
-    return this.userDoc.valueChanges().pipe(
-      map((doc) => {return doc.chats})
-    );
+    return this.authService.user$.pipe(map(doc => doc.chats));
   }
 
   //Add a subscription to the user chats array
@@ -50,7 +47,6 @@ export class SubscriptionService {
 
   //Show all available classes
   getClasses(): Observable<any> {
-    return this.afs.collection('classes').valueChanges({idField: 'id'}).pipe(
-      map((doc) => {return doc}));
+    return this.afs.collection('classes').valueChanges({idField: 'id'});
   }
 }

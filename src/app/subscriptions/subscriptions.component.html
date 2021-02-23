@@ -4,11 +4,11 @@
   <h3>ID:</h3>
   <ul class="subs" style="list-style-type: none">
     <li
-      (dblclick)="removeSubscription($event, sub)"
       *ngFor="let sub of subs"
       class="collection-sub"
     >
       <strong>{{ sub }}</strong>
+      <button mat-button (click)="removeSubscription($event, sub)">Remove</button>
     </li>
   </ul>
 </div>
