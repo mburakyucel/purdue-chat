@@ -15,14 +15,7 @@ export class ClassesComponent implements OnInit {
   constructor(private subService: SubscriptionService) {}
 
   ngOnInit() {
-<<<<<<< HEAD
     this.subService.getClasses().subscribe((classes) => (this.classes = classes));
-=======
-    this.subService
-      .getClasses()
-      .subscribe((classes) => (this.classes = classes));
-    this.subService.getSubscriptions().subscribe((subs) => (this.subs = subs));
->>>>>>> 8c6c24612c059a121f56867df735414865d09c34
   }
 
   onSelect(myclass: Class): void {
