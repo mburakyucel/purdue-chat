@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 
 import * as Croppie from 'croppie';
-import { CroppieOptions, ResultOptions, CropData } from 'croppie';
+import { CroppieOptions, ResultOptions } from 'croppie';
 
 import { ImageUploadService } from 'src/app/services/image-upload.service';
 import { AuthService } from 'src/app/services/auth.service';
