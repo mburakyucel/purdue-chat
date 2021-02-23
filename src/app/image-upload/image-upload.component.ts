@@ -50,28 +50,12 @@ export class ImageUploadComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  get imageUrl(): string {
-    return this.imgUrl;
-  }
-
-  set imageUrl(url: string) {
-    if (this.imgUrl === url) {
-      return;
-    }
-
-    this.imgUrl = url;
-
-    if (this._croppie) {
-      this.bindToCroppie(this.imageUrl, this.points, this.defaultZoom);
-    }
-  }
-
   enterImage(): any {
     this._croppie = new Croppie(
       this.imageEdit.nativeElement,
       this.croppieOptions
     );
-    this.bindToCroppie(this.imageUrl, this.points, this.defaultZoom);
+    this.bindToCroppie(this.imgUrl, this.points, this.defaultZoom);
   }
 
   private bindToCroppie(url: string, points: number[], zoom: number) {
