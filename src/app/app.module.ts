@@ -19,7 +19,6 @@ import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
-import { ProfilepageComponent } from './profilepage/profilepage.component';
 import { CropComponent } from './crop/crop.component';
 
 import { ChatComponent } from './chat/chat.component';
@@ -33,7 +32,6 @@ import { MatListModule } from '@angular/material/list';
     RegisterComponent,
     LoginComponent,
     ChatComponent,
-    ProfilepageComponent,
     CropComponent,
     ChatListComponent,
   ],

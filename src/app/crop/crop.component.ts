@@ -6,8 +6,6 @@ import { CroppieOptions, ResultOptions, CropData } from 'croppie';
 import { ImageUploadService } from 'src/app/services/image-upload.service'
 import { AuthService } from 'src/app/services/auth.service'
 
-export type Type = 'canvas' | 'base64' | 'html' | 'blob' | 'rawcanvas';
-
 @Component({
   selector: 'app-crop',
   templateUrl: './crop.component.html',
@@ -98,7 +96,6 @@ export class CropComponent implements OnInit {
 	submit():void{
 		this._croppie.result(this.outputFormatOptions).then(result => {
 			this.uploadService.uploadImage(String(result)).subscribe((url:string) => {
-				//console.log(url)
 				this.uploadService.uploadProfileImage(url, this.auth.getUid()).subscribe()
 			})
 
