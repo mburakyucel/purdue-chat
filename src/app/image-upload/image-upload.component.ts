@@ -1,13 +1,4 @@
-<<<<<<< HEAD
-import {
-  Component,
-  OnInit,
-  ViewChild,
-  ElementRef,
-} from '@angular/core';
-=======
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
->>>>>>> 76c175ef4320217b4728698e2e1edfb4396594d3
 
 import * as Croppie from 'croppie';
 import { CroppieOptions, ResultOptions } from 'croppie';
@@ -15,6 +6,7 @@ import { CroppieOptions, ResultOptions } from 'croppie';
 import { ImageUploadService } from 'src/app/services/image-upload.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { VirtualTimeScheduler } from 'rxjs';
 
 @Component({
   selector: 'app-crop',
@@ -56,19 +48,11 @@ export class ImageUploadComponent implements OnInit {
       this.imageEdit.nativeElement,
       this.croppieOptions
     );
-<<<<<<< HEAD
-    this.bindToCroppie(this.imgUrl, this.points, this.defaultZoom);
-  }
-
-  private bindToCroppie(url: string, points: number[], zoom: number) {
-    this._croppie.bind({ url, points, zoom });
-=======
     this._croppie.bind({
       url: this.imageUrl,
       points: this.points,
       zoom: this.defaultZoom,
     });
->>>>>>> 76c175ef4320217b4728698e2e1edfb4396594d3
   }
 
   onInputChange(event: any): void {
@@ -111,5 +95,10 @@ export class ImageUploadComponent implements OnInit {
       this._croppie.destroy();
       this._croppie = null;
     });
+  }
+
+  cancel(): void {
+    this._croppie.destroy()
+    this._croppie = null
   }
 }

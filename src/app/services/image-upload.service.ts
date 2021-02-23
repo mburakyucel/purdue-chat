@@ -40,26 +40,10 @@ export class ImageUploadService {
     });
   }
 
-<<<<<<< HEAD
-  uploadProfileImage(downloadURL: string, id: string): Observable<any> {
-    return from(
-      this.afs
-        .collection('users')
-        .doc(id)
-        .update({ profileImage: downloadURL })
-        .then(() => {
-          console.log('done');
-        })
-        .catch((error) => {
-          console.log('Error in updating user profile image: ', error);
-        })
-    );
-=======
   uploadProfileImage(downloadURL: string, id: string): Promise<any> {
     return this.afs
       .collection('users')
       .doc(id)
       .update({ profileImage: downloadURL });
->>>>>>> 76c175ef4320217b4728698e2e1edfb4396594d3
   }
 }
