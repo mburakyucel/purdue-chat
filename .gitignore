@@ -48,3 +48,4 @@ Thumbs.db
 # Extras
 .firebaserc
 src/environments
+.firebase
