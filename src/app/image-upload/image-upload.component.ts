@@ -97,7 +97,7 @@ export class ImageUploadComponent implements OnInit {
   }
 
   cancel(): void {
-    this._croppie.destroy()
-    this._croppie = null
+    this._croppie.destroy();
+    this._croppie = null;
   }
 }
