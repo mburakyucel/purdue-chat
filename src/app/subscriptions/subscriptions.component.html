@@ -3,12 +3,11 @@
   <h3>Double click to remove subscription</h3>
   <h3>ID:</h3>
   <ul class="subs" style="list-style-type: none">
-    <li
-      *ngFor="let sub of subs"
-      class="collection-sub"
-    >
+    <li *ngFor="let sub of subs" class="collection-sub">
       <strong>{{ sub }}</strong>
-      <button mat-button (click)="removeSubscription($event, sub)">Remove</button>
+      <button mat-button (click)="removeSubscription($event, sub)">
+        Remove
+      </button>
     </li>
   </ul>
 </div>
