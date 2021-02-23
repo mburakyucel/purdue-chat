@@ -53,7 +53,11 @@ export class ImageUploadComponent implements OnInit {
       this.imageEdit.nativeElement,
       this.croppieOptions
     );
-    this._croppie.bind({url: this.imageUrl, points: this.points, zoom: this.defaultZoom})
+    this._croppie.bind({
+      url: this.imageUrl,
+      points: this.points,
+      zoom: this.defaultZoom,
+    });
   }
 
   onInputChange(event: any): void {
@@ -70,7 +74,11 @@ export class ImageUploadComponent implements OnInit {
     );
 
     reader.onload = (e1: any) => {
-      this._croppie.bind({url: e1.target.result, points: this.points, zoom: this.defaultZoom})
+      this._croppie.bind({
+        url: e1.target.result,
+        points: this.points,
+        zoom: this.defaultZoom,
+      });
     };
 
     reader.readAsDataURL(this.file);
@@ -80,15 +88,13 @@ export class ImageUploadComponent implements OnInit {
     // console.log(this._croppie.result(this.outputFormatOptions));
     this._croppie.result(this.outputFormatOptions).then((result: any) => {
       console.log(result);
-      this.uploadService
-        .uploadImage(result)
-        .subscribe((url: string) => {
-          console.log(url);
-          this.uploadService
-            .uploadProfileImage(url, this.auth.getUid())
-            .then(data => console.log(data))
-            .catch(error => console.log(error))
-        });
+      this.uploadService.uploadImage(result).subscribe((url: string) => {
+        console.log(url);
+        this.uploadService
+          .uploadProfileImage(url, this.auth.getUid())
+          .then((data) => console.log(data))
+          .catch((error) => console.log(error));
+      });
 
       this._croppie.destroy();
       this._croppie = null;

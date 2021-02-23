@@ -42,8 +42,8 @@ export class ImageUploadService {
 
   uploadProfileImage(downloadURL: string, id: string): Promise<any> {
     return this.afs
-        .collection('users')
-        .doc(id)
-        .update({ profileImage: downloadURL });
+      .collection('users')
+      .doc(id)
+      .update({ profileImage: downloadURL });
   }
 }
