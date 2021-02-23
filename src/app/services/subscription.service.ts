@@ -43,10 +43,8 @@ export class SubscriptionService {
   //Show all classes a user is subscribed too
   getSubscriptions(): Observable<any> {
     this.userDoc = this.afs.collection('users').doc(this.authService.getUid());
-    return this.subs = this.userDoc.valueChanges().pipe(
-      map((doc) => {
-        return doc.chats;
-      })
+    return this.userDoc.valueChanges().pipe(
+      map((doc) => { return doc.chats})
     );
   }
 
