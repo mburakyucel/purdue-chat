@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { from, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import {
   AngularFireStorage,
   AngularFireStorageReference,
@@ -23,8 +23,8 @@ export class ImageUploadService {
   uploadImage(imageData: string): Observable<any> {
     return new Observable<any>((subscriber) => {
       const randomId = Math.random().toString(36).substring(2);
-      this.ref = this.storage.ref(randomId);
-      this.task = this.ref.putString(imageData.split(',')[1], 'base64');
+      this.ref = this.storage.ref(`${randomId}.png`);
+      this.task = this.ref.putString(imageData, 'data_url');
 
       this.task.snapshotChanges().subscribe(
         () => {},
@@ -40,6 +40,7 @@ export class ImageUploadService {
     });
   }
 
+<<<<<<< HEAD
   uploadProfileImage(downloadURL: string, id: string): Observable<any> {
     return from(
       this.afs
@@ -53,5 +54,12 @@ export class ImageUploadService {
           console.log('Error in updating user profile image: ', error);
         })
     );
+=======
+  uploadProfileImage(downloadURL: string, id: string): Promise<any> {
+    return this.afs
+      .collection('users')
+      .doc(id)
+      .update({ profileImage: downloadURL });
+>>>>>>> 76c175ef4320217b4728698e2e1edfb4396594d3
   }
 }

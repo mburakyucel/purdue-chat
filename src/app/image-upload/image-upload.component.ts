@@ -1,15 +1,20 @@
+<<<<<<< HEAD
 import {
   Component,
   OnInit,
   ViewChild,
   ElementRef,
 } from '@angular/core';
+=======
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+>>>>>>> 76c175ef4320217b4728698e2e1edfb4396594d3
 
 import * as Croppie from 'croppie';
 import { CroppieOptions, ResultOptions } from 'croppie';
 
 import { ImageUploadService } from 'src/app/services/image-upload.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-crop',
@@ -31,15 +36,17 @@ export class ImageUploadComponent implements OnInit {
   private defaultZoom = 0;
   private _croppie: Croppie;
   private file: any;
-  private imgUrl: string;
+  private imageUrl: string;
   private outputFormatOptions: ResultOptions = {
     type: 'base64',
     size: 'viewport',
+    circle: false,
   };
 
   constructor(
     private uploadService: ImageUploadService,
-    private auth: AuthService
+    private auth: AuthService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {}
@@ -49,11 +56,19 @@ export class ImageUploadComponent implements OnInit {
       this.imageEdit.nativeElement,
       this.croppieOptions
     );
+<<<<<<< HEAD
     this.bindToCroppie(this.imgUrl, this.points, this.defaultZoom);
   }
 
   private bindToCroppie(url: string, points: number[], zoom: number) {
     this._croppie.bind({ url, points, zoom });
+=======
+    this._croppie.bind({
+      url: this.imageUrl,
+      points: this.points,
+      zoom: this.defaultZoom,
+    });
+>>>>>>> 76c175ef4320217b4728698e2e1edfb4396594d3
   }
 
   onInputChange(event: any): void {
@@ -70,7 +85,11 @@ export class ImageUploadComponent implements OnInit {
     );
 
     reader.onload = (e1: any) => {
-      this.bindToCroppie(e1.target.result, this.points, this.defaultZoom);
+      this._croppie.bind({
+        url: e1.target.result,
+        points: this.points,
+        zoom: this.defaultZoom,
+      });
     };
 
     reader.readAsDataURL(this.file);
@@ -78,13 +97,16 @@ export class ImageUploadComponent implements OnInit {
 
   submit(): void {
     this._croppie.result(this.outputFormatOptions).then((result: any) => {
-      this.uploadService
-        .uploadImage(String(result))
-        .subscribe((url: string) => {
-          this.uploadService
-            .uploadProfileImage(url, this.auth.getUid())
-            .subscribe();
-        });
+      this.uploadService.uploadImage(result).subscribe((url: string) => {
+        this.uploadService
+          .uploadProfileImage(url, this.auth.getUid())
+          .then(() => {
+            this._snackBar.open('Image uploaded successfully', 'Close', {
+              duration: 2000,
+            });
+          })
+          .catch((error) => console.log(error));
+      });
 
       this._croppie.destroy();
       this._croppie = null;
