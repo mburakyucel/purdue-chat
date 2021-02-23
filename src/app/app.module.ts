@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import { environment } from '../environments/environment';
+import { environment } from 'src/app/environments/environments';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -22,6 +22,7 @@ import { LoginComponent } from './login/login.component';
 import { ChatComponent } from './chat/chat.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { MatListModule } from '@angular/material/list';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { MatListModule } from '@angular/material/list';
     LoginComponent,
     ChatComponent,
     ChatListComponent,
+    ImageUploadComponent,
   ],
   imports: [
     BrowserModule,
