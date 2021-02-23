@@ -6,7 +6,6 @@ import { CroppieOptions, ResultOptions } from 'croppie';
 import { ImageUploadService } from 'src/app/services/image-upload.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { VirtualTimeScheduler } from 'rxjs';
 
 @Component({
   selector: 'app-crop',
