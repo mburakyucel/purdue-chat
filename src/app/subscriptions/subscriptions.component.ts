@@ -10,24 +10,16 @@ import { DocumentData } from '@angular/fire/firestore';
   templateUrl: './subscriptions.component.html',
   styleUrls: ['./subscriptions.component.css'],
 })
-export class SubListComponent implements OnInit {
+export class SubscriptionsComponent implements OnInit {
   subs: string[];
 
   constructor(private subService: SubscriptionService) {}
 
   ngOnInit() {
-    this.getSubscriptions();
-  }
-
-  getSubscriptions(): void {
     this.subService.getSubscriptions().subscribe((subs) => (this.subs = subs));
   }
 
   removeSubscription(event: any, sub: string) {
     this.subService.removeSubscription(sub);
-  }
-
-  ngOnDestroy() {
-    console.log('onDestroy');
   }
 }

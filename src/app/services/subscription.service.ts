@@ -9,42 +9,22 @@ import { DocumentData } from '@angular/fire/firestore';
 
 import { Observable, of, from } from 'rxjs';
 import { map } from 'rxjs/operators';
-
 import { AuthService } from '../services/auth.service';
-
 import { Class } from '../../assets/class';
-import { CLASSES } from '../../assets/mock-classes';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SubscriptionService {
-  classesCollection: AngularFirestoreCollection<Class>;
-  classes: Observable<Class[]>;
   userDoc: AngularFirestoreDocument<any>;
-  subs: Observable<any>;
 
-  constructor(public afs: AngularFirestore, public authService: AuthService) {
-    //To obtain the list of classes from database
-    this.classesCollection = this.afs.collection('classes', (ref) =>
-      ref.orderBy('course', 'asc')
-    );
-    this.classes = this.classesCollection.snapshotChanges().pipe(
-      map((changes) => {
-        return changes.map((a) => {
-          const data = a.payload.doc.data() as Class;
-          data.id = a.payload.doc.id;
-          return data;
-        });
-      })
-    );
-  }
+  constructor(public afs: AngularFirestore, public authService: AuthService) { }
 
   //Show all classes a user is subscribed too
   getSubscriptions(): Observable<any> {
     this.userDoc = this.afs.collection('users').doc(this.authService.getUid());
     return this.userDoc.valueChanges().pipe(
-      map((doc) => { return doc.chats})
+      map((doc) => {return doc.chats})
     );
   }
 
@@ -69,11 +49,8 @@ export class SubscriptionService {
   }
 
   //Show all available classes
-  getClasses(): Observable<Class[]> {
-    return this.classes;
-  }
-
-  addClassesToDatabase() {
-    for (let entry of CLASSES) this.classesCollection.add(entry);
+  getClasses(): Observable<any> {
+    return this.afs.collection('classes').valueChanges({idField: 'id'}).pipe(
+      map((doc) => {return doc}));
   }
 }

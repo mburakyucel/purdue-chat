@@ -1,7 +1,8 @@
 <h2>Your Subscriptions</h2>
 <div *ngIf="subs?.length > 0; else noSubs">
+  <h3>Double click to remove subscription</h3>
   <h3>ID:</h3>
-  <ul class="classes" style="list-style-type: none">
+  <ul class="subs" style="list-style-type: none">
     <li
       (dblclick)="removeSubscription($event, sub)"
       *ngFor="let sub of subs"
