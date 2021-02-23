@@ -13,11 +13,6 @@ import { CroppieOptions, ResultOptions, CropData } from 'croppie';
 
 import { ImageUploadService } from 'src/app/services/image-upload.service';
 import { AuthService } from 'src/app/services/auth.service';
-<<<<<<< HEAD
-=======
-
-export type Type = 'canvas' | 'base64' | 'html' | 'blob' | 'rawcanvas';
->>>>>>> efa9dc793509bc2b5ed41ee471398343cd96ebb5
 
 @Component({
   selector: 'app-crop',
@@ -35,15 +30,9 @@ export class CropComponent implements OnInit {
     enableZoom: true,
   };
 
-<<<<<<< HEAD
   private points: number[];
   private defaultZoom = 0;
   public result: EventEmitter<
-=======
-  @Input() points: number[];
-  @Input() defaultZoom = 0;
-  @Output() result: EventEmitter<
->>>>>>> efa9dc793509bc2b5ed41ee471398343cd96ebb5
     string | HTMLElement | Blob | HTMLCanvasElement
   > = new EventEmitter<string | HTMLElement | Blob | HTMLCanvasElement>();
   private _croppie: Croppie;
@@ -65,11 +54,7 @@ export class CropComponent implements OnInit {
     return this.imgUrl;
   }
 
-<<<<<<< HEAD
   set imageUrl(url: string) {
-=======
-  @Input() set imageUrl(url: string) {
->>>>>>> efa9dc793509bc2b5ed41ee471398343cd96ebb5
     if (this.imgUrl === url) {
       return;
     }
@@ -114,11 +99,7 @@ export class CropComponent implements OnInit {
     }
 
     this.file = event.target.files[0];
-<<<<<<< HEAD
     const reader = new FileReader();
-=======
-    var reader = new FileReader();
->>>>>>> efa9dc793509bc2b5ed41ee471398343cd96ebb5
 
     this._croppie = new Croppie(
       this.imageEdit.nativeElement,
@@ -137,10 +118,6 @@ export class CropComponent implements OnInit {
       this.uploadService
         .uploadImage(String(result))
         .subscribe((url: string) => {
-<<<<<<< HEAD
-=======
-          //console.log(url)
->>>>>>> efa9dc793509bc2b5ed41ee471398343cd96ebb5
           this.uploadService
             .uploadProfileImage(url, this.auth.getUid())
             .subscribe();
