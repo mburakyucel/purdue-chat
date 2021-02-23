@@ -114,7 +114,7 @@ export class ImageUploadComponent implements OnInit {
   }
 
   submit(): void {
-    this._croppie.result(this.outputFormatOptions).then((result:any) => {
+    this._croppie.result(this.outputFormatOptions).then((result: any) => {
       this.uploadService
         .uploadImage(String(result))
         .subscribe((url: string) => {
