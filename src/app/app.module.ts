@@ -21,6 +21,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { CropComponent } from './crop/crop.component';
 
+<<<<<<< HEAD
+=======
+import { NgxCroppieModule } from 'ngx-croppie';
+>>>>>>> efa9dc793509bc2b5ed41ee471398343cd96ebb5
 import { ChatComponent } from './chat/chat.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { MatListModule } from '@angular/material/list';
