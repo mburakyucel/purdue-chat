@@ -25,7 +25,6 @@ import { ChatComponent } from './chat/chat.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { MatListModule } from '@angular/material/list';
 
-
 @NgModule({
   declarations: [
     AppComponent,
