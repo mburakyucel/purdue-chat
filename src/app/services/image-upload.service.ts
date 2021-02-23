@@ -24,7 +24,7 @@ export class ImageUploadService {
     return new Observable<any>((subscriber) => {
       const randomId = Math.random().toString(36).substring(2);
       this.ref = this.storage.ref(`${randomId}.png`);
-      this.task = this.ref.putString(imageData.split(',')[1], 'data_url');
+      this.task = this.ref.putString(imageData, 'data_url');
 
       this.task.snapshotChanges().subscribe(
         () => {},
