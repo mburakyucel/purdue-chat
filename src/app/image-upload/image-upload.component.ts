@@ -13,6 +13,7 @@ import { CroppieOptions, ResultOptions, CropData } from 'croppie';
 
 import { ImageUploadService } from 'src/app/services/image-upload.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-crop',
@@ -43,7 +44,8 @@ export class ImageUploadComponent implements OnInit {
 
   constructor(
     private uploadService: ImageUploadService,
-    private auth: AuthService
+    private auth: AuthService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {}
@@ -87,10 +89,13 @@ export class ImageUploadComponent implements OnInit {
   submit(): void {
     this._croppie.result(this.outputFormatOptions).then((result: any) => {
       this.uploadService.uploadImage(result).subscribe((url: string) => {
-        console.log(url);
         this.uploadService
           .uploadProfileImage(url, this.auth.getUid())
-          .then((data) => console.log(data))
+          .then(() => {
+            this._snackBar.open('Image uploaded successfully', 'Close', {
+              duration: 2000,
+            });
+          })
           .catch((error) => console.log(error));
       });
 
