@@ -41,7 +41,6 @@ export class ImageUploadService {
   }
 
   uploadProfileImage(downloadURL: string, id: string): Observable<any> {
-    //console.log(downloadURL)
     return from(
       this.afs
         .collection('users')

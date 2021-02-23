@@ -1,15 +1,12 @@
 import {
   Component,
   OnInit,
-  Input,
-  EventEmitter,
-  Output,
   ViewChild,
   ElementRef,
 } from '@angular/core';
 
 import * as Croppie from 'croppie';
-import { CroppieOptions, ResultOptions, CropData } from 'croppie';
+import { CroppieOptions, ResultOptions } from 'croppie';
 
 import { ImageUploadService } from 'src/app/services/image-upload.service';
 import { AuthService } from 'src/app/services/auth.service';
@@ -32,9 +29,6 @@ export class ImageUploadComponent implements OnInit {
 
   private points: number[];
   private defaultZoom = 0;
-  public result: EventEmitter<
-    string | HTMLElement | Blob | HTMLCanvasElement
-  > = new EventEmitter<string | HTMLElement | Blob | HTMLCanvasElement>();
   private _croppie: Croppie;
   private file: any;
   private imgUrl: string;
@@ -60,21 +54,6 @@ export class ImageUploadComponent implements OnInit {
 
   private bindToCroppie(url: string, points: number[], zoom: number) {
     this._croppie.bind({ url, points, zoom });
-  }
-
-  newResult() {
-    this._croppie.result(this.outputFormatOptions).then((res) => {
-      this.result.emit(res);
-    });
-  }
-
-  rotate(degrees: 90 | 180 | 270 | -90 | -180 | -270) {
-    this._croppie.rotate(degrees);
-  }
-
-  get(): CropData {
-    console.log(this._croppie.result({ type: 'base64', circle: true }));
-    return this._croppie.get();
   }
 
   onInputChange(event: any): void {
