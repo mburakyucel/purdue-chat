@@ -14,6 +14,11 @@
       <span>Chat</span>
     </button>
   </a>
+  <a class="text-reset" routerLink="/imageUpload">
+    <button mat-button class="p-1 p-lg-3">
+      <span>Upload Image</span>
+    </button>
+  </a>
   <button mat-button (click)="this.authService.logout()">Logout</button>
 </mat-toolbar>
 <router-outlet></router-outlet>

@@ -1,0 +1,9 @@
+<input
+  type="file"
+  id="userImage"
+  (change)="onInputChange($event)"
+  accept="image/*"
+/>
+<div #imageEdit></div>
+<button id="submit" (click)="submit()">Submit</button>
+<button id="cancel" (click)="cancel()">Cancel</button>
