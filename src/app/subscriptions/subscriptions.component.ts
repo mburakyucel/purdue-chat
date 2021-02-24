@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { Class } from '../../assets/class';
 import { SubscriptionService } from '../services/subscription.service';
-
-import { DocumentData } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-subscriptions',
@@ -16,7 +12,7 @@ export class SubscriptionsComponent implements OnInit {
   constructor(private subService: SubscriptionService) {}
 
   ngOnInit() {
-    this.subService.getSubscriptions().subscribe((subs) => (this.subs = subs));
+    this.subService.getSubscriptions().subscribe(subs => this.subs = subs);
   }
 
   removeSubscription(event: any, sub: string) {
