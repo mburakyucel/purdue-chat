@@ -7,12 +7,14 @@ import {
 import { switchMap } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import { Class } from '../../assets/class';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private uid: string = '';
+  private chats: Array<string> = [];
   user$: Observable<any>;
   constructor(
     private afAuth: AngularFireAuth,
@@ -70,6 +72,7 @@ export class AuthService {
       `users/${user.uid}`
     );
     const data = {
+      chats: this.chats,
       uid: user.uid,
       email: user.email,
       profileImage: '',

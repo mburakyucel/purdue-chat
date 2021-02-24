@@ -20,6 +20,8 @@ import { RegisterComponent } from './register/register.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 
+import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
+import { ClassesComponent } from './classes/classes.component';
 import { ChatComponent } from './chat/chat.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { MatListModule } from '@angular/material/list';
@@ -30,6 +32,8 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
     AppComponent,
     RegisterComponent,
     LoginComponent,
+    SubscriptionsComponent,
+    ClassesComponent,
     ChatComponent,
     ChatListComponent,
     ImageUploadComponent,

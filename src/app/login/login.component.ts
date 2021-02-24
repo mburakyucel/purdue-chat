@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
     email: new FormControl(''),
     password: new FormControl(''),
   });
+
   constructor(
     public authService: AuthService,
     private _snackBar: MatSnackBar,
