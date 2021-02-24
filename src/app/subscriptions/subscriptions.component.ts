@@ -12,7 +12,7 @@ export class SubscriptionsComponent implements OnInit {
   constructor(private subService: SubscriptionService) {}
 
   ngOnInit() {
-    this.subService.getSubscriptions().subscribe(subs => this.subs = subs);
+    this.subService.getSubscriptions().subscribe((subs) => (this.subs = subs));
   }
 
   removeSubscription(event: any, sub: string) {

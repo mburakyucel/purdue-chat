@@ -17,7 +17,7 @@ export class ClassesComponent implements OnInit {
   ngOnInit() {
     this.subService
       .getClasses()
-      .subscribe(classes => this.classes = classes);
+      .subscribe((classes) => (this.classes = classes));
   }
 
   onSelect(myclass: Class): void {
