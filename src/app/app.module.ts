@@ -22,10 +22,10 @@ import { LoginComponent } from './login/login.component';
 
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 import { ClassesComponent } from './classes/classes.component';
-
 import { ChatComponent } from './chat/chat.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { MatListModule } from '@angular/material/list';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +36,7 @@ import { MatListModule } from '@angular/material/list';
     ClassesComponent,
     ChatComponent,
     ChatListComponent,
+    ImageUploadComponent,
   ],
   imports: [
     BrowserModule,

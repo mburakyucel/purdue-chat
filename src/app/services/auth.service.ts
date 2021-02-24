@@ -75,6 +75,7 @@ export class AuthService {
       chats: this.chats,
       uid: user.uid,
       email: user.email,
+      profileImage: '',
     };
 
     return userRef.set(data, { merge: true });
