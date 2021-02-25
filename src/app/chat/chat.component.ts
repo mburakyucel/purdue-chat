@@ -50,10 +50,6 @@ export class ChatComponent implements OnInit, OnDestroy {
     }
   }
 
-  onChatSelect(chatId: string) {
-    this.router.navigate([`/chat/${chatId}`]);
-  }
-
   ngOnDestroy() {
     console.log('onDestroy');
   }

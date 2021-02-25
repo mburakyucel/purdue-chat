@@ -1,0 +1,40 @@
+<mat-toolbar>
+    <a class="text-reset" routerLink="/login">
+        <button mat-button class="p-1 p-lg-3">
+            <span>Login</span>
+        </button>
+    </a>
+    <a class="text-reset" routerLink="/register">
+        <button mat-button class="p-1 p-lg-3">
+            <span>Register</span>
+        </button>
+    </a>
+    <a class="text-reset" routerLink="/classes">
+        <button mat-button class="p-1 p-lg-3">
+            <span>Classes</span>
+        </button>
+    </a>
+    <a class="text-reset" routerLink="/imageUpload">
+        <button mat-button class="p-1 p-lg-3">
+            <span>Upload Image</span>
+        </button>
+    </a>
+    <button mat-button (click)="this.authService.logout()">Logout</button>
+</mat-toolbar>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+        <app-chat-list (chatSelect)="onChatSelect($event)"></app-chat-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+            <button type="button" mat-icon-button (click)="drawer.toggle()"
+                *ngIf="isHandset$ | async">
+                <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+            </button>
+            <span>Chat</span>
+        </mat-toolbar>
+        <!-- Add Content Here -->
+        <app-chat></app-chat>
+    </mat-sidenav-content>
+</mat-sidenav-container>
