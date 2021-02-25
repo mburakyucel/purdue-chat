@@ -28,6 +28,7 @@ import { ChatListComponent } from './chat-list/chat-list.component';
 import { MatListModule } from '@angular/material/list';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { MainComponent } from './main/main.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { MainComponent } from './main/main.component';
     ChatListComponent,
     ImageUploadComponent,
     MainComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

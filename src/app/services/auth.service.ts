@@ -62,6 +62,18 @@ export class AuthService {
     return this.uid;
   }
 
+  isSignedIn(): Observable<boolean> {
+    return this.afAuth.authState.pipe(
+      switchMap(user => {
+        if(user) {
+          return of(true);
+        } else{
+          return of(false);
+        }
+      })
+    )
+  }
+
   logout() {
     this.afAuth.signOut();
     this.router.navigate(['login']);
