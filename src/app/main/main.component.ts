@@ -29,4 +29,7 @@ export class MainComponent implements OnInit {
     this.router.navigate([`/chat/${chatId}`]);
   }
 
+  onLogout() {
+    this.authService.logout();
+  }
 }

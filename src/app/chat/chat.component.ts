@@ -8,7 +8,8 @@ import {
 import { DocumentData } from '@angular/fire/firestore';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { ChatService } from '../services/chat.service';
 
 @Component({
@@ -21,6 +22,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   messages$: any;
   messages: any[] = [];
   messageControl = new FormControl('');
+  unsubscribe$: Subject<void> = new Subject<void>();
   @ViewChild('inputMessage') inputMessage: ElementRef<HTMLInputElement>;
   constructor(
     public chatService: ChatService,
@@ -31,11 +33,12 @@ export class ChatComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.messages$ = this.route.paramMap.pipe(
       switchMap((params) => {
+        console.log(params);
         this.chatId = params.get('chatId');
         return this.chatService.getMessages(this.chatId);
       })
     );
-    this.messages$.subscribe((data: Array<DocumentData>) => {
+    this.messages$.pipe(takeUntil(this.unsubscribe$)).subscribe((data: Array<DocumentData>) => {
       console.log(data);
       this.messages = data.sort((m1, m2) => m1.createdAt - m2.createdAt);
     });
@@ -52,5 +55,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     console.log('onDestroy');
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

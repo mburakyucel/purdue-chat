@@ -1,14 +1,4 @@
 <mat-toolbar>
-    <a class="text-reset" routerLink="/login">
-        <button mat-button class="p-1 p-lg-3">
-            <span>Login</span>
-        </button>
-    </a>
-    <a class="text-reset" routerLink="/register">
-        <button mat-button class="p-1 p-lg-3">
-            <span>Register</span>
-        </button>
-    </a>
     <a class="text-reset" routerLink="/classes">
         <button mat-button class="p-1 p-lg-3">
             <span>Classes</span>
@@ -19,7 +9,7 @@
             <span>Upload Image</span>
         </button>
     </a>
-    <button mat-button (click)="this.authService.logout()">Logout</button>
+    <button mat-button (click)="onLogout()">Logout</button>
 </mat-toolbar>
 <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #drawer class="sidenav" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
