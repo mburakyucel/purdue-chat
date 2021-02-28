@@ -31,13 +31,15 @@ export class ProfileComponent implements OnInit {
   }
 
   onDisplayNameClick(){
-
+    console.log(this.displayName.value)
+    this.profileService.changeDisplayName(this.displayName.value)
+    this.toggleOn = true
   }
 
   test(){
     console.log(this.imageURL)
     console.log(this.email)
-    console.log(this.displayName)
+    console.log(this.displayName.value)
   }
 
 }

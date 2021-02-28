@@ -16,6 +16,6 @@ export class ProfileService {
   }
 
   changeDisplayName(newDisplayName:string){
-
+    this.afs.collection('users').doc(this.authService.getUid()).update({displayName: newDisplayName})
   }
 }
