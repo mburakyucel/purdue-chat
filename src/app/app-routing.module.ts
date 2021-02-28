@@ -6,6 +6,7 @@ import { RegisterComponent } from './register/register.component';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 import { ClassesComponent } from './classes/classes.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'chat', component: ChatComponent },
   { path: 'chat/:chatId', component: ChatComponent },
   { path: 'imageUpload', component: ImageUploadComponent },
+  { path: 'profile', component: ProfileComponent },
 ];
 
 @NgModule({
