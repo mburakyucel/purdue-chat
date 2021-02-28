@@ -17,10 +17,9 @@ export class ClassesComponent implements OnInit {
   constructor(private subService: SubscriptionService) {}
 
   ngOnInit() {
-    this.subService
-      .getClasses()
-      .subscribe(classes => {this.classes = classes, 
-        this.classSearch = this.classes});
+    this.subService.getClasses().subscribe((classes) => {
+      (this.classes = classes), (this.classSearch = this.classes);
+    });
   }
 
   onSelect(myclass: Class): void {
@@ -34,12 +33,12 @@ export class ClassesComponent implements OnInit {
 
     //Only compare the class name and number
     let name: string;
-    for(let item of this.classes) 
-    {
-      name = item.subject + " " + item.course;
-      if(name.toLocaleLowerCase().includes(this.searchText) ||
-         name.includes(this.searchText))
-      {
+    for (let item of this.classes) {
+      name = item.subject + ' ' + item.course;
+      if (
+        name.toLocaleLowerCase().includes(this.searchText) ||
+        name.includes(this.searchText)
+      ) {
         this.classSearch.push(item);
       }
     }
