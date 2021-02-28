@@ -6,3 +6,13 @@ img {
     display: flex;
     justify-content: center;
 }
+
+.email {
+    display: flex;
+    justify-content: center;
+}
+
+.display_name {
+    display: flex;
+    justify-content: center;
+}

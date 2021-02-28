@@ -1,4 +1,23 @@
 <div class="image">
     <img src={{imageURL}} (click)="onImageClick()">
 </div>
+<div class="email">
+    Email: {{email}}
+</div>
+
+<div class="display_name">
+    <div *ngIf="toggleOn; else toggleOff">
+        Display Name: {{displayName.value}}
+        <button mat-icon-button (click)="toggleOn =! toggleOn">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+    </div>
+    <ng-template #toggleOff>
+        <p>Display Name: 
+            <input type="text" [formControl]="displayName">
+            <button mat-stroked-button (click)="onDisplayNameClick()">Submit</button>
+        </p>
+    </ng-template>
+</div>
+
 <button (click)="test()">Test</button>

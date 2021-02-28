@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../services/profile.service';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
 import { MatDialog } from '@angular/material/dialog';
+import { FormControl } from '@angular/forms'
 
 @Component({
   selector: 'app-profile',
@@ -10,8 +11,9 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class ProfileComponent implements OnInit {
   public imageURL:string;
-  private email:string;
-  private displayName:string;
+  public email:string;
+  public displayName:any = new FormControl('');
+  public toggleOn:any = true;
 
   constructor(public profileService: ProfileService, public dialog: MatDialog) { }
 
@@ -19,15 +21,17 @@ export class ProfileComponent implements OnInit {
     this.profileService.getDoc().subscribe((doc:any) => {
       this.imageURL = doc.profileImage;
       this.email = doc.email;
-      this.displayName = doc.displayName;
+      this.displayName.setValue(doc.displayName);
     })
   }
 
   onImageClick(){
     const imageRef = this.dialog.open(ImageUploadComponent);
-    imageRef.afterClosed().subscribe(result => {
-      console.log(result)
-    })
+    imageRef.afterClosed().subscribe()
+  }
+
+  onDisplayNameClick(){
+
   }
 
   test(){
