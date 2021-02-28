@@ -1,7 +1,12 @@
 <div class="container">
+	<div class="form-group">
+		<label for="search-text">Search Your Class</label>
+		<input type="email" class="form-control" id="search-text" aria-describedby="search-text" 
+      [(ngModel)]="searchText" placeholder="Enter class name to search" (keyup)="classFilter()">
+  </div>
   <ul class="list-group">
     <li class="list-group-item clearfix"
-        *ngFor="let class of classes">
+        *ngFor="let class of classSearch">
       <img class="img-responsive img-rounded" src="http://placehold.it/256/163a63" alt=""/>
       <h3 class="list-group-item-heading">
         {{ class.subject }} {{ class.course }}
