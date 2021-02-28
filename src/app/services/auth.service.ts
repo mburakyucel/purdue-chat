@@ -8,6 +8,7 @@ import { switchMap } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { Class } from '../../assets/class';
+import { environment } from 'src/environments/environment'
 
 @Injectable({
   providedIn: 'root',
@@ -75,7 +76,8 @@ export class AuthService {
       chats: this.chats,
       uid: user.uid,
       email: user.email,
-      profileImage: '',
+      profileImage: environment.firebase.profileImage,
+      displayName: user.email.split("@")[0],
     };
 
     return userRef.set(data, { merge: true });

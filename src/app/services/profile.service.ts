@@ -14,4 +14,8 @@ export class ProfileService {
   getDoc():Observable<any>{
     return this.authService.user$
   }
+
+  changeDisplayName(newDisplayName:string){
+
+  }
 }
