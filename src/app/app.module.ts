@@ -26,6 +26,7 @@ import { ChatComponent } from './chat/chat.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { MatListModule } from '@angular/material/list';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
     ChatComponent,
     ChatListComponent,
     ImageUploadComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
