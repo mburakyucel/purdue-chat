@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../services/profile.service';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
 import { MatDialog } from '@angular/material/dialog';
-import { FormControl } from '@angular/forms'
+import { FormControl, FormGroup } from '@angular/forms'
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +13,14 @@ export class ProfileComponent implements OnInit {
   public imageURL:string;
   public email:string;
   public displayName:any = new FormControl('');
+  public passwordForm: any = new FormGroup({
+    old_password: new FormControl(''),
+    new_password: new FormControl(''),
+    confirm_password: new FormControl(''),
+  });
+
   public toggleOn:any = true;
+  public toggleOn_password: any = true;
 
   constructor(public profileService: ProfileService, public dialog: MatDialog) { }
 
@@ -34,6 +41,20 @@ export class ProfileComponent implements OnInit {
     console.log(this.displayName.value)
     this.profileService.changeDisplayName(this.displayName.value)
     this.toggleOn = true
+  }
+
+  onPasswordChange(){
+    console.log(this.passwordForm.value.old_password)
+    console.log(this.passwordForm.value.new_password)
+    console.log(this.passwordForm.value.confirm_password)
+  }
+
+  cancelPassword(){
+    this.toggleOn_password = true;
+  }
+
+  cancelDisplayName(){
+    this.toggleOn = true;
   }
 
   test(){

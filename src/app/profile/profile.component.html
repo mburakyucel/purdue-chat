@@ -15,9 +15,40 @@
     <ng-template #toggleOff>
         <p>Display Name: 
             <input type="text" [formControl]="displayName">
-            <button mat-stroked-button (click)="onDisplayNameClick()">Submit</button>
+            <button mat-stroked-button (click)="onDisplayNameClick()">Save</button>
+            <button mat-stroked-button (click)="cancelDisplayName()">Cancel</button>
         </p>
     </ng-template>
 </div>
+
+<div class="display_password">
+    <div *ngIf="toggleOn_password; else toggleOff_password">
+        Password: ********
+        <button mat-icon-button (click)="toggleOn_password =! toggleOn_password">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+    </div>
+    
+    <ng-template #toggleOff_password>
+        <form [formGroup]="passwordForm" (ngSubmit)="onPasswordChange()">
+            <label>
+                Old Password:
+                <input type="text" formControlName="old_password">
+            </label>
+            <label>
+                New Password:
+                <input type="text" formControlName="new_password">
+            </label>
+            <label>
+                Confirm Password:
+                <input type="text" formControlName="confirm_password">
+                <button mat-stroked-button type="submit" [disabled]="!passwordForm.valid">Save</button>
+                <button mat-stroked-button (click)="cancelPassword()">Cancel</button>
+            </label>
+        </form>
+    </ng-template>
+</div>
+
+
 
 <button (click)="test()">Test</button>

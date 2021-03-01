@@ -16,3 +16,8 @@ img {
     display: flex;
     justify-content: center;
 }
+
+.display_password {
+    display: flex;
+    justify-content: center;
+}
