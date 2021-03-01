@@ -1,3 +1,70 @@
+<div class="profile">
+    <div class="card">
+        <div class="image">
+            <img src={{imageURL}} (click)="onImageClick()">
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <p style="float: left; margin-top: 12px;">
+                    Email: <span class="tab1">{{email}}</span>
+                </p>
+            </li>
+            <li class="list-group-item">
+                <div *ngIf="toggleOn; else toggleOff">
+                    <p style="float: left; margin-top: 12px;">
+                        Display Name: &nbsp;&nbsp;&nbsp;{{displayName.value}}
+                    </p>
+                    <button mat-icon-button (click)="toggleOn =! toggleOn" style="float: right">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                </div>
+                <ng-template #toggleOff>
+                    <p>Display Name: 
+                        <input type="text" [formControl]="displayName">
+                    </p>
+                    <button mat-stroked-button (click)="onDisplayNameClick()">Save</button>
+                    <button mat-stroked-button (click)="cancelDisplayName()">Cancel</button>
+                </ng-template>
+            </li>
+            <li class="list-group-item">
+                <div *ngIf="toggleOn_password; else toggleOff_password">
+                    <p style="float: left; margin-top: 12px;">
+                        Password:<span class="tab2">******</span>
+                    </p>
+                    <button mat-icon-button (click)="toggleOn_password =! toggleOn_password" style="float: right;">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                </div>
+                <ng-template #toggleOff_password>
+                    <form [formGroup]="passwordForm" (ngSubmit)="onPasswordChange()">
+                        <div class="formGroup">
+                            <label>
+                                <input type="text" formControlName="old_password" placeholder="Old Password">
+                            </label>
+                        </div>
+                        <div class="formGroup">
+                            <label>
+                                <input type="text" formControlName="new_password" placeholder="New Password">
+                            </label>
+                        </div>
+                        <div class="formGroup">
+                            <label>
+                                <input type="text" formControlName="confirm_password" placeholder="Confirm Password">
+                            </label>
+                            <button mat-stroked-button type="submit" [disabled]="!passwordForm.valid">Save</button>
+                            <button mat-stroked-button (click)="cancelPassword()">Cancel</button>
+                        </div>
+                    </form>
+                </ng-template>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+
+
+<!--
 <div class="image">
     <img src={{imageURL}} (click)="onImageClick()">
 </div>
@@ -31,24 +98,30 @@
     
     <ng-template #toggleOff_password>
         <form [formGroup]="passwordForm" (ngSubmit)="onPasswordChange()">
-            <label>
-                Old Password:
-                <input type="text" formControlName="old_password">
-            </label>
-            <label>
-                New Password:
-                <input type="text" formControlName="new_password">
-            </label>
-            <label>
-                Confirm Password:
-                <input type="text" formControlName="confirm_password">
-                <button mat-stroked-button type="submit" [disabled]="!passwordForm.valid">Save</button>
-                <button mat-stroked-button (click)="cancelPassword()">Cancel</button>
-            </label>
+            <div class="formGroup">
+                <label>
+                    Old Password:
+                    <input type="text" formControlName="old_password">
+                </label>
+            </div>
+            <div class="formGroup">
+                <label>
+                    New Password:
+                    <input type="text" formControlName="new_password">
+                </label>
+            </div>
+            <div class="formGroup">
+                <label>
+                    Confirm Password:
+                    <input type="text" formControlName="confirm_password">
+                    <button mat-stroked-button type="submit" [disabled]="!passwordForm.valid">Save</button>
+                    <button mat-stroked-button (click)="cancelPassword()">Cancel</button>
+                </label>
+            </div>
         </form>
     </ng-template>
 </div>
-
+-->
 
 
 <button (click)="test()">Test</button>
