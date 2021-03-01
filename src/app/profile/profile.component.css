@@ -21,7 +21,6 @@ label {
     display: flex;
     flex-direction: row;
     justify-content: center;
-
     width: 350px;
     line-height: 26px;
     margin-bottom: 10px;
@@ -48,5 +47,4 @@ input {
     justify-content: center;
     margin: auto;
     width: 50%;
-
 }
