@@ -25,7 +25,7 @@ export class SubscriptionService {
 
   //Add a subscription to the user chats array
   addSubscription(classID: string) {
-    this.afs
+    return this.afs
       .collection('users')
       .doc(this.authService.getUid())
       .update({
@@ -35,7 +35,7 @@ export class SubscriptionService {
 
   //Remove a subscription from the user chats array
   removeSubscription(classID: string) {
-    this.afs
+    return this.afs
       .collection('users')
       .doc(this.authService.getUid())
       .update({

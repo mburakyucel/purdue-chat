@@ -9,39 +9,41 @@ import { SubscriptionService } from '../services/subscription.service';
   styleUrls: ['./classes.component.css'],
 })
 export class ClassesComponent implements OnInit {
-  classes: Class[];
-  selectedClass: Class;
+  allClasses: Class[];
   searchText = '';
-  classSearch: Class[];
-  subs: string[0];
+  displayedClasses: Class[];
+  subscribedClases: string[];
 
   constructor(private subService: SubscriptionService) {}
 
   ngOnInit() {
     this.subService.getClasses().subscribe((classes) => {
-      (this.classes = classes), (this.classSearch = this.classes);
+      (this.allClasses = classes), (this.displayedClasses = this.allClasses);
     });
-    this.subService.getSubscriptions().subscribe((subs) => (this.subs = subs));
+    this.subService.getSubscriptions().subscribe((subs) => (this.subscribedClases = subs));
   }
 
   onSelect(myclass: Class): void {
-    this.selectedClass = myclass;
-    this.subService.addSubscription(myclass.id);
+    this.subService.addSubscription(myclass.id).then(() => {
+      console.log("Class added");
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   classFilter(): void {
     //Clear serchable class list
-    this.classSearch = [];
+    this.displayedClasses = [];
 
     //Only compare the class name and number
     let name: string;
-    for (let item of this.classes) {
+    for (let item of this.allClasses) {
       name = item.subject + ' ' + item.course;
       if (
         name.toLocaleLowerCase().includes(this.searchText) ||
         name.includes(this.searchText)
       ) {
-        this.classSearch.push(item);
+        this.displayedClasses.push(item);
       }
     }
   }

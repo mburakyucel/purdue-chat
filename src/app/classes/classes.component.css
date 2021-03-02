@@ -1,19 +1,6 @@
-.searchbar-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
-}
-
-.searchbar-full-width {
-  width: 100%;
-}
-
 img {
   float: left;
   margin-right: 15px;
   height: 128px;
   width: 128px;
-}
-.img-rounded {
-  border-radius: 6px;
 }

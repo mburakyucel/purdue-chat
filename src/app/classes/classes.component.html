@@ -1,47 +1,40 @@
 <div class="container">
   <div class="row">
-    <label for="search-text">Search Your Class</label>
-    <form class="searchbar-form">
-      <mat-form-field class="searchbar-full-width">
-        <mat-label>Class</mat-label>
-        <input
-          matInput
-          type="text"
-          class="form-control"
-          [(ngModel)]="searchText"
-          [ngModelOptions]="{ standalone: true }"
-          placeholder="ECE 49595"
-          (keyup)="classFilter()"
-        />
-      </mat-form-field>
-    </form>
+    <mat-form-field class="w-50">
+      <mat-label>Search Your Class</mat-label>
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="searchText"
+        [ngModelOptions]="{ standalone: true }"
+        placeholder="ECE 49595"
+        (keyup)="classFilter()"
+      />
+    </mat-form-field>
   </div>
-  <mat-list *ngFor="let class of classSearch">
-    <div *ngIf="subs != undefined && !subs.includes(class.id)">
-      <div class="row row-cols-3">
+  <div *ngFor="let class of displayedClasses">
+    <div *ngIf="subscribedClases != undefined && !subscribedClases.includes(class.id)">
+      <div class="row row-cols-3 py-2">
         <div class="col-md-auto">
           <img
-            class="img-responsive img-rounded"
-            src="http://placehold.it/256/163a63"
-            alt=""
+            class="rounded"
+            src="https://picsum.photos/seed/{{class.id}}/256/?random&img={{class.id}}"
+            alt="http://placehold.it/256/163a63"
           />
         </div>
         <div class="col-3">
-          <h3>{{ class.subject }} {{ class.course }}</h3>
+          <h2>{{ class.subject }} {{ class.course }}</h2>
         </div>
         <div class="col-md-auto align-self-center">
-          <div class="btn-group">
-            <button
-              mat-raised-button
-              color="primary"
-              (click)="onSelect(class)"
-              [class.selected]="class === selectedClass"
-            >
-              Join
-            </button>
-          </div>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="onSelect(class)"
+          >
+            Join
+          </button>
         </div>
       </div>
     </div>
-  </mat-list>
+  </div>
 </div>
