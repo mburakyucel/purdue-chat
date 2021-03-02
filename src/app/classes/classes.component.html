@@ -3,15 +3,15 @@
   <form class="example-form">
     <mat-form-field class="example-full-width">
       <mat-label>Class</mat-label>
-        <input
+      <input
         matInput
         type="text"
         class="form-control"
         [(ngModel)]="searchText"
-        [ngModelOptions]="{standalone: true}"
+        [ngModelOptions]="{ standalone: true }"
         placeholder="ECE 49595"
         (keyup)="classFilter()"
-        />
+      />
     </mat-form-field>
   </form>
   <ul class="list-group">
