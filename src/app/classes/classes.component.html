@@ -1,14 +1,19 @@
 <div class="container">
   <label for="search-text">Search Your Class</label>
-  <input
-    type="text"
-    class="form-control"
-    id="search-text"
-    aria-describedby="search-text"
-    [(ngModel)]="searchText"
-    placeholder="Enter class name to search"
-    (keyup)="classFilter()"
-  />
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Class</mat-label>
+        <input
+        matInput
+        type="text"
+        class="form-control"
+        [(ngModel)]="searchText"
+        [ngModelOptions]="{standalone: true}"
+        placeholder="ECE 49595"
+        (keyup)="classFilter()"
+        />
+    </mat-form-field>
+  </form>
   <ul class="list-group">
     <li class="list-group-item clearfix" *ngFor="let class of classSearch">
       <div *ngIf="subs != undefined && !subs.includes(class.id)">
