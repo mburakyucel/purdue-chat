@@ -8,6 +8,8 @@ import { switchMap } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import firebase from '@firebase/app';
+import '@firebase/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -80,5 +82,32 @@ export class AuthService {
     };
 
     return userRef.set(data, { merge: true });
+  }
+
+  async resetPassword(
+    email: string,
+    old_password: string,
+    new_password: string
+  ) {
+    try {
+      let user = firebase.auth().currentUser;
+      const cred = firebase.auth.EmailAuthProvider.credential(
+        email,
+        old_password
+      );
+      await user.reauthenticateWithCredential(cred).then(() => {
+        user
+          .updatePassword(new_password)
+          .then(function () {})
+          .catch(function (error) {
+            console.log(error);
+            return throwError('error');
+          });
+      });
+      return of(true);
+    } catch (error) {
+      console.log(error);
+      return throwError('error');
+    }
   }
 }
