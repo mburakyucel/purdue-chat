@@ -1,19 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProfileService } from '../services/profile.service';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/auth.service';
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy{
   public imageURL: string;
   public email: string;
+  public subscription: Subscription
   public displayName: any = new FormControl('');
   public passwordForm: any = new FormGroup({
     old_password: new FormControl(''),
@@ -32,7 +35,7 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authService.user$.subscribe((doc: any) => {
+    this.subscription = this.authService.user$.subscribe((doc: any) => {
       this.imageURL = doc.profileImage;
       this.email = doc.email;
       this.displayName.setValue(doc.displayName);
@@ -40,8 +43,7 @@ export class ProfileComponent implements OnInit {
   }
 
   onImageClick() {
-    const imageRef = this.dialog.open(ImageUploadComponent);
-    imageRef.afterClosed().subscribe();
+    this.dialog.open(ImageUploadComponent);
   }
 
   onDisplayNameClick() {
@@ -50,7 +52,7 @@ export class ProfileComponent implements OnInit {
   }
 
   async onPasswordChange() {
-    (await this.authService.resetPassword(this.email, this.passwordForm.value.old_password, this.passwordForm.value.new_password)).subscribe(() => {
+    (await this.authService.resetPassword(this.email, this.passwordForm.value.old_password, this.passwordForm.value.new_password)).pipe(take(1)).subscribe(() => {
       this._snackBar.open('Password Change Successful', 'Close', {
         duration: 2000,
       })
@@ -76,5 +78,9 @@ export class ProfileComponent implements OnInit {
 
   cancelDisplayName() {
     this.toggle = true;
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe()
   }
 }

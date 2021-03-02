@@ -90,7 +90,7 @@ export class AuthService {
     new_password: string
   ) {
     try {
-      let user = firebase.auth().currentUser;
+      const user = firebase.auth().currentUser;
       const cred = firebase.auth.EmailAuthProvider.credential(
         email,
         old_password
