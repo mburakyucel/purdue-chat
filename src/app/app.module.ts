@@ -13,6 +13,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { TextFieldModule } from '@angular/cdk/text-field';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +27,8 @@ import { ChatComponent } from './chat/chat.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { MatListModule } from '@angular/material/list';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { MainComponent } from './main/main.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,8 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
     ChatComponent,
     ChatListComponent,
     ImageUploadComponent,
+    MainComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +61,7 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
     MatIconModule,
     TextFieldModule,
     MatListModule,
+    MatSidenavModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
