@@ -70,21 +70,32 @@ export class ProfileComponent implements OnInit {
       this._snackBar.open('New password cannot be old password', 'Close', {
         duration: 5000,
       });
-    }
-    else{
-      (await this.profileService.resetPassword(this.email, this.passwordForm.value.old_password, this.passwordForm.value.new_password)).subscribe(() => {
-        this._snackBar.open('Password Change Successful', 'Close', {
-          duration: 2000,
-        })
-        this.toggle_password = true;
-        this.passwordForm.setValue({old_password: '', new_password: '', confirm_password: ''})
-      }, 
-      (error) => {
-        console.log(error);
-        this._snackBar.open('Incorrect Password', 'Close', {
-          duration: 5000,
-        });
-      });
+    } else {
+      (
+        await this.profileService.resetPassword(
+          this.email,
+          this.passwordForm.value.old_password,
+          this.passwordForm.value.new_password
+        )
+      ).subscribe(
+        () => {
+          this._snackBar.open('Password Change Successful', 'Close', {
+            duration: 2000,
+          });
+          this.toggle_password = true;
+          this.passwordForm.setValue({
+            old_password: '',
+            new_password: '',
+            confirm_password: '',
+          });
+        },
+        (error) => {
+          console.log(error);
+          this._snackBar.open('Incorrect Password', 'Close', {
+            duration: 5000,
+          });
+        }
+      );
     }
   }
 
