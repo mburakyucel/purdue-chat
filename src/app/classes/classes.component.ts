@@ -13,6 +13,7 @@ export class ClassesComponent implements OnInit {
   selectedClass: Class;
   searchText = '';
   classSearch: Class[];
+  subs: string[0];
 
   constructor(private subService: SubscriptionService) {}
 
@@ -20,6 +21,7 @@ export class ClassesComponent implements OnInit {
     this.subService.getClasses().subscribe((classes) => {
       (this.classes = classes), (this.classSearch = this.classes);
     });
+    this.subService.getSubscriptions().subscribe((subs) => (this.subs = subs));
   }
 
   onSelect(myclass: Class): void {

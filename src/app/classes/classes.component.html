@@ -1,8 +1,7 @@
 <div class="container">
-  <div class="form-group">
-    <label for="search-text">Search Your Class</label>
+  <label for="search-text">Search Your Class</label>
     <input
-      type="email"
+      type="text"
       class="form-control"
       id="search-text"
       aria-describedby="search-text"
@@ -10,23 +9,17 @@
       placeholder="Enter class name to search"
       (keyup)="classFilter()"
     />
-  </div>
   <ul class="list-group">
     <li class="list-group-item clearfix" *ngFor="let class of classSearch">
-      <img
-        class="img-responsive img-rounded"
-        src="http://placehold.it/256/163a63"
-        alt=""
-      />
-      <h3 class="list-group-item-heading">
-        {{ class.subject }} {{ class.course }}
-      </h3>
-      <p class="list-group-item-text lead">
-        [class description]
-        <br />
-        <small>[#] Members</small>
-      </p>
-      <div class="btn-toolbar pull-right" role="toolbar" aria-label="">
+      <div *ngIf="(subs != undefined) && (!subs.includes(class.id))">
+        <img
+          class="img-responsive img-rounded"
+          src="http://placehold.it/256/163a63"
+          alt=""
+        />
+        <h3 class="list-group-item-heading">
+          {{ class.subject }} {{ class.course }}
+        </h3>
         <div class="btn-group">
           <button
             type="button"
