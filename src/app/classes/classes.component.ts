@@ -20,15 +20,20 @@ export class ClassesComponent implements OnInit {
     this.subService.getClasses().subscribe((classes) => {
       (this.allClasses = classes), (this.displayedClasses = this.allClasses);
     });
-    this.subService.getSubscriptions().subscribe((subs) => (this.subscribedClases = subs));
+    this.subService
+      .getSubscriptions()
+      .subscribe((subs) => (this.subscribedClases = subs));
   }
 
   onSelect(myclass: Class): void {
-    this.subService.addSubscription(myclass.id).then(() => {
-      console.log("Class added");
-    }).catch((error) => {
-      console.log(error);
-    });
+    this.subService
+      .addSubscription(myclass.id)
+      .then(() => {
+        console.log('Class added');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   classFilter(): void {

@@ -13,12 +13,18 @@
     </mat-form-field>
   </div>
   <div *ngFor="let class of displayedClasses">
-    <div *ngIf="subscribedClases != undefined && !subscribedClases.includes(class.id)">
+    <div
+      *ngIf="
+        subscribedClases != undefined && !subscribedClases.includes(class.id)
+      "
+    >
       <div class="row row-cols-3 py-2">
         <div class="col-md-auto">
           <img
             class="rounded"
-            src="https://picsum.photos/seed/{{class.id}}/256/?random&img={{class.id}}"
+            src="https://picsum.photos/seed/{{ class.id }}/256/?random&img={{
+              class.id
+            }}"
             alt="http://placehold.it/256/163a63"
           />
         </div>
@@ -26,11 +32,7 @@
           <h2>{{ class.subject }} {{ class.course }}</h2>
         </div>
         <div class="col-md-auto align-self-center">
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="onSelect(class)"
-          >
+          <button mat-raised-button color="primary" (click)="onSelect(class)">
             Join
           </button>
         </div>
