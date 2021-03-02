@@ -23,7 +23,7 @@ export class ClassesComponent implements OnInit {
     });
     this.subService.getSubscriptions().subscribe((subs) => (this.subs = subs));
   }
-
+  
   onSelect(myclass: Class): void {
     this.selectedClass = myclass;
     this.subService.addSubscription(myclass.id);

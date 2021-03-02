@@ -1,24 +1,11 @@
-.example-form {
+.searchbar-form {
   min-width: 150px;
   max-width: 500px;
   width: 100%;
 }
 
-.example-full-width {
+.searchbar-full-width {
   width: 100%;
-}
-
-.list-group {
-  box-shadow: 0px 11px 23px 5px rgba(0, 0, 0, 0.34);
-}
-
-.list-group-item {
-  background-color: rgba(255, 255, 255, 0.7);
-  border: 0;
-}
-
-.btn-toolbar {
-  margin-top: 10px;
 }
 
 img {
@@ -27,90 +14,6 @@ img {
   height: 128px;
   width: 128px;
 }
-
-/* ==== SOME BOOTSTRAP MODS/STYLING ==== */
-.btn-default {
-  background-color: rgba(255, 255, 255, 0.3);
-  border-color: rgba(0, 0, 0, 0.2);
-}
-.img-rounded,
-.btn,
-.label {
+.img-rounded {
   border-radius: 6px;
-}
-.btn {
-  padding: 6px 18px;
-}
-.dropdown-menu > li > a {
-  color: #777;
-}
-.dropdown-menu {
-  background-color: rgba(0, 0, 0, 0.8);
-  .divider {
-    background-color: #555;
-  }
-}
-body {
-  /* GRADIENT BG */
-  background: -moz-linear-gradient(
-    45deg,
-    rgba(0, 145, 0, 1) 0%,
-    rgba(0, 86, 199, 1) 100%
-  );
-  /* ff3.6+ */
-  background: -webkit-gradient(
-    linear,
-    left bottom,
-    right top,
-    color-stop(0%, rgba(0, 145, 0, 1)),
-    color-stop(100%, rgba(0, 86, 199, 1))
-  );
-  /* safari4+,chrome */
-  background: -webkit-linear-gradient(
-    45deg,
-    rgba(0, 145, 0, 1) 0%,
-    rgba(0, 86, 199, 1) 100%
-  );
-  /* safari5.1+,chrome10+ */
-  background: -o-linear-gradient(
-    45deg,
-    rgba(0, 145, 0, 1) 0%,
-    rgba(0, 86, 199, 1) 100%
-  );
-  /* opera 11.10+ */
-  background: -ms-linear-gradient(
-    45deg,
-    rgba(0, 145, 0, 1) 0%,
-    rgba(0, 86, 199, 1) 100%
-  );
-  /* ie10+ */
-  background: linear-gradient(
-    45deg,
-    rgba(0, 145, 0, 1) 0%,
-    rgba(0, 86, 199, 1) 100%
-  );
-  /* w3c */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0056C7', endColorstr='#009100',GradientType=1 ); /* ie6-9 */
-}
-
-/* ==== FONTS ==== */
-@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:300);
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Montserrat", sans-serif;
-  text-transform: uppercase;
-  font-weight: 700;
-}
-html,
-body {
-  font-family: "Open Sans", sans-serif;
-  -webkit-font-smoothing: antialiased !important;
-}
-.active a {
-  color: #c7ddef;
 }
