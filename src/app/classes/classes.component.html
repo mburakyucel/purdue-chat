@@ -1,17 +1,17 @@
 <div class="container">
   <label for="search-text">Search Your Class</label>
-    <input
-      type="text"
-      class="form-control"
-      id="search-text"
-      aria-describedby="search-text"
-      [(ngModel)]="searchText"
-      placeholder="Enter class name to search"
-      (keyup)="classFilter()"
-    />
+  <input
+    type="text"
+    class="form-control"
+    id="search-text"
+    aria-describedby="search-text"
+    [(ngModel)]="searchText"
+    placeholder="Enter class name to search"
+    (keyup)="classFilter()"
+  />
   <ul class="list-group">
     <li class="list-group-item clearfix" *ngFor="let class of classSearch">
-      <div *ngIf="(subs != undefined) && (!subs.includes(class.id))">
+      <div *ngIf="subs != undefined && !subs.includes(class.id)">
         <img
           class="img-responsive img-rounded"
           src="http://placehold.it/256/163a63"
