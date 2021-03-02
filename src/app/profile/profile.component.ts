@@ -69,6 +69,9 @@ export class ProfileComponent implements OnInit {
       }, 
       (error) => {
         console.log(error);
+        this._snackBar.open('Incorrect Password', 'Close', {
+          duration: 5000,
+        });
       });
     }
   }
