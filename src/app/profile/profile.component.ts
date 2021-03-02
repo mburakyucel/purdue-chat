@@ -3,6 +3,7 @@ import { ProfileService } from '../services/profile.service';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl, FormGroup } from '@angular/forms'
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile',
@@ -19,10 +20,10 @@ export class ProfileComponent implements OnInit {
     confirm_password: new FormControl(''),
   });
 
-  public toggleOn:any = true;
-  public toggleOn_password: any = true;
+  public toggle:any = true;
+  public toggle_password: any = true;
 
-  constructor(public profileService: ProfileService, public dialog: MatDialog) { }
+  constructor(public profileService: ProfileService, public dialog: MatDialog, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.profileService.getDoc().subscribe((doc:any) => {
@@ -38,29 +39,46 @@ export class ProfileComponent implements OnInit {
   }
 
   onDisplayNameClick(){
-    console.log(this.displayName.value)
     this.profileService.changeDisplayName(this.displayName.value)
-    this.toggleOn = true
+    this.toggle = true
   }
 
-  onPasswordChange(){
-    console.log(this.passwordForm.value.old_password)
-    console.log(this.passwordForm.value.new_password)
-    console.log(this.passwordForm.value.confirm_password)
+  async onPasswordChange(){
+    if(this.passwordForm.value.new_password != this.passwordForm.value.confirm_password){
+      this._snackBar.open('Passwords do not match', 'Close', {
+        duration: 5000,
+      });
+    }
+    else if(this.passwordForm.value.new_password.length < 6){
+      this._snackBar.open('Passwords must be at least 6 characters long', 'Close', {
+        duration: 5000,
+      });
+    }
+    else if(this.passwordForm.value.old_password == this.passwordForm.value.new_password){
+      this._snackBar.open('New password cannot be old password', 'Close', {
+        duration: 5000,
+      });
+    }
+    else{
+      (await this.profileService.resetPassword(this.email, this.passwordForm.value.old_password, this.passwordForm.value.new_password)).subscribe(() => {
+        this._snackBar.open('Password Change Successful', 'Close', {
+          duration: 2000,
+        })
+        this.toggle_password = true;
+        this.passwordForm.setValue({old_password: '', new_password: '', confirm_password: ''})
+      }, 
+      (error) => {
+        console.log(error);
+      });
+    }
   }
 
   cancelPassword(){
-    this.toggleOn_password = true;
+    this.toggle_password = true;
+    this.passwordForm.setValue({old_password: '', new_password: '', confirm_password: ''})
   }
 
   cancelDisplayName(){
-    this.toggleOn = true;
+    this.toggle = true;
   }
-
-  test(){
-    console.log(this.imageURL)
-    console.log(this.email)
-    console.log(this.displayName.value)
-  }
-
 }

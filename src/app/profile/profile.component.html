@@ -1,7 +1,7 @@
 <div class="profile">
     <div class="card">
         <div class="image">
-            <img src={{imageURL}} (click)="onImageClick()">
+            <img src={{imageURL}} (click)="onImageClick()" alt="Image not available">
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
@@ -10,12 +10,12 @@
                 </p>
             </li>
             <li class="list-group-item">
-                <div *ngIf="toggleOn; else toggleOff">
+                <div *ngIf="toggle; else toggleOff">
                     <p style="float: left; margin-top: 12px;">
                         Display Name: &nbsp;&nbsp;&nbsp;{{displayName.value}}
                     </p>
-                    <button mat-icon-button (click)="toggleOn =! toggleOn" style="float: right">
-                        <mat-icon>more_vert</mat-icon>
+                    <button mat-stroked-button (click)="toggle =! toggle; toggle_password = true" style="float: right">
+                        edit
                     </button>
                 </div>
                 <ng-template #toggleOff>
@@ -27,12 +27,12 @@
                 </ng-template>
             </li>
             <li class="list-group-item">
-                <div *ngIf="toggleOn_password; else toggleOff_password">
+                <div *ngIf="toggle_password; else toggleOff_password">
                     <p style="float: left; margin-top: 12px;">
-                        Password:<span class="tab2">******</span>
+                        Password:<span class="tab2">********</span>
                     </p>
-                    <button mat-icon-button (click)="toggleOn_password =! toggleOn_password" style="float: right;">
-                        <mat-icon>more_vert</mat-icon>
+                    <button mat-stroked-button (click)="toggle_password =! toggle_password; toggle = true" style="float: right;">
+                        edit
                     </button>
                 </div>
                 <ng-template #toggleOff_password>
@@ -61,4 +61,3 @@
     </div>
 </div>
 
-<button (click)="test()">Test</button>

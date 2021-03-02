@@ -7,9 +7,7 @@ import {
 import { switchMap } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { Class } from '../../assets/class';
 import { environment } from 'src/environments/environment'
-import { ɵangular_packages_platform_browser_dynamic_platform_browser_dynamic_a } from '@angular/platform-browser-dynamic';
 
 @Injectable({
   providedIn: 'root',
@@ -58,10 +56,6 @@ export class AuthService {
       console.log(error);
       return throwError('error');
     }
-  }
-
-  resetPassword(email:string){
-    return this.afAuth.sendPasswordResetEmail(email);
   }
 
   getUid() {
