@@ -1,4 +1,10 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  OnDestroy,
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
@@ -16,7 +22,7 @@ export class ChatListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.authService.user$.subscribe((data) => {
       console.log(data);
-      if(data){
+      if (data) {
         this.chats = data.chats;
       }
     });

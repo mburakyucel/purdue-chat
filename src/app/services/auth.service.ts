@@ -64,14 +64,14 @@ export class AuthService {
 
   isSignedIn(): Observable<boolean> {
     return this.afAuth.authState.pipe(
-      switchMap(user => {
+      switchMap((user) => {
         if (user) {
           return of(true);
         } else {
           return of(false);
         }
       })
-    )
+    );
   }
 
   logout() {

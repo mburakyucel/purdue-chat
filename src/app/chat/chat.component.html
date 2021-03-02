@@ -20,8 +20,16 @@
     <div class="col">
       <mat-form-field class="w-100" [style.fontSize]="'20px'">
         <mat-label>Input message</mat-label>
-        <textarea #inputMessage matInput cdkTextareaAutosize cdkAutosizeMinRows="3" cdkAutosizeMaxRows="5"
-          [formControl]="messageControl" (keydown.enter)="sendMessage()" autocomplete="off"></textarea>
+        <textarea
+          #inputMessage
+          matInput
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="3"
+          cdkAutosizeMaxRows="5"
+          [formControl]="messageControl"
+          (keydown.enter)="sendMessage()"
+          autocomplete="off"
+        ></textarea>
         <button mat-icon-button matSuffix (click)="sendMessage()">
           <mat-icon>send</mat-icon>
         </button>
