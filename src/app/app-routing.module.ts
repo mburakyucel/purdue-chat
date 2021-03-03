@@ -1,20 +1,31 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ChatComponent } from './chat/chat.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 import { ClassesComponent } from './classes/classes.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
+<<<<<<< HEAD
 import { ProfileComponent } from './profile/profile.component';
+=======
+import { MainComponent } from './main/main.component';
+import { AuthGuard } from './auth.guard';
+import { UnauthGuard } from './unauth.guard';
+import { HomeComponent } from './home/home.component';
+>>>>>>> main
 
 const routes: Routes = [
-  { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent },
+  { path: '', component: HomeComponent, canActivate: [UnauthGuard] },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    canActivate: [UnauthGuard],
+  },
+  { path: 'login', component: LoginComponent, canActivate: [UnauthGuard] },
   { path: 'subs', component: SubscriptionsComponent },
   { path: 'classes', component: ClassesComponent },
-  { path: 'chat', component: ChatComponent },
-  { path: 'chat/:chatId', component: ChatComponent },
+  { path: 'chat', component: MainComponent },
+  { path: 'chat/:chatId', component: MainComponent, canActivate: [AuthGuard] },
   { path: 'imageUpload', component: ImageUploadComponent },
   { path: 'profile', component: ProfileComponent },
 ];
