@@ -14,7 +14,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatCardModule } from '@angular/material/card'
+import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { AppRoutingModule } from './app-routing.module';

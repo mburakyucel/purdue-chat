@@ -13,7 +13,7 @@ import { take } from 'rxjs/operators';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent implements OnInit, OnDestroy{
+export class ProfileComponent implements OnInit, OnDestroy {
   public imageURL: string;
   public email: string;
   public subscription: Subscription;
@@ -52,19 +52,33 @@ export class ProfileComponent implements OnInit, OnDestroy{
   }
 
   async onPasswordChange() {
-    (await this.authService.resetPassword(this.email, this.passwordForm.value.old_password, this.passwordForm.value.new_password)).pipe(take(1)).subscribe(() => {
-      this._snackBar.open('Password Change Successful', 'Close', {
-        duration: 2000,
-      })
-      this.toggle_password = true;
-      this.passwordForm.setValue({old_password: '', new_password: '', confirm_password: ''})
-    }, 
-    (error) => {
-      console.log(error);
-      this._snackBar.open('Incorrect Password', 'Close', {
-        duration: 5000,
-      });
-    });
+    (
+      await this.authService.resetPassword(
+        this.email,
+        this.passwordForm.value.old_password,
+        this.passwordForm.value.new_password
+      )
+    )
+      .pipe(take(1))
+      .subscribe(
+        () => {
+          this._snackBar.open('Password Change Successful', 'Close', {
+            duration: 2000,
+          });
+          this.toggle_password = true;
+          this.passwordForm.setValue({
+            old_password: '',
+            new_password: '',
+            confirm_password: '',
+          });
+        },
+        (error) => {
+          console.log(error);
+          this._snackBar.open('Incorrect Password', 'Close', {
+            duration: 5000,
+          });
+        }
+      );
   }
 
   cancelPassword() {
@@ -80,7 +94,7 @@ export class ProfileComponent implements OnInit, OnDestroy{
     this.toggle = true;
   }
 
-  ngOnDestroy(){
-    this.subscription.unsubscribe()
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }
