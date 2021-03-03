@@ -7,7 +7,9 @@ import {
 import { switchMap } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { Class } from '../../assets/class';
+import { environment } from 'src/environments/environment';
+import firebase from '@firebase/app';
+import '@firebase/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -88,9 +90,30 @@ export class AuthService {
       chats: this.chats,
       uid: user.uid,
       email: user.email,
-      profileImage: '',
+      profileImage: environment.firebase.profileImage,
+      displayName: user.email.split('@')[0],
     };
 
     return userRef.set(data, { merge: true });
+  }
+
+  async resetPassword(
+    email: string,
+    old_password: string,
+    new_password: string
+  ) {
+    try {
+      const user = firebase.auth().currentUser;
+      const cred = firebase.auth.EmailAuthProvider.credential(
+        email,
+        old_password
+      );
+      await user.reauthenticateWithCredential(cred);
+      await user.updatePassword(new_password);
+      return of(true);
+    } catch (error) {
+      console.log(error);
+      return throwError('error');
+    }
   }
 }

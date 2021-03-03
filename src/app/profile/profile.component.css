@@ -1,0 +1,39 @@
+img {
+  border-radius: 50%;
+  width: 50%;
+}
+
+.image {
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+.tab1 {
+  display: inline-block;
+  margin-left: 60px;
+}
+
+.tab2 {
+  display: inline-block;
+  margin-left: 40px;
+}
+
+.profile {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 50%;
+}
+
+.custom.mat-card {
+  padding: 0%;
+  width: 400px;
+}
+
+.formGroup {
+  margin-bottom: -20px;
+  font-size: 14px;
+  margin-left: 33%;
+}

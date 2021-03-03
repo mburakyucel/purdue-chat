@@ -13,6 +13,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { TextFieldModule } from '@angular/cdk/text-field';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -27,6 +29,7 @@ import { ChatComponent } from './chat/chat.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { MatListModule } from '@angular/material/list';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { ProfileComponent } from './profile/profile.component';
 import { MainComponent } from './main/main.component';
 import { HomeComponent } from './home/home.component';
 
@@ -40,6 +43,7 @@ import { HomeComponent } from './home/home.component';
     ChatComponent,
     ChatListComponent,
     ImageUploadComponent,
+    ProfileComponent,
     MainComponent,
     HomeComponent,
   ],
@@ -61,6 +65,8 @@ import { HomeComponent } from './home/home.component';
     MatIconModule,
     TextFieldModule,
     MatListModule,
+    MatDialogModule,
+    MatCardModule,
     MatSidenavModule,
   ],
   providers: [],
