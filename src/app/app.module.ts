@@ -13,12 +13,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatIconModule } from '@angular/material/icon';
 import { TextFieldModule } from '@angular/cdk/text-field';
-<<<<<<< HEAD
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card'
-=======
 import { MatSidenavModule } from '@angular/material/sidenav';
->>>>>>> main
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,12 +29,9 @@ import { ChatComponent } from './chat/chat.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { MatListModule } from '@angular/material/list';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
-<<<<<<< HEAD
 import { ProfileComponent } from './profile/profile.component';
-=======
 import { MainComponent } from './main/main.component';
 import { HomeComponent } from './home/home.component';
->>>>>>> main
 
 @NgModule({
   declarations: [
@@ -49,12 +43,9 @@ import { HomeComponent } from './home/home.component';
     ChatComponent,
     ChatListComponent,
     ImageUploadComponent,
-<<<<<<< HEAD
     ProfileComponent,
-=======
     MainComponent,
     HomeComponent,
->>>>>>> main
   ],
   imports: [
     BrowserModule,
@@ -74,12 +65,9 @@ import { HomeComponent } from './home/home.component';
     MatIconModule,
     TextFieldModule,
     MatListModule,
-<<<<<<< HEAD
     MatDialogModule,
     MatCardModule,
-=======
     MatSidenavModule,
->>>>>>> main
   ],
   providers: [],
   bootstrap: [AppComponent],

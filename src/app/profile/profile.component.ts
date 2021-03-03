@@ -64,52 +64,7 @@ export class ProfileComponent implements OnInit, OnDestroy{
       this._snackBar.open('Incorrect Password', 'Close', {
         duration: 5000,
       });
-<<<<<<< HEAD
     });
-=======
-    } else if (this.passwordForm.value.new_password.length < 6) {
-      this._snackBar.open(
-        'Passwords must be at least 6 characters long',
-        'Close',
-        {
-          duration: 5000,
-        }
-      );
-    } else if (
-      this.passwordForm.value.old_password ==
-      this.passwordForm.value.new_password
-    ) {
-      this._snackBar.open('New password cannot be old password', 'Close', {
-        duration: 5000,
-      });
-    } else {
-      (
-        await this.profileService.resetPassword(
-          this.email,
-          this.passwordForm.value.old_password,
-          this.passwordForm.value.new_password
-        )
-      ).subscribe(
-        () => {
-          this._snackBar.open('Password Change Successful', 'Close', {
-            duration: 2000,
-          });
-          this.toggle_password = true;
-          this.passwordForm.setValue({
-            old_password: '',
-            new_password: '',
-            confirm_password: '',
-          });
-        },
-        (error) => {
-          console.log(error);
-          this._snackBar.open('Incorrect Password', 'Close', {
-            duration: 5000,
-          });
-        }
-      );
-    }
->>>>>>> 1438fb516fa094c5ab5662f57e98e8b1b2d4cd32
   }
 
   cancelPassword() {

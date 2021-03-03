@@ -5,14 +5,11 @@ import { RegisterComponent } from './register/register.component';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 import { ClassesComponent } from './classes/classes.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
-<<<<<<< HEAD
 import { ProfileComponent } from './profile/profile.component';
-=======
 import { MainComponent } from './main/main.component';
 import { AuthGuard } from './auth.guard';
 import { UnauthGuard } from './unauth.guard';
 import { HomeComponent } from './home/home.component';
->>>>>>> main
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [UnauthGuard] },
