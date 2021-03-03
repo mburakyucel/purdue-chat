@@ -16,7 +16,7 @@ import { take } from 'rxjs/operators';
 export class ProfileComponent implements OnInit, OnDestroy{
   public imageURL: string;
   public email: string;
-  public subscription: Subscription
+  public subscription: Subscription;
   public displayName: any = new FormControl('');
   public passwordForm: any = new FormGroup({
     old_password: new FormControl(''),

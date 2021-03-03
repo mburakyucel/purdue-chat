@@ -10,31 +10,9 @@ img {
   margin-bottom: 10%;
 }
 
-.card {
-  max-width: 400px;
-  width: 400px;
-  text-align: center;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
-
-label {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 350px;
-  line-height: 26px;
-  margin-bottom: 10px;
-}
-
-input {
-  height: 20px;
-  flex: 0 0 200px;
-  margin-left: 10px;
-}
-
 .tab1 {
   display: inline-block;
-  margin-left: 65px;
+  margin-left: 60px;
 }
 
 .tab2 {
@@ -49,3 +27,13 @@ input {
   width: 50%;
 }
 
+.custom.mat-card {
+  padding: 0%;
+  width: 400px;
+}
+
+.formGroup {
+  margin-bottom: -20px;
+  font-size: 14px;
+  margin-left: 33%;
+}
