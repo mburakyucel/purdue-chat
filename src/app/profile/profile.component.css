@@ -34,7 +34,7 @@ input {
 
 .tab1 {
   display: inline-block;
-  margin-left: 60px;
+  margin-left: 65px;
 }
 
 .tab2 {
@@ -48,3 +48,4 @@ input {
   margin: auto;
   width: 50%;
 }
+

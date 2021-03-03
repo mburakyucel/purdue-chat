@@ -1,4 +1,58 @@
 <div class="profile">
+  <mat-card>
+    <div class="image">
+      <img src="{{ imageURL }}" (click)="onImageClick()" alt="Image not available">
+    </div>
+    <mat-list>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <span style="flex: 1 1 auto;">
+          Email: <span class="tab1">{{ email }}</span>
+        </span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item style="height: auto;">
+        <div *ngIf="toggle; else toggleOff" style="flex: 1 1 auto;">
+          <p style="float: left; margin-top: 12px">
+            Display Name: &nbsp;{{ displayName.value }}
+          </p>
+          <button mat-stroked-button (click)="toggle = !toggle; toggle_password = true" style="float: right; margin-top: 5px;">edit</button>
+        </div>
+        <ng-template #toggleOff>
+          <p style="float: left; margin-top: 35px;">
+            Display Name:
+            <mat-form-field appearance="outline">
+              <input matInput type="text" [formControl]="displayName">
+            </mat-form-field>
+          </p>
+          <button mat-stroked-button (click)="onDisplayNameClick()">
+            Save
+          </button>
+          <button mat-stroked-button (click)="cancelDisplayName()">
+            Cancel
+          </button>
+        </ng-template>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <div *ngIf="toggle_password; else toggleOff_password" style="flex: 1 1 auto;">
+          <p style="float: left; margin-top: 12px">
+            Password:<span class="tab2">********</span>
+          </p>
+          <button mat-stroked-button (click)="toggle_password = !toggle_password; toggle = true" style="float: right; margin-top: 5px;">edit</button>
+        </div>
+        <ng-template #toggleOff_password>
+
+        </ng-template>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </mat-card>
+</div>
+
+
+<!--
+<div class="profile">
   <div class="card">
     <div class="image">
       <img
@@ -97,3 +151,4 @@
     </ul>
   </div>
 </div>
+-->
