@@ -48,7 +48,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   onDisplayNameClick() {
     this.profileService
-      .changeDisplayName(this.displayName.value).then(() => {
+      .changeDisplayName(this.displayName.value)
+      .then(() => {
         this._snackBar.open('Display Name Change Successful', 'Close', {
           duration: 2000,
         });
