@@ -18,7 +18,8 @@ export class ClassesComponent implements OnInit {
 
   ngOnInit() {
     this.subService.getClasses().subscribe((classes) => {
-      (this.allClasses = classes), (this.displayedClasses = this.allClasses);
+      (this.allClasses = classes)
+      (this.displayedClasses = classes)
     });
     this.subService
       .getSubscriptions()
