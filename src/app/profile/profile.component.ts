@@ -47,7 +47,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   onDisplayNameClick() {
-    this.profileService.changeDisplayName(this.displayName.value);
+    // TODO: Maybe add a snackbar or something
+    this.profileService.changeDisplayName(this.displayName.value).catch((error) => {
+      console.log(error);
+    })
     this.toggle = true;
   }
 
