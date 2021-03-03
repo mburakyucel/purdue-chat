@@ -108,15 +108,8 @@ export class AuthService {
         email,
         old_password
       );
-      await user.reauthenticateWithCredential(cred).then(() => {
-        user
-          .updatePassword(new_password)
-          .then(function () {})
-          .catch(function (error) {
-            console.log(error);
-            return throwError('error');
-          });
-      });
+      await user.reauthenticateWithCredential(cred);
+      await user.updatePassword(new_password);
       return of(true);
     } catch (error) {
       console.log(error);
