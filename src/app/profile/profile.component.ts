@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     confirm_password: new FormControl(''),
   });
 
-  public toggle: any = true;
+  public toggle_displayName: any = true;
   public toggle_password: any = true;
 
   constructor(
@@ -47,13 +47,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   onDisplayNameClick() {
-    // TODO: Maybe add a snackbar or something
     this.profileService
-      .changeDisplayName(this.displayName.value)
+      .changeDisplayName(this.displayName.value).then(() => {
+        this._snackBar.open('Display Name Change Successful', 'Close', {
+          duration: 2000,
+        });
+      })
       .catch((error) => {
         console.log(error);
       });
-    this.toggle = true;
+    this.toggle_displayName = true;
   }
 
   async onPasswordChange() {
@@ -96,7 +99,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   cancelDisplayName() {
-    this.toggle = true;
+    this.toggle_displayName = true;
   }
 
   ngOnDestroy() {

@@ -16,13 +16,13 @@
       </mat-list-item>
       <mat-divider></mat-divider>
       <mat-list-item style="height: auto">
-        <div *ngIf="toggle; else toggleOff" style="flex: 1 1 auto">
+        <div *ngIf="toggle_displayName; else toggleOff" style="flex: 1 1 auto">
           <p style="float: left; margin-top: 12px">
             Display Name: &nbsp;{{ displayName.value }}
           </p>
           <button
             mat-stroked-button
-            (click)="toggle = !toggle; toggle_password = true"
+            (click)="toggle_displayName = !toggle_displayName; toggle_password = true"
             style="float: right; margin-top: 5px"
           >
             edit
@@ -58,7 +58,7 @@
           </p>
           <button
             mat-stroked-button
-            (click)="toggle_password = !toggle_password; toggle = true"
+            (click)="toggle_password = !toggle_password; toggle_displayName = true"
             style="float: right; margin-top: 5px"
           >
             edit
