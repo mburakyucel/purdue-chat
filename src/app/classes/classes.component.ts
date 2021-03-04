@@ -10,10 +10,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./classes.component.css'],
 })
 export class ClassesComponent implements OnInit {
-  allClasses: Class[];
+  displayedClasses: Class[] = [];
+  allClasses: Class[] = [];
   searchText = '';
-  displayedClasses: Class[];
-  subscribedClases: string[];
+  subscribedClasses: string[] = [];
 
   constructor(
     private subService: SubscriptionService,
@@ -23,11 +23,14 @@ export class ClassesComponent implements OnInit {
   ngOnInit() {
     this.subService.getClasses().subscribe((classes) => {
       this.allClasses = classes;
-      this.displayedClasses = classes;
+      this.filterDisplayedClasses();
     });
     this.subService
       .getSubscriptions()
-      .subscribe((subs) => (this.subscribedClases = subs));
+      .subscribe(subs => {
+        this.subscribedClasses = subs
+        this.filterDisplayedClasses();
+      });
   }
 
   onSelect(selectedClass: Class): void {
@@ -35,11 +38,7 @@ export class ClassesComponent implements OnInit {
       .addSubscription(selectedClass.id)
       .then(() => {
         this._snackBar.open(
-          'Subscribed to ' +
-            selectedClass.subject +
-            ' ' +
-            selectedClass.course +
-            ' !',
+          `Subscribed to ${selectedClass.subject} ${selectedClass.course}`,
           'Close',
           {
             duration: 2000,
@@ -51,15 +50,14 @@ export class ClassesComponent implements OnInit {
       });
   }
 
-  classFilter(): void {
-    //Clear serchable class list
+  filterDisplayedClasses() {
     this.displayedClasses = [];
 
     //Only compare the class name and number
     let name: string;
     for (let item of this.allClasses) {
       name = item.subject + ' ' + item.course;
-      if (name.toLowerCase().includes(this.searchText.toLowerCase())) {
+      if (name.toLowerCase().includes(this.searchText.toLowerCase()) && !this.subscribedClasses.includes(item.id)) {
         this.displayedClasses.push(item);
       }
     }

@@ -8,35 +8,27 @@
         [(ngModel)]="searchText"
         [ngModelOptions]="{ standalone: true }"
         placeholder="ECE 49595"
-        (keyup)="classFilter()"
+        (keyup)="filterDisplayedClasses()"
       />
     </mat-form-field>
   </div>
-  <div *ngFor="let class of displayedClasses">
-    <div
-      *ngIf="
-        subscribedClases != undefined && !subscribedClases.includes(class.id)
-      "
-    >
-      <div class="row mw-100 py-2">
-        <div class="col-auto">
-          <img
-            class="rounded profile-img"
-            src="https://picsum.photos/seed/{{ class.id }}/256/?random&img={{
-              class.id
-            }}"
-            alt="http://placehold.it/256/163a63"
-          />
-        </div>
-        <div class="col">
-          <h2>{{ class.subject }} {{ class.course }}</h2>
-        </div>
-        <div class="col align-self-center">
-          <button mat-raised-button color="primary" (click)="onSelect(class)">
-            Join
-          </button>
-        </div>
-      </div>
+  <div class="row py-2" *ngFor="let class of displayedClasses">
+    <div class="col-auto">
+      <img
+        class="rounded profile-img"
+        src="https://picsum.photos/seed/{{ class.id }}/256/?random&img={{
+          class.id
+        }}"
+        alt="http://placehold.it/256/163a63"
+      />
+    </div>
+    <div class="col">
+      <h2>{{ class.subject }} {{ class.course }}</h2>
+    </div>
+    <div class="col align-self-center">
+      <button mat-raised-button color="primary" (click)="onSelect(class)">
+        Join
+      </button>
     </div>
   </div>
 </div>
