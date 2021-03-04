@@ -4,11 +4,8 @@
       <span>Classes</span>
     </button>
   </a>
-  <a class="text-reset" routerLink="/imageUpload">
-    <button mat-button class="p-1 p-lg-3">
-      <span>Upload Image</span>
-    </button>
-  </a>
+  <span class="spacer"></span>
+  <button mat-button (click)="openProfileDialog()">Profile</button>
   <button mat-button (click)="onLogout()">Logout</button>
 </mat-toolbar>
 <mat-sidenav-container class="sidenav-container">
