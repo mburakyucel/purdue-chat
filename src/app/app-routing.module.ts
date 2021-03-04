@@ -4,8 +4,6 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 import { ClassesComponent } from './classes/classes.component';
-import { ImageUploadComponent } from './image-upload/image-upload.component';
-import { ProfileComponent } from './profile/profile.component';
 import { MainComponent } from './main/main.component';
 import { AuthGuard } from './auth.guard';
 import { UnauthGuard } from './unauth.guard';
@@ -23,8 +21,6 @@ const routes: Routes = [
   { path: 'classes', component: ClassesComponent },
   { path: 'chat', component: MainComponent },
   { path: 'chat/:chatId', component: MainComponent, canActivate: [AuthGuard] },
-  { path: 'imageUpload', component: ImageUploadComponent },
-  { path: 'profile', component: ProfileComponent },
 ];
 
 @NgModule({

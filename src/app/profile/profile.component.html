@@ -1,115 +1,105 @@
-<div class="profile">
-  <mat-card class="custom">
-    <div class="image">
-      <img
-        src="{{ imageURL }}"
-        (click)="onImageClick()"
-        alt="Image not available"
-      />
-    </div>
-    <mat-list>
-      <mat-divider></mat-divider>
-      <mat-list-item>
-        <span style="flex: 1 1 auto">
-          Email: <span class="tab1">{{ email }}</span>
-        </span>
-      </mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item style="height: auto">
-        <div *ngIf="toggle_displayName; else toggleOff" style="flex: 1 1 auto">
-          <p style="float: left; margin-top: 12px">
-            Display Name: &nbsp;{{ displayName.value }}
-          </p>
-          <button
-            mat-stroked-button
-            (click)="
-              toggle_displayName = !toggle_displayName; toggle_password = true
-            "
-            style="float: right; margin-top: 5px"
-          >
-            edit
-          </button>
-        </div>
-        <ng-template #toggleOff>
-          <form class="display_name" style="margin-top: 24px">
+<mat-card class="custom">
+  <div class="image">
+    <img
+      src="{{ imageURL }}"
+      (click)="onImageClick()"
+      alt="Image not available"
+    />
+  </div>
+  <mat-list>
+    <mat-divider></mat-divider>
+    <mat-list-item>
+      <span style="flex: 1 1 auto">
+        Email: <span class="tab1">{{ email }}</span>
+      </span>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item style="height: auto">
+      <div *ngIf="toggle_displayName; else toggleOff" style="flex: 1 1 auto">
+        <p style="float: left; margin-top: 12px">
+          Display Name: &nbsp;{{ displayName.value }}
+        </p>
+        <button
+          mat-stroked-button
+          (click)="
+            toggle_displayName = !toggle_displayName; toggle_password = true
+          "
+          style="float: right; margin-top: 5px"
+        >
+          edit
+        </button>
+      </div>
+      <ng-template #toggleOff>
+        <form class="display_name" style="margin-top: 24px">
+          <mat-form-field appearance="outline">
+            <mat-label>Display Name:</mat-label>
+            <input matInput type="text" [formControl]="displayName" />
+          </mat-form-field>
+        </form>
+        <button
+          mat-stroked-button
+          (click)="onDisplayNameClick()"
+          style="margin-left: 10px"
+        >
+          Save
+        </button>
+        <button mat-stroked-button (click)="cancelDisplayName()">Cancel</button>
+      </ng-template>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item style="height: auto">
+      <div
+        *ngIf="toggle_password; else toggleOff_password"
+        style="flex: 1 1 auto"
+      >
+        <p style="float: left; margin-top: 12px">
+          Password:<span class="tab2">********</span>
+        </p>
+        <button
+          mat-stroked-button
+          (click)="
+            toggle_password = !toggle_password; toggle_displayName = true
+          "
+          style="float: right; margin-top: 5px"
+        >
+          edit
+        </button>
+      </div>
+      <ng-template #toggleOff_password>
+        <form
+          [formGroup]="passwordForm"
+          (ngSubmit)="onPasswordChange()"
+          style="margin-top: 12px; margin-bottom: 5px"
+        >
+          <div class="formGroup">
             <mat-form-field appearance="outline">
-              <mat-label>Display Name:</mat-label>
-              <input matInput type="text" [formControl]="displayName" />
+              <mat-label>Old Password</mat-label>
+              <input matInput type="text" formControlName="old_password" />
             </mat-form-field>
-          </form>
+          </div>
+          <div class="formGroup">
+            <mat-form-field appearance="outline">
+              <mat-label>New Password</mat-label>
+              <input matInput type="text" formControlName="new_password" />
+            </mat-form-field>
+          </div>
+          <div class="formGroup">
+            <mat-form-field appearance="outline">
+              <mat-label>Confirm Password</mat-label>
+              <input matInput type="text" formControlName="confirm_password" />
+            </mat-form-field>
+          </div>
           <button
             mat-stroked-button
-            (click)="onDisplayNameClick()"
-            style="margin-left: 10px"
+            type="submit"
+            [disabled]="!passwordForm.valid"
+            style="margin-left: 115px"
           >
             Save
           </button>
-          <button mat-stroked-button (click)="cancelDisplayName()">
-            Cancel
-          </button>
-        </ng-template>
-      </mat-list-item>
-      <mat-divider></mat-divider>
-      <mat-list-item style="height: auto">
-        <div
-          *ngIf="toggle_password; else toggleOff_password"
-          style="flex: 1 1 auto"
-        >
-          <p style="float: left; margin-top: 12px">
-            Password:<span class="tab2">********</span>
-          </p>
-          <button
-            mat-stroked-button
-            (click)="
-              toggle_password = !toggle_password; toggle_displayName = true
-            "
-            style="float: right; margin-top: 5px"
-          >
-            edit
-          </button>
-        </div>
-        <ng-template #toggleOff_password>
-          <form
-            [formGroup]="passwordForm"
-            (ngSubmit)="onPasswordChange()"
-            style="margin-top: 12px; margin-bottom: 5px"
-          >
-            <div class="formGroup">
-              <mat-form-field appearance="outline">
-                <mat-label>Old Password</mat-label>
-                <input matInput type="text" formControlName="old_password" />
-              </mat-form-field>
-            </div>
-            <div class="formGroup">
-              <mat-form-field appearance="outline">
-                <mat-label>New Password</mat-label>
-                <input matInput type="text" formControlName="new_password" />
-              </mat-form-field>
-            </div>
-            <div class="formGroup">
-              <mat-form-field appearance="outline">
-                <mat-label>Confirm Password</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  formControlName="confirm_password"
-                />
-              </mat-form-field>
-            </div>
-            <button
-              mat-stroked-button
-              type="submit"
-              [disabled]="!passwordForm.valid"
-              style="margin-left: 115px"
-            >
-              Save
-            </button>
-            <button mat-stroked-button (click)="cancelPassword()">
-              Cancel
-            </button>
-          </form>
-        </ng-template>
-      </mat-list-item>
-    </mat-list>
-  </mat-card>
-</div>
+          <button mat-stroked-button (click)="cancelPassword()">Cancel</button>
+        </form>
+      </ng-template>
+    </mat-list-item>
+  </mat-list>
+</mat-card>

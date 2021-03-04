@@ -20,13 +20,6 @@ img {
   margin-left: 40px;
 }
 
-.profile {
-  display: flex;
-  justify-content: center;
-  margin: auto;
-  width: 50%;
-}
-
 .custom.mat-card {
   padding: 0%;
   width: 400px;

@@ -1,8 +1,10 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { ProfileComponent } from '../profile/profile.component';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -20,6 +22,7 @@ export class MainComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
+    public dialog: MatDialog,
     private router: Router,
     private breakpointObserver: BreakpointObserver
   ) {}
@@ -27,6 +30,10 @@ export class MainComponent implements OnInit {
 
   onChatSelect(chatId: string) {
     this.router.navigate([`/chat/${chatId}`]);
+  }
+
+  openProfileDialog() {
+    this.dialog.open(ProfileComponent);
   }
 
   onLogout() {
