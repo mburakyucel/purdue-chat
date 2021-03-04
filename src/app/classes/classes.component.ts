@@ -25,12 +25,10 @@ export class ClassesComponent implements OnInit {
       this.allClasses = classes;
       this.filterDisplayedClasses();
     });
-    this.subService
-      .getSubscriptions()
-      .subscribe(subs => {
-        this.subscribedClasses = subs
-        this.filterDisplayedClasses();
-      });
+    this.subService.getSubscriptions().subscribe((subs) => {
+      this.subscribedClasses = subs;
+      this.filterDisplayedClasses();
+    });
   }
 
   onSelect(selectedClass: Class): void {
@@ -57,7 +55,10 @@ export class ClassesComponent implements OnInit {
     let name: string;
     for (let item of this.allClasses) {
       name = item.subject + ' ' + item.course;
-      if (name.toLowerCase().includes(this.searchText.toLowerCase()) && !this.subscribedClasses.includes(item.id)) {
+      if (
+        name.toLowerCase().includes(this.searchText.toLowerCase()) &&
+        !this.subscribedClasses.includes(item.id)
+      ) {
         this.displayedClasses.push(item);
       }
     }
