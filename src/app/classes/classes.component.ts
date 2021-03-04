@@ -4,7 +4,6 @@ import { Class } from '../../assets/class';
 import { SubscriptionService } from '../services/subscription.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-
 @Component({
   selector: 'app-classes',
   templateUrl: './classes.component.html',
@@ -28,16 +27,24 @@ export class ClassesComponent implements OnInit {
     });
     this.subService
       .getSubscriptions()
-      .subscribe(subs => this.subscribedClases = subs);
+      .subscribe((subs) => (this.subscribedClases = subs));
   }
 
   onSelect(selectedClass: Class): void {
     this.subService
       .addSubscription(selectedClass.id)
       .then(() => {
-        this._snackBar.open('Subscribed to '+selectedClass.subject+' '+selectedClass.course+' !', 'Close', {
-              duration: 2000,
-            });
+        this._snackBar.open(
+          'Subscribed to ' +
+            selectedClass.subject +
+            ' ' +
+            selectedClass.course +
+            ' !',
+          'Close',
+          {
+            duration: 2000,
+          }
+        );
       })
       .catch((error) => {
         console.log(error);
@@ -52,9 +59,7 @@ export class ClassesComponent implements OnInit {
     let name: string;
     for (let item of this.allClasses) {
       name = item.subject + ' ' + item.course;
-      if (
-        name.toLowerCase().includes(this.searchText.toLowerCase())
-      ) {
+      if (name.toLowerCase().includes(this.searchText.toLowerCase())) {
         this.displayedClasses.push(item);
       }
     }
