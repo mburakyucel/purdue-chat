@@ -8,9 +8,10 @@ import { MainComponent } from './main/main.component';
 import { AuthGuard } from './auth.guard';
 import { UnauthGuard } from './unauth.guard';
 import { HomeComponent } from './home/home.component';
+import { ChatComponent } from './chat/chat.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [UnauthGuard] },
+  { path: 'home', component: HomeComponent, canActivate: [UnauthGuard] },
   {
     path: 'register',
     component: RegisterComponent,
@@ -18,13 +19,24 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginComponent, canActivate: [UnauthGuard] },
   { path: 'subs', component: SubscriptionsComponent },
-  { path: 'classes', component: ClassesComponent },
-  { path: 'chat', component: MainComponent },
-  { path: 'chat/:chatId', component: MainComponent, canActivate: [AuthGuard] },
+  {
+    path: '', component: MainComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'classes',
+        component: ClassesComponent,
+      },
+      {
+        path: 'chat/:chatId',
+        component: ChatComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
