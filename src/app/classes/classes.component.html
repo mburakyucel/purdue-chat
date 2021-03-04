@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <mat-form-field class="w-50">
+    <mat-form-field class="mw-100">
       <mat-label>Search Your Class</mat-label>
       <input
         matInput
@@ -18,20 +18,20 @@
         subscribedClases != undefined && !subscribedClases.includes(class.id)
       "
     >
-      <div class="row row-cols-3 py-2">
-        <div class="col-md-auto">
+      <div class="row mw-100 py-2">
+        <div class="col-auto">
           <img
-            class="rounded"
+            class="rounded profile-img"
             src="https://picsum.photos/seed/{{ class.id }}/256/?random&img={{
               class.id
             }}"
             alt="http://placehold.it/256/163a63"
           />
         </div>
-        <div class="col-3">
+        <div class="col">
           <h2>{{ class.subject }} {{ class.course }}</h2>
         </div>
-        <div class="col-md-auto align-self-center">
+        <div class="col align-self-center">
           <button mat-raised-button color="primary" (click)="onSelect(class)">
             Join
           </button>

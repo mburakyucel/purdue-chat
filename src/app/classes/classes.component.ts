@@ -1,7 +1,9 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Class } from '../../assets/class';
 import { SubscriptionService } from '../services/subscription.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-classes',
@@ -14,23 +16,28 @@ export class ClassesComponent implements OnInit {
   displayedClasses: Class[];
   subscribedClases: string[];
 
-  constructor(private subService: SubscriptionService) {}
+  constructor(
+    private subService: SubscriptionService,
+    private _snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.subService.getClasses().subscribe((classes) => {
-      (this.allClasses = classes)
-      (this.displayedClasses = classes)
+      this.allClasses = classes;
+      this.displayedClasses = classes;
     });
     this.subService
       .getSubscriptions()
-      .subscribe((subs) => (this.subscribedClases = subs));
+      .subscribe(subs => this.subscribedClases = subs);
   }
 
-  onSelect(myclass: Class): void {
+  onSelect(selectedClass: Class): void {
     this.subService
-      .addSubscription(myclass.id)
+      .addSubscription(selectedClass.id)
       .then(() => {
-        console.log('Class added');
+        this._snackBar.open('Subscribed to '+selectedClass.subject+' '+selectedClass.course+' !', 'Close', {
+              duration: 2000,
+            });
       })
       .catch((error) => {
         console.log(error);
@@ -46,8 +53,7 @@ export class ClassesComponent implements OnInit {
     for (let item of this.allClasses) {
       name = item.subject + ' ' + item.course;
       if (
-        name.toLocaleLowerCase().includes(this.searchText) ||
-        name.includes(this.searchText)
+        name.toLowerCase().includes(this.searchText.toLowerCase())
       ) {
         this.displayedClasses.push(item);
       }

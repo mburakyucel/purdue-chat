@@ -1,6 +1,4 @@
-img {
-  float: left;
-  margin-right: 15px;
+.profile-img {
   height: 128px;
   width: 128px;
 }
