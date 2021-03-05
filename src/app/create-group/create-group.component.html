@@ -1,0 +1,21 @@
+<mat-card class="new-group-card">
+    <mat-card-header class="card-header">
+        <mat-card-title>New Group</mat-card-title>
+    </mat-card-header>
+    <div class="group-image-container">
+        <img mat-card-image class="image" src="{{ groupImageURL }}" alt="Image not available" (click)="selectGroupImage()">
+    </div>
+    <mat-card-content>
+        <mat-form-field class="enter-group-information" appearance="outline">
+            <mat-label>Enter Group Name</mat-label>
+            <input matInput type="text" [formControl]="groupName">
+        </mat-form-field>
+        <mat-form-field class="enter-group-information" appearance="outline">
+            <mat-label>Enter Group Description</mat-label>
+            <textarea matInput type="text" [formControl]="groupDescription"></textarea>
+        </mat-form-field>
+    </mat-card-content>
+    <mat-card-footer>
+        <button mat-flat-button class="create-group-button" (click)="createGroup()">Create Group</button>
+    </mat-card-footer>
+</mat-card>

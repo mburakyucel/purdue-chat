@@ -1,0 +1,27 @@
+.new-group-card {
+    max-width: 400px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    border-color: white;
+}
+
+.group-image-container {
+    display: flex;
+    justify-content: center;
+}
+
+.image {
+    max-width: 50%;
+}
+
+.enter-group-information{
+    width: 100%;
+}
+
+.create-group-button {
+    width: 100%;
+}

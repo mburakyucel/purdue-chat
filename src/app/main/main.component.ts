@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { CreateGroupComponent } from '../create-group/create-group.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { AuthService } from '../services/auth.service';
 
@@ -38,5 +39,9 @@ export class MainComponent implements OnInit {
 
   onLogout() {
     this.authService.logout();
+  }
+
+  createNewGroup(){
+    this.dialog.open(CreateGroupComponent);
   }
 }
