@@ -1,15 +1,34 @@
-<h2>Class List</h2>
-<ul class="classes" style="list-style-type: none">
-  <li
-    *ngFor="let class of classes"
-    [class.selected]="class === selectedClass"
-    (click)="onSelect(class)"
-  >
-    {{ class.subject }} {{ class.course }}
-  </li>
-</ul>
-
-<div *ngIf="selectedClass">
-  <h2>Subscribed to {{ selectedClass.subject }} {{ selectedClass.course }}</h2>
-  <div>{{ selectedClass.id }}</div>
+<div class="container">
+  <div class="row">
+    <mat-form-field class="mw-100">
+      <mat-label>Search Your Class</mat-label>
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="searchText"
+        [ngModelOptions]="{ standalone: true }"
+        placeholder="ECE 49595"
+        (keyup)="filterDisplayedClasses()"
+      />
+    </mat-form-field>
+  </div>
+  <div class="row py-2" *ngFor="let class of displayedClasses">
+    <div class="col-auto">
+      <img
+        class="rounded profile-img"
+        src="https://picsum.photos/seed/{{ class.id }}/256/?random&img={{
+          class.id
+        }}"
+        alt="http://placehold.it/256/163a63"
+      />
+    </div>
+    <div class="col">
+      <h2>{{ class.subject }} {{ class.course }}</h2>
+    </div>
+    <div class="col align-self-center">
+      <button mat-raised-button color="primary" (click)="onSelect(class)">
+        Join
+      </button>
+    </div>
+  </div>
 </div>
