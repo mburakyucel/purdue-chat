@@ -8,6 +8,8 @@
     background-color: white;
     border-color: white;
     padding-bottom: 0;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 .enter-group-information{
@@ -48,7 +50,7 @@
     opacity: 1;
 }
 
-.test {
+.row-image {
     display: flex;
     justify-content: center;
     margin: 5%;

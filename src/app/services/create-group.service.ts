@@ -12,7 +12,8 @@ export class CreateGroupService {
     const data = {
       groupName: groupName,
       groupDescription: groupDescription,
-      groupImageURL: groupImageURL
+      groupImageURL: groupImageURL,
+      createdAt: Date.now(),
     }
     return this.afs.collection('chats').add(data)
   }
