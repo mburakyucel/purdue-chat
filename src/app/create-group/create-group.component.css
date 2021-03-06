@@ -7,15 +7,7 @@
     justify-content: center;
     background-color: white;
     border-color: white;
-}
-
-.group-image-container {
-    display: flex;
-    justify-content: center;
-}
-
-.image {
-    max-width: 50%;
+    padding-bottom: 0;
 }
 
 .enter-group-information{
@@ -24,4 +16,40 @@
 
 .create-group-button {
     width: 100%;
+}
+
+.container {
+    position: relative;
+    width: 50%;
+}
+
+.image {
+    opacity: 1;
+    transition: .5s ease;
+    backface-visibility: hidden;
+    width: 100%;
+}
+
+.text {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.container:hover .image{
+    opacity: 0.3;
+}
+
+.container:hover .text {
+    opacity: 1;
+}
+
+.test {
+    display: flex;
+    justify-content: center;
+    margin: 5%;
 }

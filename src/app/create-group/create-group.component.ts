@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { environment } from 'src/environments/environment';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { CreateGroupService } from '../services/create-group.service';
 
 @Component({
   selector: 'app-create-group',
@@ -12,17 +14,25 @@ export class CreateGroupComponent implements OnInit {
   public groupName = new FormControl('')
   public groupDescription = new FormControl('')
 
-  constructor() { }
+  constructor(public groupService: CreateGroupService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
 
   createGroup(){
+    console.log(this.groupDescription.value)
+    console.log(this.groupName.value)
 
+    this.groupService.uploadGroup(this.groupName.value, this.groupDescription.value, "test").then(() => {
+      this._snackBar.open('Group Creation Successful', 'Close', {
+        duration: 2000,
+      });
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   selectGroupImage(){
 
   }
-
 }

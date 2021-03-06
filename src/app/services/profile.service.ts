@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable, of, throwError } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Injectable({
