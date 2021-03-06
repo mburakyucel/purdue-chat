@@ -3,4 +3,5 @@ export interface Class {
   CRN?: number;
   subject?: string;
   course?: number;
+  description?: string;
 }

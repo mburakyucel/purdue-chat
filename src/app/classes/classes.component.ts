@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
 import { Class } from '../../assets/class';
 import { SubscriptionService } from '../services/subscription.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ChatInfoComponent } from '../chat-info/chat-info.component';
 
 @Component({
   selector: 'app-classes',
@@ -17,7 +19,8 @@ export class ClassesComponent implements OnInit {
 
   constructor(
     private subService: SubscriptionService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -31,7 +34,7 @@ export class ClassesComponent implements OnInit {
     });
   }
 
-  onSelect(selectedClass: Class): void {
+  onJoinSelect(selectedClass: Class): void {
     this.subService
       .addSubscription(selectedClass.id)
       .then(() => {
@@ -62,5 +65,11 @@ export class ClassesComponent implements OnInit {
         this.displayedClasses.push(item);
       }
     }
+  }
+
+  //Triggered when the class name is pressed by user to view its info
+  onClassInfoSelect(selectedClass: Class) {
+    this.subService.changeSelectedClassInfo(selectedClass.id);
+    this.dialog.open(ChatInfoComponent);
   }
 }

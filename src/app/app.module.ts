@@ -32,6 +32,7 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MainComponent } from './main/main.component';
 import { HomeComponent } from './home/home.component';
+import { ChatInfoComponent } from './chat-info/chat-info.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { HomeComponent } from './home/home.component';
     ProfileComponent,
     MainComponent,
     HomeComponent,
+    ChatInfoComponent,
   ],
   imports: [
     BrowserModule,
