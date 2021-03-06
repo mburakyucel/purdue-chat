@@ -1,12 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProfileService } from '../services/profile.service';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { CroppieOptions } from 'croppie';
+import { ImageUploadService } from '../services/image-upload.service';
 
 @Component({
   selector: 'app-profile',
@@ -26,12 +28,22 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   public toggle_displayName: any = true;
   public toggle_password: any = true;
+  public croppieOptions: CroppieOptions = {
+    viewport: { width: 100, height: 100, type: 'circle' },
+    boundary: { width: 300, height: 300 },
+    showZoomer: true,
+    enableOrientation: true,
+    enableZoom: true,
+  };
+
+  public imageUploadDialogRef: MatDialogRef<ImageUploadComponent>;
 
   constructor(
     public profileService: ProfileService,
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
-    private authService: AuthService
+    private authService: AuthService,
+    public uploadService: ImageUploadService
   ) {}
 
   ngOnInit(): void {
@@ -43,7 +55,17 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   onImageClick() {
-    this.dialog.open(ImageUploadComponent);
+    this.imageUploadDialogRef = this.dialog.open(ImageUploadComponent, {data: {croppieOptions: this.croppieOptions}});
+    this.imageUploadDialogRef.afterClosed().subscribe(imageurl => {
+      imageurl.subscribe((url:string) => {
+        this.uploadService.uploadProfileImage(url, this.authService.getUid()).then(() => {
+          this._snackBar.open('Image uploaded successfully', 'Close', {
+            duration: 2000,
+          });
+        })
+        .catch((error) => console.log(error));
+      })
+    })
   }
 
   onDisplayNameClick() {

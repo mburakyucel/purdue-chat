@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, Inject } from '@angular/core';
 
 import * as Croppie from 'croppie';
 import { CroppieOptions, ResultOptions } from 'croppie';
 
 import { ImageUploadService } from 'src/app/services/image-upload.service';
-import { AuthService } from 'src/app/services/auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-crop',
@@ -14,14 +13,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ImageUploadComponent implements OnInit {
   @ViewChild('imageEdit') imageEdit: ElementRef;
-
-  croppieOptions: CroppieOptions = {
-    viewport: { width: 100, height: 100, type: 'circle' },
-    boundary: { width: 300, height: 300 },
-    showZoomer: true,
-    enableOrientation: true,
-    enableZoom: true,
-  };
 
   private points: number[];
   private defaultZoom = 0;
@@ -36,8 +27,8 @@ export class ImageUploadComponent implements OnInit {
 
   constructor(
     private uploadService: ImageUploadService,
-    private auth: AuthService,
-    private _snackBar: MatSnackBar
+    public dialogRef: MatDialogRef<ImageUploadComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: {croppieOptions: CroppieOptions}
   ) {}
 
   ngOnInit(): void {}
@@ -45,7 +36,7 @@ export class ImageUploadComponent implements OnInit {
   enterImage(): any {
     this._croppie = new Croppie(
       this.imageEdit.nativeElement,
-      this.croppieOptions
+      this.data.croppieOptions
     );
     this._croppie.bind({
       url: this.imageUrl,
@@ -64,7 +55,7 @@ export class ImageUploadComponent implements OnInit {
 
     this._croppie = new Croppie(
       this.imageEdit.nativeElement,
-      this.croppieOptions
+      this.data.croppieOptions
     );
 
     reader.onload = (e1: any) => {
@@ -80,17 +71,7 @@ export class ImageUploadComponent implements OnInit {
 
   submit(): void {
     this._croppie.result(this.outputFormatOptions).then((result: any) => {
-      this.uploadService.uploadImage(result).subscribe((url: string) => {
-        this.uploadService
-          .uploadProfileImage(url, this.auth.getUid())
-          .then(() => {
-            this._snackBar.open('Image uploaded successfully', 'Close', {
-              duration: 2000,
-            });
-          })
-          .catch((error) => console.log(error));
-      });
-
+      this.dialogRef.close(this.uploadService.uploadImage(result))
       this._croppie.destroy();
       this._croppie = null;
     });
