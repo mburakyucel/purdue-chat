@@ -20,7 +20,8 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [UnauthGuard] },
   { path: 'subs', component: SubscriptionsComponent },
   {
-    path: '', component: MainComponent,
+    path: '',
+    component: MainComponent,
     canActivate: [AuthGuard],
     children: [
       {
@@ -39,4 +40,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
