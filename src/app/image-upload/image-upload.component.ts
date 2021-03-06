@@ -1,4 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, Inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  Input,
+  Inject,
+} from '@angular/core';
 
 import * as Croppie from 'croppie';
 import { CroppieOptions, ResultOptions } from 'croppie';
@@ -28,7 +35,7 @@ export class ImageUploadComponent implements OnInit {
   constructor(
     private uploadService: ImageUploadService,
     public dialogRef: MatDialogRef<ImageUploadComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {croppieOptions: CroppieOptions}
+    @Inject(MAT_DIALOG_DATA) public data: { croppieOptions: CroppieOptions }
   ) {}
 
   ngOnInit(): void {}
@@ -71,7 +78,7 @@ export class ImageUploadComponent implements OnInit {
 
   submit(): void {
     this._croppie.result(this.outputFormatOptions).then((result: any) => {
-      this.dialogRef.close(this.uploadService.uploadImage(result))
+      this.dialogRef.close(this.uploadService.uploadImage(result));
       this._croppie.destroy();
       this._croppie = null;
     });

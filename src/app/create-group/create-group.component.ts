@@ -10,12 +10,12 @@ import { CroppieOptions } from 'croppie';
 @Component({
   selector: 'app-create-group',
   templateUrl: './create-group.component.html',
-  styleUrls: ['./create-group.component.css']
+  styleUrls: ['./create-group.component.css'],
 })
 export class CreateGroupComponent implements OnInit {
-  public groupImageURL:string = environment.profileImage;
-  public groupName = new FormControl('')
-  public groupDescription = new FormControl('')
+  public groupImageURL: string = environment.profileImage;
+  public groupName = new FormControl('');
+  public groupDescription = new FormControl('');
   public croppieOptions: CroppieOptions = {
     viewport: { width: 100, height: 100, type: 'square' },
     boundary: { width: 300, height: 300 },
@@ -25,27 +25,39 @@ export class CreateGroupComponent implements OnInit {
   };
   public imageUploadDialogRef: MatDialogRef<ImageUploadComponent>;
 
-  constructor(public groupService: CreateGroupService, private _snackBar: MatSnackBar, public dialog: MatDialog) { }
+  constructor(
+    public groupService: CreateGroupService,
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  createGroup(){
-    this.groupService.uploadGroup(this.groupName.value, this.groupDescription.value, this.groupImageURL).then(() => {
-      this._snackBar.open('Group Creation Successful', 'Close', {
-        duration: 2000,
-      });
-    }).catch((error) => {
-      console.log(error);
-    });
-  }
-
-  selectGroupImage(){
-    this.imageUploadDialogRef = this.dialog.open(ImageUploadComponent, {data: {croppieOptions: this.croppieOptions}});
-    this.imageUploadDialogRef.afterClosed().subscribe(imageurl => {
-      imageurl.subscribe((url:string) => {
-        this.groupImageURL = url;
+  createGroup() {
+    this.groupService
+      .uploadGroup(
+        this.groupName.value,
+        this.groupDescription.value,
+        this.groupImageURL
+      )
+      .then(() => {
+        this._snackBar.open('Group Creation Successful', 'Close', {
+          duration: 2000,
+        });
       })
-    })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  selectGroupImage() {
+    this.imageUploadDialogRef = this.dialog.open(ImageUploadComponent, {
+      data: { croppieOptions: this.croppieOptions },
+    });
+    this.imageUploadDialogRef.afterClosed().subscribe((imageurl) => {
+      imageurl.subscribe((url: string) => {
+        this.groupImageURL = url;
+      });
+    });
   }
 }

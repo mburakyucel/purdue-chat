@@ -55,17 +55,21 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   onImageClick() {
-    this.imageUploadDialogRef = this.dialog.open(ImageUploadComponent, {data: {croppieOptions: this.croppieOptions}});
-    this.imageUploadDialogRef.afterClosed().subscribe(imageurl => {
-      imageurl.subscribe((url:string) => {
-        this.uploadService.uploadProfileImage(url, this.authService.getUid()).then(() => {
-          this._snackBar.open('Image uploaded successfully', 'Close', {
-            duration: 2000,
-          });
-        })
-        .catch((error) => console.log(error));
-      })
-    })
+    this.imageUploadDialogRef = this.dialog.open(ImageUploadComponent, {
+      data: { croppieOptions: this.croppieOptions },
+    });
+    this.imageUploadDialogRef.afterClosed().subscribe((imageurl) => {
+      imageurl.subscribe((url: string) => {
+        this.uploadService
+          .uploadProfileImage(url, this.authService.getUid())
+          .then(() => {
+            this._snackBar.open('Image uploaded successfully', 'Close', {
+              duration: 2000,
+            });
+          })
+          .catch((error) => console.log(error));
+      });
+    });
   }
 
   onDisplayNameClick() {

@@ -1,26 +1,39 @@
 <div class="new-group-card">
-    <div class="card-header">
-        New Group
+  <div class="card-header">New Group</div>
+  <div class="row-image">
+    <div class="container">
+      <img
+        class="image"
+        src="{{ groupImageURL }}"
+        alt="Image not available"
+        (click)="selectGroupImage()"
+        style="width: 100%"
+      />
+      <div class="text">Upload Image</div>
     </div>
-    <div class="row-image">
-        <div class="container">
-            <img class="image" src="{{ groupImageURL }}" alt="Image not available" (click)="selectGroupImage()" style="width: 100%">
-            <div class="text">
-                Upload Image
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <mat-form-field class="enter-group-information" appearance="outline">
-            <mat-label>Enter Group Name</mat-label>
-            <input matInput type="text" [formControl]="groupName">
-        </mat-form-field>
-        <mat-form-field class="enter-group-information" appearance="outline">
-            <mat-label>Enter Group Description (Optional)</mat-label>
-            <textarea matInput type="text" [formControl]="groupDescription"></textarea>
-        </mat-form-field>
-    </div>
-    <div class="row">
-        <button mat-flat-button class="create-group-button" [mat-dialog-close]="true" (click)="createGroup()">Create Group</button>
-    </div>
+  </div>
+  <div class="row">
+    <mat-form-field class="enter-group-information" appearance="outline">
+      <mat-label>Enter Group Name</mat-label>
+      <input matInput type="text" [formControl]="groupName" />
+    </mat-form-field>
+    <mat-form-field class="enter-group-information" appearance="outline">
+      <mat-label>Enter Group Description (Optional)</mat-label>
+      <textarea
+        matInput
+        type="text"
+        [formControl]="groupDescription"
+      ></textarea>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <button
+      mat-flat-button
+      class="create-group-button"
+      [mat-dialog-close]="true"
+      (click)="createGroup()"
+    >
+      Create Group
+    </button>
+  </div>
 </div>
