@@ -23,9 +23,13 @@
       />
     </div>
     <div class="col">
-      <button type="button" class="btn bg-transparent btn-lg btn-block" 
-      (click)="onClassInfoSelect(class)">
-        <b>{{ class.subject }} {{ class.course }}</b></button>
+      <button
+        type="button"
+        class="btn bg-transparent btn-lg btn-block"
+        (click)="onClassInfoSelect(class)"
+      >
+        <b>{{ class.subject }} {{ class.course }}</b>
+      </button>
     </div>
     <div class="col align-self-center">
       <button mat-raised-button color="primary" (click)="onJoinSelect(class)">

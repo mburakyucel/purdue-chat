@@ -7,7 +7,7 @@ import {
 import firebase from 'firebase/app';
 import { DocumentData } from '@angular/fire/firestore';
 
-import { Observable, BehaviorSubject} from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { Class } from '../../assets/class';
@@ -52,6 +52,6 @@ export class SubscriptionService {
   }
 
   changeSelectedClassInfo(selectedClass: string) {
-    this.selectionSource.next(selectedClass)
+    this.selectionSource.next(selectedClass);
   }
 }
