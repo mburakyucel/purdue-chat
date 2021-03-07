@@ -16,7 +16,7 @@ import '@firebase/auth';
 })
 export class AuthService {
   private uid: string = '';
-  private chats: Array<string> = [];
+  private chats: Array<Object> = [];
   user$: Observable<any>;
   constructor(
     private afAuth: AngularFireAuth,

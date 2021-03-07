@@ -1,9 +1,9 @@
 <mat-action-list>
   <button
     mat-list-item
-    *ngFor="let chatId of chats"
-    (click)="onChatSelect(chatId)"
+    *ngFor="let chat of chats"
+    (click)="onChatSelect(chat.id)"
   >
-    {{ chatId }}
+    {{ chat.title }}
   </button>
 </mat-action-list>

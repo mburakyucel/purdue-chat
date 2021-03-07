@@ -6,7 +6,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { AuthService } from '../services/auth.service';
+import { ChatService } from '../services/chat.service';
 
 @Component({
   selector: 'app-chat-list',
@@ -14,18 +14,15 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./chat-list.component.css'],
 })
 export class ChatListComponent implements OnInit, OnDestroy {
-  chats: Array<string>;
+  chats: Array<any>;
   @Output() chatSelect = new EventEmitter();
   subscription: Subscription;
-  constructor(public authService: AuthService) {}
+  constructor(public chatService: ChatService) {}
 
   ngOnInit(): void {
-    this.subscription = this.authService.user$.subscribe((data) => {
-      console.log(data);
-      if (data) {
-        this.chats = data.chats;
-      }
-    });
+    this.chatService.getChatMetadatas().subscribe((chatDocuments: Array<any>) => {
+      this.chats = chatDocuments;
+    })
   }
 
   onChatSelect(chatId: string) {
