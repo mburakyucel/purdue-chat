@@ -6,6 +6,7 @@ import { CreateGroupService } from '../services/create-group.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
 import { CroppieOptions } from 'croppie';
+import { finalize, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-group',
@@ -42,10 +43,10 @@ export class CreateGroupComponent implements OnInit {
 
   selectGroupImage(){
     this.imageUploadDialogRef = this.dialog.open(ImageUploadComponent, {data: {croppieOptions: this.croppieOptions}});
-    this.imageUploadDialogRef.afterClosed().subscribe(imageurl => {
-      imageurl.subscribe((url:string) => {
-        this.groupImageURL = url;
-      })
+    this.imageUploadDialogRef.afterClosed().subscribe((imageurl:string) => {
+      if(imageurl){
+        this.groupImageURL = imageurl
+      }
     })
   }
 }

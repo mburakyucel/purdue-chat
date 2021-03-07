@@ -5,9 +5,10 @@
   accept="image/*"
 />
 <div #imageEdit></div>
-<button mat-button mat-dialog-close id="submit" (click)="submit()">
+<mat-progress-bar class="progress-bar" *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<button mat-button id="submit" (click)="submit()">
   Submit
 </button>
-<button mat-button mat-dialog-close id="cancel" (click)="cancel()">
+<button mat-button id="cancel" (click)="cancel()">
   Cancel
 </button>

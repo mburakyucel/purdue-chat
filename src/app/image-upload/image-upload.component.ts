@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, Inject } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
 
 import * as Croppie from 'croppie';
-import { CroppieOptions, ResultOptions } from 'croppie';
+import { CroppieOptions } from 'croppie';
 
 import { ImageUploadService } from 'src/app/services/image-upload.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -19,11 +19,7 @@ export class ImageUploadComponent implements OnInit {
   private _croppie: Croppie;
   private file: any;
   private imageUrl: string;
-  private outputFormatOptions: ResultOptions = {
-    type: 'base64',
-    size: 'viewport',
-    circle: false,
-  };
+  public loading = false;
 
   constructor(
     private uploadService: ImageUploadService,
@@ -70,15 +66,28 @@ export class ImageUploadComponent implements OnInit {
   }
 
   submit(): void {
-    this._croppie.result(this.outputFormatOptions).then((result: any) => {
-      this.dialogRef.close(this.uploadService.uploadImage(result))
-      this._croppie.destroy();
-      this._croppie = null;
-    });
+    if(this._croppie){
+      this.loading = true;
+      this._croppie.result({
+        type: 'base64',
+        size: 'viewport',
+        circle: false
+      }).then((imageData: string) => {
+        this.uploadService.uploadImage(imageData).subscribe((imageUrl:string) => {
+          this.loading = false;
+          this._croppie.destroy();
+          this._croppie = null;
+          this.dialogRef.close(imageUrl);
+        });
+      });
+    }
   }
 
   cancel(): void {
-    this._croppie.destroy();
-    this._croppie = null;
+    if(this._croppie){
+      this._croppie.destroy();
+      this._croppie = null;
+    }
+    this.dialogRef.close(false)
   }
 }
