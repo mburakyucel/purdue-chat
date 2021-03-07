@@ -31,6 +31,7 @@ export class ImageUploadComponent implements OnInit {
     size: 'viewport',
     circle: false,
   };
+  loading = false;
 
   constructor(
     private uploadService: ImageUploadService,
@@ -77,10 +78,18 @@ export class ImageUploadComponent implements OnInit {
   }
 
   submit(): void {
-    this._croppie.result(this.outputFormatOptions).then((result: any) => {
-      this.dialogRef.close(this.uploadService.uploadImage(result));
-      this._croppie.destroy();
-      this._croppie = null;
+    this.loading = true;
+    this._croppie.result(this.outputFormatOptions).then((imageData: any) => {
+      this.uploadService.uploadImage(imageData).subscribe(imageUrl => {
+        this.loading = false;
+        this._croppie.destroy();
+        this._croppie = null;
+        this.dialogRef.close(imageUrl);
+        }
+      )
+      // this.dialogRef.close(this.uploadService.uploadImage(result));
+      // this._croppie.destroy();
+      // this._croppie = null;
     });
   }
 

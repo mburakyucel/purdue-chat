@@ -20,7 +20,7 @@ export class ImageUploadService {
     private afs: AngularFirestore
   ) {}
 
-  uploadImage(imageData: string): Observable<any> {
+  uploadImage(imageData: any): Observable<any> {
     return new Observable<any>((subscriber) => {
       const randomId = Math.random().toString(36).substring(2);
       this.ref = this.storage.ref(`${randomId}.png`);

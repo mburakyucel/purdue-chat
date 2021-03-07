@@ -55,9 +55,10 @@ export class CreateGroupComponent implements OnInit {
       data: { croppieOptions: this.croppieOptions },
     });
     this.imageUploadDialogRef.afterClosed().subscribe((imageurl) => {
-      imageurl.subscribe((url: string) => {
-        this.groupImageURL = url;
-      });
+      console.log(imageurl);
+      // imageurl.subscribe((url: string) => {
+      //   this.groupImageURL = url;
+      // });
     });
   }
 }
