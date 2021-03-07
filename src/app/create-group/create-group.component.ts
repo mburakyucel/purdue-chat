@@ -6,7 +6,6 @@ import { CreateGroupService } from '../services/create-group.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
 import { CroppieOptions } from 'croppie';
-import { finalize, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-group',
