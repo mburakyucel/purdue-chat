@@ -1,28 +1,5 @@
-.new-group-card {
+.create-group-page {
   max-width: 400px;
-}
-
-.card-header {
-  display: flex;
-  justify-content: center;
-  background-color: white;
-  border-color: white;
-  padding-bottom: 0;
-  font-weight: bold;
-  font-size: 16px;
-}
-
-.enter-group-information {
-  width: 100%;
-}
-
-.create-group-button {
-  width: 100%;
-}
-
-.container {
-  position: relative;
-  width: 50%;
 }
 
 .image {
@@ -36,22 +13,16 @@
   transition: 0.5s ease;
   opacity: 0;
   position: absolute;
-  top: 50%;
+  top: 37%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
 }
 
-.container:hover .image {
+.image-hover-element:hover .image {
   opacity: 0.3;
 }
 
-.container:hover .text {
+.image-hover-element:hover .text {
   opacity: 1;
-}
-
-.row-image {
-  display: flex;
-  justify-content: center;
-  margin: 5%;
 }

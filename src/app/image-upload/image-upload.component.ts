@@ -73,29 +73,23 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
   }
 
   submit(): void {
-    if (this.croppie) {
-      this.loading = true;
-      this.croppie
-        .result({
-          type: 'base64',
-          size: 'viewport',
-          circle: false,
-        })
-        .then((imageData: string) => {
-          this.uploadService
-            .uploadImage(imageData)
-            .subscribe((imageUrl: string) => {
-              this.loading = false;
-              this.croppie.destroy();
-              this.croppie = null;
-              this.dialogRef.close(imageUrl);
-            });
-        });
-    }
-  }
-
-  cancel(): void {
-    this.dialogRef.close(false);
+    this.loading = true;
+    this.croppie
+      .result({
+        type: 'base64',
+        size: 'viewport',
+        circle: false,
+      })
+      .then((imageData: string) => {
+        this.uploadService
+          .uploadImage(imageData)
+          .subscribe((imageUrl: string) => {
+            this.loading = false;
+            this.croppie.destroy();
+            this.croppie = null;
+            this.dialogRef.close(imageUrl);
+          });
+      });
   }
 
   ngOnDestroy() {
