@@ -50,12 +50,14 @@ export class CreateGroupComponent implements OnInit {
       });
   }
 
-  selectGroupImage(){
-    this.imageUploadDialogRef = this.dialog.open(ImageUploadComponent, {data: {croppieOptions: this.croppieOptions}});
-    this.imageUploadDialogRef.afterClosed().subscribe((imageurl:string) => {
-      if(imageurl){
-        this.groupImageURL = imageurl
+  selectGroupImage() {
+    this.imageUploadDialogRef = this.dialog.open(ImageUploadComponent, {
+      data: { croppieOptions: this.croppieOptions },
+    });
+    this.imageUploadDialogRef.afterClosed().subscribe((imageurl: string) => {
+      if (imageurl) {
+        this.groupImageURL = imageurl;
       }
-    })
+    });
   }
 }

@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ElementRef,
+  Inject,
+} from '@angular/core';
 
 import * as Croppie from 'croppie';
 import { CroppieOptions } from 'croppie';
@@ -66,28 +72,32 @@ export class ImageUploadComponent implements OnInit {
   }
 
   submit(): void {
-    if(this._croppie){
+    if (this._croppie) {
       this.loading = true;
-      this._croppie.result({
-        type: 'base64',
-        size: 'viewport',
-        circle: false
-      }).then((imageData: string) => {
-        this.uploadService.uploadImage(imageData).subscribe((imageUrl:string) => {
-          this.loading = false;
-          this._croppie.destroy();
-          this._croppie = null;
-          this.dialogRef.close(imageUrl);
+      this._croppie
+        .result({
+          type: 'base64',
+          size: 'viewport',
+          circle: false,
+        })
+        .then((imageData: string) => {
+          this.uploadService
+            .uploadImage(imageData)
+            .subscribe((imageUrl: string) => {
+              this.loading = false;
+              this._croppie.destroy();
+              this._croppie = null;
+              this.dialogRef.close(imageUrl);
+            });
         });
-      });
     }
   }
 
   cancel(): void {
-    if(this._croppie){
+    if (this._croppie) {
       this._croppie.destroy();
       this._croppie = null;
     }
-    this.dialogRef.close(false)
+    this.dialogRef.close(false);
   }
 }
