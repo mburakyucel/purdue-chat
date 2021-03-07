@@ -4,6 +4,7 @@ import {
   ViewChild,
   ElementRef,
   Inject,
+  OnDestroy,
 } from '@angular/core';
 
 import * as Croppie from 'croppie';
@@ -17,15 +18,15 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   templateUrl: './image-upload.component.html',
   styleUrls: ['./image-upload.component.css'],
 })
-export class ImageUploadComponent implements OnInit {
+export class ImageUploadComponent implements OnInit, OnDestroy {
   @ViewChild('imageEdit') imageEdit: ElementRef;
 
   private points: number[];
   private defaultZoom = 0;
-  private _croppie: Croppie;
   private file: any;
   private imageUrl: string;
   public loading = false;
+  public croppie: Croppie;
 
   constructor(
     private uploadService: ImageUploadService,
@@ -36,11 +37,11 @@ export class ImageUploadComponent implements OnInit {
   ngOnInit(): void {}
 
   enterImage(): any {
-    this._croppie = new Croppie(
+    this.croppie = new Croppie(
       this.imageEdit.nativeElement,
       this.data.croppieOptions
     );
-    this._croppie.bind({
+    this.croppie.bind({
       url: this.imageUrl,
       points: this.points,
       zoom: this.defaultZoom,
@@ -48,20 +49,20 @@ export class ImageUploadComponent implements OnInit {
   }
 
   onInputChange(event: any): void {
-    if (this._croppie) {
-      this._croppie.destroy();
+    if (this.croppie) {
+      this.croppie.destroy();
     }
 
     this.file = event.target.files[0];
     const reader = new FileReader();
 
-    this._croppie = new Croppie(
+    this.croppie = new Croppie(
       this.imageEdit.nativeElement,
       this.data.croppieOptions
     );
 
     reader.onload = (e1: any) => {
-      this._croppie.bind({
+      this.croppie.bind({
         url: e1.target.result,
         points: this.points,
         zoom: this.defaultZoom,
@@ -72,9 +73,9 @@ export class ImageUploadComponent implements OnInit {
   }
 
   submit(): void {
-    if (this._croppie) {
+    if (this.croppie) {
       this.loading = true;
-      this._croppie
+      this.croppie
         .result({
           type: 'base64',
           size: 'viewport',
@@ -85,8 +86,8 @@ export class ImageUploadComponent implements OnInit {
             .uploadImage(imageData)
             .subscribe((imageUrl: string) => {
               this.loading = false;
-              this._croppie.destroy();
-              this._croppie = null;
+              this.croppie.destroy();
+              this.croppie = null;
               this.dialogRef.close(imageUrl);
             });
         });
@@ -94,10 +95,13 @@ export class ImageUploadComponent implements OnInit {
   }
 
   cancel(): void {
-    if (this._croppie) {
-      this._croppie.destroy();
-      this._croppie = null;
-    }
     this.dialogRef.close(false);
+  }
+
+  ngOnDestroy() {
+    if (this.croppie) {
+      this.croppie.destroy();
+      this.croppie = null;
+    }
   }
 }
