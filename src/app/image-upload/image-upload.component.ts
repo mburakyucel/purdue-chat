@@ -80,13 +80,12 @@ export class ImageUploadComponent implements OnInit {
   submit(): void {
     this.loading = true;
     this._croppie.result(this.outputFormatOptions).then((imageData: any) => {
-      this.uploadService.uploadImage(imageData).subscribe(imageUrl => {
+      this.uploadService.uploadImage(imageData).subscribe((imageUrl) => {
         this.loading = false;
         this._croppie.destroy();
         this._croppie = null;
         this.dialogRef.close(imageUrl);
-        }
-      )
+      });
       // this.dialogRef.close(this.uploadService.uploadImage(result));
       // this._croppie.destroy();
       // this._croppie = null;
