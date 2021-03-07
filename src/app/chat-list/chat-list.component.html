@@ -1,3 +1,16 @@
+<!-- <mat-action-list>
+  <button
+    mat-list-item
+    *ngFor="let chat of chats"
+    (click)="onChatSelect(chat.id)"
+  >
+    {{ chat.title }}
+  </button>
+</mat-action-list> -->
+<!-- 
+<div *ngFor="let chat of chats">
+  <img [src]="chat.imageUrl" alt="">
+</div>
 <mat-action-list>
   <button
     mat-list-item
@@ -6,4 +19,22 @@
   >
     {{ chat.title }}
   </button>
-</mat-action-list>
+</mat-action-list> -->
+
+<!-- <div class="container">
+  <div *ngFor="let chat of chats" class="row">
+    <div class="col">
+      <img [src]="chat.imageUrl" alt="">      
+    </div>
+    <div class="col">{{chat.title}}</div>
+  </div>
+</div> -->
+
+
+<mat-card *ngFor="let chat of chats" class="example-card">
+  <mat-card-header>
+    <img mat-card-avatar [src]="chat.imageUrl"/>
+    <mat-card-title>{{chat.title}}</mat-card-title>
+    <mat-card-subtitle>This is a message....</mat-card-subtitle>
+  </mat-card-header>
+</mat-card>
