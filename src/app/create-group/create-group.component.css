@@ -51,13 +51,7 @@
 }
 
 .row-image {
-<<<<<<< HEAD
     display: flex;
     justify-content: center;
     margin: 5%;
-=======
-  display: flex;
-  justify-content: center;
-  margin: 5%;
->>>>>>> 3317ad4f17fb68c371c01019c3d455618b2ae7fd
 }
