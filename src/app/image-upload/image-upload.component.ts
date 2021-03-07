@@ -24,7 +24,7 @@ export class ImageUploadComponent implements OnInit {
   constructor(
     private uploadService: ImageUploadService,
     public dialogRef: MatDialogRef<ImageUploadComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {croppieOptions: CroppieOptions}
+    @Inject(MAT_DIALOG_DATA) public data: { croppieOptions: CroppieOptions }
   ) {}
 
   ngOnInit(): void {}

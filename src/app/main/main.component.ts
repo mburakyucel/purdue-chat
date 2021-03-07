@@ -41,7 +41,7 @@ export class MainComponent implements OnInit {
     this.authService.logout();
   }
 
-  createNewGroup(){
+  createNewGroup() {
     this.dialog.open(CreateGroupComponent);
   }
 }
