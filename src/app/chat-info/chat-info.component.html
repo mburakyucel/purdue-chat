@@ -23,10 +23,7 @@
   </div>
   <div class="row pt-3">
     <mat-accordion>
-      <mat-expansion-panel
-        (opened)="panelOpenState = true"
-        (closed)="panelOpenState = false"
-      >
+      <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
             <b>About</b>
@@ -38,17 +35,19 @@
   </div>
   <div class="row pt-2">
     <mat-accordion>
-      <mat-expansion-panel
-        (opened)="panelOpenState = true"
-        (closed)="panelOpenState = false"
-      >
+      <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <b>Member</b>
+            <b>Members</b>
           </mat-panel-title>
         </mat-expansion-panel-header>
         <p>[List of members]</p>
       </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div class="row pt-2" *ngIf="subscribed">
+    <mat-accordion>
+      <mat-checkbox class="primary text-light bg-dark rounded" color="primary">Mute chat</mat-checkbox>
     </mat-accordion>
   </div>
   <div class="row justify-content-center py-4">

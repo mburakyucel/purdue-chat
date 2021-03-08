@@ -2,3 +2,7 @@
   height: 180px;
   width: 180px;
 }
+
+::ng-deep .mat-checkbox-frame {
+  border-color: white
+}

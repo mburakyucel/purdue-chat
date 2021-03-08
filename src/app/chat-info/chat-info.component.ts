@@ -11,7 +11,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./chat-info.component.css'],
 })
 export class ChatInfoComponent implements OnInit {
-  panelOpenState = false;
+  subscribed = 1;
 
   constructor(
     private subService: SubscriptionService,
