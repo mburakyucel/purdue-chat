@@ -3,7 +3,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Class } from '../../assets/class';
 import { SubscriptionService } from '../services/subscription.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-chat-info',
