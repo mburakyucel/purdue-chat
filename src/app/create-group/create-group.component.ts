@@ -47,7 +47,7 @@ export class CreateGroupComponent implements OnInit {
           this._snackBar.open('Group Creation Successful', 'Close', {
             duration: 2000,
           });
-        })
+        });
       })
       .catch((error) => {
         console.log(error);
