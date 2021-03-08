@@ -77,7 +77,7 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
     this.croppie
       .result({
         type: 'base64',
-        size: 'viewport',
+        size: 'original',
         circle: false,
       })
       .then((imageData: string) => {

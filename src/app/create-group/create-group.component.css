@@ -10,6 +10,8 @@
   transition: 0.5s ease;
   backface-visibility: hidden;
   width: 100%;
+  min-width: 200px;
+  min-height: 200px;
 }
 
 .text {
