@@ -6,6 +6,7 @@ import { CreateGroupService } from '../services/create-group.service';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
 import { CroppieOptions } from 'croppie';
+import { SubscriptionService } from '../services/subscription.service';
 
 @Component({
   selector: 'app-create-group',
@@ -28,7 +29,8 @@ export class CreateGroupComponent implements OnInit {
   constructor(
     public groupService: CreateGroupService,
     private _snackBar: MatSnackBar,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public sub: SubscriptionService
   ) {}
 
   ngOnInit(): void {}
@@ -40,10 +42,12 @@ export class CreateGroupComponent implements OnInit {
         this.groupDescription.value,
         this.groupImageURL
       )
-      .then(() => {
-        this._snackBar.open('Group Creation Successful', 'Close', {
-          duration: 2000,
-        });
+      .then((docRef) => {
+        this.sub.addSubscription(docRef.id).then(() => {
+          this._snackBar.open('Group Creation Successful', 'Close', {
+            duration: 2000,
+          });
+        })
       })
       .catch((error) => {
         console.log(error);
