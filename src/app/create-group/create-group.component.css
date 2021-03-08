@@ -1,5 +1,8 @@
 .create-group-page {
-  max-width: 400px;
+  max-width: 350px;
+  min-width: 250px;
+  width: 100%;
+  padding: 0%;
 }
 
 .image {
@@ -13,7 +16,7 @@
   transition: 0.5s ease;
   opacity: 0;
   position: absolute;
-  top: 37%;
+  top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
