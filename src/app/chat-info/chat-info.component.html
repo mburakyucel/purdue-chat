@@ -1,82 +1,86 @@
-<div class="container px-4 pt-4 text-light bg-dark rounded">
-  <div class="row">
-    <div class="col-auto">
-      <img
-        mat-card-avatar
-        class="rounded dialog-img rounded-circle"
-        src="https://picsum.photos/seed/{{
-          selectedClass.id
-        }}/256/?random&img={{ selectedClass.id }}"
-        alt="http://placehold.it/256/163a63"
-      />
+<mat-dialog-content class="bg-white" style="max-height: 100%;" >
+  <div class="container px-4 pt-4 text-dark bg-white rounded h-100" style="max-width: 280px">
+    <div class="row">
+      <div class="col">
+        <img
+          mat-card-avatar
+          class="rounded dialog-img rounded-circle"
+          src="https://picsum.photos/seed/{{
+            selectedClass.id
+          }}/256/?random&img={{ selectedClass.id }}"
+          alt="http://placehold.it/256/163a63"
+        />
+      </div>
     </div>
-  </div>
-  <div class="row pt-3">
-    <div class="col-auto">
-      <h2>{{ selectedClass.subject }} {{ selectedClass.course }}</h2>
+    <div class="row pt-3">
+      <div class="col-auto">
+        <h2>{{ selectedClass.subject }} {{ selectedClass.course }}</h2>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-auto">
-      <small class="text-muted">[date created]</small>
+    <div class="row">
+      <div class="col-auto">
+        <small class="text-muted">{{ selectedClass.dateCreated }}</small>
+      </div>
     </div>
-  </div>
-  <div class="row pt-3">
-    <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <b>About</b>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <p>{{ selectedClass.description }}</p>
-      </mat-expansion-panel>
-    </mat-accordion>
-  </div>
-  <div class="row pt-2">
-    <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <b>Members</b>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <div
-          class="row pb-2"
-          *ngFor="let name of chatMembersDisplayName; index as i"
+    <div class="row pt-3">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              About
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div class="col your-class">
+            <p>{{ selectedClass.description }}</p>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="row pt-2 pb-2">
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Members
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div
+            class="row pb-2"
+            *ngFor="let name of chatMembersDisplayName; index as i"
+          >
+            <div class="col-auto">
+              <img
+                mat-card-avatar
+                class="rounded profile-img"
+                src="{{ chatMembersProfilePic[i] }}"
+                alt="http://placehold.it/256/163a63"
+              />
+            </div>
+            <div class="col-auto pt-2 align-self-center">
+              <h2>{{ name }}</h2>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="row pt-2" *ngIf="subscribed">
+      <mat-accordion>
+        <mat-checkbox class="primary text-dark bg-white rounded" color="primary"
+          >Mute chat</mat-checkbox
         >
-          <div class="col-auto">
-            <img
-              mat-card-avatar
-              class="rounded profile-img"
-              src="{{ chatMembersProfilePic[i] }}"
-              alt="http://placehold.it/256/163a63"
-            />
-          </div>
-          <div class="col-auto pt-2 align-self-center">
-            <h2>{{ name }}</h2>
-          </div>
-        </div>
-      </mat-expansion-panel>
-    </mat-accordion>
-  </div>
-  <div class="row pt-2" *ngIf="subscribed">
-    <mat-accordion>
-      <mat-checkbox class="primary text-light bg-dark rounded" color="primary"
-        >Mute chat</mat-checkbox
-      >
-    </mat-accordion>
-  </div>
-  <div class="row justify-content-center py-4">
-    <div class="col col-auto">
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="onJoinSelectInDialog()"
-        [mat-dialog-close]="true"
-      >
-        Join
-      </button>
+      </mat-accordion>
+    </div>
+    <div class="row justify-content-center py-3">
+      <div class="col col-auto">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onJoinSelectInDialog()"
+          [mat-dialog-close]="true"
+        >
+          Join
+        </button>
+      </div>
     </div>
   </div>
-</div>
+</mat-dialog-content>

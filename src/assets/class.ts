@@ -4,4 +4,5 @@ export interface Class {
   subject?: string;
   course?: number;
   description?: string;
+  dateCreated?: string;
 }

@@ -1,13 +1,12 @@
 .dialog-img {
   height: 180px;
   width: 180px;
-}
-
-::ng-deep .mat-checkbox-frame {
-  border-color: white;
+  margin: auto;    
+  display: block;
 }
 
 .profile-img {
   height: 60px;
   width: 60px;
 }
+

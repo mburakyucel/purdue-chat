@@ -11,7 +11,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./chat-info.component.css'],
 })
 export class ChatInfoComponent implements OnInit {
-  subscribed = 1;
+  subscribed = 0;
   chatMembersProfilePic: string[] = [];
   chatMembersDisplayName: string[] = [];
 
