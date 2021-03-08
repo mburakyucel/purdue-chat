@@ -16,7 +16,7 @@
   transition: 0.5s ease;
   opacity: 0;
   position: absolute;
-  top: 35%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
@@ -28,4 +28,8 @@
 
 .image-hover-element:hover .text {
   opacity: 1;
+}
+
+.image-hover-element {
+  position: relative;
 }
