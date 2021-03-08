@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 
 import { Class } from '../../assets/class';
 import { SubscriptionService } from '../services/subscription.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-chat-info',
@@ -10,41 +11,23 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./chat-info.component.css'],
 })
 export class ChatInfoComponent implements OnInit {
-  selectedClassId: string = '';
-  selectedClassInfo: Class;
-  allClasses: Class[] = [];
+  panelOpenState = false;
 
   constructor(
     private subService: SubscriptionService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public dialogRef: MatDialogRef<ChatInfoComponent>,
+    @Inject(MAT_DIALOG_DATA) public selectedClass: Class
   ) {}
 
-  ngOnInit(): void {
-    this.subService.currentSelectedClass.subscribe(
-      (Class) => (this.selectedClassId = Class)
-    );
-    this.subService
-      .getClasses()
-      .subscribe((classes) => (this.allClasses = classes));
-  }
-
-  //Function that return the description of the selected class
-  findClassInfo(): string {
-    for (let item of this.allClasses) {
-      if (item.id == this.selectedClassId) {
-        this.selectedClassInfo = item;
-        return item.description;
-      }
-    }
-    return '';
-  }
+  ngOnInit(): void {}
 
   onJoinSelectInDialog(): void {
     this.subService
-      .addSubscription(this.selectedClassId)
+      .addSubscription(this.selectedClass.id)
       .then(() => {
         this._snackBar.open(
-          `Subscribed to ${this.selectedClassInfo.subject} ${this.selectedClassInfo.course}`,
+          `Subscribed to ${this.selectedClass.subject} ${this.selectedClass.course}`,
           'Close',
           {
             duration: 2000,

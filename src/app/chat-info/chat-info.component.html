@@ -1,13 +1,50 @@
-<mat-card class="custom">
+<div class="container px-4 pt-4 text-light bg-dark rounded">
   <div class="row">
-    <div class="col">
-      <b>Class Description:</b>
+    <div class="col-auto">
+      <img mat-card-avatar
+        class="rounded dialog-img rounded-circle"
+        src="https://picsum.photos/seed/{{ selectedClass.id }}/256/?random&img={{
+          selectedClass.id
+        }}"
+        alt="http://placehold.it/256/163a63"
+      />
     </div>
   </div>
-  <div class="row">
-    <div class="col">
-      {{ findClassInfo() }}
+  <div class="row pt-3">
+    <div class="col-auto">
+      <h2>{{selectedClass.subject}} {{selectedClass.course}}</h2>
     </div>
+  </div>
+  <div class="row ">
+    <div class="col-auto">
+      <small class="text-muted">[date created]</small>
+    </div>
+  </div>
+  <div class="row pt-3">
+    <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false">
+      <mat-expansion-panel-header >
+        <mat-panel-title>
+          <b>About</b>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>{{selectedClass.description}}</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div class="row pt-2">
+    <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false">
+      <mat-expansion-panel-header >
+        <mat-panel-title>
+          <b>Member</b>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>[List of members]</p>
+      </mat-expansion-panel>
+    </mat-accordion>
   </div>
   <div class="row justify-content-center py-4">
     <div class="col col-auto">
@@ -21,4 +58,4 @@
       </button>
     </div>
   </div>
-</mat-card>
+</div>

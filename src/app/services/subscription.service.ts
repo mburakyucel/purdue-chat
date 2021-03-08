@@ -16,9 +16,6 @@ import { Class } from '../../assets/class';
   providedIn: 'root',
 })
 export class SubscriptionService {
-  private selectionSource = new BehaviorSubject('');
-  currentSelectedClass = this.selectionSource.asObservable();
-
   constructor(public afs: AngularFirestore, public authService: AuthService) {}
 
   //Show all classes a user is subscribed too
@@ -49,9 +46,5 @@ export class SubscriptionService {
   //Show all available classes
   getClasses(): Observable<any> {
     return this.afs.collection('classes').valueChanges({ idField: 'id' });
-  }
-
-  changeSelectedClassInfo(selectedClass: string) {
-    this.selectionSource.next(selectedClass);
   }
 }

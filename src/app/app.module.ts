@@ -7,6 +7,7 @@ import { environment } from '../environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -58,6 +59,7 @@ import { ChatInfoComponent } from './chat-info/chat-info.component';
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatExpansionModule,
     AngularFirestoreModule,
     AngularFireAuthModule,
     MatButtonModule,

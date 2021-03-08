@@ -26,13 +26,13 @@
       <button
         type="button"
         class="btn bg-transparent btn-lg btn-block"
-        (click)="onClassInfoSelect(class)"
+        (click)="onClassInfo(class)"
       >
         <b>{{ class.subject }} {{ class.course }}</b>
       </button>
     </div>
     <div class="col align-self-center">
-      <button mat-raised-button color="primary" (click)="onJoinSelect(class)">
+      <button mat-raised-button color="primary" (click)="onJoin(class)">
         Join
       </button>
     </div>

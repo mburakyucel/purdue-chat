@@ -34,7 +34,7 @@ export class ClassesComponent implements OnInit {
     });
   }
 
-  onJoinSelect(selectedClass: Class): void {
+  onJoin(selectedClass: Class): void {
     this.subService
       .addSubscription(selectedClass.id)
       .then(() => {
@@ -68,8 +68,9 @@ export class ClassesComponent implements OnInit {
   }
 
   //Triggered when the class name is pressed by user to view its info
-  onClassInfoSelect(selectedClass: Class) {
-    this.subService.changeSelectedClassInfo(selectedClass.id);
-    this.dialog.open(ChatInfoComponent);
+  onClassInfo(selectedClass: Class) {
+    this.dialog.open(ChatInfoComponent, {
+      data: selectedClass
+    });
   }
 }
