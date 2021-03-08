@@ -41,7 +41,19 @@
             <b>Members</b>
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <p>[List of members]</p>
+        <div class="row pb-2" *ngFor="let name of chatMembersDisplayName; index as i">
+          <div class="col-auto">
+            <img
+            mat-card-avatar
+            class="rounded profile-img"
+            src={{chatMembersProfilePic[i]}}
+            alt="http://placehold.it/256/163a63"
+          />
+          </div>
+          <div class="col-auto pt-2 align-self-center">
+            <h2>{{name}}</h2>
+          </div>
+        </div>
       </mat-expansion-panel>
     </mat-accordion>
   </div>

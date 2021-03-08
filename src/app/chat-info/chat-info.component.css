@@ -6,3 +6,8 @@
 ::ng-deep .mat-checkbox-frame {
   border-color: white;
 }
+
+.profile-img {
+  height: 60px;
+  width: 60px;
+}

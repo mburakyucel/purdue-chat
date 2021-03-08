@@ -12,6 +12,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class ChatInfoComponent implements OnInit {
   subscribed = 1;
+  chatMembersProfilePic: string[] = [];
+  chatMembersDisplayName: string[] = [];
 
   constructor(
     private subService: SubscriptionService,
@@ -20,7 +22,22 @@ export class ChatInfoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public selectedClass: Class
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.subService.getAllUsersID().forEach(users => {
+      //Go through all chats of all users and check if they are subscribed to this chat
+      for(let user of users) {
+        this.subService.getUserInfo(user.id).forEach(data => {
+          for(let chat of data.chats){
+            //If they are, add this user to the chatMembers array
+            if(chat == this.selectedClass.id) {
+              this.chatMembersDisplayName.push(data.displayName);
+              this.chatMembersProfilePic.push(data.profileImage);
+            }
+          }
+        });
+      }
+    })
+  }
 
   onJoinSelectInDialog(): void {
     this.subService

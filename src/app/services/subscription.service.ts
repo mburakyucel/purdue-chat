@@ -7,7 +7,7 @@ import {
 import firebase from 'firebase/app';
 import { DocumentData } from '@angular/fire/firestore';
 
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 import { Class } from '../../assets/class';
@@ -46,5 +46,14 @@ export class SubscriptionService {
   //Show all available classes
   getClasses(): Observable<any> {
     return this.afs.collection('classes').valueChanges({ idField: 'id' });
+  }
+  
+  getAllUsersID(): Observable<any> {
+    return this.afs.collection('users').valueChanges({ idField: 'id' })
+  }
+
+  getUserInfo(user: string): Observable<any> {
+    return this.afs.collection('users').doc<any>(user).get().pipe(
+      map(doc => doc.data()))
   }
 }
