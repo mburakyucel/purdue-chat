@@ -35,10 +35,15 @@ export class ChatService {
 
   getChatMetadatas(): Observable<any> {
     return this.authService.user$.pipe(
-      switchMap(userData => {
-        const chatMetadatas$: Observable<any>[] = userData.chats.map((chatID: string) => {
-          return this.afs.collection<any>('chats').doc(chatID).valueChanges({ idField: 'id' });
-        });
+      switchMap((userData) => {
+        const chatMetadatas$: Observable<any>[] = userData.chats.map(
+          (chatID: string) => {
+            return this.afs
+              .collection<any>('chats')
+              .doc(chatID)
+              .valueChanges({ idField: 'id' });
+          }
+        );
         return combineLatest(chatMetadatas$);
       })
     );
