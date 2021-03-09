@@ -20,9 +20,11 @@ export class ChatListComponent implements OnInit, OnDestroy {
   constructor(public chatService: ChatService) {}
 
   ngOnInit(): void {
-    this.chatService.getChatMetadatas().subscribe((chatDocuments: Array<any>) => {
-      this.chats = chatDocuments;
-    })
+    this.chatService
+      .getChatMetadatas()
+      .subscribe((chatDocuments: Array<any>) => {
+        this.chats = chatDocuments;
+      });
   }
 
   onChatSelect(chatId: string) {
