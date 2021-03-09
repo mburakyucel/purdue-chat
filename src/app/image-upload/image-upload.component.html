@@ -1,18 +1,16 @@
-<div class="container">
-  <input
-    type="file"
-    id="userImage"
-    (change)="onInputChange($event)"
-    accept="image/*"
-  />
-  <div #imageEdit></div>
-  <mat-progress-bar
-    class="mb-2"
-    *ngIf="loading"
-    mode="indeterminate"
-  ></mat-progress-bar>
-  <button mat-button [disabled]="!croppie" id="submit" (click)="submit()">
-    Submit
-  </button>
-  <button mat-button mat-dialog-close id="cancel">Cancel</button>
-</div>
+<input
+  type="file"
+  id="userImage"
+  (change)="onInputChange($event)"
+  accept="image/*"
+/>
+<div #imageEdit></div>
+<mat-progress-bar
+  class="mb-2"
+  *ngIf="loading"
+  mode="indeterminate"
+></mat-progress-bar>
+<button mat-button [disabled]="!croppie" id="submit" (click)="submit()">
+  Submit
+</button>
+<button mat-button mat-dialog-close id="cancel">Cancel</button>

@@ -1,20 +1,18 @@
-<div class="create-group-page">
+<div class="container">
   <div class="row">
     <div class="col">
       <h2 class="text-center">New Group</h2>
     </div>
   </div>
   <div class="row justify-content-center">
-    <div class="col mx-5">
-      <div class="container-fluid px-0 image-hover-element">
-        <img
-          class="img-fluid image"
-          src="{{ groupImageURL }}"
-          alt="Image not available"
-          (click)="selectGroupImage()"
-        />
-        <div class="text">Upload Image</div>
-      </div>
+    <div class="col mx-5 image-hover-element">
+      <img
+        class="img-fluid group-image"
+        src="{{ groupImageURL }}"
+        alt="Image not available"
+        (click)="selectGroupImage()"
+      />
+      <div class="text">Upload Image</div>
     </div>
   </div>
   <div class="row mt-4">

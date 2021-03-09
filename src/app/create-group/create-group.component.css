@@ -1,15 +1,7 @@
-.create-group-page {
-  max-width: 350px;
-  min-width: 250px;
-  width: 100%;
-  padding: 0%;
-}
-
-.image {
+.group-image {
   opacity: 1;
   transition: 0.5s ease;
   backface-visibility: hidden;
-  width: 100%;
   min-width: 200px;
   min-height: 200px;
 }
