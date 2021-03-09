@@ -1,0 +1,29 @@
+.group-image {
+  opacity: 1;
+  transition: 0.5s ease;
+  backface-visibility: hidden;
+  min-width: 200px;
+  min-height: 200px;
+}
+
+.text {
+  transition: 0.5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.image-hover-element:hover .image {
+  opacity: 0.3;
+}
+
+.image-hover-element:hover .text {
+  opacity: 1;
+}
+
+.image-hover-element {
+  position: relative;
+}

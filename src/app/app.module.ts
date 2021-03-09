@@ -16,6 +16,7 @@ import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -32,6 +33,7 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MainComponent } from './main/main.component';
 import { HomeComponent } from './home/home.component';
+import { CreateGroupComponent } from './create-group/create-group.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { HomeComponent } from './home/home.component';
     ProfileComponent,
     MainComponent,
     HomeComponent,
+    CreateGroupComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +71,7 @@ import { HomeComponent } from './home/home.component';
     MatDialogModule,
     MatCardModule,
     MatSidenavModule,
+    MatTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

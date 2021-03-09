@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2 class="text-center">New Group</h2>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col mx-5 image-hover-element">
+      <img
+        class="img-fluid group-image"
+        src="{{ groupImageURL }}"
+        alt="Image not available"
+        (click)="selectGroupImage()"
+      />
+      <div class="text">Upload Image</div>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="col">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Enter Group Name</mat-label>
+        <input matInput type="text" [formControl]="groupName" />
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <mat-form-field class="w-100" appearance="outline">
+        <mat-label>Enter Group Description (Optional)</mat-label>
+        <textarea
+          matInput
+          type="text"
+          [formControl]="groupDescription"
+        ></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button
+        mat-flat-button
+        class="w-100"
+        [mat-dialog-close]="true"
+        (click)="createGroup()"
+      >
+        Create Group
+      </button>
+    </div>
+  </div>
+</div>
