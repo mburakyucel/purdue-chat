@@ -29,12 +29,50 @@
     <div class="col">{{chat.title}}</div>
   </div>
 </div> -->
+<!-- 
+<div class="container-fluid">
+  <div *ngFor="let chat of chats" class="row">
+    <div class="col">
+      <mat-card class="example-card">
+        <mat-card-header>
+          <img mat-card-avatar [src]="chat.imageUrl"/>
+          <mat-card-title>{{chat.title}}</mat-card-title>
+          <mat-card-subtitle>This is a message....</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+    </div>
+  </div>
+</div> -->
 
+<mat-action-list>
+  <button mat-list-item *ngFor="let chat of chats" class="h-auto p-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-auto ps-0">
+          <img class="rounded-circle" height="56px" [src]="chat.imageUrl" alt="">
+        </div>
+        <div class="col">
+          <div class="row">
+            <div class="col-auto">
+              <h4 class="m-0">{{chat.title}}</h4>
+            </div>
+            <div class="col">time</div>
+          </div>
+          <div class="row">
+            <div class="col">
+              Message
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </button>
+</mat-action-list>
 
-<mat-card *ngFor="let chat of chats" class="example-card">
+<!-- <mat-card *ngFor="let chat of chats" class="example-card">
   <mat-card-header>
     <img mat-card-avatar [src]="chat.imageUrl"/>
     <mat-card-title>{{chat.title}}</mat-card-title>
     <mat-card-subtitle>This is a message....</mat-card-subtitle>
   </mat-card-header>
-</mat-card>
+</mat-card> -->
