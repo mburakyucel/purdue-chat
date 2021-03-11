@@ -60,9 +60,11 @@ export class ChatComponent implements OnInit, OnDestroy {
       console.log('Sent');
     }
     else{
+      this.imageLoading = true;
       this.imageUploadService.uploadImage(this.imageUrl).subscribe((imageUrl:string) => {
         this.chatService.sendMessage(imageUrl, this.chatId, "image")
         this.sendImage = false;
+        this.imageLoading = false;
         this.imageUrl = null;
         console.log(imageUrl)
       })
@@ -78,10 +80,12 @@ export class ChatComponent implements OnInit, OnDestroy {
   onImageSelect(event:any){
     this.selectedImageFile = event.target.files[0];
     const reader = new FileReader();
+
     reader.onload = (url:any) => {
       this.imageUrl = url.target.result;
       console.log(this.imageUrl);
     }
+
     this.sendImage = true;
     reader.readAsDataURL(this.selectedImageFile);
   }
