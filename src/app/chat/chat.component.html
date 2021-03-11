@@ -43,10 +43,16 @@
       </mat-form-field>
     </div>
   </div>
-  <div class="row">
+  <div class="row mb-3">
     <div class="col">
       <input style="display: none;" type="file" accept="image/*" (change)="onImageSelect($event)" #hiddenImageInput>
       <button mat-flat-button (click)="hiddenImageInput.click()">Image</button>
+    </div>
+    <div class="col">
+      <img class="chatImage" src="{{ imageUrl }}" alt="test">
+    </div>
+    <div class="col">
+      <mat-spinner *ngIf="imageLoading" mode="indeterminate"></mat-spinner>
     </div>
   </div>
 </div>
