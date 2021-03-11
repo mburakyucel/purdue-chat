@@ -9,9 +9,16 @@
       <div class="row" *ngFor="let msg of messages">
         <div class="col-auto">{{ msg.uid }}</div>
         <div class="col">
-          <p>
-            {{ msg.message }}
-          </p>
+          <container-element [ngSwitch]="msg.type">
+            <div *ngSwitchCase="'text'">
+              <p>
+                {{ msg.message }}
+              </p>
+            </div>
+            <div *ngSwitchCase="'image'">
+              <img class="chatImage" src="{{ msg.message }}" >
+            </div>
+          </container-element>
         </div>
       </div>
     </div>
@@ -34,6 +41,12 @@
           <mat-icon>send</mat-icon>
         </button>
       </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <input style="display: none;" type="file" accept="image/*" (change)="onImageSelect($event)" #hiddenImageInput>
+      <button mat-flat-button (click)="hiddenImageInput.click()">Image</button>
     </div>
   </div>
 </div>
