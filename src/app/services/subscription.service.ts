@@ -48,7 +48,11 @@ export class SubscriptionService {
     return this.afs.collection('classes').valueChanges({ idField: 'id' });
   }
 
-  getUsersSubscribedToClass (selectedClass: Class): Observable<any> {
-    return this.afs.collection('users', (ref) => ref.where('chats', 'array-contains', selectedClass.id)).valueChanges();
+  getUsersSubscribedToClass(selectedClass: Class): Observable<any> {
+    return this.afs
+      .collection('users', (ref) =>
+        ref.where('chats', 'array-contains', selectedClass.id)
+      )
+      .valueChanges();
   }
 }
