@@ -1,9 +1,23 @@
 <mat-action-list>
   <button
     mat-list-item
-    *ngFor="let chatId of chats"
-    (click)="onChatSelect(chatId)"
+    (click)="onChatSelect(chat.id)"
+    *ngFor="let chat of chats"
+    class="h-auto p-0 py-2"
   >
-    {{ chatId }}
+    <div class="container">
+      <div class="row">
+        <div class="col-auto ps-0">
+          <img
+            class="rounded-circle"
+            height="56px"
+            [src]="chat.groupImageUrl"
+          />
+        </div>
+        <div class="col">
+          <h3 class="m-0">{{ chat.groupName }}</h3>
+        </div>
+      </div>
+    </div>
   </button>
 </mat-action-list>

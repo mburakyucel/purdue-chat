@@ -4,6 +4,11 @@
       <span>Classes</span>
     </button>
   </a>
+  <a class="create-group">
+    <button mat-button (click)="createNewGroup()">
+      <span>Create Group</span>
+    </button>
+  </a>
   <span class="spacer"></span>
   <button mat-button (click)="openProfileDialog()">Profile</button>
   <button mat-button (click)="onLogout()">Logout</button>
@@ -28,9 +33,8 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>Chat</span>
     </mat-toolbar>
     <!-- Add Content Here -->
-    <app-chat></app-chat>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

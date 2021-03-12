@@ -16,7 +16,7 @@ import '@firebase/auth';
 })
 export class AuthService {
   private uid: string = '';
-  private chats: Array<string> = [];
+  private chats: Array<Object> = [];
   user$: Observable<any>;
   constructor(
     private afAuth: AngularFireAuth,
@@ -90,7 +90,7 @@ export class AuthService {
       chats: this.chats,
       uid: user.uid,
       email: user.email,
-      profileImage: environment.firebase.profileImage,
+      profileImage: environment.profileImage,
       displayName: user.email.split('@')[0],
     };
 
