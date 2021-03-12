@@ -45,18 +45,18 @@
           </mat-expansion-panel-header>
           <div
             class="row pb-2"
-            *ngFor="let name of chatMembersDisplayName; index as i"
+            *ngFor="let user of chatMembers"
           >
             <div class="col-auto">
               <img
                 mat-card-avatar
                 class="rounded profile-img"
-                src="{{ chatMembersProfilePic[i] }}"
+                src="{{ user.profileImage }}"
                 alt="http://placehold.it/256/163a63"
               />
             </div>
             <div class="col-auto pt-2 align-self-center">
-              <h2>{{ name }}</h2>
+              <h2>{{ user.displayName }}</h2>
             </div>
           </div>
         </mat-expansion-panel>
