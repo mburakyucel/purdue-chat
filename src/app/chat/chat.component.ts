@@ -25,7 +25,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   selectedImageFile: any;
   imageUrl:any;
   imageLoading = false;
-  sendImage = false;
   messageControl = new FormControl('');
   unsubscribe$: Subject<void> = new Subject<void>();
   @ViewChild('inputMessage') inputMessage: ElementRef<HTMLInputElement>;
@@ -53,21 +52,23 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   sendMessage() {
-    if (this.messageControl.value.trim() || !this.sendImage) {
-      this.chatService.sendMessage(this.messageControl.value, this.chatId, "text");
-      this.inputMessage.nativeElement.value = '';
-      this.messageControl.setValue('');
-      console.log('Sent');
-    }
-    else{
+    if(this.imageUrl){
+      console.log(this.imageUrl)
       this.imageLoading = true;
       this.imageUploadService.uploadImage(this.imageUrl).subscribe((imageUrl:string) => {
         this.chatService.sendMessage(imageUrl, this.chatId, "image")
-        this.sendImage = false;
         this.imageLoading = false;
         this.imageUrl = null;
         console.log(imageUrl)
       })
+    }
+    else{
+      if (this.messageControl.value.trim()) {
+        this.chatService.sendMessage(this.messageControl.value, this.chatId, "text");
+        this.inputMessage.nativeElement.value = '';
+        this.messageControl.setValue('');
+        console.log('Sent');
+      }
     }
   }
 
@@ -86,7 +87,6 @@ export class ChatComponent implements OnInit, OnDestroy {
       console.log(this.imageUrl);
     }
 
-    this.sendImage = true;
     reader.readAsDataURL(this.selectedImageFile);
   }
 }

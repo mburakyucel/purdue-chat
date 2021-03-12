@@ -23,6 +23,16 @@
       </div>
     </div>
   </div>
+  <div *ngIf="imageUrl">
+    <div class="row py-4">
+      <div class="col-auto">
+        <img class="chatImage" src="{{ imageUrl }}">
+      </div>
+      <div class="col-auto">
+        <mat-spinner *ngIf="imageLoading" [diameter]="50" mode="indeterminate"></mat-spinner>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col">
       <mat-form-field class="w-100" [style.fontSize]="'20px'">
@@ -42,17 +52,9 @@
         </button>
       </mat-form-field>
     </div>
-  </div>
-  <div class="row mb-3">
-    <div class="col">
+    <div class="col-auto pb-4 align-self-end">
       <input style="display: none;" type="file" accept="image/*" (change)="onImageSelect($event)" #hiddenImageInput>
       <button mat-flat-button (click)="hiddenImageInput.click()">Image</button>
-    </div>
-    <div class="col">
-      <img class="chatImage" src="{{ imageUrl }}" alt="test">
-    </div>
-    <div class="col">
-      <mat-spinner *ngIf="imageLoading" mode="indeterminate"></mat-spinner>
     </div>
   </div>
 </div>
