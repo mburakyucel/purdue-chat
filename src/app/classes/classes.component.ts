@@ -70,8 +70,8 @@ export class ClassesComponent implements OnInit {
   //Triggered when the class name is pressed by user to view its info
   onClassInfo(selectedClass: Class) {
     this.dialog.open(ChatInfoComponent, {
-      width: "360px",
-      maxWidth: "360px",
+      width: '360px',
+      maxWidth: '360px',
       data: selectedClass,
     });
   }

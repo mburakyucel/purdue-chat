@@ -2,22 +2,24 @@
   <div class="row-col-1">
     <img
       class="dialog-img rounded mx-auto d-block"
-      src="https://picsum.photos/seed/{{
+      src="https://picsum.photos/seed/{{ selectedClass.id }}/256/?random&img={{
         selectedClass.id
-      }}/256/?random&img={{ selectedClass.id }}"
+      }}"
       alt="http://placehold.it/256/163a63"
     />
   </div>
   <div class="row pt-2 justify-content-center">
     <div class="col-auto">
-      <h2 style="margin: 0px;">{{ selectedClass.subject }} {{ selectedClass.course }}</h2>
+      <h2 style="margin: 0px">
+        {{ selectedClass.subject }} {{ selectedClass.course }}
+      </h2>
     </div>
     <div class="w-100"></div>
     <div class="col-auto pb-1">
       <small class="text-muted">[date created]</small>
     </div>
   </div>
-  <mat-card style="margin-bottom: 10px;">
+  <mat-card style="margin-bottom: 10px">
     <div class="row">
       <h2>About</h2>
     </div>
@@ -26,31 +28,34 @@
     </div>
   </mat-card>
   <mat-card>
-  <div class="row">
-    <h2>Members</h2>
-  </div>
-  <div class="row">
-    <div class="row pb-2" style="padding-right: 0px;" *ngFor="let user of chatMembers">
-      <div class="col-auto" style="padding-right: 0px;">
-        <img
-          class="rounded profile-img"
-          src="{{ user.profileImage }}"
-          alt="http://placehold.it/256/163a63"
-        />
-      </div>
-      <div class="col-auto align-self-center">
-        <h2 style="margin: 0px;">{{ user.displayName }}</h2>
-      </div>
-      <div class="col btn align-self-center" style="padding: 0px;" *ngIf="subscribed">
-        <button
-          mat-raised-button
-          color="primary"
+    <div class="row">
+      <h2>Members</h2>
+    </div>
+    <div class="row">
+      <div
+        class="row pb-2"
+        style="padding-right: 0px"
+        *ngFor="let user of chatMembers"
+      >
+        <div class="col-auto" style="padding-right: 0px">
+          <img
+            class="rounded profile-img"
+            src="{{ user.profileImage }}"
+            alt="http://placehold.it/256/163a63"
+          />
+        </div>
+        <div class="col-auto align-self-center">
+          <h2 style="margin: 0px">{{ user.displayName }}</h2>
+        </div>
+        <div
+          class="col btn align-self-center"
+          style="padding: 0px"
+          *ngIf="subscribed"
         >
-          Message
-        </button>
+          <button mat-raised-button color="primary">Message</button>
+        </div>
       </div>
     </div>
-  </div>
   </mat-card>
   <div class="row pt-2" *ngIf="subscribed">
     <mat-checkbox class="primary text-dark bg-white rounded" color="primary"
