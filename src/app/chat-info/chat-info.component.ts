@@ -22,8 +22,8 @@ export class ChatInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.subService
-      .getUsersSubscribedToClass(this.selectedClass)
-      .subscribe((userData) => (this.chatMembers = userData));
+      .getUsersSubscribedToGroup(this.selectedClass)
+      .subscribe(userData => this.chatMembers = userData);
   }
 
   onJoinSelectInDialog(): void {
@@ -38,7 +38,7 @@ export class ChatInfoComponent implements OnInit {
           }
         );
       })
-      .catch((error) => {
+      .catch(error => {
         console.log(error);
       });
   }
