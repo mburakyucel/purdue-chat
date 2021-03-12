@@ -35,11 +35,8 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MainComponent } from './main/main.component';
 import { HomeComponent } from './home/home.component';
-<<<<<<< HEAD
 import { ChatInfoComponent } from './chat-info/chat-info.component';
-=======
 import { CreateGroupComponent } from './create-group/create-group.component';
->>>>>>> main
 
 @NgModule({
   declarations: [
@@ -54,11 +51,8 @@ import { CreateGroupComponent } from './create-group/create-group.component';
     ProfileComponent,
     MainComponent,
     HomeComponent,
-<<<<<<< HEAD
     ChatInfoComponent,
-=======
     CreateGroupComponent,
->>>>>>> main
   ],
   imports: [
     BrowserModule,
