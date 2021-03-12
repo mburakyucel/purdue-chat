@@ -1,82 +1,72 @@
-<mat-dialog-content class="bg-white" style="max-height: 100%">
-  <div
-    class="container px-4 pt-4 text-dark bg-white rounded h-100"
-    style="max-width: 280px"
-  >
+<mat-dialog-content class="bg-white px-3 text-dark rounded h-100">
+  <div class="row-col-1">
+    <img
+      class="dialog-img rounded mx-auto d-block"
+      src="https://picsum.photos/seed/{{
+        selectedClass.id
+      }}/256/?random&img={{ selectedClass.id }}"
+      alt="http://placehold.it/256/163a63"
+    />
+  </div>
+  <div class="row pt-2 justify-content-center">
+    <div class="col-auto">
+      <h2 style="margin: 0px;">{{ selectedClass.subject }} {{ selectedClass.course }}</h2>
+    </div>
+    <div class="w-100"></div>
+    <div class="col-auto pb-1">
+      <small class="text-muted">[date created]</small>
+    </div>
+  </div>
+  <mat-card style="margin-bottom: 10px;">
     <div class="row">
-      <div class="col">
+      <h2>About</h2>
+    </div>
+    <div class="row">
+      <p>{{ selectedClass.description }}</p>
+    </div>
+  </mat-card>
+  <mat-card>
+  <div class="row">
+    <h2>Members</h2>
+  </div>
+  <div class="row">
+    <div class="row pb-2" style="padding-right: 0px;" *ngFor="let user of chatMembers">
+      <div class="col-auto" style="padding-right: 0px;">
         <img
-          mat-card-avatar
-          class="rounded dialog-img rounded-circle"
-          src="https://picsum.photos/seed/{{
-            selectedClass.id
-          }}/256/?random&img={{ selectedClass.id }}"
+          class="rounded profile-img"
+          src="{{ user.profileImage }}"
           alt="http://placehold.it/256/163a63"
         />
       </div>
-    </div>
-    <div class="row pt-3">
-      <div class="col-auto">
-        <h2>{{ selectedClass.subject }} {{ selectedClass.course }}</h2>
+      <div class="col-auto align-self-center">
+        <h2 style="margin: 0px;">{{ user.displayName }}</h2>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-auto">
-        <small class="text-muted">{{ selectedClass.dateCreated }}</small>
-      </div>
-    </div>
-    <div class="row pt-3">
-      <mat-accordion>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title> About </mat-panel-title>
-          </mat-expansion-panel-header>
-          <div class="col your-class">
-            <p>{{ selectedClass.description }}</p>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </div>
-    <div class="row pt-2 pb-2">
-      <mat-accordion>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title> Members </mat-panel-title>
-          </mat-expansion-panel-header>
-          <div class="row pb-2" *ngFor="let user of chatMembers">
-            <div class="col-auto">
-              <img
-                mat-card-avatar
-                class="rounded profile-img"
-                src="{{ user.profileImage }}"
-                alt="http://placehold.it/256/163a63"
-              />
-            </div>
-            <div class="col-auto pt-2 align-self-center">
-              <h2>{{ user.displayName }}</h2>
-            </div>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </div>
-    <div class="row pt-2" *ngIf="subscribed">
-      <mat-accordion>
-        <mat-checkbox class="primary text-dark bg-white rounded" color="primary"
-          >Mute chat</mat-checkbox
-        >
-      </mat-accordion>
-    </div>
-    <div class="row justify-content-center py-3">
-      <div class="col col-auto">
+      <div class="col btn align-self-center" style="padding: 0px;" *ngIf="subscribed">
         <button
           mat-raised-button
           color="primary"
-          (click)="onJoinSelectInDialog()"
-          [mat-dialog-close]="true"
         >
-          Join
+          Message
         </button>
       </div>
+    </div>
+  </div>
+  </mat-card>
+  <div class="row pt-2" *ngIf="subscribed">
+    <mat-checkbox class="primary text-dark bg-white rounded" color="primary"
+      >Mute chat</mat-checkbox
+    >
+  </div>
+  <div class="row justify-content-center py-3">
+    <div class="col col-auto">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onJoinSelectInDialog()"
+        [mat-dialog-close]="true"
+      >
+        Join
+      </button>
     </div>
   </div>
 </mat-dialog-content>
