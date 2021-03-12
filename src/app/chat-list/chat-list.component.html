@@ -21,3 +21,7 @@
     </div>
   </button>
 </mat-action-list>
+
+<div *ngFor="let chatId of chatIds">
+  <app-chat-list-item [chatId]="chatId"></app-chat-list-item>
+</div>

@@ -34,6 +34,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { MainComponent } from './main/main.component';
 import { HomeComponent } from './home/home.component';
 import { CreateGroupComponent } from './create-group/create-group.component';
+import { ChatListItemComponent } from './chat-list-item/chat-list-item.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { CreateGroupComponent } from './create-group/create-group.component';
     MainComponent,
     HomeComponent,
     CreateGroupComponent,
+    ChatListItemComponent,
   ],
   imports: [
     BrowserModule,
