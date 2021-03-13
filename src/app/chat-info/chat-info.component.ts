@@ -11,7 +11,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./chat-info.component.css'],
 })
 export class ChatInfoComponent implements OnInit {
-  subscribed = 0;
+  subscribed = 1;
   chatMembers: any[] = [];
 
   constructor(
