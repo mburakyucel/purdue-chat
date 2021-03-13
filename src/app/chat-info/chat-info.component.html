@@ -1,4 +1,4 @@
-<div style="height: 550px; min-width: 480px;">
+<div style="height: 550px; min-width: 480px">
   <img
     class="dialog-img rounded mx-auto d-block"
     src="https://picsum.photos/seed/{{ selectedClass.id }}/256/?random&img={{
@@ -41,10 +41,7 @@
           <div class="col-auto align-self-center">
             <h2 style="margin: 0px">{{ user.displayName }}</h2>
           </div>
-          <div
-            class="col btn align-self-center"
-            *ngIf="subscribed"
-          >
+          <div class="col btn align-self-center" *ngIf="subscribed">
             <button mat-raised-button color="primary">Message</button>
           </div>
         </div>
