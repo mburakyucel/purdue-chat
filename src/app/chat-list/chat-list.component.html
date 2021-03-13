@@ -1,27 +1,5 @@
 <mat-action-list>
-  <button
-    mat-list-item
-    (click)="onChatSelect(chat.id)"
-    *ngFor="let chat of chats"
-    class="h-auto p-0 py-2"
-  >
-    <div class="container">
-      <div class="row">
-        <div class="col-auto ps-0">
-          <img
-            class="rounded-circle"
-            height="56px"
-            [src]="chat.groupImageUrl"
-          />
-        </div>
-        <div class="col">
-          <h3 class="m-0">{{ chat.groupName }}</h3>
-        </div>
-      </div>
-    </div>
-  </button>
+  <ng-container *ngFor="let chatId of chatIds">
+    <app-chat-list-item [chatId]="chatId" (chatSelect)="onChatSelect($event)"></app-chat-list-item>
+  </ng-container>
 </mat-action-list>
-
-<div *ngFor="let chatId of chatIds">
-  <app-chat-list-item [chatId]="chatId"></app-chat-list-item>
-</div>

@@ -1,2 +1,14 @@
-<p>{{chatId}}</p>
-<p>{{lastMessage}}</p>
+<button *ngIf="chatMetadata" mat-list-item class="h-auto my-2" (click)="onClick()">
+    <div class="container">
+        <div class="row">
+            <div class="col-auto p-0">
+                <img class="rounded-circle" height="56px" [src]="chatMetadata.groupImageUrl" />
+            </div>
+            <div class="col">
+                <span>{{ chatMetadata.groupName }}</span> <span>Time</span>
+                <!-- <h3 class="m-0">{{ chatMetadata.groupName }}</h3> -->
+                <p>{{lastMessage}}</p>
+            </div>
+        </div>
+    </div>
+</button>

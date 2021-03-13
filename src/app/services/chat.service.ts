@@ -17,7 +17,7 @@ export class ChatService {
     return this.afs
       .collection<any>('chats')
       .doc(chatId)
-      .collection('messages')
+      .collection('messages', ref => ref.orderBy('createdAt', 'desc'))
       .valueChanges();
   }
 
@@ -25,7 +25,7 @@ export class ChatService {
     return this.afs
       .collection<any>('chats')
       .doc(chatId)
-      .collection('messages', ref => ref.limit(limit))
+      .collection('messages', ref => ref.orderBy('createdAt', 'desc').limit(limit))
       .valueChanges();
   }
 
