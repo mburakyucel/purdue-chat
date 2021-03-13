@@ -53,10 +53,9 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   sendMessage() {
     if(this.imageUrl){
-      console.log(this.imageUrl)
       this.imageLoading = true;
       this.imageUploadService.uploadImage(this.imageUrl).subscribe((imageUrl:string) => {
-        this.chatService.sendMessage(imageUrl, this.chatId, "image")
+        this.chatService.sendMessage(imageUrl, this.chatId, "image");
         this.imageLoading = false;
         this.imageUrl = null;
         console.log(imageUrl)
@@ -84,7 +83,6 @@ export class ChatComponent implements OnInit, OnDestroy {
 
     reader.onload = (url:any) => {
       this.imageUrl = url.target.result;
-      console.log(this.imageUrl);
     }
 
     reader.readAsDataURL(this.selectedImageFile);

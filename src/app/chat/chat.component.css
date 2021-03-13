@@ -4,6 +4,5 @@ textarea.mat-input-element.cdk-textarea-autosize {
 }
 
 .chatImage {
-  height: 50px;
-  width: 50px;
+  max-height: 50px;
 }
