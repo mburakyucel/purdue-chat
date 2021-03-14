@@ -23,7 +23,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   messages$: any;
   messages: any[] = [];
   selectedImageFile: any;
-  imageUrl:any;
+  imageUrl: any;
   imageLoading = false;
   messageControl = new FormControl('');
   unsubscribe$: Subject<void> = new Subject<void>();
@@ -32,7 +32,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     public chatService: ChatService,
     public route: ActivatedRoute,
     public router: Router,
-    public imageUploadService: ImageUploadService,
+    public imageUploadService: ImageUploadService
   ) {}
 
   ngOnInit(): void {
@@ -52,18 +52,23 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   sendMessage() {
-    if(this.imageUrl){
+    if (this.imageUrl) {
       this.imageLoading = true;
-      this.imageUploadService.uploadImage(this.imageUrl).subscribe((imageUrl:string) => {
-        this.chatService.sendMessage(imageUrl, this.chatId, "image");
-        this.imageLoading = false;
-        this.imageUrl = null;
-        console.log(imageUrl)
-      })
-    }
-    else{
+      this.imageUploadService
+        .uploadImage(this.imageUrl)
+        .subscribe((imageUrl: string) => {
+          this.chatService.sendMessage(imageUrl, this.chatId, 'image');
+          this.imageLoading = false;
+          this.imageUrl = null;
+          console.log(imageUrl);
+        });
+    } else {
       if (this.messageControl.value.trim()) {
-        this.chatService.sendMessage(this.messageControl.value, this.chatId, "text");
+        this.chatService.sendMessage(
+          this.messageControl.value,
+          this.chatId,
+          'text'
+        );
         this.inputMessage.nativeElement.value = '';
         this.messageControl.setValue('');
         console.log('Sent');
@@ -77,13 +82,13 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
-  onImageSelect(event:any){
+  onImageSelect(event: any) {
     this.selectedImageFile = event.target.files[0];
     const reader = new FileReader();
 
-    reader.onload = (url:any) => {
+    reader.onload = (url: any) => {
       this.imageUrl = url.target.result;
-    }
+    };
 
     reader.readAsDataURL(this.selectedImageFile);
   }
