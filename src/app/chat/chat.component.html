@@ -8,12 +8,29 @@
     <div class="col">
       <div class="row" *ngFor="let msg of messages">
         <div class="col-auto">{{ msg.uid }}</div>
-        <div class="col">
-          <p>
+        <div [ngSwitch]="msg.type" class="col">
+          <p *ngSwitchCase="'text'">
             {{ msg.message }}
           </p>
+          <img
+            *ngSwitchCase="'image'"
+            class="chat-image"
+            src="{{ msg.message }}"
+          />
         </div>
       </div>
+    </div>
+  </div>
+  <div *ngIf="imageUrl" class="row py-4">
+    <div class="col-auto">
+      <img class="chat-image" src="{{ imageUrl }}" />
+    </div>
+    <div class="col-auto">
+      <mat-spinner
+        *ngIf="imageLoading"
+        [diameter]="50"
+        mode="indeterminate"
+      ></mat-spinner>
     </div>
   </div>
   <div class="row">
@@ -34,6 +51,16 @@
           <mat-icon>send</mat-icon>
         </button>
       </mat-form-field>
+    </div>
+    <div class="col-auto pb-4 align-self-end">
+      <input
+        style="display: none"
+        type="file"
+        accept="image/*"
+        (change)="onImageSelect($event)"
+        #hiddenImageInput
+      />
+      <button mat-flat-button (click)="hiddenImageInput.click()">Image</button>
     </div>
   </div>
 </div>
