@@ -6,16 +6,34 @@
           <div class="col">
             <mat-form-field class="w-100">
               <mat-label>Email</mat-label>
-              <input matInput type="text" formControlName="email" />
+              <input matInput [class.is-invalid] = "loginForm.get('email').invalid && loginForm.get('email').touched"
+              type="email" class="form-control" formControlName="email" />
             </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">     
+            <div *ngIf="(email.invalid && email.touched) || email.dirty">
+              <small *ngIf="email.errors?.required" class="text-danger">Email is required</small>
+              <small *ngIf="email.errors?.pattern" class="text-danger">Please provide a valid email address</small>
+            </div>
           </div>
         </div>
         <div class="row">
           <div class="col">
             <mat-form-field class="w-100">
               <mat-label>Password</mat-label>
-              <input matInput type="password" formControlName="password" />
+              <input matInput [class.is-invalid] = "loginForm.get('password').invalid && loginForm.get('password').touched"
+              type="password" class="form-control" formControlName="password" />
             </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">     
+            <div *ngIf="(password.invalid && password.touched) || password.dirty">
+              <small *ngIf="password.errors?.required" class="text-danger">Password is required</small>
+              <small *ngIf="password.errors?.minlength" class="text-danger">Please provide a valid password</small>
+            </div>
           </div>
         </div>
         <div class="row">
