@@ -12,7 +12,11 @@
           <p *ngSwitchCase="'text'">
             {{ msg.message }}
           </p>
-          <img *ngSwitchCase="'image'" class="chat-image" src="{{ msg.message }}" />
+          <img
+            *ngSwitchCase="'image'"
+            class="chat-image"
+            src="{{ msg.message }}"
+          />
         </div>
       </div>
     </div>
