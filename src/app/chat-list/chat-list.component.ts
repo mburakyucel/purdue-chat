@@ -19,15 +19,20 @@ export class ChatListComponent implements OnInit, OnDestroy {
   chatIds: Array<string>;
   @Output() chatSelect = new EventEmitter();
   unsubscribe$: Subject<void> = new Subject<void>();
-  constructor(public chatService: ChatService,
-    private authService: AuthService) {}
+  constructor(
+    public chatService: ChatService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    this.authService.user$.pipe(
-      takeUntil(this.unsubscribe$),
-      takeWhile(val => !!val)).subscribe((data) => {
-      this.chatIds = data.chats;
-    })
+    this.authService.user$
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        takeWhile((val) => !!val)
+      )
+      .subscribe((data) => {
+        this.chatIds = data.chats;
+      });
   }
 
   onChatSelect(chatId: string) {

@@ -1,5 +1,8 @@
 <mat-action-list>
   <ng-container *ngFor="let chatId of chatIds">
-    <app-chat-list-item [chatId]="chatId" (chatSelect)="onChatSelect($event)"></app-chat-list-item>
+    <app-chat-list-item
+      [chatId]="chatId"
+      (chatSelect)="onChatSelect($event)"
+    ></app-chat-list-item>
   </ng-container>
 </mat-action-list>

@@ -5,7 +5,7 @@ import { SubscriptionService } from '../services/subscription.service';
 @Component({
   selector: 'app-chat-list-item',
   templateUrl: './chat-list-item.component.html',
-  styleUrls: ['./chat-list-item.component.css']
+  styleUrls: ['./chat-list-item.component.css'],
 })
 export class ChatListItemComponent implements OnInit {
   @Input() chatId: string;
@@ -16,23 +16,25 @@ export class ChatListItemComponent implements OnInit {
   constructor(
     private chatService: ChatService,
     private subService: SubscriptionService
-    ) { }
+  ) {}
 
   ngOnInit(): void {
     this.chatService.getChatMetadata(this.chatId).subscribe((data: any) => {
       this.chatMetadata = data;
     });
-    this.chatService.getMessagesWithLimit(this.chatId, 1).subscribe((data: Array<any>) => {
-      if(data.length) {
-        this.lastMessage = data[0];
+    this.chatService.getMessagesWithLimit(this.chatId, 1).subscribe(
+      (data: Array<any>) => {
+        if (data.length) {
+          this.lastMessage = data[0];
+        }
+      },
+      (error) => {
+        console.log(error);
       }
-    },
-    (error) => {
-      console.log(error);
-    });
+    );
     this.subService.getSubscribedUsers(this.chatId).subscribe((users) => {
       this.usersArrayToJson(users);
-    })
+    });
   }
 
   onClick() {
@@ -44,5 +46,4 @@ export class ChatListItemComponent implements OnInit {
       this.users[user.uid] = user;
     });
   }
-
 }
