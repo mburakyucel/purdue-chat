@@ -26,7 +26,7 @@ export class ChatInfoComponent implements OnInit {
       .subscribe((userData) => (this.chatMembers = userData));
   }
 
-  onJoinSelectInDialog(): void {
+  onJoin(): void {
     this.subService
       .addSubscription(this.selectedClass.id)
       .then(() => {
