@@ -36,7 +36,21 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['login']);
       },
       (error) => {
-        console.log(error);
+        if (error.code == "auth/weak-password") {
+          this._snackBar.open('The password should be at least 6 characters in length', 'Close', {
+            duration: 3000,
+          });
+        }
+        else if (error.code == "auth/email-already-in-use") {
+          this._snackBar.open('The email address is already in use by another account', 'Close', {
+            duration: 3000,
+          });
+        }
+        else {
+          this._snackBar.open(error.message, 'Close', {
+            duration: 3000,
+          });
+        }
         this.loading = false;
       }
     );
