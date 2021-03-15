@@ -8,33 +8,25 @@
     <div class="col">
       <div class="row" *ngFor="let msg of messages">
         <div class="col-auto">{{ msg.uid }}</div>
-        <div class="col">
-          <container-element [ngSwitch]="msg.type">
-            <div *ngSwitchCase="'text'">
-              <p>
-                {{ msg.message }}
-              </p>
-            </div>
-            <div *ngSwitchCase="'image'">
-              <img class="chatImage" src="{{ msg.message }}" />
-            </div>
-          </container-element>
+        <div [ngSwitch]="msg.type" class="col">
+          <p *ngSwitchCase="'text'">
+            {{ msg.message }}
+          </p>
+          <img *ngSwitchCase="'image'" class="chat-image" src="{{ msg.message }}" />
         </div>
       </div>
     </div>
   </div>
-  <div *ngIf="imageUrl">
-    <div class="row py-4">
-      <div class="col-auto">
-        <img class="chatImage" src="{{ imageUrl }}" />
-      </div>
-      <div class="col-auto">
-        <mat-spinner
-          *ngIf="imageLoading"
-          [diameter]="50"
-          mode="indeterminate"
-        ></mat-spinner>
-      </div>
+  <div *ngIf="imageUrl" class="row py-4">
+    <div class="col-auto">
+      <img class="chat-image" src="{{ imageUrl }}" />
+    </div>
+    <div class="col-auto">
+      <mat-spinner
+        *ngIf="imageLoading"
+        [diameter]="50"
+        mode="indeterminate"
+      ></mat-spinner>
     </div>
   </div>
   <div class="row">
