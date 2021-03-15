@@ -1,4 +1,4 @@
-<div style="height: 550px; min-width: 480px">
+<div class="dialog-format">
   <img
     class="dialog-img rounded mx-auto d-block"
     src="https://picsum.photos/seed/{{ selectedClass.id }}/256/?random&img={{
@@ -20,7 +20,7 @@
       </div>
     </div>
   </div>
-  <mat-card style="margin-bottom: 10px">
+  <mat-card class="mb-1">
     <mat-card-title class="pb-2">About</mat-card-title>
     <mat-card-content>
       <p>{{ selectedClass.description }}</p>
@@ -29,21 +29,19 @@
   <mat-card>
     <mat-card-title class="pb-2">Members</mat-card-title>
     <mat-card-content>
-      <div class="container">
-        <div class="row pb-2" *ngFor="let user of chatMembers">
-          <div class="col-auto p-0">
-            <img
-              class="rounded profile-img"
-              src="{{ user.profileImage }}"
-              alt="http://placehold.it/256/163a63"
-            />
-          </div>
-          <div class="col-auto align-self-center">
-            <h2 style="margin: 0px">{{ user.displayName }}</h2>
-          </div>
-          <div class="col btn align-self-center" *ngIf="subscribed">
-            <button mat-raised-button color="primary">Message</button>
-          </div>
+      <div class="row pb-2" *ngFor="let user of chatMembers">
+        <div class="col-auto">
+          <img
+            class="rounded profile-img"
+            src="{{ user.profileImage }}"
+            alt="http://placehold.it/256/163a63"
+          />
+        </div>
+        <div class="col-auto align-self-center">
+          <h2 class="m-0">{{ user.displayName }}</h2>
+        </div>
+        <div class="col align-self-center" *ngIf="subscribed">
+          <button mat-raised-button class="btn float-end" color="primary">Message</button>
         </div>
       </div>
     </mat-card-content>
