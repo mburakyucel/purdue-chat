@@ -1,29 +1,31 @@
 <div class="dialog-format">
-  <img
-    class="dialog-img rounded mx-auto d-block"
-    src="https://picsum.photos/seed/{{ selectedClass.id }}/256/?random&img={{
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <img
+      class="dialog-img rounded"
+      src="https://picsum.photos/seed/{{ selectedClass.id }}/256/?random&img={{
       selectedClass.id
     }}"
-    alt="http://placehold.it/256/163a63"
-  />
-  <div class="container">
-    <div class="row pt-2 justify-content-center">
-      <div class="col-auto">
-        <h2 style="margin: 1px">
-          {{ selectedClass.subject }} {{ selectedClass.course }}
-        </h2>
-      </div>
-      <div class="row pb-1 justify-content-center">
-        <div class="col-auto text-muted">
-          <small>[date created]</small>
-        </div>
+      alt="../assets/defaultImage.jpg"
+    />
+    </div>
+  </div>
+  <div class="row pt-1 justify-content-center">
+    <div class="col-auto">
+      <h2 class="m-1">
+        [groupName]
+      </h2>
+    </div>
+    <div class="row pb-1 justify-content-center">
+      <div class="col-auto text-muted">
+        <small>[createAt.toDate()]</small>
       </div>
     </div>
   </div>
   <mat-card class="mb-1">
     <mat-card-title class="pb-2">About</mat-card-title>
     <mat-card-content>
-      <p>{{ selectedClass.description }}</p>
+      <p>[groupDescription]</p>
     </mat-card-content>
   </mat-card>
   <mat-card>
@@ -32,7 +34,7 @@
       <div class="row pb-2" *ngFor="let user of chatMembers">
         <div class="col-auto">
           <img
-            class="rounded profile-img"
+            class="rounded-circle profile-img"
             src="{{ user.profileImage }}"
             alt="http://placehold.it/256/163a63"
           />
@@ -46,15 +48,16 @@
       </div>
     </mat-card-content>
   </mat-card>
-  <div class="py-3">
-    <button
-      mat-raised-button
-      class="mx-auto d-block primary"
-      color="primary"
-      (click)="onJoinSelectInDialog()"
-      [mat-dialog-close]="true"
-    >
-      Join
-    </button>
+  <div class="row py-3 justify-content-center">
+    <div class="col-auto">
+        <button
+        mat-raised-button
+        color="primary"
+        (click)="onJoinSelectInDialog()"
+        [mat-dialog-close]="true"
+      >
+        Join
+      </button>
+    </div>
   </div>
 </div>
