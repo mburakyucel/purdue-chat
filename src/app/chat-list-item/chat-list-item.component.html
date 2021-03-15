@@ -6,8 +6,7 @@
             </div>
             <div class="col">
                 <span>{{ chatMetadata.groupName }}</span> <span>Time</span>
-                <!-- <h3 class="m-0">{{ chatMetadata.groupName }}</h3> -->
-                <p>{{lastMessage}}</p>
+                <p *ngIf="lastMessage && users[lastMessage.uid]" class="pt-2 text-muted">{{users[lastMessage.uid].displayName}}: {{lastMessage.message}}</p>
             </div>
         </div>
     </div>

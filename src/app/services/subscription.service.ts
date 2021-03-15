@@ -43,4 +43,12 @@ export class SubscriptionService {
   getGroups(): Observable<any> {
     return this.afs.collection('chats').valueChanges({ idField: 'id' });
   }
+
+  getSubscribedUsers(chatId: string): Observable<any> {
+    return this.afs
+      .collection('users', (ref) =>
+        ref.where('chats', 'array-contains', chatId)
+      )
+      .valueChanges();
+  }
 }

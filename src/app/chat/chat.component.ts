@@ -41,7 +41,6 @@ export class ChatComponent implements OnInit, OnDestroy {
     this.messages$
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((data: Array<DocumentData>) => {
-        console.log(data);
         this.messages = data.sort((m1, m2) => m1.createdAt - m2.createdAt);
       });
   }
