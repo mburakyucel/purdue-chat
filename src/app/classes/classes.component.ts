@@ -12,8 +12,8 @@ import { ChatInfoComponent } from '../chat-info/chat-info.component';
   styleUrls: ['./classes.component.css'],
 })
 export class ClassesComponent implements OnInit {
-  displayedClasses: Class[] = [];
-  allClasses: Class[] = [];
+  displayedGroups: Array<any> = [];
+  allGroups: Array<any> = [];
   searchText = '';
   subscribedClasses: string[] = [];
 
@@ -24,13 +24,14 @@ export class ClassesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.subService.getClasses().subscribe((classes) => {
-      this.allClasses = classes;
-      this.filterDisplayedClasses();
+    this.subService.getGroups().subscribe((groups) => {
+      console.log(groups);
+      this.allGroups = groups;
+      this.filterDisplayedGroups();
     });
     this.subService.getSubscriptions().subscribe((subs) => {
       this.subscribedClasses = subs;
-      this.filterDisplayedClasses();
+      this.filterDisplayedGroups();
     });
   }
 
@@ -51,18 +52,15 @@ export class ClassesComponent implements OnInit {
       });
   }
 
-  filterDisplayedClasses() {
-    this.displayedClasses = [];
+  filterDisplayedGroups() {
+    this.displayedGroups = [];
 
-    //Only compare the class name and number
-    let name: string;
-    for (let item of this.allClasses) {
-      name = item.subject + ' ' + item.course;
+    for (let item of this.allGroups) {
       if (
-        name.toLowerCase().includes(this.searchText.toLowerCase()) &&
+        item.groupName.toLowerCase().includes(this.searchText.toLowerCase()) &&
         !this.subscribedClasses.includes(item.id)
       ) {
-        this.displayedClasses.push(item);
+        this.displayedGroups.push(item);
       }
     }
   }

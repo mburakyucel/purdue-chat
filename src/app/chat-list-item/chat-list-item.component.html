@@ -1,0 +1,36 @@
+<button
+  *ngIf="chatMetadata"
+  mat-list-item
+  class="h-auto my-2"
+  (click)="onClick()"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-auto p-0">
+        <img
+          class="rounded-circle"
+          height="56px"
+          [src]="chatMetadata.groupImageUrl"
+        />
+      </div>
+      <div class="col">
+        <span>{{ chatMetadata.groupName }}</span>
+        <span *ngIf="lastMessage" style="float: right">{{
+          lastMessage.createdAt | date: "shortTime"
+        }}</span>
+        <p
+          *ngIf="lastMessage && users[lastMessage.uid]"
+          class="pt-2 text-muted"
+        >
+          {{ users[lastMessage.uid].displayName }}:
+          <ng-container *ngIf="lastMessage.type == 'text'">{{
+            lastMessage.message
+          }}</ng-container>
+          <ng-container *ngIf="lastMessage.type == 'image'"
+            >shared an image</ng-container
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+</button>

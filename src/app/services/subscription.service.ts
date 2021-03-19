@@ -1,16 +1,10 @@
 import { Injectable } from '@angular/core';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-  AngularFirestoreDocument,
-} from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import firebase from 'firebase/app';
-import { DocumentData } from '@angular/fire/firestore';
 
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
-import { Class } from '../../assets/class';
 
 @Injectable({
   providedIn: 'root',
@@ -44,8 +38,16 @@ export class SubscriptionService {
   }
 
   //Show all available classes
-  getClasses(): Observable<any> {
-    return this.afs.collection('classes').valueChanges({ idField: 'id' });
+  getGroups(): Observable<any> {
+    return this.afs.collection('chats').valueChanges({ idField: 'id' });
+  }
+
+  getSubscribedUsers(chatId: string): Observable<any> {
+    return this.afs
+      .collection('users', (ref) =>
+        ref.where('chats', 'array-contains', chatId)
+      )
+      .valueChanges();
   }
 
   getUsersSubscribedToGroup(selectedClass: Class): Observable<any> {

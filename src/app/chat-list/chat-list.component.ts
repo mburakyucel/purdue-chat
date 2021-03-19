@@ -5,7 +5,9 @@ import {
   EventEmitter,
   OnDestroy,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
+import { takeUntil, takeWhile } from 'rxjs/operators';
+import { AuthService } from '../services/auth.service';
 import { ChatService } from '../services/chat.service';
 
 @Component({
@@ -14,16 +16,22 @@ import { ChatService } from '../services/chat.service';
   styleUrls: ['./chat-list.component.css'],
 })
 export class ChatListComponent implements OnInit, OnDestroy {
-  chats: Array<any>;
+  chatIds: Array<string>;
   @Output() chatSelect = new EventEmitter();
-  subscription: Subscription;
-  constructor(public chatService: ChatService) {}
+  unsubscribe$: Subject<void> = new Subject<void>();
+  constructor(
+    public chatService: ChatService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
-    this.chatService
-      .getChatMetadatas()
-      .subscribe((chatDocuments: Array<any>) => {
-        this.chats = chatDocuments;
+    this.authService.user$
+      .pipe(
+        takeUntil(this.unsubscribe$),
+        takeWhile((val) => !!val)
+      )
+      .subscribe((data) => {
+        this.chatIds = data.chats;
       });
   }
 
@@ -32,6 +40,7 @@ export class ChatListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

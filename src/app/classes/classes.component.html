@@ -8,21 +8,22 @@
         [(ngModel)]="searchText"
         [ngModelOptions]="{ standalone: true }"
         placeholder="ECE 49595"
-        (keyup)="filterDisplayedClasses()"
+        (keyup)="filterDisplayedGroups()"
       />
     </mat-form-field>
   </div>
-  <div class="row py-2" *ngFor="let class of displayedClasses">
+  <div class="row py-2" *ngFor="let group of displayedGroups">
     <div class="col-auto">
       <img
         class="rounded profile-img"
-        src="https://picsum.photos/seed/{{ class.id }}/256/?random&img={{
-          class.id
+        src="https://picsum.photos/seed/{{ group.id }}/256/?random&img={{
+          group.id
         }}"
         alt="http://placehold.it/256/163a63"
       />
     </div>
     <div class="col">
+<<<<<<< HEAD
       <button
         type="button"
         class="btn bg-transparent btn-lg btn-block"
@@ -33,6 +34,12 @@
     </div>
     <div class="col align-self-center">
       <button mat-raised-button color="primary" (click)="onJoin(class)">
+=======
+      <h2>{{ group.groupName }}</h2>
+    </div>
+    <div class="col align-self-center">
+      <button mat-raised-button color="primary" (click)="onSelect(group)">
+>>>>>>> main
         Join
       </button>
     </div>

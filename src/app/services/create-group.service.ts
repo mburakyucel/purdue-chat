@@ -10,12 +10,12 @@ export class CreateGroupService {
   uploadGroup(
     groupName: string,
     groupDescription: string,
-    groupImageURL: string
+    groupImageUrl: string
   ) {
     const data = {
-      groupName: groupName,
-      groupDescription: groupDescription,
-      groupImageURL: groupImageURL,
+      groupName,
+      groupDescription,
+      groupImageUrl,
       createdAt: Date.now(),
     };
     return this.afs.collection('chats').add(data);

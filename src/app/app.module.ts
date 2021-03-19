@@ -19,6 +19,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -37,6 +38,7 @@ import { MainComponent } from './main/main.component';
 import { HomeComponent } from './home/home.component';
 import { ChatInfoComponent } from './chat-info/chat-info.component';
 import { CreateGroupComponent } from './create-group/create-group.component';
+import { ChatListItemComponent } from './chat-list-item/chat-list-item.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,7 @@ import { CreateGroupComponent } from './create-group/create-group.component';
     HomeComponent,
     ChatInfoComponent,
     CreateGroupComponent,
+    ChatListItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +81,7 @@ import { CreateGroupComponent } from './create-group/create-group.component';
     MatCardModule,
     MatSidenavModule,
     MatTooltipModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
