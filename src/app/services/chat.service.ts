@@ -17,7 +17,17 @@ export class ChatService {
     return this.afs
       .collection<any>('chats')
       .doc(chatId)
-      .collection('messages')
+      .collection('messages', (ref) => ref.orderBy('createdAt', 'desc'))
+      .valueChanges();
+  }
+
+  getMessagesWithLimit(chatId: string, limit: number) {
+    return this.afs
+      .collection<any>('chats')
+      .doc(chatId)
+      .collection('messages', (ref) =>
+        ref.orderBy('createdAt', 'desc').limit(limit)
+      )
       .valueChanges();
   }
 
@@ -32,6 +42,10 @@ export class ChatService {
 
     const ref = this.afs.collection('chats').doc(chatId).collection('messages');
     return ref.add(data);
+  }
+
+  getChatMetadata(chatId: string): Observable<any> {
+    return this.afs.collection<any>('chats').doc(chatId).valueChanges();
   }
 
   getChatMetadatas(): Observable<any> {
