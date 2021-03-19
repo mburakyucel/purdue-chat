@@ -14,7 +14,7 @@
         />
       </div>
       <div class="col">
-        <span>{{ chatMetadata.groupName }}</span> <span>Time</span>
+        <span>{{ chatMetadata.groupName }}</span> <span *ngIf="lastMessage" style="float: right;">{{lastMessage.createdAt | date: 'shortTime'}}</span> 
         <p
           *ngIf="lastMessage && users[lastMessage.uid]"
           class="pt-2 text-muted"
