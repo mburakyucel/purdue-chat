@@ -31,12 +31,13 @@ export class ChatService {
       .valueChanges();
   }
 
-  sendMessage(message: string, chatId: string) {
+  sendMessage(message: string, chatId: string, type: string) {
     const uid = this.authService.getUid();
     const data = {
       uid,
       message,
       createdAt: Date.now(),
+      type,
     };
 
     const ref = this.afs.collection('chats').doc(chatId).collection('messages');
