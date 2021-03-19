@@ -19,9 +19,13 @@
           *ngIf="lastMessage && users[lastMessage.uid]"
           class="pt-2 text-muted"
         >
-          {{ users[lastMessage.uid].displayName }}: 
-          <ng-container *ngIf="lastMessage.type=='text'">{{ lastMessage.message }}</ng-container>
-          <ng-container *ngIf="lastMessage.type=='image'">shared an image</ng-container>
+          {{ users[lastMessage.uid].displayName }}:
+          <ng-container *ngIf="lastMessage.type == 'text'">{{
+            lastMessage.message
+          }}</ng-container>
+          <ng-container *ngIf="lastMessage.type == 'image'"
+            >shared an image</ng-container
+          >
         </p>
       </div>
     </div>
