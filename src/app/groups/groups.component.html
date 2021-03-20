@@ -16,14 +16,18 @@
     <div class="col-auto">
       <img
         class="rounded profile-img"
-        src="{{group.groupImageUrl}}"
+        src="{{ group.groupImageUrl }}"
         alt="http://placehold.it/256/163a63"
       />
     </div>
     <div class="col">
-      <button type="button" class="btn bg-transparent btn-lg" 
-      (click)="onGroupInfo(group)">
-      <b>{{ group.groupName }}</b></button>
+      <button
+        type="button"
+        class="btn bg-transparent btn-lg"
+        (click)="onGroupInfo(group)"
+      >
+        <b>{{ group.groupName }}</b>
+      </button>
     </div>
     <div class="col align-self-center">
       <button mat-raised-button color="primary" (click)="onJoin(group)">
