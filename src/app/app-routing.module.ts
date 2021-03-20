@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
-import { ClassesComponent } from './classes/classes.component';
+import { GroupsComponent } from './groups/groups.component';
 import { MainComponent } from './main/main.component';
 import { AuthGuard } from './auth.guard';
 import { UnauthGuard } from './unauth.guard';
@@ -26,7 +26,7 @@ const routes: Routes = [
     children: [
       {
         path: 'groups',
-        component: ClassesComponent,
+        component: GroupsComponent,
       },
       {
         path: 'chat/:chatId',

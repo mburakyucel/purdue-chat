@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 
-import { Class } from '../../assets/class';
 import { SubscriptionService } from '../services/subscription.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -16,21 +15,21 @@ export class ChatInfoComponent implements OnInit {
   constructor(
     private subService: SubscriptionService,
     private _snackBar: MatSnackBar,
-    @Inject(MAT_DIALOG_DATA) public selectedClass: Class
+    @Inject(MAT_DIALOG_DATA) public selectedGroup: any
   ) {}
 
   ngOnInit(): void {
     this.subService
-      .getUsersSubscribedToGroup(this.selectedClass)
+      .getSubscribedUsers(this.selectedGroup.id)
       .subscribe((userData) => (this.chatMembers = userData));
   }
 
   onJoin(): void {
     this.subService
-      .addSubscription(this.selectedClass.id)
+      .addSubscription(this.selectedGroup.id)
       .then(() => {
         this._snackBar.open(
-          `Subscribed to ${this.selectedClass.subject} ${this.selectedClass.course}`,
+          `Subscribed to ${this.selectedGroup.groupName}`,
           'Close',
           {
             duration: 2000,

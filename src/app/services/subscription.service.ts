@@ -12,7 +12,7 @@ import { AuthService } from '../services/auth.service';
 export class SubscriptionService {
   constructor(public afs: AngularFirestore, public authService: AuthService) {}
 
-  //Show all classes a user is subscribed too
+  //Show all groups a user is subscribed too
   getSubscriptions(): Observable<any> {
     return this.authService.user$.pipe(map((doc) => doc.chats));
   }
@@ -37,7 +37,7 @@ export class SubscriptionService {
       });
   }
 
-  //Show all available classes
+  //Show all available groups
   getGroups(): Observable<any> {
     return this.afs.collection('chats').valueChanges({ idField: 'id' });
   }
@@ -46,14 +46,6 @@ export class SubscriptionService {
     return this.afs
       .collection('users', (ref) =>
         ref.where('chats', 'array-contains', chatId)
-      )
-      .valueChanges();
-  }
-
-  getUsersSubscribedToGroup(selectedClass: Class): Observable<any> {
-    return this.afs
-      .collection('users', (ref) =>
-        ref.where('chats', 'array-contains', selectedClass.id)
       )
       .valueChanges();
   }

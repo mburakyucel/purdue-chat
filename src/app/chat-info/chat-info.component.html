@@ -1,36 +1,26 @@
-<div class="container dialog-format">
+<div class="container dialog-dimension">
   <div class="row justify-content-center">
     <div class="col-auto">
       <img
-<<<<<<< HEAD
-      class="dialog-img rounded"
-      src="[groupImageUrl]"
-      alt="../assets/defaultImage.jpg"
+      class="groupImage-dimension rounded"
+      src="{{ selectedGroup.groupImageUrl }}"
     />
-=======
-        class="dialog-img rounded"
-        src="https://picsum.photos/seed/{{
-          selectedClass.id
-        }}/256/?random&img={{ selectedClass.id }}"
-        alt="../assets/defaultImage.jpg"
-      />
->>>>>>> d3b124b7514287a797879d717bfff92da6222978
     </div>
   </div>
   <div class="row pt-1 justify-content-center">
     <div class="col-auto">
-      <h2 class="m-1">[groupName]</h2>
+      <h2 class="m-1">{{ selectedGroup.groupName }}</h2>
     </div>
     <div class="row pb-2 justify-content-center">
       <div class="col-auto text-muted">
-        <small>[createAt.toDate()]</small>
+        <small>{{ selectedGroup.createdAt | date: "short" }}</small>
       </div>
     </div>
   </div>
   <mat-card class="mb-1">
     <mat-card-title class="pb-2">About</mat-card-title>
     <mat-card-content>
-      <p>[groupDescription]</p>
+      <p>{{ selectedGroup.groupDescription}} </p>
     </mat-card-content>
   </mat-card>
   <mat-card>
@@ -39,9 +29,8 @@
       <div class="row pb-2" *ngFor="let user of chatMembers">
         <div class="col-auto">
           <img
-            class="rounded-circle profile-img"
+            class="profileImage-dimension rounded-circle"
             src="{{ user.profileImage }}"
-            alt="http://placehold.it/256/163a63"
           />
         </div>
         <div class="col-auto align-self-center">
@@ -56,7 +45,7 @@
     </mat-card-content>
   </mat-card>
   <div class="row pt-3 justify-content-center">
-    <div class="col-auto">
+    <div class="col-auto pb-4">
       <button
         mat-raised-button
         color="primary"

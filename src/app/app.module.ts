@@ -28,7 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
-import { ClassesComponent } from './classes/classes.component';
+import { GroupsComponent } from './groups/groups.component';
 import { ChatComponent } from './chat/chat.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { MatListModule } from '@angular/material/list';
@@ -46,7 +46,7 @@ import { ChatListItemComponent } from './chat-list-item/chat-list-item.component
     RegisterComponent,
     LoginComponent,
     SubscriptionsComponent,
-    ClassesComponent,
+    GroupsComponent,
     ChatComponent,
     ChatListComponent,
     ImageUploadComponent,
