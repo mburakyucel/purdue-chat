@@ -14,7 +14,7 @@ import { SubscriptionService } from '../services/subscription.service';
   styleUrls: ['./create-group.component.css'],
 })
 export class CreateGroupComponent implements OnInit {
-  public groupImageURL: string = environment.profileImage;
+  public groupImageUrl: string = environment.profileImage;
   public groupName = new FormControl('');
   public groupDescription = new FormControl('');
   public croppieOptions: CroppieOptions = {
@@ -40,7 +40,7 @@ export class CreateGroupComponent implements OnInit {
       .uploadGroup(
         this.groupName.value,
         this.groupDescription.value,
-        this.groupImageURL
+        this.groupImageUrl
       )
       .then((docRef) => {
         this.sub.addSubscription(docRef.id).then(() => {
@@ -60,7 +60,7 @@ export class CreateGroupComponent implements OnInit {
     });
     this.imageUploadDialogRef.afterClosed().subscribe((imageurl: string) => {
       if (imageurl) {
-        this.groupImageURL = imageurl;
+        this.groupImageUrl = imageurl;
       }
     });
   }
