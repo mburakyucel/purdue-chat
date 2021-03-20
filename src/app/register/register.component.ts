@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -10,9 +10,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
+  passwordHide = true;
   registerForm = new FormGroup({
-    email: new FormControl(''),
-    password: new FormControl(''),
+    email: new FormControl('',[
+      Validators.required,
+      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
+    ]),
+    password: new FormControl('',[
+      Validators.required,
+      Validators.minLength(6)
+    ]),
   });
   loading = false;
   constructor(
@@ -36,20 +43,22 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['login']);
       },
       (error) => {
-        if (error.code == "auth/weak-password") {
-          this._snackBar.open('The password should be at least 6 characters in length', 'Close', {
-            duration: 3000,
-          });
-        }
-        else if (error.code == "auth/email-already-in-use") {
-          this._snackBar.open('The email address is already in use by another account', 'Close', {
-            duration: 3000,
-          });
-        }
-        else {
-          this._snackBar.open(error.message, 'Close', {
-            duration: 3000,
-          });
+        switch (error.code) {
+          case "auth/weak-password":
+            this._snackBar.open('The password should be at least 6 characters in length', 'Close', {
+              duration: 3000,
+            });
+            break;
+          case "auth/email-already-in-use":
+            this._snackBar.open('The email address is already in use by another account', 'Close', {
+              duration: 3000,
+            });
+            break;
+          default:
+            this._snackBar.open(error.message, 'Close', {
+              duration: 3000,
+            });
+            break;
         }
         this.loading = false;
       }
@@ -62,5 +71,19 @@ export class RegisterComponent implements OnInit {
 
   get password() {
     return this.registerForm.get('password');
+  }
+
+  getEmailErrorMsg() {
+    if (this.email.hasError('required')) {
+      return "Email is required";
+    }
+    return this.email.hasError('pattern') ? "Not a valid email" : "";
+  }
+
+  getPasswordErrorMsg() {
+    if (this.password.hasError('required')) {
+      return "Password is required";
+    }
+    return this.password.hasError('minlength') ? "Not a valid password" : "";
   }
 }

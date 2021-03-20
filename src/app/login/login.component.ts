@@ -10,6 +10,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  passwordHide = true;
   loading = false;
   loginForm = new FormGroup({
     email: new FormControl('',[
@@ -31,39 +32,38 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   async login() { 
-    if(!this.email.invalid && !this.password.invalid ) {
-      this.loading = true;
-      (
-        await this.authService.login(this.email.value, this.password.value)
-      ).subscribe(
-        () => {
-          this._snackBar.open('Login successful', 'Close', {
-            duration: 2000,
-          });
-          this.loading = false;
-          this.router.navigate(['']);
-        },
-        (error) => {
-          if(error.code == "auth/user-not-found")
-          {
+    this.loading = true;
+    (
+      await this.authService.login(this.email.value, this.password.value)
+    ).subscribe(
+      () => {
+        this._snackBar.open('Login successful', 'Close', {
+          duration: 2000,
+        });
+        this.loading = false;
+        this.router.navigate(['']);
+      },
+      (error) => {
+        switch(error.code) {
+          case "auth/user-not-found":
             this._snackBar.open('There is no user record corresponding to this email address', 'Close', {
               duration: 3000,
             });
-          }
-          else if (error.code == "auth/wrong-password") {
+            break;
+          case "auth/wrong-password":
             this._snackBar.open('The password is invalid', 'Close', {
               duration: 3000,
             });
-          }
-          else {
+            break;
+          default:
             this._snackBar.open(error.message, 'Close', {
               duration: 3000,
             });
-          }
-          this.loading = false;
+            break;
         }
-      );
-    }
+        this.loading = false;
+      }
+    );
   }
 
   get email() {
@@ -73,4 +73,19 @@ export class LoginComponent implements OnInit {
   get password() {
     return this.loginForm.get('password');
   }
+
+  getEmailErrorMsg() {
+    if (this.email.hasError('required')) {
+      return "Email is required";
+    }
+    return this.email.hasError('pattern') ? "Not a valid email" : "";
+  }
+
+  getPasswordErrorMsg() {
+    if (this.password.hasError('required')) {
+      return "Password is required";
+    }
+    return this.password.hasError('minlength') ? "Not a valid password" : "";
+  }
+
 }

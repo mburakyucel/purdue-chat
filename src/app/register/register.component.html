@@ -6,7 +6,8 @@
           <div class="col">
             <mat-form-field class="w-100">
               <mat-label>Email</mat-label>
-              <input matInput type="text" formControlName="email" />
+              <input matInput type="email" class="form-control" formControlName="email" placeholder="mitch@purdue.com"/>
+              <mat-error *ngIf="email.invalid">{{ getEmailErrorMsg() }}</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -14,7 +15,11 @@
           <div class="col">
             <mat-form-field class="w-100">
               <mat-label>Password</mat-label>
-              <input matInput type="password" formControlName="password" />
+              <input matInput [type]="passwordHide ? 'password' : 'text'" class="form-control" formControlName="password"/>
+              <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="passwordHide">
+                <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-error *ngIf="password.invalid">{{ getPasswordErrorMsg() }}</mat-error>
             </mat-form-field>
           </div>
         </div>
