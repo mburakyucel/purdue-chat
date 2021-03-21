@@ -10,8 +10,7 @@ import { take } from 'rxjs/operators';
 import { CroppieOptions } from 'croppie';
 import { ImageUploadService } from '../services/image-upload.service';
 
-import { MustMatch } from '../shared/must-match.directive';
-import { MustNotMatch } from '../shared/must-not-match.directive';
+import { MustMatch, MustNotMatch } from '../shared/match-validation.directive';
 
 @Component({
   selector: 'app-profile',
