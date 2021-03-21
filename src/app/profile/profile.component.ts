@@ -2,7 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProfileService } from '../services/profile.service';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
@@ -21,24 +26,24 @@ export class ProfileComponent implements OnInit, OnDestroy {
   public imageURL: string;
   public email: string;
   public subscription: Subscription;
-  public displayName: any = new FormControl('',[
+  public displayName: any = new FormControl('', [
     Validators.required,
-    Validators.maxLength(32)
-  ]
+    Validators.maxLength(32),
+  ]);
+  public passwordForm: any = this.formBuilder.group(
+    {
+      old_password: new FormControl('', [Validators.required]),
+      new_password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+      confirm_password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+    },
+    { validator: [MustMatch, MustNotMatch] }
   );
-  public passwordForm: any = this.formBuilder.group({
-    old_password: new FormControl('',[
-      Validators.required
-    ]),
-    new_password: new FormControl('',[
-      Validators.required,
-      Validators.minLength(6)
-    ]),
-    confirm_password: new FormControl('',[
-      Validators.required,
-      Validators.minLength(6),
-    ]),
-  }, {validator: [MustMatch, MustNotMatch]});
 
   public toggle_displayName: any = true;
   public toggle_password: any = true;
@@ -146,9 +151,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   getNameErrorMsg() {
     if (this.displayName.hasError('required')) {
-      return "Atleast 1 character required";
+      return 'Atleast 1 character required';
     }
-    return this.displayName.hasError('maxlength') ? "Character limit exceeded" : "";
+    return this.displayName.hasError('maxlength')
+      ? 'Character limit exceeded'
+      : '';
   }
 
   ngOnDestroy() {

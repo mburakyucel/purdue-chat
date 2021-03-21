@@ -13,13 +13,13 @@ export class LoginComponent implements OnInit {
   passwordHide = true;
   loading = false;
   loginForm = new FormGroup({
-    email: new FormControl('',[
+    email: new FormControl('', [
       Validators.required,
-      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")
+      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
     ]),
-    password: new FormControl('',[
+    password: new FormControl('', [
       Validators.required,
-      Validators.minLength(6)
+      Validators.minLength(6),
     ]),
   });
 
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  async login() { 
+  async login() {
     this.loading = true;
     (
       await this.authService.login(this.email.value, this.password.value)
@@ -44,13 +44,17 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['']);
       },
       (error) => {
-        switch(error.code) {
-          case "auth/user-not-found":
-            this._snackBar.open('There is no user record corresponding to this email address', 'Close', {
-              duration: 3000,
-            });
+        switch (error.code) {
+          case 'auth/user-not-found':
+            this._snackBar.open(
+              'There is no user record corresponding to this email address',
+              'Close',
+              {
+                duration: 3000,
+              }
+            );
             break;
-          case "auth/wrong-password":
+          case 'auth/wrong-password':
             this._snackBar.open('The password is invalid', 'Close', {
               duration: 3000,
             });
@@ -76,16 +80,17 @@ export class LoginComponent implements OnInit {
 
   getEmailErrorMsg() {
     if (this.email.hasError('required')) {
-      return "Email is required";
+      return 'Email is required';
     }
-    return this.email.hasError('pattern') ? "Enter a valid email" : "";
+    return this.email.hasError('pattern') ? 'Enter a valid email' : '';
   }
 
   getPasswordErrorMsg() {
     if (this.password.hasError('required')) {
-      return "Password is required";
+      return 'Password is required';
     }
-    return this.password.hasError('minlength') ? "Enter a 6 or more character password" : "";
+    return this.password.hasError('minlength')
+      ? 'Enter a 6 or more character password'
+      : '';
   }
-
 }

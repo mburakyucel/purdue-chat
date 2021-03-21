@@ -47,8 +47,15 @@
           (keydown.enter)="sendMessage()"
           autocomplete="off"
         ></textarea>
-        <mat-error *ngIf="messageControl.invalid">Character limit exceeded</mat-error>
-        <button mat-icon-button matSuffix (click)="sendMessage()" [disabled]="!messageControl.valid">
+        <mat-error *ngIf="messageControl.invalid"
+          >Character limit exceeded</mat-error
+        >
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="sendMessage()"
+          [disabled]="!messageControl.valid"
+        >
           <mat-icon>send</mat-icon>
         </button>
       </mat-form-field>

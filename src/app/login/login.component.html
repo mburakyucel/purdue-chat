@@ -6,8 +6,16 @@
           <div class="col">
             <mat-form-field class="w-100">
               <mat-label>Email</mat-label>
-              <input matInput type="email" class="form-control" formControlName="email" placeholder="daniels@purdue.com"/>
-              <mat-error *ngIf="email.invalid">{{ getEmailErrorMsg() }}</mat-error>
+              <input
+                matInput
+                type="email"
+                class="form-control"
+                formControlName="email"
+                placeholder="daniels@purdue.com"
+              />
+              <mat-error *ngIf="email.invalid">{{
+                getEmailErrorMsg()
+              }}</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -15,11 +23,26 @@
           <div class="col">
             <mat-form-field class="w-100">
               <mat-label>Password</mat-label>
-              <input matInput [type]="passwordHide ? 'password' : 'text'" class="form-control" formControlName="password"/>
-              <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="passwordHide">
-                <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              <input
+                matInput
+                [type]="passwordHide ? 'password' : 'text'"
+                class="form-control"
+                formControlName="password"
+              />
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="passwordHide = !passwordHide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="passwordHide"
+              >
+                <mat-icon>{{
+                  passwordHide ? "visibility_off" : "visibility"
+                }}</mat-icon>
               </button>
-              <mat-error *ngIf="password.invalid">{{ getPasswordErrorMsg() }}</mat-error>
+              <mat-error *ngIf="password.invalid">{{
+                getPasswordErrorMsg()
+              }}</mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -34,11 +57,12 @@
         </div>
         <div class="row justify-content-center">
           <div class="col-auto">
-            
-            <button 
-              mat-raised-button color="accent" 
+            <button
+              mat-raised-button
+              color="accent"
               [disabled]="!loginForm.valid"
-              (click)="this.login()">
+              (click)="this.login()"
+            >
               Login
             </button>
           </div>
