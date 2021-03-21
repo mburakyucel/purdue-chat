@@ -149,7 +149,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     if (this.displayName.hasError('required')) {
       return "Atleast 1 character required";
     }
-    return this.displayName.hasError('maxlength') ? "Character limit reached" : "";
+    return this.displayName.hasError('maxlength') ? "Character limit exceeded" : "";
   }
 
   ngOnDestroy() {

@@ -84,6 +84,6 @@ export class RegisterComponent implements OnInit {
     if (this.password.hasError('required')) {
       return "Password is required";
     }
-    return this.password.hasError('minlength') ? "Enter a 6 character password" : "";
+    return this.password.hasError('minlength') ? "Enter a 6 or more character password" : "";
   }
 }

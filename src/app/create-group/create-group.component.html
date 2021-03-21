@@ -20,6 +20,7 @@
       <mat-form-field class="w-100" appearance="outline">
         <mat-label>Enter Group Name</mat-label>
         <input matInput type="text" [formControl]="groupName" />
+        <mat-error *ngIf="groupName.invalid">{{ getNameErrorMsg() }}</mat-error>
       </mat-form-field>
     </div>
   </div>
@@ -32,6 +33,7 @@
           type="text"
           [formControl]="groupDescription"
         ></textarea>
+        <mat-error *ngIf="groupDescription.invalid">Chatacter limit reached</mat-error>
       </mat-form-field>
     </div>
   </div>
@@ -41,6 +43,7 @@
         mat-flat-button
         class="w-100"
         [mat-dialog-close]="true"
+        [disabled]="!groupName.valid || !groupDescription.valid"
         (click)="createGroup()"
       >
         Create Group

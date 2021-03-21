@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CreateGroupService } from '../services/create-group.service';
@@ -15,8 +15,13 @@ import { SubscriptionService } from '../services/subscription.service';
 })
 export class CreateGroupComponent implements OnInit {
   public groupImageUrl: string = environment.profileImage;
-  public groupName = new FormControl('');
-  public groupDescription = new FormControl('');
+  public groupName = new FormControl('',[
+    Validators.required,
+    Validators.maxLength(32)
+  ]);
+  public groupDescription = new FormControl('',[
+    Validators.maxLength(500)
+  ]);
   public croppieOptions: CroppieOptions = {
     viewport: { width: 100, height: 100, type: 'square' },
     boundary: { width: 300, height: 300 },
@@ -63,5 +68,12 @@ export class CreateGroupComponent implements OnInit {
         this.groupImageUrl = imageurl;
       }
     });
+  }
+
+  getNameErrorMsg() {
+    if (this.groupName.hasError('required')) {
+      return "Please enter a group name";
+    }
+    return this.groupName.hasError('maxlength') ? "Character limit exceeded" : "";
   }
 }

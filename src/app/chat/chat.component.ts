@@ -6,7 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { DocumentData } from '@angular/fire/firestore';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { switchMap, takeUntil } from 'rxjs/operators';
@@ -25,7 +25,9 @@ export class ChatComponent implements OnInit, OnDestroy {
   selectedImageFile: any;
   imageUrl: any;
   imageLoading = false;
-  messageControl = new FormControl('');
+  messageControl = new FormControl('',[
+    Validators.maxLength(1000)
+  ]);
   unsubscribe$: Subject<void> = new Subject<void>();
   @ViewChild('inputMessage') inputMessage: ElementRef<HTMLInputElement>;
   constructor(
