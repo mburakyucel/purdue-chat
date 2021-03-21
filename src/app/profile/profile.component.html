@@ -8,7 +8,7 @@
   </div>
   <mat-list>
     <mat-divider></mat-divider>
-    <mat-list-item>
+    <mat-list-item>                  
       <span style="flex: 1 1 auto">
         Email: <span class="tab1">{{ email }}</span>
       </span>
@@ -33,11 +33,13 @@
         <form class="display_name" style="margin-top: 24px">
           <mat-form-field appearance="outline">
             <mat-label>Display Name:</mat-label>
-            <input matInput type="text" [formControl]="displayName" />
+            <input matInput type="text" class="form-control" [formControl]="displayName" />
+            <mat-error *ngIf="displayName.invalid">{{ getNameErrorMsg() }}</mat-error>
           </mat-form-field>
         </form>
         <button
           mat-stroked-button
+          [disabled]="!displayName.valid"
           (click)="onDisplayNameClick()"
           style="margin-left: 10px"
         >
@@ -98,6 +100,16 @@
             Save
           </button>
           <button mat-stroked-button (click)="cancelPassword()">Cancel</button>
+          <div class="container">
+            <div class="row pt-3">
+              <div class="col-auto alert alert-danger" *ngIf="passwordForm.errors?.match">
+                Same new and old passwords
+              </div>
+              <div class="col-auto alert alert-danger" *ngIf="passwordForm.errors?.noMatch && !passwordForm.errors?.match">
+                Passwords do not match
+              </div>
+            </div>  
+          </div>
         </form>
       </ng-template>
     </mat-list-item>

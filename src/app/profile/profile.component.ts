@@ -2,13 +2,16 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProfileService } from '../services/profile.service';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { CroppieOptions } from 'croppie';
 import { ImageUploadService } from '../services/image-upload.service';
+
+import { MustMatch } from '../shared/must-match.directive';
+import { MustNotMatch } from '../shared/must-not-match.directive';
 
 @Component({
   selector: 'app-profile',
@@ -19,12 +22,24 @@ export class ProfileComponent implements OnInit, OnDestroy {
   public imageURL: string;
   public email: string;
   public subscription: Subscription;
-  public displayName: any = new FormControl('');
-  public passwordForm: any = new FormGroup({
-    old_password: new FormControl(''),
-    new_password: new FormControl(''),
-    confirm_password: new FormControl(''),
-  });
+  public displayName: any = new FormControl('',[
+    Validators.required,
+    Validators.maxLength(32)
+  ]
+  );
+  public passwordForm: any = this.formBuilder.group({
+    old_password: new FormControl('',[
+      Validators.required
+    ]),
+    new_password: new FormControl('',[
+      Validators.required,
+      Validators.minLength(6)
+    ]),
+    confirm_password: new FormControl('',[
+      Validators.required,
+      Validators.minLength(6),
+    ]),
+  }, {validator: [MustMatch, MustNotMatch]});
 
   public toggle_displayName: any = true;
   public toggle_password: any = true;
@@ -43,7 +58,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private authService: AuthService,
-    public uploadService: ImageUploadService
+    public uploadService: ImageUploadService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -127,6 +143,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   cancelDisplayName() {
     this.toggle_displayName = true;
+  }
+
+  getNameErrorMsg() {
+    if (this.displayName.hasError('required')) {
+      return "Atleast 1 character required";
+    }
+    return this.displayName.hasError('maxlength') ? "Character limit reached" : "";
   }
 
   ngOnDestroy() {

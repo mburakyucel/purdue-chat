@@ -36,6 +36,8 @@ import { MainComponent } from './main/main.component';
 import { HomeComponent } from './home/home.component';
 import { CreateGroupComponent } from './create-group/create-group.component';
 import { ChatListItemComponent } from './chat-list-item/chat-list-item.component';
+import { MustMatchDirective } from './shared/must-match.directive';
+import { MustNotMatchDirective } from './shared/must-not-match.directive';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { ChatListItemComponent } from './chat-list-item/chat-list-item.component
     HomeComponent,
     CreateGroupComponent,
     ChatListItemComponent,
+    MustMatchDirective,
+    MustNotMatchDirective,
   ],
   imports: [
     BrowserModule,

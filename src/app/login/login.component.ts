@@ -78,14 +78,14 @@ export class LoginComponent implements OnInit {
     if (this.email.hasError('required')) {
       return "Email is required";
     }
-    return this.email.hasError('pattern') ? "Not a valid email" : "";
+    return this.email.hasError('pattern') ? "Enter a valid email" : "";
   }
 
   getPasswordErrorMsg() {
     if (this.password.hasError('required')) {
       return "Password is required";
     }
-    return this.password.hasError('minlength') ? "Not a valid password" : "";
+    return this.password.hasError('minlength') ? "Enter a 6 character password" : "";
   }
 
 }
