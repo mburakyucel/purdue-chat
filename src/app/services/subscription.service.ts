@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import firebase from 'firebase/app';
 
-import { Observable, of, from } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
 
@@ -12,7 +12,7 @@ import { AuthService } from '../services/auth.service';
 export class SubscriptionService {
   constructor(public afs: AngularFirestore, public authService: AuthService) {}
 
-  //Show all classes a user is subscribed too
+  //Show all groups a user is subscribed too
   getSubscriptions(): Observable<any> {
     return this.authService.user$.pipe(map((doc) => doc.chats));
   }
@@ -37,7 +37,7 @@ export class SubscriptionService {
       });
   }
 
-  //Show all available classes
+  //Show all available groups
   getGroups(): Observable<any> {
     return this.afs.collection('chats').valueChanges({ idField: 'id' });
   }

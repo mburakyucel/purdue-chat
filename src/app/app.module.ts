@@ -7,6 +7,8 @@ import { environment } from '../environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -26,7 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
-import { ClassesComponent } from './classes/classes.component';
+import { GroupsComponent } from './groups/groups.component';
 import { ChatComponent } from './chat/chat.component';
 import { ChatListComponent } from './chat-list/chat-list.component';
 import { MatListModule } from '@angular/material/list';
@@ -34,6 +36,7 @@ import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MainComponent } from './main/main.component';
 import { HomeComponent } from './home/home.component';
+import { ChatInfoComponent } from './chat-info/chat-info.component';
 import { CreateGroupComponent } from './create-group/create-group.component';
 import { ChatListItemComponent } from './chat-list-item/chat-list-item.component';
 
@@ -43,13 +46,14 @@ import { ChatListItemComponent } from './chat-list-item/chat-list-item.component
     RegisterComponent,
     LoginComponent,
     SubscriptionsComponent,
-    ClassesComponent,
+    GroupsComponent,
     ChatComponent,
     ChatListComponent,
     ImageUploadComponent,
     ProfileComponent,
     MainComponent,
     HomeComponent,
+    ChatInfoComponent,
     CreateGroupComponent,
     ChatListItemComponent,
   ],
@@ -62,6 +66,8 @@ import { ChatListItemComponent } from './chat-list-item/chat-list-item.component
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatExpansionModule,
+    MatCheckboxModule,
     AngularFirestoreModule,
     AngularFireAuthModule,
     MatButtonModule,

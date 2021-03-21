@@ -1,0 +1,14 @@
+.groupImage-dimension {
+  height: 180px;
+  width: 180px;
+}
+
+.profileImage-dimension {
+  height: 60px;
+  width: 60px;
+}
+
+.dialog-dimension {
+  height: 550px;
+  min-width: 480px;
+}
