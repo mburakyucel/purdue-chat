@@ -13,7 +13,7 @@
     </mat-form-field>
   </div>
   <div class="row py-2" *ngFor="let group of displayedGroups">
-    <div class="col-auto">
+    <div *ngIf="group.type == 'group'" class="col-auto">
       <img
         class="rounded profile-img"
         src="{{ group.groupImageUrl }}"

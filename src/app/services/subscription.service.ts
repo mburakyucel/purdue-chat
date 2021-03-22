@@ -18,10 +18,10 @@ export class SubscriptionService {
   }
 
   //Add a subscription to the user chats array
-  addSubscription(classID: string) {
+  addSubscription(classID: string, userId:string) {
     return this.afs
       .collection('users')
-      .doc(this.authService.getUid())
+      .doc(userId)
       .update({
         chats: firebase.firestore.FieldValue.arrayUnion(classID),
       });
