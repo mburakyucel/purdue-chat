@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 import { ChatService } from '../services/chat.service';
 import { SubscriptionService } from '../services/subscription.service';
 
@@ -13,9 +14,11 @@ export class ChatListItemComponent implements OnInit {
   chatMetadata: any;
   lastMessage: any;
   users: any = {};
+  myId:any;
   constructor(
     private chatService: ChatService,
-    private subService: SubscriptionService
+    private subService: SubscriptionService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +38,7 @@ export class ChatListItemComponent implements OnInit {
     this.subService.getSubscribedUsers(this.chatId).subscribe((users) => {
       this.usersArrayToJson(users);
     });
+    this.myId = this.authService.getUid()
   }
 
   onClick() {
