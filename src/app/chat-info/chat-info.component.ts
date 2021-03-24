@@ -1,10 +1,11 @@
-import { Component, OnInit, Inject, Output, EventEmitter, Input } from '@angular/core';
-
+import { Component, OnInit, Inject} from '@angular/core';
 import { SubscriptionService } from '../services/subscription.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from '../services/auth.service';
 import { CreateGroupService } from '../services/create-group.service';
+import { take } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-chat-info',
@@ -34,7 +35,6 @@ export class ChatInfoComponent implements OnInit {
     this.subService
       .addSubscription(this.selectedGroup.id, this.authService.getUid())
       .then(() => {
-        console.log("testing purpose")
         this._snackBar.open(
           `Subscribed to ${this.selectedGroup.groupName}`,
           'Close',
@@ -52,8 +52,19 @@ export class ChatInfoComponent implements OnInit {
     const myId = this.authService.getUid()
     this.docDmId = myId.concat(user.uid)
     this.revDocDmId = user.uid.concat(myId)
+
     console.log(user.uid)
     console.log(this.docDmId)
-    this.groupService.createDmChat(this.docDmId,this.revDocDmId, myId, user.uid)
+
+    this.groupService.queryDm(this.docDmId,this.revDocDmId, myId, user.uid).pipe(take(1)).subscribe((docDm) => {
+      if(docDm.empty){
+        this.groupService.createDm(this.docDmId, myId, user.uid).then((ref) => {
+          this.subService.addSubscription(ref.id, myId).then(() => {
+            this._snackBar.open('Created DM', 'Close', {duration: 2000});
+          })
+          this.subService.addSubscription(ref.id, user.uid)
+        })
+      }
+    })
   }
 }

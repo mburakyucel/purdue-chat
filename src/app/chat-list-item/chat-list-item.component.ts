@@ -15,6 +15,7 @@ export class ChatListItemComponent implements OnInit {
   lastMessage: any;
   users: any = {};
   myId:any;
+
   constructor(
     private chatService: ChatService,
     private subService: SubscriptionService,
