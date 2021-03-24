@@ -48,7 +48,7 @@ export class ChatInfoComponent implements OnInit {
       });
   }
 
-  createDM(user:any){
+  sendDM(user:any){
     const myId = this.authService.getUid()
     this.docDmId = myId.concat(user.uid)
     this.revDocDmId = user.uid.concat(myId)
