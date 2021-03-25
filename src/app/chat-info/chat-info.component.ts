@@ -1,10 +1,11 @@
 import { Component, OnInit, Inject} from '@angular/core';
 import { SubscriptionService } from '../services/subscription.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from '../services/auth.service';
 import { CreateGroupService } from '../services/create-group.service';
-import { take } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { GroupsComponent } from '../groups/groups.component';
 
 
 @Component({
@@ -22,6 +23,8 @@ export class ChatInfoComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private authService: AuthService,
     public groupService: CreateGroupService,
+    private router: Router,
+    public dialogRef: MatDialogRef<GroupsComponent>,
     @Inject(MAT_DIALOG_DATA) public selectedGroup: any
   ) {}
 
@@ -50,20 +53,25 @@ export class ChatInfoComponent implements OnInit {
 
   sendDM(user:any){
     const myId = this.authService.getUid()
-    this.docDmId = myId.concat(user.uid)
-    this.revDocDmId = user.uid.concat(myId)
+    const participants = new Array(myId, user.uid).sort()
+    this.docDmId = participants[0] + '_' + participants[1];
 
+    console.log(participants)
     console.log(user.uid)
     console.log(this.docDmId)
 
-    this.groupService.queryDm(this.docDmId,this.revDocDmId, myId, user.uid).pipe(take(1)).subscribe((docDm) => {
-      if(docDm.empty){
-        this.groupService.createDm(this.docDmId, myId, user.uid).then((ref) => {
-          this.subService.addSubscription(ref.id, myId).then(() => {
-            this._snackBar.open('Created DM', 'Close', {duration: 2000});
-          })
-          this.subService.addSubscription(ref.id, user.uid)
+    this.groupService.queryDm(this.docDmId).subscribe((docDm) => {
+      if(!docDm.exists){
+        this.groupService.createDm(this.docDmId, participants).then(() => {
+          this.subService.addSubscription(this.docDmId, myId);
+          this.router.navigate([`/chat/${this.docDmId}`]);
+          this.dialogRef.close()
         })
+      }
+      else{
+        this.subService.addSubscription(this.docDmId, myId);
+        this.router.navigate([`/chat/${this.docDmId}`]);
+        this.dialogRef.close()
       }
     })
   }

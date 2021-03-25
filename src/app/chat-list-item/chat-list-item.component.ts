@@ -15,6 +15,7 @@ export class ChatListItemComponent implements OnInit {
   lastMessage: any;
   users: any = {};
   myId:any;
+  dmRecipiant:any;
 
   constructor(
     private chatService: ChatService,
@@ -23,8 +24,15 @@ export class ChatListItemComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.myId = this.authService.getUid()
+
     this.chatService.getChatMetadata(this.chatId).subscribe((data: any) => {
       this.chatMetadata = data;
+      if(data && data.type == 'dm'){
+        this.subService.getDmUsers(this.myId, data.participants).subscribe((user) => {
+          this.dmRecipiant = user
+        })
+      }
     });
     this.chatService.getMessagesWithLimit(this.chatId, 1).subscribe(
       (data: Array<any>) => {
@@ -39,7 +47,6 @@ export class ChatListItemComponent implements OnInit {
     this.subService.getSubscribedUsers(this.chatId).subscribe((users) => {
       this.usersArrayToJson(users);
     });
-    this.myId = this.authService.getUid()
   }
 
   onClick() {
