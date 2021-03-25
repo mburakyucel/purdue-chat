@@ -4,5 +4,14 @@ textarea.mat-input-element.cdk-textarea-autosize {
 }
 
 .chat-image {
-  max-height: 50px;
+  max-width: 50%;
+}
+
+.chat-container {
+  height: calc(100% - 80px);
+}
+
+.message-section {
+  height: calc(100% - 170px);
+  overflow: auto;
 }

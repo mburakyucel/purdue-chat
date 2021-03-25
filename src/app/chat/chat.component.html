@@ -1,20 +1,24 @@
-<div class="container">
+<div class="container my-2 border chat-container">
   <ng-container *ngIf="chatMetadata">
-    <div class="row">
+    <div class="row p-2">
+      <div class="col-auto px-2">
+        <img class="rounded-circle" height="72px" width="72px" [src]="chatMetadata.groupImageUrl">
+      </div>
       <div class="col">
         <h1>{{ chatMetadata.groupName }}</h1>
       </div>
     </div>
-    <div class="row">
+    <mat-divider></mat-divider>
+    <div class="row message-section">
       <div class="col">
-        <div class="row pt-1" *ngFor="let msg of messages">
+        <div class="row text-break pt-1" *ngFor="let msg of messages">
           <div class="col-auto"> 
-            <img height="48px" width="48px" [src]="users[msg.uid].profileImage" alt="">  
+            <img class="rounded-circle" height="48px" width="48px" [src]="users[msg.uid]?.profileImage">  
           </div>
           <div class="col">
             <div class="row">
               <div class="col">
-                <span class="mat-body-strong"> {{ users[msg.uid]?.displayName }} </span> 
+                <span class="mat-body-strong pe-3"> {{ users[msg.uid]?.displayName }} </span> 
                 {{msg.createdAt | date: "shortTime"}}
               </div>
             </div>  
@@ -48,15 +52,15 @@
         ></mat-spinner>
       </div>
     </div>
+    <mat-divider></mat-divider>
     <div class="row">
       <div class="col">
         <mat-form-field class="w-100" [style.fontSize]="'20px'">
-          <mat-label>Input message</mat-label>
+          <mat-label>Message</mat-label>
           <textarea
             #inputMessage
             matInput
             cdkTextareaAutosize
-            cdkAutosizeMinRows="3"
             cdkAutosizeMaxRows="5"
             [formControl]="messageControl"
             (keydown.enter)="sendMessage()"
