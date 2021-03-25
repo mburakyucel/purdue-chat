@@ -2,7 +2,12 @@
   <ng-container *ngIf="chatMetadata">
     <div class="row p-2">
       <div class="col-auto px-2">
-        <img class="rounded-circle" height="72px" width="72px" [src]="chatMetadata.groupImageUrl">
+        <img
+          class="rounded-circle"
+          height="72px"
+          width="72px"
+          [src]="chatMetadata.groupImageUrl"
+        />
       </div>
       <div class="col">
         <h1>{{ chatMetadata.groupName }}</h1>
@@ -12,16 +17,23 @@
     <div class="row message-section">
       <div class="col">
         <div class="row text-break pt-1" *ngFor="let msg of messages">
-          <div class="col-auto"> 
-            <img class="rounded-circle" height="48px" width="48px" [src]="users[msg.uid]?.profileImage">  
+          <div class="col-auto">
+            <img
+              class="rounded-circle"
+              height="48px"
+              width="48px"
+              [src]="users[msg.uid]?.profileImage"
+            />
           </div>
           <div class="col">
             <div class="row">
               <div class="col">
-                <span class="mat-body-strong pe-3"> {{ users[msg.uid]?.displayName }} </span> 
-                {{msg.createdAt | date: "shortTime"}}
+                <span class="mat-body-strong pe-3">
+                  {{ users[msg.uid]?.displayName }}
+                </span>
+                {{ msg.createdAt | date: "shortTime" }}
               </div>
-            </div>  
+            </div>
             <div class="row">
               <div class="col">
                 <div [ngSwitch]="msg.type" class="col">
@@ -79,7 +91,9 @@
           (change)="onImageSelect($event)"
           #hiddenImageInput
         />
-        <button mat-flat-button (click)="hiddenImageInput.click()">Image</button>
+        <button mat-flat-button (click)="hiddenImageInput.click()">
+          Image
+        </button>
       </div>
     </div>
   </ng-container>

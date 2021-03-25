@@ -38,28 +38,36 @@ export class ChatComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.pipe(
-      map((params: ParamMap) => params.get('chatId')),
-      switchMap((chatId: string) => this.chatService.getChatMetadata(chatId)),
-      takeUntil(this.unsubscribe$)
-    ).subscribe((data: any) => {
-      this.chatMetadata = data;
-    });
-    this.route.paramMap.pipe(
-      tap(params => this.chatId = params.get('chatId')),
-      switchMap(() => this.chatService.getMessages(this.chatId)),
-      takeUntil(this.unsubscribe$)
-    ).subscribe((data: Array<DocumentData>) => {
-      this.messages = data.sort((m1, m2) => m1.createdAt - m2.createdAt);
-    });
-    this.route.paramMap.pipe(
-      map((params: ParamMap) => params.get('chatId')),
-      switchMap((chatId: string) => this.subService.getSubscribedUsers(chatId)),
-      takeUntil(this.unsubscribe$)
-    ).subscribe((users: any) => {
-      console.log(users);
-      this.usersArrayToJson(users);
-    });
+    this.route.paramMap
+      .pipe(
+        map((params: ParamMap) => params.get('chatId')),
+        switchMap((chatId: string) => this.chatService.getChatMetadata(chatId)),
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe((data: any) => {
+        this.chatMetadata = data;
+      });
+    this.route.paramMap
+      .pipe(
+        tap((params) => (this.chatId = params.get('chatId'))),
+        switchMap(() => this.chatService.getMessages(this.chatId)),
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe((data: Array<DocumentData>) => {
+        this.messages = data.sort((m1, m2) => m1.createdAt - m2.createdAt);
+      });
+    this.route.paramMap
+      .pipe(
+        map((params: ParamMap) => params.get('chatId')),
+        switchMap((chatId: string) =>
+          this.subService.getSubscribedUsers(chatId)
+        ),
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe((users: any) => {
+        console.log(users);
+        this.usersArrayToJson(users);
+      });
   }
 
   sendMessage() {
