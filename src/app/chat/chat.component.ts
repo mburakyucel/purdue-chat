@@ -43,7 +43,6 @@ export class ChatComponent implements OnInit, OnDestroy {
       switchMap((chatId: string) => this.chatService.getChatMetadata(chatId)),
       takeUntil(this.unsubscribe$)
     ).subscribe((data: any) => {
-      console.log(data);
       this.chatMetadata = data;
     });
     this.route.paramMap.pipe(
@@ -51,7 +50,6 @@ export class ChatComponent implements OnInit, OnDestroy {
       switchMap(() => this.chatService.getMessages(this.chatId)),
       takeUntil(this.unsubscribe$)
     ).subscribe((data: Array<DocumentData>) => {
-      console.log("Message received");
       this.messages = data.sort((m1, m2) => m1.createdAt - m2.createdAt);
     });
     this.route.paramMap.pipe(
