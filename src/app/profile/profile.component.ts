@@ -139,9 +139,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
           });
         }
       );
-      this.oldPasswordHide = true;
-      this.newPasswordHide = true;
-      this.confirmPasswordHide = true;
+    this.oldPasswordHide = true;
+    this.newPasswordHide = true;
+    this.confirmPasswordHide = true;
   }
 
   cancelPassword() {
@@ -158,7 +158,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   cancelDisplayName() {
     this.toggle_displayName = true;
-    this.displayName.setValue(this.tempDisplayName)
+    this.displayName.setValue(this.tempDisplayName);
   }
 
   ngOnDestroy() {

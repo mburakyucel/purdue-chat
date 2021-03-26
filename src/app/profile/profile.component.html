@@ -35,13 +35,16 @@
             <mat-label>Display Name:</mat-label>
             <input
               matInput
-              #name maxlength="32"
+              #name
+              maxlength="32"
               type="text"
               class="form-control"
               [formControl]="displayName"
             />
-            <mat-error *ngIf="displayName.invalid">Atleast 1 character required</mat-error>
-            <mat-hint align="end">{{name.value?.length || 0}}/32</mat-hint>
+            <mat-error *ngIf="displayName.invalid"
+              >Atleast 1 character required</mat-error
+            >
+            <mat-hint align="end">{{ name.value?.length || 0 }}/32</mat-hint>
           </mat-form-field>
         </form>
         <button
@@ -82,7 +85,11 @@
           <div class="formGroup">
             <mat-form-field appearance="outline">
               <mat-label>Old Password</mat-label>
-              <input matInput [type]="oldPasswordHide ? 'password' : 'text'" formControlName="old_password" />
+              <input
+                matInput
+                [type]="oldPasswordHide ? 'password' : 'text'"
+                formControlName="old_password"
+              />
               <button
                 mat-icon-button
                 matSuffix
@@ -99,7 +106,11 @@
           <div class="formGroup">
             <mat-form-field appearance="outline">
               <mat-label>New Password</mat-label>
-              <input matInput [type]="newPasswordHide ? 'password' : 'text'" formControlName="new_password" />
+              <input
+                matInput
+                [type]="newPasswordHide ? 'password' : 'text'"
+                formControlName="new_password"
+              />
               <button
                 mat-icon-button
                 matSuffix
@@ -116,7 +127,11 @@
           <div class="formGroup">
             <mat-form-field appearance="outline">
               <mat-label>Confirm Password</mat-label>
-              <input matInput [type]="confirmPasswordHide ? 'password' : 'text'" formControlName="confirm_password" />
+              <input
+                matInput
+                [type]="confirmPasswordHide ? 'password' : 'text'"
+                formControlName="confirm_password"
+              />
               <button
                 mat-icon-button
                 matSuffix

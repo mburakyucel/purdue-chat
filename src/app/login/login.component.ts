@@ -4,7 +4,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
-import { existingUser, correctPassword } from '../shared/login-validation.directive';
+import {
+  existingUser,
+  correctPassword,
+} from '../shared/login-validation.directive';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +23,7 @@ export class LoginComponent implements OnInit {
     email: new FormControl('', [
       Validators.required,
       Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-      existingUser(this.afsUser)
+      existingUser(this.afsUser),
     ]),
     password: new FormControl('', [
       Validators.required,
@@ -53,9 +56,9 @@ export class LoginComponent implements OnInit {
           case 'auth/user-not-found':
             this.afsUser = false;
             break;
-          case 'auth/wrong-password': 
+          case 'auth/wrong-password':
             this.afsWrongPassword = false;
-            break
+            break;
           default:
             this.afsUser = true;
             this.afsWrongPassword = true;
@@ -78,15 +81,12 @@ export class LoginComponent implements OnInit {
     if (this.email.hasError('required')) {
       this.afsUser = false;
       return 'Email is required';
-    }
-    else if(this.email.hasError('pattern')) {
+    } else if (this.email.hasError('pattern')) {
       this.afsUser = false;
       return 'Enter a valid email';
-    }
-    else if(this.email.hasError('noUser')) {
-      return 'There is no user record corresponding to this email address'
-    }
-    else return '';
+    } else if (this.email.hasError('noUser')) {
+      return 'There is no user record corresponding to this email address';
+    } else return '';
   }
 
   getPasswordErrorMsg() {

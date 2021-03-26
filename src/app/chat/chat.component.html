@@ -35,12 +35,17 @@
   </div>
   <div class="row">
     <div class="col">
-      <mat-form-field class="w-100" hintLabel="Max 1024 characters" [style.fontSize]="'20px'">
+      <mat-form-field
+        class="w-100"
+        hintLabel="Max 1024 characters"
+        [style.fontSize]="'20px'"
+      >
         <mat-label>Input message</mat-label>
         <textarea
           #inputMessage
           matInput
-          #message maxlength="1024"
+          #message
+          maxlength="1024"
           cdkTextareaAutosize
           cdkAutosizeMinRows="3"
           cdkAutosizeMaxRows="5"
@@ -48,14 +53,14 @@
           (keydown.enter)="sendMessage()"
           autocomplete="off"
         ></textarea>
-        <mat-hint align="end">{{message.value?.length || 0}}/1024</mat-hint>
+        <mat-hint align="end">{{ message.value?.length || 0 }}/1024</mat-hint>
         <button
           mat-icon-button
           matSuffix
           (click)="sendMessage()"
           [disabled]="!messageControl.valid"
         >
-        <mat-icon>send</mat-icon>
+          <mat-icon>send</mat-icon>
         </button>
       </mat-form-field>
     </div>
