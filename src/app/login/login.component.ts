@@ -4,18 +4,23 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
+import { existingUser, correctPassword } from '../shared/login-validation.directive';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  afsUser = true;
+  afsWrongPassword = false;
   passwordHide = true;
   loading = false;
   loginForm = new FormGroup({
     email: new FormControl('', [
       Validators.required,
       Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+      existingUser(this.afsUser)
     ]),
     password: new FormControl('', [
       Validators.required,
@@ -46,23 +51,14 @@ export class LoginComponent implements OnInit {
       (error) => {
         switch (error.code) {
           case 'auth/user-not-found':
-            this._snackBar.open(
-              'There is no user record corresponding to this email address',
-              'Close',
-              {
-                duration: 3000,
-              }
-            );
+            this.afsUser = false;
             break;
-          case 'auth/wrong-password':
-            this._snackBar.open('The password is invalid', 'Close', {
-              duration: 3000,
-            });
-            break;
+          case 'auth/wrong-password': 
+            this.afsWrongPassword = false;
+            break
           default:
-            this._snackBar.open(error.message, 'Close', {
-              duration: 3000,
-            });
+            this.afsUser = true;
+            this.afsWrongPassword = true;
             break;
         }
         this.loading = false;
@@ -80,9 +76,17 @@ export class LoginComponent implements OnInit {
 
   getEmailErrorMsg() {
     if (this.email.hasError('required')) {
+      this.afsUser = false;
       return 'Email is required';
     }
-    return this.email.hasError('pattern') ? 'Enter a valid email' : '';
+    else if(this.email.hasError('pattern')) {
+      this.afsUser = false;
+      return 'Enter a valid email';
+    }
+    else if(this.email.hasError('noUser')) {
+      return 'There is no user record corresponding to this email address'
+    }
+    else return '';
   }
 
   getPasswordErrorMsg() {

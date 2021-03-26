@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     Validators.required,
     Validators.maxLength(32),
   ]);
+  public tempDisplayName: any;
   public passwordForm: any = this.formBuilder.group(
     {
       old_password: new FormControl('', [Validators.required]),
@@ -44,6 +45,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     },
     { validator: [MustMatch, MustNotMatch] }
   );
+  public oldPasswordHide = true;
+  public newPasswordHide = true;
+  public confirmPasswordHide = true;
 
   public toggle_displayName: any = true;
   public toggle_password: any = true;
@@ -71,6 +75,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.imageURL = doc.profileImage;
       this.email = doc.email;
       this.displayName.setValue(doc.displayName);
+      this.tempDisplayName = doc.displayName;
     });
   }
 
@@ -134,10 +139,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
           });
         }
       );
+      this.oldPasswordHide = true;
+      this.newPasswordHide = true;
+      this.confirmPasswordHide = true;
   }
 
   cancelPassword() {
     this.toggle_password = true;
+    this.oldPasswordHide = true;
+    this.newPasswordHide = true;
+    this.confirmPasswordHide = true;
     this.passwordForm.setValue({
       old_password: '',
       new_password: '',
@@ -147,15 +158,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   cancelDisplayName() {
     this.toggle_displayName = true;
-  }
-
-  getNameErrorMsg() {
-    if (this.displayName.hasError('required')) {
-      return 'Atleast 1 character required';
-    }
-    return this.displayName.hasError('maxlength')
-      ? 'Character limit exceeded'
-      : '';
+    this.displayName.setValue(this.tempDisplayName)
   }
 
   ngOnDestroy() {

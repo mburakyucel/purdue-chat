@@ -25,7 +25,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   selectedImageFile: any;
   imageUrl: any;
   imageLoading = false;
-  messageControl = new FormControl('', [Validators.maxLength(1000)]);
+  messageControl = new FormControl('', [Validators.maxLength(1024)]);
   unsubscribe$: Subject<void> = new Subject<void>();
   @ViewChild('inputMessage') inputMessage: ElementRef<HTMLInputElement>;
   constructor(

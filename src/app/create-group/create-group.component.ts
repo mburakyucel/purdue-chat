@@ -19,7 +19,7 @@ export class CreateGroupComponent implements OnInit {
     Validators.required,
     Validators.maxLength(32),
   ]);
-  public groupDescription = new FormControl('', [Validators.maxLength(500)]);
+  public groupDescription = new FormControl('', [Validators.maxLength(256)]);
   public croppieOptions: CroppieOptions = {
     viewport: { width: 100, height: 100, type: 'square' },
     boundary: { width: 300, height: 300 },
@@ -66,14 +66,5 @@ export class CreateGroupComponent implements OnInit {
         this.groupImageUrl = imageurl;
       }
     });
-  }
-
-  getNameErrorMsg() {
-    if (this.groupName.hasError('required')) {
-      return 'Please enter a group name';
-    }
-    return this.groupName.hasError('maxlength')
-      ? 'Character limit exceeded'
-      : '';
   }
 }
