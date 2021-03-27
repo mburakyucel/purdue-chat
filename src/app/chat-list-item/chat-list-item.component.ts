@@ -20,7 +20,7 @@ export class ChatListItemComponent implements OnInit {
   constructor(
     private chatService: ChatService,
     private subService: SubscriptionService,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
