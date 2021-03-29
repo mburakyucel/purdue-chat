@@ -14,9 +14,9 @@
       </div>
     </div>
     <mat-divider></mat-divider>
-    <div class="row message-section">
+    <div #messageSection class="row message-section">
       <div class="col">
-        <div class="row text-break pt-1" *ngFor="let msg of messages">
+        <div class="row text-break pt-1" *ngFor="let msg of messages; trackBy: trackByCreated">
           <div class="col-auto">
             <img
               class="rounded-circle"
@@ -75,10 +75,10 @@
             cdkTextareaAutosize
             cdkAutosizeMaxRows="5"
             [formControl]="messageControl"
-            (keydown.enter)="sendMessage()"
+            (keydown.enter)="sendMessage($event)"
             autocomplete="off"
           ></textarea>
-          <button mat-icon-button matSuffix (click)="sendMessage()">
+          <button mat-icon-button matSuffix (click)="sendMessage($event)">
             <mat-icon>send</mat-icon>
           </button>
         </mat-form-field>

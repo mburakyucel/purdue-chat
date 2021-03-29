@@ -29,6 +29,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   imageLoading = false;
   messageControl = new FormControl('');
   unsubscribe$: Subject<void> = new Subject<void>();
+  @ViewChild('messageSection', { read: ElementRef }) public messageSection: ElementRef<any>;
   @ViewChild('inputMessage') inputMessage: ElementRef<HTMLInputElement>;
   constructor(
     private chatService: ChatService,
@@ -55,6 +56,10 @@ export class ChatComponent implements OnInit, OnDestroy {
       )
       .subscribe((data: Array<DocumentData>) => {
         this.messages = data.sort((m1, m2) => m1.createdAt - m2.createdAt);
+        // Scroll down after the DOM is updated
+        setTimeout(() => {
+          this.messageSection.nativeElement.scrollTop = this.messageSection.nativeElement.scrollHeight;
+        }, 0)
       });
     this.route.paramMap
       .pipe(
@@ -70,7 +75,8 @@ export class ChatComponent implements OnInit, OnDestroy {
       });
   }
 
-  sendMessage() {
+  sendMessage(event: any) {
+    event.preventDefault();
     if (this.imageUrl) {
       this.imageLoading = true;
       this.imageUploadService
@@ -93,6 +99,10 @@ export class ChatComponent implements OnInit, OnDestroy {
         console.log('Sent');
       }
     }
+  }
+
+  trackByCreated(index: number, msg: any) {
+    return msg.createdAt;
   }
 
   ngOnDestroy() {
