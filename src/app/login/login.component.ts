@@ -4,26 +4,18 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 
-import {
-  existingUser,
-  correctPassword,
-} from '../shared/login-validation.directive';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  afsUser = true;
-  afsWrongPassword = false;
   passwordHide = true;
   loading = false;
   loginForm = new FormGroup({
     email: new FormControl('', [
       Validators.required,
-      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
-      existingUser(this.afsUser),
+      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')
     ]),
     password: new FormControl('', [
       Validators.required,
@@ -54,14 +46,14 @@ export class LoginComponent implements OnInit {
       (error) => {
         switch (error.code) {
           case 'auth/user-not-found':
-            this.afsUser = false;
+            this.email.setErrors({'afsNoUser': true});
             break;
           case 'auth/wrong-password':
-            this.afsWrongPassword = false;
+            this.password.setErrors({'afsWrongPassword': true});
             break;
           default:
-            this.afsUser = true;
-            this.afsWrongPassword = true;
+            this.email.setErrors(null);
+            this.password.setErrors(null);
             break;
         }
         this.loading = false;
@@ -79,12 +71,10 @@ export class LoginComponent implements OnInit {
 
   getEmailErrorMsg() {
     if (this.email.hasError('required')) {
-      this.afsUser = false;
       return 'Email is required';
     } else if (this.email.hasError('pattern')) {
-      this.afsUser = false;
       return 'Enter a valid email';
-    } else if (this.email.hasError('noUser')) {
+    } else if (this.email.hasError('afsNoUser')) {
       return 'There is no user record corresponding to this email address';
     } else return '';
   }
@@ -92,9 +82,10 @@ export class LoginComponent implements OnInit {
   getPasswordErrorMsg() {
     if (this.password.hasError('required')) {
       return 'Password is required';
-    }
-    return this.password.hasError('minlength')
-      ? 'Enter a 6 or more character password'
-      : '';
+    } else if (this.password.hasError('minlength')) {
+      return 'Enter a 6 or more character password';
+    } else if (this.password.hasError('afsWrongPassword')) {
+      return 'Incorrect Password';
+    } else return '';
   }
 }

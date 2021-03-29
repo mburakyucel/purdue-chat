@@ -44,28 +44,11 @@ export class RegisterComponent implements OnInit {
       },
       (error) => {
         switch (error.code) {
-          case 'auth/weak-password':
-            this._snackBar.open(
-              'The password should be at least 6 characters in length',
-              'Close',
-              {
-                duration: 3000,
-              }
-            );
-            break;
           case 'auth/email-already-in-use':
-            this._snackBar.open(
-              'The email address is already in use by another account',
-              'Close',
-              {
-                duration: 3000,
-              }
-            );
+            this.email.setErrors({'afsExistingUser': true});
             break;
           default:
-            this._snackBar.open(error.message, 'Close', {
-              duration: 3000,
-            });
+            this.email.setErrors(null);
             break;
         }
         this.loading = false;
@@ -84,16 +67,18 @@ export class RegisterComponent implements OnInit {
   getEmailErrorMsg() {
     if (this.email.hasError('required')) {
       return 'Email is required';
-    }
-    return this.email.hasError('pattern') ? 'Enter a valid email' : '';
+    } else if (this.email.hasError('pattern')) {
+      return 'Enter a valid email';
+    } else if (this.email.hasError('afsExistingUser')) {
+      return 'Email address is already in use by another account';
+    } else return '';
   }
 
   getPasswordErrorMsg() {
     if (this.password.hasError('required')) {
       return 'Password is required';
-    }
-    return this.password.hasError('minlength')
-      ? 'Enter a 6 or more character password'
-      : '';
+    } else if (this.password.hasError('minlength')) {
+      return 'Enter a 6 or more character password';
+    } else return '';
   }
 }
