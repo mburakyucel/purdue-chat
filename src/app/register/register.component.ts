@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
       (error) => {
         switch (error.code) {
           case 'auth/email-already-in-use':
-            this.email.setErrors({'afsExistingUser': true});
+            this.email.setErrors({ afsExistingUser: true });
             break;
           default:
             this.email.setErrors(null);

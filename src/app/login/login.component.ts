@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   loginForm = new FormGroup({
     email: new FormControl('', [
       Validators.required,
-      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')
+      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
     ]),
     password: new FormControl('', [
       Validators.required,
@@ -46,10 +46,10 @@ export class LoginComponent implements OnInit {
       (error) => {
         switch (error.code) {
           case 'auth/user-not-found':
-            this.email.setErrors({'afsNoUser': true});
+            this.email.setErrors({ afsNoUser: true });
             break;
           case 'auth/wrong-password':
-            this.password.setErrors({'afsWrongPassword': true});
+            this.password.setErrors({ afsWrongPassword: true });
             break;
           default:
             this.email.setErrors(null);
