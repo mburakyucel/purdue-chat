@@ -16,7 +16,10 @@
     <mat-divider></mat-divider>
     <div #messageSection class="row message-section">
       <div class="col">
-        <div class="row text-break pt-1" *ngFor="let msg of messages; trackBy: trackByCreated">
+        <div
+          class="row text-break pt-1"
+          *ngFor="let msg of messages; trackBy: trackByCreated"
+        >
           <div class="col-auto">
             <img
               class="rounded-circle"

@@ -29,7 +29,8 @@ export class ChatComponent implements OnInit, OnDestroy {
   imageLoading = false;
   messageControl = new FormControl('');
   unsubscribe$: Subject<void> = new Subject<void>();
-  @ViewChild('messageSection', { read: ElementRef }) public messageSection: ElementRef<any>;
+  @ViewChild('messageSection', { read: ElementRef })
+  public messageSection: ElementRef<any>;
   @ViewChild('inputMessage') inputMessage: ElementRef<HTMLInputElement>;
   constructor(
     private chatService: ChatService,
@@ -59,7 +60,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         // Scroll down after the DOM is updated
         setTimeout(() => {
           this.messageSection.nativeElement.scrollTop = this.messageSection.nativeElement.scrollHeight;
-        }, 0)
+        }, 0);
       });
     this.route.paramMap
       .pipe(
