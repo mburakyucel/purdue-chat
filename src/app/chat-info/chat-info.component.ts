@@ -56,10 +56,6 @@ export class ChatInfoComponent implements OnInit {
     const participants = new Array(myId, user.uid).sort()
     this.docDmId = participants[0] + '_' + participants[1];
 
-    console.log(participants)
-    console.log(user.uid)
-    console.log(this.docDmId)
-
     this.groupService.queryDm(this.docDmId).subscribe((docDm) => {
       if(!docDm.exists){
         this.groupService.createDm(this.docDmId, participants).then(() => {

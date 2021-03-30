@@ -31,8 +31,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   messageControl = new FormControl('');
   unsubscribe$: Subject<void> = new Subject<void>();
 
-  dmRecipiant: any;
-  myId: any;
+  recipientUser:any;
   
   @ViewChild('messageSection', { read: ElementRef })
   public messageSection: ElementRef<any>;
@@ -42,7 +41,8 @@ export class ChatComponent implements OnInit, OnDestroy {
     private chatService: ChatService,
     private route: ActivatedRoute,
     private imageUploadService: ImageUploadService,
-    private subService: SubscriptionService
+    private subService: SubscriptionService,
+    private auth: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -54,6 +54,11 @@ export class ChatComponent implements OnInit, OnDestroy {
       )
       .subscribe((data: any) => {
         this.chatMetadata = data;
+        if(this.chatMetadata.type == 'dm'){
+          this.subService.getDmUsers(this.auth.getUid(), this.chatMetadata.participants).subscribe((user:any) => {
+            this.recipientUser = user
+          })
+        }
       });
     this.route.paramMap
       .pipe(
@@ -84,6 +89,11 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   sendMessage(event: any) {
     event.preventDefault();
+    if(this.chatMetadata.type == 'dm'){
+      console.log(this.chatId)
+      console.log(this.recipientUser.uid)
+      //this.subService.addSubscription(this.chatId, this.recipient.uid)
+    }
     if (this.imageUrl) {
       this.imageLoading = true;
       this.imageUploadService
