@@ -7,10 +7,10 @@ import {
 } from '@angular/core';
 import { DocumentData } from '@angular/fire/firestore';
 import { FormControl } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Subject } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
+import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { ChatService } from '../services/chat.service';
 import { ImageUploadService } from '../services/image-upload.service';
 import { SubscriptionService } from '../services/subscription.service';
@@ -22,8 +22,9 @@ import { SubscriptionService } from '../services/subscription.service';
 })
 export class ChatComponent implements OnInit, OnDestroy {
   chatId: string;
-  messages$: any;
+  chatMetadata: any;
   messages: any[] = [];
+  users: any = {};
   selectedImageFile: any;
   imageUrl: any;
   imageLoading = false;
@@ -32,55 +33,57 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   dmRecipiant: any;
   myId: any;
-  chatMetadata:any;
   
+  @ViewChild('messageSection', { read: ElementRef })
+  public messageSection: ElementRef<any>;
   @ViewChild('inputMessage') inputMessage: ElementRef<HTMLInputElement>;
 
   constructor(
-    public chatService: ChatService,
-    public route: ActivatedRoute,
-    public router: Router,
-    public imageUploadService: ImageUploadService,
-    private authService: AuthService,
-    private subService: SubscriptionService,
+    private chatService: ChatService,
+    private route: ActivatedRoute,
+    private imageUploadService: ImageUploadService,
+    private subService: SubscriptionService
   ) {}
 
   ngOnInit(): void {
-    this.myId = this.authService.getUid()
-
-    this.messages$ = this.route.paramMap.pipe(
-      switchMap((params) => {
-        console.log(params);
-        this.chatId = params.get('chatId');
-
-        this.chatService.getChatMetadata(this.chatId).subscribe((data: any) => {
-          this.chatMetadata = data;
-          if(data && data.type == 'dm'){
-            this.subService.getDmUsers(this.myId, data.participants).subscribe((user:any) => {
-              this.dmRecipiant = user
-            })
-          }
-        });
-
-        return this.chatService.getMessages(this.chatId);
-      })
-    );
-
-    this.messages$
-      .pipe(takeUntil(this.unsubscribe$))
+    this.route.paramMap
+      .pipe(
+        map((params: ParamMap) => params.get('chatId')),
+        switchMap((chatId: string) => this.chatService.getChatMetadata(chatId)),
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe((data: any) => {
+        this.chatMetadata = data;
+      });
+    this.route.paramMap
+      .pipe(
+        tap((params) => (this.chatId = params.get('chatId'))),
+        switchMap(() => this.chatService.getMessages(this.chatId)),
+        takeUntil(this.unsubscribe$)
+      )
       .subscribe((data: Array<DocumentData>) => {
         this.messages = data.sort((m1, m2) => m1.createdAt - m2.createdAt);
-    });
+        // Scroll down after the DOM is updated
+        setTimeout(() => {
+          this.messageSection.nativeElement.scrollTop = this.messageSection.nativeElement.scrollHeight;
+        }, 0);
+      });
+    this.route.paramMap
+      .pipe(
+        map((params: ParamMap) => params.get('chatId')),
+        switchMap((chatId: string) =>
+          this.subService.getSubscribedUsers(chatId)
+        ),
+        takeUntil(this.unsubscribe$)
+      )
+      .subscribe((users: any) => {
+        console.log(users);
+        this.usersArrayToJson(users);
+      });
   }
 
-  sendMessage() {
-    console.log(this.chatId)
-    console.log(this.dmRecipiant.uid)
-    console.log(this.chatMetadata)
-    if(this.chatMetadata.type == 'dm'){
-      console.log("added subscribed")
-      this.subService.addSubscription(this.chatId, this.dmRecipiant.uid);
-    }
+  sendMessage(event: any) {
+    event.preventDefault();
     if (this.imageUrl) {
       this.imageLoading = true;
       this.imageUploadService
@@ -105,6 +108,10 @@ export class ChatComponent implements OnInit, OnDestroy {
     }
   }
 
+  trackByCreated(index: number, msg: any) {
+    return msg.createdAt;
+  }
+
   ngOnDestroy() {
     console.log('onDestroy');
     this.unsubscribe$.next();
@@ -120,5 +127,11 @@ export class ChatComponent implements OnInit, OnDestroy {
     };
 
     reader.readAsDataURL(this.selectedImageFile);
+  }
+
+  private usersArrayToJson(usersArray: Array<any>) {
+    usersArray.forEach((user) => {
+      this.users[user.uid] = user;
+    });
   }
 }

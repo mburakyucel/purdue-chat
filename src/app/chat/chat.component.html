@@ -1,66 +1,103 @@
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h1>Group Id: {{ chatId }}</h1>
+<div class="container my-2 border chat-container">
+  <ng-container *ngIf="chatMetadata">
+    <div class="row p-2">
+      <div class="col-auto px-2">
+        <img
+          class="rounded-circle"
+          height="72px"
+          width="72px"
+          [src]="chatMetadata.groupImageUrl"
+        />
+      </div>
+      <div class="col">
+        <h1>{{ chatMetadata.groupName }}</h1>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <div class="row" *ngFor="let msg of messages">
-        <div class="col-auto">{{ msg.uid }}</div>
-        <div [ngSwitch]="msg.type" class="col">
-          <p *ngSwitchCase="'text'">
-            {{ msg.message }}
-          </p>
-          <img
-            *ngSwitchCase="'image'"
-            class="chat-image"
-            src="{{ msg.message }}"
-          />
+    <mat-divider></mat-divider>
+    <div #messageSection class="row message-section">
+      <div class="col">
+        <div
+          class="row text-break pt-1"
+          *ngFor="let msg of messages; trackBy: trackByCreated"
+        >
+          <div class="col-auto">
+            <img
+              class="rounded-circle"
+              height="48px"
+              width="48px"
+              [src]="users[msg.uid]?.profileImage"
+            />
+          </div>
+          <div class="col">
+            <div class="row">
+              <div class="col">
+                <span class="mat-body-strong pe-3">
+                  {{ users[msg.uid]?.displayName }}
+                </span>
+                {{ msg.createdAt | date: "shortTime" }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div [ngSwitch]="msg.type" class="col">
+                  <p *ngSwitchCase="'text'">
+                    {{ msg.message }}
+                  </p>
+                  <img
+                    *ngSwitchCase="'image'"
+                    class="chat-image"
+                    [src]="msg.message"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div *ngIf="imageUrl" class="row py-4">
-    <div class="col-auto">
-      <img class="chat-image" src="{{ imageUrl }}" />
+    <div *ngIf="imageUrl" class="row py-4">
+      <div class="col-auto">
+        <img class="chat-image" src="{{ imageUrl }}" />
+      </div>
+      <div class="col-auto">
+        <mat-spinner
+          *ngIf="imageLoading"
+          [diameter]="50"
+          mode="indeterminate"
+        ></mat-spinner>
+      </div>
     </div>
-    <div class="col-auto">
-      <mat-spinner
-        *ngIf="imageLoading"
-        [diameter]="50"
-        mode="indeterminate"
-      ></mat-spinner>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <mat-form-field class="w-100" [style.fontSize]="'20px'">
-        <mat-label>Input message</mat-label>
-        <textarea
-          #inputMessage
-          matInput
-          cdkTextareaAutosize
-          cdkAutosizeMinRows="3"
-          cdkAutosizeMaxRows="5"
-          [formControl]="messageControl"
-          (keydown.enter)="sendMessage()"
-          autocomplete="off"
-        ></textarea>
-        <button mat-icon-button matSuffix (click)="sendMessage()">
-          <mat-icon>send</mat-icon>
+    <mat-divider></mat-divider>
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="w-100" [style.fontSize]="'20px'">
+          <mat-label>Message</mat-label>
+          <textarea
+            #inputMessage
+            matInput
+            cdkTextareaAutosize
+            cdkAutosizeMaxRows="5"
+            [formControl]="messageControl"
+            (keydown.enter)="sendMessage($event)"
+            autocomplete="off"
+          ></textarea>
+          <button mat-icon-button matSuffix (click)="sendMessage($event)">
+            <mat-icon>send</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div class="col-auto pb-4 align-self-end">
+        <input
+          style="display: none"
+          type="file"
+          accept="image/*"
+          (change)="onImageSelect($event)"
+          #hiddenImageInput
+        />
+        <button mat-flat-button (click)="hiddenImageInput.click()">
+          Image
         </button>
-      </mat-form-field>
+      </div>
     </div>
-    <div class="col-auto pb-4 align-self-end">
-      <input
-        style="display: none"
-        type="file"
-        accept="image/*"
-        (change)="onImageSelect($event)"
-        #hiddenImageInput
-      />
-      <button mat-flat-button (click)="hiddenImageInput.click()">Image</button>
-    </div>
-  </div>
+  </ng-container>
 </div>
