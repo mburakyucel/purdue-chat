@@ -42,7 +42,7 @@
               [formControl]="displayName"
             />
             <mat-error *ngIf="displayName.invalid"
-              >Atleast 1 character required</mat-error
+              >At least 1 character required</mat-error
             >
             <mat-hint align="end">{{ name.value?.length || 0 }}/32</mat-hint>
           </mat-form-field>
@@ -89,6 +89,7 @@
                 matInput
                 [type]="oldPasswordHide ? 'password' : 'text'"
                 formControlName="old_password"
+                autocomplete="new-password"
               />
               <button
                 mat-icon-button
@@ -110,6 +111,7 @@
                 matInput
                 [type]="newPasswordHide ? 'password' : 'text'"
                 formControlName="new_password"
+                autocomplete="new-password"
               />
               <button
                 mat-icon-button
@@ -131,6 +133,7 @@
                 matInput
                 [type]="confirmPasswordHide ? 'password' : 'text'"
                 formControlName="confirm_password"
+                autocomplete="new-password"
               />
               <button
                 mat-icon-button
