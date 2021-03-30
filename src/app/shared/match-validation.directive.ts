@@ -1,18 +1,18 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 // Custom validators to check that two fields match
-export const MustMatch: ValidatorFn = (
+export const ConfirmPasswordMustMatch: ValidatorFn = (
   control: AbstractControl
 ): ValidationErrors | null => {
-  return control.value.confirm_password === control.value.new_password
+  return control.value.confirmPassword === control.value.newPassword
     ? null
     : { noMatch: true };
 };
 
-export const MustNotMatch: ValidatorFn = (
+export const OldPasswordMustNotMatch: ValidatorFn = (
   control: AbstractControl
 ): ValidationErrors | null => {
-  return control.value.old_password !== control.value.new_password
+  return control.value.oldPassword !== control.value.newPassword
     ? null
     : { match: true };
 };

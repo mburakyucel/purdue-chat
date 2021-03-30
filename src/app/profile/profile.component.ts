@@ -3,7 +3,6 @@ import { ProfileService } from '../services/profile.service';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {
-  FormBuilder,
   FormControl,
   FormGroup,
   Validators,
@@ -15,7 +14,7 @@ import { take } from 'rxjs/operators';
 import { CroppieOptions } from 'croppie';
 import { ImageUploadService } from '../services/image-upload.service';
 
-import { MustMatch, MustNotMatch } from '../shared/match-validation.directive';
+import { ConfirmPasswordMustMatch, OldPasswordMustNotMatch } from '../shared/match-validation.directive';
 
 @Component({
   selector: 'app-profile',
@@ -30,20 +29,20 @@ export class ProfileComponent implements OnInit, OnDestroy {
     Validators.required,
     Validators.maxLength(32),
   ]);
-  public tempDisplayName: any;
-  public passwordForm: any = this.formBuilder.group(
+  public currentDisplayName: any;
+  public passwordForm: any = new FormGroup(
     {
-      old_password: new FormControl('', [Validators.required]),
-      new_password: new FormControl('', [
+      oldPassword: new FormControl('', [Validators.required]),
+      newPassword: new FormControl('', [
         Validators.required,
         Validators.minLength(6),
       ]),
-      confirm_password: new FormControl('', [
+      confirmPassword: new FormControl('', [
         Validators.required,
         Validators.minLength(6),
       ]),
     },
-    { validator: [MustMatch, MustNotMatch] }
+    { validators: [ConfirmPasswordMustMatch, OldPasswordMustNotMatch] }
   );
   public oldPasswordHide = true;
   public newPasswordHide = true;
@@ -67,7 +66,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private _snackBar: MatSnackBar,
     private authService: AuthService,
     public uploadService: ImageUploadService,
-    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
@@ -75,7 +73,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       this.imageURL = doc.profileImage;
       this.email = doc.email;
       this.displayName.setValue(doc.displayName);
-      this.tempDisplayName = doc.displayName;
+      this.currentDisplayName = doc.displayName;
     });
   }
 
@@ -115,8 +113,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     (
       await this.authService.resetPassword(
         this.email,
-        this.passwordForm.value.old_password,
-        this.passwordForm.value.new_password
+        this.passwordForm.value.oldPassword,
+        this.passwordForm.value.newPassword
       )
     )
       .pipe(take(1))
@@ -127,9 +125,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
           });
           this.toggle_password = true;
           this.passwordForm.setValue({
-            old_password: '',
-            new_password: '',
-            confirm_password: '',
+            oldPassword: '',
+            newPassword: '',
+            confirmPassword: '',
           });
         },
         (error) => {
@@ -150,15 +148,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.newPasswordHide = true;
     this.confirmPasswordHide = true;
     this.passwordForm.setValue({
-      old_password: '',
-      new_password: '',
-      confirm_password: '',
+      oldPassword: '',
+      newPassword: '',
+      confirmPassword: '',
     });
   }
 
   cancelDisplayName() {
     this.toggle_displayName = true;
-    this.displayName.setValue(this.tempDisplayName);
+    this.displayName.setValue(this.currentDisplayName);
   }
 
   ngOnDestroy() {

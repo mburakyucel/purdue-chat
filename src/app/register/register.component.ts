@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
       (error) => {
         switch (error.code) {
           case 'auth/email-already-in-use':
-            this.email.setErrors({ afsExistingUser: true });
+            this.email.setErrors({ existingUser: true });
             break;
           default:
             this.email.setErrors(null);
@@ -69,9 +69,9 @@ export class RegisterComponent implements OnInit {
       return 'Email is required';
     } else if (this.email.hasError('pattern')) {
       return 'Enter a valid email';
-    } else if (this.email.hasError('afsExistingUser')) {
+    } else if (this.email.hasError('existingUser')) {
       return 'Email address is already in use by another account';
-    } else return '';
+    } else return 'Unknown error';
   }
 
   getPasswordErrorMsg() {
@@ -79,6 +79,6 @@ export class RegisterComponent implements OnInit {
       return 'Password is required';
     } else if (this.password.hasError('minlength')) {
       return 'Enter a 6 or more character password';
-    } else return '';
+    } else return 'Unknown error';
   }
 }

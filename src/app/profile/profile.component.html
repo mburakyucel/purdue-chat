@@ -88,7 +88,7 @@
               <input
                 matInput
                 [type]="oldPasswordHide ? 'password' : 'text'"
-                formControlName="old_password"
+                formControlName="oldPassword"
                 autocomplete="new-password"
               />
               <button
@@ -110,7 +110,7 @@
               <input
                 matInput
                 [type]="newPasswordHide ? 'password' : 'text'"
-                formControlName="new_password"
+                formControlName="newPassword"
                 autocomplete="new-password"
               />
               <button
@@ -132,7 +132,7 @@
               <input
                 matInput
                 [type]="confirmPasswordHide ? 'password' : 'text'"
-                formControlName="confirm_password"
+                formControlName="confirmPassword"
                 autocomplete="new-password"
               />
               <button
@@ -158,23 +158,19 @@
             Save
           </button>
           <button mat-stroked-button (click)="cancelPassword()">Cancel</button>
-          <div class="container">
-            <div class="row pt-3">
-              <div
-                class="col-auto alert alert-danger"
-                *ngIf="passwordForm.errors?.match"
-              >
-                Same new and old passwords
-              </div>
-              <div
-                class="col-auto alert alert-danger"
-                *ngIf="
-                  passwordForm.errors?.noMatch && !passwordForm.errors?.match
-                "
-              >
-                Passwords do not match
-              </div>
-            </div>
+          <div
+            class="alert alert-danger pt-3"
+            *ngIf="passwordForm.errors?.match"
+          >
+            Same new and old passwords
+          </div>
+          <div
+            class="alert alert-danger pt-3"
+            *ngIf="
+              passwordForm.errors?.noMatch && !passwordForm.errors?.match
+            "
+          >
+            Passwords do not match
           </div>
         </form>
       </ng-template>

@@ -46,10 +46,13 @@ export class LoginComponent implements OnInit {
       (error) => {
         switch (error.code) {
           case 'auth/user-not-found':
-            this.email.setErrors({ afsNoUser: true });
+            this.email.setErrors({ noUser: true });
             break;
           case 'auth/wrong-password':
-            this.password.setErrors({ afsWrongPassword: true });
+            this.password.setErrors({ incorrectPassword: true });
+            break;
+          case 'auth/too-many-requests':
+            this.password.setErrors({ toManyIncorrectAttempts: true})
             break;
           default:
             this.email.setErrors(null);
@@ -74,9 +77,9 @@ export class LoginComponent implements OnInit {
       return 'Email is required';
     } else if (this.email.hasError('pattern')) {
       return 'Enter a valid email';
-    } else if (this.email.hasError('afsNoUser')) {
+    } else if (this.email.hasError('noUser')) {
       return 'There is no user record corresponding to this email address';
-    } else return '';
+    } else return 'Unknown error';
   }
 
   getPasswordErrorMsg() {
@@ -84,8 +87,10 @@ export class LoginComponent implements OnInit {
       return 'Password is required';
     } else if (this.password.hasError('minlength')) {
       return 'Enter a 6 or more character password';
-    } else if (this.password.hasError('afsWrongPassword')) {
+    } else if (this.password.hasError('incorrectPassword')) {
       return 'Incorrect Password';
-    } else return '';
+    } else if (this.password.hasError('toManyIncorrectAttempts')) {
+      return 'Account has been temporarily disabled due to many failed login attempts';
+    } else return 'Unknown error';
   }
 }
