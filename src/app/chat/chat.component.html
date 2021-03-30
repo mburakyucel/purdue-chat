@@ -69,7 +69,11 @@
     </div>
     <div class="row">
       <div class="col">
-        <mat-form-field class="w-100" hintLabel="Max 1024 characters" [style.fontSize]="'20px'">
+        <mat-form-field
+          class="w-100"
+          hintLabel="Max 1024 characters"
+          [style.fontSize]="'20px'"
+        >
           <mat-label>Message</mat-label>
           <textarea
             #inputMessage
@@ -81,7 +85,9 @@
             (keydown.enter)="sendMessage($event)"
             autocomplete="off"
           ></textarea>
-          <mat-hint align="end">{{inputMessage.value?.length || 0 }}/1024</mat-hint>
+          <mat-hint align="end"
+            >{{ inputMessage.value?.length || 0 }}/1024</mat-hint
+          >
           <button mat-icon-button matSuffix (click)="sendMessage($event)">
             <mat-icon>send</mat-icon>
           </button>
