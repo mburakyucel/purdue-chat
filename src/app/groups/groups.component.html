@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <mat-form-field class="mw-100">
-      <mat-label>Search Your Class</mat-label>
+      <mat-label>Search Your Group</mat-label>
       <input
         matInput
         type="text"
@@ -16,17 +16,21 @@
     <div class="col-auto">
       <img
         class="rounded profile-img"
-        src="https://picsum.photos/seed/{{ group.id }}/256/?random&img={{
-          group.id
-        }}"
+        src="{{ group.groupImageUrl }}"
         alt="http://placehold.it/256/163a63"
       />
     </div>
     <div class="col">
-      <h2>{{ group.groupName }}</h2>
+      <button
+        type="button"
+        class="btn bg-transparent btn-lg"
+        (click)="onGroupInfo(group)"
+      >
+        <b>{{ group.groupName }}</b>
+      </button>
     </div>
     <div class="col align-self-center">
-      <button mat-raised-button color="primary" (click)="onSelect(group)">
+      <button mat-raised-button color="primary" (click)="onJoin(group)">
         Join
       </button>
     </div>

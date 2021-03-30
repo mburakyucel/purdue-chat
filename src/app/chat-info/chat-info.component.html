@@ -1,0 +1,59 @@
+<div class="container dialog-dimension">
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <img
+        class="groupImage-dimension rounded"
+        src="{{ selectedGroup.groupImageUrl }}"
+      />
+    </div>
+  </div>
+  <div class="row pt-1 justify-content-center">
+    <div class="col-auto">
+      <h2 class="m-1">{{ selectedGroup.groupName }}</h2>
+    </div>
+    <div class="row pb-2 justify-content-center">
+      <div class="col-auto text-muted">
+        <small>{{ selectedGroup.createdAt | date: "short" }}</small>
+      </div>
+    </div>
+  </div>
+  <mat-card class="mb-1">
+    <mat-card-title class="pb-2">About</mat-card-title>
+    <mat-card-content>
+      <p>{{ selectedGroup.groupDescription }}</p>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-title class="pb-2">Members</mat-card-title>
+    <mat-card-content>
+      <div class="row pb-2" *ngFor="let user of chatMembers">
+        <div class="col-auto">
+          <img
+            class="profileImage-dimension rounded-circle"
+            src="{{ user.profileImage }}"
+          />
+        </div>
+        <div class="col-auto align-self-center">
+          <h2 class="m-0">{{ user.displayName }}</h2>
+        </div>
+        <div class="col align-self-center">
+          <button mat-raised-button class="btn float-end" color="primary">
+            Message
+          </button>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <div class="row pt-3 justify-content-center">
+    <div class="col-auto pb-4">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="onJoin()"
+        [mat-dialog-close]="true"
+      >
+        Join
+      </button>
+    </div>
+  </div>
+</div>

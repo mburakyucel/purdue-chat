@@ -1,23 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Class } from '../../assets/class';
 import { SubscriptionService } from '../services/subscription.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
+import { ChatInfoComponent } from '../chat-info/chat-info.component';
 
 @Component({
-  selector: 'app-classes',
-  templateUrl: './classes.component.html',
-  styleUrls: ['./classes.component.css'],
+  selector: 'app-groups',
+  templateUrl: './groups.component.html',
+  styleUrls: ['./groups.component.css'],
 })
-export class ClassesComponent implements OnInit {
+export class GroupsComponent implements OnInit {
   displayedGroups: Array<any> = [];
   allGroups: Array<any> = [];
   searchText = '';
-  subscribedClasses: string[] = [];
+  subscribedGroups: string[] = [];
 
   constructor(
     private subService: SubscriptionService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -27,17 +29,17 @@ export class ClassesComponent implements OnInit {
       this.filterDisplayedGroups();
     });
     this.subService.getSubscriptions().subscribe((subs) => {
-      this.subscribedClasses = subs;
+      this.subscribedGroups = subs;
       this.filterDisplayedGroups();
     });
   }
 
-  onSelect(selectedClass: Class): void {
+  onJoin(selectedGroup: any): void {
     this.subService
-      .addSubscription(selectedClass.id)
+      .addSubscription(selectedGroup.id)
       .then(() => {
         this._snackBar.open(
-          `Subscribed to ${selectedClass.subject} ${selectedClass.course}`,
+          `Subscribed to ${selectedGroup.groupName}`,
           'Close',
           {
             duration: 2000,
@@ -55,10 +57,17 @@ export class ClassesComponent implements OnInit {
     for (let item of this.allGroups) {
       if (
         item.groupName.toLowerCase().includes(this.searchText.toLowerCase()) &&
-        !this.subscribedClasses.includes(item.id)
+        !this.subscribedGroups.includes(item.id)
       ) {
         this.displayedGroups.push(item);
       }
     }
+  }
+
+  //Triggered when the group name is pressed by user to view its info
+  onGroupInfo(selectedGroup: any) {
+    this.dialog.open(ChatInfoComponent, {
+      data: selectedGroup,
+    });
   }
 }
