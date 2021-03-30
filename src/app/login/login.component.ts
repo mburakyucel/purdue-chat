@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
             this.password.setErrors({ incorrectPassword: true });
             break;
           case 'auth/too-many-requests':
-            this.password.setErrors({ toManyIncorrectAttempts: true})
+            this.password.setErrors({ toManyIncorrectAttempts: true });
             break;
           default:
             this.email.setErrors(null);

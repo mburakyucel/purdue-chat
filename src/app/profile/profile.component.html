@@ -166,9 +166,7 @@
           </div>
           <div
             class="alert alert-danger pt-3"
-            *ngIf="
-              passwordForm.errors?.noMatch && !passwordForm.errors?.match
-            "
+            *ngIf="passwordForm.errors?.noMatch && !passwordForm.errors?.match"
           >
             Passwords do not match
           </div>

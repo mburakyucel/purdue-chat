@@ -2,11 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProfileService } from '../services/profile.service';
 import { ImageUploadComponent } from '../image-upload/image-upload.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import {
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
@@ -14,7 +10,10 @@ import { take } from 'rxjs/operators';
 import { CroppieOptions } from 'croppie';
 import { ImageUploadService } from '../services/image-upload.service';
 
-import { ConfirmPasswordMustMatch, OldPasswordMustNotMatch } from '../shared/match-validation.directive';
+import {
+  ConfirmPasswordMustMatch,
+  OldPasswordMustNotMatch,
+} from '../shared/match-validation.directive';
 
 @Component({
   selector: 'app-profile',
@@ -65,7 +64,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private _snackBar: MatSnackBar,
     private authService: AuthService,
-    public uploadService: ImageUploadService,
+    public uploadService: ImageUploadService
   ) {}
 
   ngOnInit(): void {
