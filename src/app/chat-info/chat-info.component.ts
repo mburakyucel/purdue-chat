@@ -15,7 +15,6 @@ import { GroupsComponent } from '../groups/groups.component';
 export class ChatInfoComponent implements OnInit {
   chatMembers: any[] = [];
   docDmId: any;
-  revDocDmId: any;
 
   constructor(
     private subService: SubscriptionService,
