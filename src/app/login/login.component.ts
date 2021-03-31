@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit {
       return 'Enter a valid email';
     } else if (this.email.hasError('noUser')) {
       return 'There is no user record corresponding to this email address';
-    } else return 'Unknown error';
+    } else return 'An error occurred';
   }
 
   getPasswordErrorMsg() {
@@ -90,7 +90,7 @@ export class LoginComponent implements OnInit {
     } else if (this.password.hasError('incorrectPassword')) {
       return 'Incorrect Password';
     } else if (this.password.hasError('toManyIncorrectAttempts')) {
-      return 'Account has been temporarily disabled due to many failed login attempts';
-    } else return 'Unknown error';
+      return 'Too many login attempts. Please try again later';
+    } else return 'An error occurred';
   }
 }
