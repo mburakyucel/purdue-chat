@@ -96,7 +96,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   sendMessage(event: any) {
     event.preventDefault();
-    if (this.chatMetadata.type == 'dm') {
+    if (this.chatMetadata.type == 'dm' && this.messages.length == 0) {
       this.subService.addSubscription(this.chatId, this.recipientUser.uid);
     }
     if (this.imageUrl) {
