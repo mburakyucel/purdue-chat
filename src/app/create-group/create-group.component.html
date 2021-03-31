@@ -17,21 +17,44 @@
   </div>
   <div class="row mt-4">
     <div class="col">
-      <mat-form-field class="w-100" appearance="outline">
+      <mat-form-field
+        class="w-100"
+        hintLabel="Max 32 characters"
+        appearance="outline"
+      >
         <mat-label>Enter Group Name</mat-label>
-        <input matInput type="text" [formControl]="groupName" />
+        <input
+          matInput
+          #name
+          maxlength="32"
+          type="text"
+          [formControl]="groupName"
+        />
+        <mat-hint align="end">{{ name.value?.length || 0 }}/32</mat-hint>
+        <mat-error *ngIf="groupName.invalid"
+          >Please enter a group name</mat-error
+        >
       </mat-form-field>
     </div>
   </div>
   <div class="row">
     <div class="col">
-      <mat-form-field class="w-100" appearance="outline">
+      <mat-form-field
+        class="w-100"
+        hintLabel="Max 256 characters"
+        appearance="outline"
+      >
         <mat-label>Enter Group Description (Optional)</mat-label>
         <textarea
           matInput
+          #description
+          maxlength="256"
           type="text"
           [formControl]="groupDescription"
         ></textarea>
+        <mat-hint align="end"
+          >{{ description.value?.length || 0 }}/256</mat-hint
+        >
       </mat-form-field>
     </div>
   </div>
@@ -41,6 +64,7 @@
         mat-flat-button
         class="w-100"
         [mat-dialog-close]="true"
+        [disabled]="!groupName.valid"
         (click)="createGroup()"
       >
         Create Group

@@ -31,13 +31,25 @@
       </div>
       <ng-template #toggleOff>
         <form class="display_name" style="margin-top: 24px">
-          <mat-form-field appearance="outline">
+          <mat-form-field hintLabel="Max 32 characters" appearance="outline">
             <mat-label>Display Name:</mat-label>
-            <input matInput type="text" [formControl]="displayName" />
+            <input
+              matInput
+              #name
+              maxlength="32"
+              type="text"
+              class="form-control"
+              [formControl]="displayName"
+            />
+            <mat-error *ngIf="displayName.invalid"
+              >At least 1 character required</mat-error
+            >
+            <mat-hint align="end">{{ name.value?.length || 0 }}/32</mat-hint>
           </mat-form-field>
         </form>
         <button
           mat-stroked-button
+          [disabled]="!displayName.valid"
           (click)="onDisplayNameClick()"
           style="margin-left: 10px"
         >
@@ -68,36 +80,96 @@
       <ng-template #toggleOff_password>
         <form
           [formGroup]="passwordForm"
-          (ngSubmit)="onPasswordChange()"
           style="margin-top: 12px; margin-bottom: 5px"
         >
           <div class="formGroup">
             <mat-form-field appearance="outline">
               <mat-label>Old Password</mat-label>
-              <input matInput type="text" formControlName="old_password" />
+              <input
+                matInput
+                [type]="oldPasswordHide ? 'password' : 'text'"
+                formControlName="oldPassword"
+                autocomplete="new-password"
+              />
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="oldPasswordHide = !oldPasswordHide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="oldPasswordHide"
+              >
+                <mat-icon>{{
+                  oldPasswordHide ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </button>
             </mat-form-field>
           </div>
           <div class="formGroup">
             <mat-form-field appearance="outline">
               <mat-label>New Password</mat-label>
-              <input matInput type="text" formControlName="new_password" />
+              <input
+                matInput
+                [type]="newPasswordHide ? 'password' : 'text'"
+                formControlName="newPassword"
+                autocomplete="new-password"
+              />
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="newPasswordHide = !newPasswordHide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="newPasswordHide"
+              >
+                <mat-icon>{{
+                  newPasswordHide ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </button>
             </mat-form-field>
           </div>
           <div class="formGroup">
             <mat-form-field appearance="outline">
               <mat-label>Confirm Password</mat-label>
-              <input matInput type="text" formControlName="confirm_password" />
+              <input
+                matInput
+                [type]="confirmPasswordHide ? 'password' : 'text'"
+                formControlName="confirmPassword"
+                autocomplete="new-password"
+              />
+              <button
+                mat-icon-button
+                matSuffix
+                (click)="confirmPasswordHide = !confirmPasswordHide"
+                [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="confirmPasswordHide"
+              >
+                <mat-icon>{{
+                  confirmPasswordHide ? "visibility_off" : "visibility"
+                }}</mat-icon>
+              </button>
             </mat-form-field>
           </div>
           <button
             mat-stroked-button
             type="submit"
+            (click)="onPasswordChange()"
             [disabled]="!passwordForm.valid"
             style="margin-left: 115px"
           >
             Save
           </button>
           <button mat-stroked-button (click)="cancelPassword()">Cancel</button>
+          <div
+            class="alert alert-danger pt-3"
+            *ngIf="passwordForm.errors?.match"
+          >
+            Same new and old passwords
+          </div>
+          <div
+            class="alert alert-danger pt-3"
+            *ngIf="passwordForm.errors?.noMatch && !passwordForm.errors?.match"
+          >
+            Passwords do not match
+          </div>
         </form>
       </ng-template>
     </mat-list-item>

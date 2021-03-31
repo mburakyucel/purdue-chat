@@ -46,7 +46,7 @@ export class AuthService {
       return of(true);
     } catch (error) {
       console.log(error);
-      return throwError('error');
+      return throwError(error);
     }
   }
 
@@ -56,7 +56,7 @@ export class AuthService {
       return of(true);
     } catch (error) {
       console.log(error);
-      return throwError('error');
+      return throwError(error);
     }
   }
 
