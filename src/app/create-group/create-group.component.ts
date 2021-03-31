@@ -32,7 +32,7 @@ export class CreateGroupComponent implements OnInit {
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
     public sub: SubscriptionService,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {}
@@ -45,11 +45,13 @@ export class CreateGroupComponent implements OnInit {
         this.groupImageUrl
       )
       .then((docRef) => {
-        this.sub.addSubscription(docRef.id, this.authService.getUid()).then(() => {
-          this._snackBar.open('Group Creation Successful', 'Close', {
-            duration: 2000,
+        this.sub
+          .addSubscription(docRef.id, this.authService.getUid())
+          .then(() => {
+            this._snackBar.open('Group Creation Successful', 'Close', {
+              duration: 2000,
+            });
           });
-        });
       })
       .catch((error) => {
         console.log(error);

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject} from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { SubscriptionService } from '../services/subscription.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -7,7 +7,6 @@ import { CreateGroupService } from '../services/create-group.service';
 import { Router } from '@angular/router';
 import { GroupsComponent } from '../groups/groups.component';
 
-
 @Component({
   selector: 'app-chat-info',
   templateUrl: './chat-info.component.html',
@@ -15,8 +14,8 @@ import { GroupsComponent } from '../groups/groups.component';
 })
 export class ChatInfoComponent implements OnInit {
   chatMembers: any[] = [];
-  docDmId:any;
-  revDocDmId:any;
+  docDmId: any;
+  revDocDmId: any;
 
   constructor(
     private subService: SubscriptionService,
@@ -51,24 +50,23 @@ export class ChatInfoComponent implements OnInit {
       });
   }
 
-  sendDM(user:any){
-    const myId = this.authService.getUid()
-    const participants = new Array(myId, user.uid).sort()
+  sendDM(user: any) {
+    const myId = this.authService.getUid();
+    const participants = new Array(myId, user.uid).sort();
     this.docDmId = participants[0] + '_' + participants[1];
 
     this.groupService.queryDm(this.docDmId).subscribe((docDm) => {
-      if(!docDm.exists){
+      if (!docDm.exists) {
         this.groupService.createDm(this.docDmId, participants).then(() => {
           this.subService.addSubscription(this.docDmId, myId);
           this.router.navigate([`/chat/${this.docDmId}`]);
-          this.dialogRef.close()
-        })
-      }
-      else{
+          this.dialogRef.close();
+        });
+      } else {
         this.subService.addSubscription(this.docDmId, myId);
         this.router.navigate([`/chat/${this.docDmId}`]);
-        this.dialogRef.close()
+        this.dialogRef.close();
       }
-    })
+    });
   }
 }
