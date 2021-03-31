@@ -15,7 +15,7 @@
         width="72px"
         [src]="recipientUser.profileImage"
         *ngIf="recipientUser && chatMetadata.type == 'dm'"
-      />
+        />
       </div>
       <div class="col">
         <h1 *ngIf="chatMetadata.type == 'group'">{{ chatMetadata.groupName }}</h1>
