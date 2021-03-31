@@ -56,7 +56,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         this.chatMetadata = data;
         if (this.chatMetadata.type == 'dm') {
           this.subService
-            .getDmUsers(this.auth.getUid(), this.chatMetadata.participants)
+            .getDmRecipiant(this.auth.getUid(), this.chatMetadata.participants)
             .subscribe((user: any) => {
               this.recipientUser = user;
             });

@@ -50,13 +50,8 @@ export class SubscriptionService {
       .valueChanges();
   }
 
-  getDmUsers(myId: string, users: any) {
-    let recipiantID;
-    if (myId != users[0]) {
-      recipiantID = users[0];
-    } else {
-      recipiantID = users[1];
-    }
+  getDmRecipiant(myId: string, users: any) {
+    const recipiantID = users[users.indexOf(myId) ^ 1]
 
     return this.afs.collection('users').doc(recipiantID).valueChanges();
   }

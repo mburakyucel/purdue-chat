@@ -30,7 +30,7 @@ export class ChatListItemComponent implements OnInit {
       this.chatMetadata = data;
       if (data && data.type == 'dm') {
         this.subService
-          .getDmUsers(this.myId, data.participants)
+          .getDmRecipiant(this.myId, data.participants)
           .subscribe((user) => {
             this.dmRecipiant = user;
           });
