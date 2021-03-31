@@ -8,7 +8,7 @@ import {
 import { DocumentData } from '@angular/fire/firestore';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Subject } from 'rxjs';
+import { of, Subject } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { ChatService } from '../services/chat.service';
@@ -50,9 +50,21 @@ export class ChatComponent implements OnInit, OnDestroy {
       .pipe(
         map((params: ParamMap) => params.get('chatId')),
         switchMap((chatId: string) => this.chatService.getChatMetadata(chatId)),
+        switchMap((data: any) => {
+          this.chatMetadata = data;
+          if (data.type === 'dm') {
+            return this.subService.getDmRecipiant(
+              this.auth.getUid(),
+              data.participants
+            );
+          } else {
+            return of(null);
+          }
+        }),
         takeUntil(this.unsubscribe$)
       )
       .subscribe((data: any) => {
+<<<<<<< HEAD
         this.chatMetadata = data;
         if (this.chatMetadata.type == 'dm') {
           this.subService
@@ -62,6 +74,10 @@ export class ChatComponent implements OnInit, OnDestroy {
               this.recipientUser = user;
             });
         }
+=======
+        /* recipientUser is null if selected chat is a group chat */
+        this.recipientUser = data;
+>>>>>>> c1050523eddcab6bbef55d151b9c4412eebbef33
       });
     this.route.paramMap
       .pipe(
