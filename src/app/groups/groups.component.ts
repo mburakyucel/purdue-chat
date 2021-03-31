@@ -21,7 +21,7 @@ export class GroupsComponent implements OnInit {
     private subService: SubscriptionService,
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -58,7 +58,8 @@ export class GroupsComponent implements OnInit {
 
     for (let item of this.allGroups) {
       if (
-        item.type == 'group' && item.groupName.toLowerCase().includes(this.searchText.toLowerCase()) &&
+        item.type == 'group' &&
+        item.groupName.toLowerCase().includes(this.searchText.toLowerCase()) &&
         !this.subscribedGroups.includes(item.id)
       ) {
         this.displayedGroups.push(item);

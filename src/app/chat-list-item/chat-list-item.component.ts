@@ -14,24 +14,26 @@ export class ChatListItemComponent implements OnInit {
   chatMetadata: any;
   lastMessage: any;
   users: any = {};
-  myId:any;
-  dmRecipiant:any;
+  myId: any;
+  dmRecipiant: any;
 
   constructor(
     private chatService: ChatService,
     private subService: SubscriptionService,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
-    this.myId = this.authService.getUid()
+    this.myId = this.authService.getUid();
 
     this.chatService.getChatMetadata(this.chatId).subscribe((data: any) => {
       this.chatMetadata = data;
-      if(data && data.type == 'dm'){
-        this.subService.getDmUsers(this.myId, data.participants).subscribe((user) => {
-          this.dmRecipiant = user
-        })
+      if (data && data.type == 'dm') {
+        this.subService
+          .getDmUsers(this.myId, data.participants)
+          .subscribe((user) => {
+            this.dmRecipiant = user;
+          });
       }
     });
     this.chatService.getMessagesWithLimit(this.chatId, 1).subscribe(

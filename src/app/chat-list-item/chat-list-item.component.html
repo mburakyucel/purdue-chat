@@ -14,15 +14,19 @@
           *ngIf="chatMetadata.type == 'group'"
         />
         <img
-        *ngIf="chatMetadata.type == 'dm' && dmRecipiant"
-        class="rounded-circle"
-        height="56px"
-        [src]="dmRecipiant.profileImage"
+          *ngIf="chatMetadata.type == 'dm' && dmRecipiant"
+          class="rounded-circle"
+          height="56px"
+          [src]="dmRecipiant.profileImage"
         />
       </div>
       <div class="col">
-        <span *ngIf="chatMetadata.type == 'group'">{{ chatMetadata.groupName }}</span>
-        <span *ngIf="chatMetadata.type == 'dm' && dmRecipiant">{{ dmRecipiant.displayName }}</span>
+        <span *ngIf="chatMetadata.type == 'group'">{{
+          chatMetadata.groupName
+        }}</span>
+        <span *ngIf="chatMetadata.type == 'dm' && dmRecipiant">{{
+          dmRecipiant.displayName
+        }}</span>
         <span *ngIf="lastMessage" style="float: right">{{
           lastMessage.createdAt | date: "shortTime"
         }}</span>

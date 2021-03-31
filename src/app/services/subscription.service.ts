@@ -18,7 +18,7 @@ export class SubscriptionService {
   }
 
   //Add a subscription to the user chats array
-  addSubscription(classID: string, userId:string) {
+  addSubscription(classID: string, userId: string) {
     return this.afs
       .collection('users')
       .doc(userId)
@@ -50,15 +50,14 @@ export class SubscriptionService {
       .valueChanges();
   }
 
-  getDmUsers(myId:string, users:any){
+  getDmUsers(myId: string, users: any) {
     let recipiantID;
-    if(myId != users[0]){
-      recipiantID = users[0]
-    }
-    else{
-      recipiantID = users[1]
+    if (myId != users[0]) {
+      recipiantID = users[0];
+    } else {
+      recipiantID = users[1];
     }
 
-    return this.afs.collection('users').doc(recipiantID).valueChanges()
+    return this.afs.collection('users').doc(recipiantID).valueChanges();
   }
 }

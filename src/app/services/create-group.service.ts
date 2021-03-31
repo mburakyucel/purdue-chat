@@ -6,7 +6,10 @@ import { SubscriptionService } from './subscription.service';
   providedIn: 'root',
 })
 export class CreateGroupService {
-  constructor(private afs: AngularFirestore, private subService: SubscriptionService,) {}
+  constructor(
+    private afs: AngularFirestore,
+    private subService: SubscriptionService
+  ) {}
 
   uploadGroup(
     groupName: string,
@@ -18,21 +21,21 @@ export class CreateGroupService {
       groupDescription,
       groupImageUrl,
       createdAt: Date.now(),
-      type: "group"
+      type: 'group',
     };
     return this.afs.collection('chats').add(data);
   }
 
-  createDm(docId:string, participants:any){
+  createDm(docId: string, participants: any) {
     const data = {
       participants: participants,
       createdAt: Date.now(),
-      type: "dm",
-    }
-    return this.afs.collection('chats').doc(docId).set(data)
+      type: 'dm',
+    };
+    return this.afs.collection('chats').doc(docId).set(data);
   }
 
-  queryDm(docId:string){
-    return this.afs.collection('chats').doc(docId).get()
+  queryDm(docId: string) {
+    return this.afs.collection('chats').doc(docId).get();
   }
 }
