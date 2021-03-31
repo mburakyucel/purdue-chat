@@ -71,7 +71,7 @@ export class RegisterComponent implements OnInit {
       return 'Enter a valid email';
     } else if (this.email.hasError('existingUser')) {
       return 'Email address is already in use by another account';
-    } else return 'Unknown error';
+    } else return 'An error occurred';
   }
 
   getPasswordErrorMsg() {
@@ -79,6 +79,6 @@ export class RegisterComponent implements OnInit {
       return 'Password is required';
     } else if (this.password.hasError('minlength')) {
       return 'Enter a 6 or more character password';
-    } else return 'Unknown error';
+    } else return 'An error occurred';
   }
 }

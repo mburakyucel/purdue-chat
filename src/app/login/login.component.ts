@@ -90,7 +90,7 @@ export class LoginComponent implements OnInit {
     } else if (this.password.hasError('incorrectPassword')) {
       return 'Incorrect Password';
     } else if (this.password.hasError('toManyIncorrectAttempts')) {
-      return 'Too many login attempts. Please try again later';
+      return 'Too many login attempts. Try again later';
     } else return 'An error occurred';
   }
 }
