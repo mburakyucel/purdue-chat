@@ -64,20 +64,8 @@ export class ChatComponent implements OnInit, OnDestroy {
         takeUntil(this.unsubscribe$)
       )
       .subscribe((data: any) => {
-<<<<<<< HEAD
-        this.chatMetadata = data;
-        if (this.chatMetadata.type == 'dm') {
-          this.subService
-            .getDmRecipiant(this.auth.getUid(), this.chatMetadata.participants)
-            .subscribe((user: any) => {
-              console.log("sgoihids")
-              this.recipientUser = user;
-            });
-        }
-=======
         /* recipientUser is null if selected chat is a group chat */
         this.recipientUser = data;
->>>>>>> c1050523eddcab6bbef55d151b9c4412eebbef33
       });
     this.route.paramMap
       .pipe(
