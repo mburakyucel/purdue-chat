@@ -7,7 +7,6 @@ import { CreateGroupService } from '../services/create-group.service';
 import { Router } from '@angular/router';
 import { GroupsComponent } from '../groups/groups.component';
 
-
 @Component({
   selector: 'app-chat-info',
   templateUrl: './chat-info.component.html',
