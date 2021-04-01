@@ -5,9 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
   providedIn: 'root',
 })
 export class CreateGroupService {
-  constructor(
-    private afs: AngularFirestore,
-  ) {}
+  constructor(private afs: AngularFirestore) {}
 
   uploadGroup(
     groupName: string,
