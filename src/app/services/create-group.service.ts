@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { SubscriptionService } from './subscription.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +7,6 @@ import { SubscriptionService } from './subscription.service';
 export class CreateGroupService {
   constructor(
     private afs: AngularFirestore,
-    private subService: SubscriptionService
   ) {}
 
   uploadGroup(
@@ -35,7 +33,7 @@ export class CreateGroupService {
     return this.afs.collection('chats').doc(docId).set(data);
   }
 
-  queryDm(docId: string) {
+  getDmMetadata(docId: string) {
     return this.afs.collection('chats').doc(docId).get();
   }
 }

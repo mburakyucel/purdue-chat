@@ -14,13 +14,13 @@ import { GroupsComponent } from '../groups/groups.component';
 })
 export class ChatInfoComponent implements OnInit {
   chatMembers: any[] = [];
-  docDmId: any;
+  dmDocId: any;
 
   constructor(
     private subService: SubscriptionService,
     private _snackBar: MatSnackBar,
     private authService: AuthService,
-    public groupService: CreateGroupService,
+    public cgService: CreateGroupService,
     private router: Router,
     public dialogRef: MatDialogRef<GroupsComponent>,
     @Inject(MAT_DIALOG_DATA) public selectedGroup: any
@@ -51,19 +51,19 @@ export class ChatInfoComponent implements OnInit {
 
   sendDM(user: any) {
     const myId = this.authService.getUid();
-    const participants = new Array(myId, user.uid).sort();
-    this.docDmId = participants[0] + '_' + participants[1];
+    const participants = [myId, user.uid].sort();
+    this.dmDocId = `${participants[0]}_${participants[1]}`;
 
-    this.groupService.queryDm(this.docDmId).subscribe((docDm) => {
+    this.cgService.getDmMetadata(this.dmDocId).subscribe((docDm) => {
       if (!docDm.exists) {
-        this.groupService.createDm(this.docDmId, participants).then(() => {
-          this.subService.addSubscription(this.docDmId, myId);
-          this.router.navigate([`/chat/${this.docDmId}`]);
+        this.cgService.createDm(this.dmDocId, participants).then(() => {
+          this.subService.addSubscription(this.dmDocId, myId);
+          this.router.navigate([`/chat/${this.dmDocId}`]);
           this.dialogRef.close();
         });
       } else {
-        this.subService.addSubscription(this.docDmId, myId);
-        this.router.navigate([`/chat/${this.docDmId}`]);
+        this.subService.addSubscription(this.dmDocId, myId);
+        this.router.navigate([`/chat/${this.dmDocId}`]);
         this.dialogRef.close();
       }
     });
