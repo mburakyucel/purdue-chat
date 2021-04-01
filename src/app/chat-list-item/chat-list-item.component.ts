@@ -14,8 +14,10 @@ export class ChatListItemComponent implements OnInit {
   chatMetadata: any;
   lastMessage: any;
   users: any = {};
-  myId: any;
+  myId = this.authService.getUid();
   dmRecipient: any;
+  imageUrl = '';
+  isRecipientSubscribed = false;
 
   constructor(
     private chatService: ChatService,
@@ -24,15 +26,18 @@ export class ChatListItemComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.myId = this.authService.getUid();
-
     this.chatService.getChatMetadata(this.chatId).subscribe((data: any) => {
       this.chatMetadata = data;
-      if (data && data.type == 'dm') {
+      /* imageUrl will get assigned null if it is a DM */
+      this.imageUrl = data?.groupImageUrl;
+      /* Subscribe to the recipient only once by checking the isRecipientSubscribed */
+      if (!this.isRecipientSubscribed && data.type == 'dm') {
+        this.isRecipientSubscribed = true;
         this.subService
           .getDmRecipient(this.myId, data.participants)
-          .subscribe((user) => {
+          .subscribe((user: any) => {
             this.dmRecipient = user;
+            this.imageUrl = user.profileImage;
           });
       }
     });

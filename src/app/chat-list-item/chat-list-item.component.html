@@ -10,14 +10,8 @@
         <img
           class="rounded-circle"
           height="56px"
-          [src]="chatMetadata.groupImageUrl"
-          *ngIf="chatMetadata.type == 'group'"
-        />
-        <img
-          *ngIf="chatMetadata.type == 'dm' && dmRecipient"
-          class="rounded-circle"
-          height="56px"
-          [src]="dmRecipient.profileImage"
+          [src]="imageUrl"
+          *ngIf="imageUrl"
         />
       </div>
       <div class="col">
