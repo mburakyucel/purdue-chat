@@ -6,23 +6,13 @@
           class="rounded-circle"
           height="72px"
           width="72px"
-          [src]="chatMetadata.groupImageUrl"
-          *ngIf="chatMetadata.type == 'group'"
-        />
-        <img
-          class="rounded-circle"
-          height="72px"
-          width="72px"
-          [src]="recipientUser.profileImage"
-          *ngIf="recipientUser && chatMetadata.type == 'dm'"
+          [src]="chatImageUrl"
+          *ngIf="chatImageUrl"
         />
       </div>
       <div class="col">
-        <h1 *ngIf="chatMetadata.type == 'group'">
-          {{ chatMetadata.groupName }}
-        </h1>
-        <h1 *ngIf="recipientUser && chatMetadata.type == 'dm'">
-          {{ recipientUser.displayName }}
+        <h1 *ngIf="chatTitle">
+          {{ chatTitle }}
         </h1>
       </div>
     </div>

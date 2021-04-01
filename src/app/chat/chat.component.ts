@@ -26,6 +26,8 @@ export class ChatComponent implements OnInit, OnDestroy {
   messages: any[] = [];
   users: any = {};
   selectedImageFile: any;
+  chatImageUrl = '';
+  chatTitle = '';
   imageUrl: any;
   imageLoading = false;
   messageControl = new FormControl('');
@@ -52,6 +54,8 @@ export class ChatComponent implements OnInit, OnDestroy {
         switchMap((chatId: string) => this.chatService.getChatMetadata(chatId)),
         switchMap((data: any) => {
           this.chatMetadata = data;
+          this.chatImageUrl = data?.groupImageUrl;
+          this.chatTitle = data?.groupName;
           if (data.type === 'dm') {
             return this.subService.getDmRecipient(
               this.auth.getUid(),
@@ -66,6 +70,9 @@ export class ChatComponent implements OnInit, OnDestroy {
       .subscribe((data: any) => {
         /* recipientUser is null if selected chat is a group chat */
         this.recipientUser = data;
+        /* If data is not null, i.e. it is not a group but DM, assign chatImageUrl and chatTitle */
+        this.chatImageUrl = data ? data.profileImage : this.chatImageUrl;
+        this.chatTitle = data ? data.displayName : this.chatTitle;
       });
     this.route.paramMap
       .pipe(
