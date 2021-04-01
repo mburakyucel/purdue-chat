@@ -15,11 +15,8 @@
         />
       </div>
       <div class="col">
-        <span *ngIf="chatMetadata.type == 'group'">{{
-          chatMetadata.groupName
-        }}</span>
-        <span *ngIf="chatMetadata.type == 'dm' && dmRecipient">{{
-          dmRecipient.displayName
+        <span *ngIf="chatTitle">{{
+          chatTitle
         }}</span>
         <span *ngIf="lastMessage" style="float: right">{{
           lastMessage.createdAt | date: "shortTime"
