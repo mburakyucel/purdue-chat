@@ -53,7 +53,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         switchMap((data: any) => {
           this.chatMetadata = data;
           if (data.type === 'dm') {
-            return this.subService.getDmRecipiant(
+            return this.subService.getDmRecipient(
               this.auth.getUid(),
               data.participants
             );

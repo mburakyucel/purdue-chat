@@ -15,7 +15,7 @@ export class ChatListItemComponent implements OnInit {
   lastMessage: any;
   users: any = {};
   myId: any;
-  dmRecipiant: any;
+  dmRecipient: any;
 
   constructor(
     private chatService: ChatService,
@@ -30,9 +30,9 @@ export class ChatListItemComponent implements OnInit {
       this.chatMetadata = data;
       if (data && data.type == 'dm') {
         this.subService
-          .getDmRecipiant(this.myId, data.participants)
+          .getDmRecipient(this.myId, data.participants)
           .subscribe((user) => {
-            this.dmRecipiant = user;
+            this.dmRecipient = user;
           });
       }
     });
