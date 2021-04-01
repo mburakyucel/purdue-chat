@@ -42,4 +42,4 @@ export const environment = {
 };
 ```
 5. (optional) Configure a new Bucket
-6. Setup firebase hosting using the Firebase CLI following the instructions in the Firebase Console Hosting tab. Deploy app using `firebase deploy` or `ng deploy`
+6. Setup firebase hosting using the Firebase CLI following the instructions in the Firebase Console Hosting tab. Deploy app using `ng deploy` or `firebase deploy`. Refer to AngularFire deployment for more details: https://github.com/angular/angularfire/blob/master/docs/deploy/getting-started.md
