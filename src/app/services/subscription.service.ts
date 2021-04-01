@@ -52,9 +52,4 @@ export class SubscriptionService {
       .valueChanges();
   }
 
-  getDmRecipient(myId: string, users: any) {
-    const recipiantID = users[users.indexOf(myId) ^ 1];
-
-    return this.afs.collection('users').doc(recipiantID).valueChanges();
-  }
 }

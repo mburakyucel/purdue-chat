@@ -35,8 +35,10 @@ export class ChatListItemComponent implements OnInit {
       /* Subscribe to the recipient only once by checking the isRecipientSubscribed */
       if (!this.isRecipientSubscribed && data.type == 'dm') {
         this.isRecipientSubscribed = true;
-        this.subService
-          .getDmRecipient(this.myId, data.participants)
+        /* Get the other user's ID */
+        const recipientId = data.participants.filter((userId: string) => userId !== this.myId)[0];
+        this.chatService
+          .getUser(recipientId)
           .subscribe((user: any) => {
             this.dmRecipient = user;
             this.imageUrl = user.profileImage;

@@ -57,10 +57,10 @@ export class ChatComponent implements OnInit, OnDestroy {
           this.chatImageUrl = data?.groupImageUrl;
           this.chatTitle = data?.groupName;
           if (data.type === 'dm') {
-            return this.subService.getDmRecipient(
-              this.auth.getUid(),
-              data.participants
-            );
+            /* Get the other user's ID */
+            const myId = this.auth.getUid();
+            const recipientId = data.participants.filter((userId: string) => userId !== myId)[0];
+            return this.chatService.getUser(recipientId);
           } else {
             return of(null);
           }

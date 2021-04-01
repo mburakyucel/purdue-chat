@@ -63,4 +63,8 @@ export class ChatService {
       })
     );
   }
+
+  getUser(userId: string) {
+    return this.afs.collection('users').doc(userId).valueChanges();
+  }
 }
