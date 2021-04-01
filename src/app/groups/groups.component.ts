@@ -58,7 +58,6 @@ export class GroupsComponent implements OnInit {
 
     for (let item of this.allGroups) {
       if (
-        item.type == 'group' &&
         item.groupName.toLowerCase().includes(this.searchText.toLowerCase()) &&
         !this.subscribedGroups.includes(item.id)
       ) {

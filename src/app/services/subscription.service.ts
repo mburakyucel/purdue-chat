@@ -39,7 +39,7 @@ export class SubscriptionService {
 
   //Show all available groups
   getGroups(): Observable<any> {
-    return this.afs.collection('chats').valueChanges({ idField: 'id' });
+    return this.afs.collection('chats', (ref) => ref.where('type', '==', 'group')).valueChanges({ idField: 'id' });
   }
 
   getSubscribedUsers(chatId: string): Observable<any> {
