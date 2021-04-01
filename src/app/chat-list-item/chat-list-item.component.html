@@ -15,9 +15,7 @@
         />
       </div>
       <div class="col">
-        <span *ngIf="chatTitle">{{
-          chatTitle
-        }}</span>
+        <span *ngIf="chatTitle">{{ chatTitle }}</span>
         <span *ngIf="lastMessage" style="float: right">{{
           lastMessage.createdAt | date: "shortTime"
         }}</span>
