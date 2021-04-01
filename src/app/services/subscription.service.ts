@@ -18,10 +18,10 @@ export class SubscriptionService {
   }
 
   //Add a subscription to the user chats array
-  addSubscription(classID: string) {
+  addSubscription(classID: string, userId: string) {
     return this.afs
       .collection('users')
-      .doc(this.authService.getUid())
+      .doc(userId)
       .update({
         chats: firebase.firestore.FieldValue.arrayUnion(classID),
       });
@@ -39,7 +39,9 @@ export class SubscriptionService {
 
   //Show all available groups
   getGroups(): Observable<any> {
-    return this.afs.collection('chats').valueChanges({ idField: 'id' });
+    return this.afs
+      .collection('chats', (ref) => ref.where('type', '==', 'group'))
+      .valueChanges({ idField: 'id' });
   }
 
   getSubscribedUsers(chatId: string): Observable<any> {

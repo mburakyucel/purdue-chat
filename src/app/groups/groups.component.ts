@@ -4,6 +4,7 @@ import { SubscriptionService } from '../services/subscription.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ChatInfoComponent } from '../chat-info/chat-info.component';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-groups',
@@ -19,7 +20,8 @@ export class GroupsComponent implements OnInit {
   constructor(
     private subService: SubscriptionService,
     private _snackBar: MatSnackBar,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -36,7 +38,7 @@ export class GroupsComponent implements OnInit {
 
   onJoin(selectedGroup: any): void {
     this.subService
-      .addSubscription(selectedGroup.id)
+      .addSubscription(selectedGroup.id, this.authService.getUid())
       .then(() => {
         this._snackBar.open(
           `Subscribed to ${selectedGroup.groupName}`,

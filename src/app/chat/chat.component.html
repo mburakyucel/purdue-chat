@@ -6,11 +6,14 @@
           class="rounded-circle"
           height="72px"
           width="72px"
-          [src]="chatMetadata.groupImageUrl"
+          [src]="chatImageUrl"
+          *ngIf="chatImageUrl"
         />
       </div>
       <div class="col">
-        <h1>{{ chatMetadata.groupName }}</h1>
+        <h1 *ngIf="chatTitle">
+          {{ chatTitle }}
+        </h1>
       </div>
     </div>
     <mat-divider></mat-divider>

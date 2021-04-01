@@ -8,7 +8,8 @@ import {
 import { DocumentData } from '@angular/fire/firestore';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { Subject } from 'rxjs';
+import { of, Subject } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { ChatService } from '../services/chat.service';
 import { ImageUploadService } from '../services/image-upload.service';
@@ -25,18 +26,24 @@ export class ChatComponent implements OnInit, OnDestroy {
   messages: any[] = [];
   users: any = {};
   selectedImageFile: any;
+  chatImageUrl = '';
+  chatTitle = '';
   imageUrl: any;
   imageLoading = false;
   messageControl = new FormControl('', [Validators.maxLength(1024)]);
   unsubscribe$: Subject<void> = new Subject<void>();
+  recipientUser: any;
+
   @ViewChild('messageSection', { read: ElementRef })
   public messageSection: ElementRef<any>;
   @ViewChild('inputMessage') inputMessage: ElementRef<HTMLInputElement>;
+
   constructor(
     private chatService: ChatService,
     private route: ActivatedRoute,
     private imageUploadService: ImageUploadService,
-    private subService: SubscriptionService
+    private subService: SubscriptionService,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -44,10 +51,29 @@ export class ChatComponent implements OnInit, OnDestroy {
       .pipe(
         map((params: ParamMap) => params.get('chatId')),
         switchMap((chatId: string) => this.chatService.getChatMetadata(chatId)),
+        switchMap((data: any) => {
+          this.chatMetadata = data;
+          this.chatImageUrl = data?.groupImageUrl;
+          this.chatTitle = data?.groupName;
+          if (data.type === 'dm') {
+            /* Get the other user's ID */
+            const myId = this.auth.getUid();
+            const recipientId = data.participants.filter(
+              (userId: string) => userId !== myId
+            )[0];
+            return this.chatService.getUser(recipientId);
+          } else {
+            return of(null);
+          }
+        }),
         takeUntil(this.unsubscribe$)
       )
       .subscribe((data: any) => {
-        this.chatMetadata = data;
+        /* recipientUser is null if selected chat is a group chat */
+        this.recipientUser = data;
+        /* If data is not null, i.e. it is not a group but DM, assign chatImageUrl and chatTitle */
+        this.chatImageUrl = data ? data.profileImage : this.chatImageUrl;
+        this.chatTitle = data ? data.displayName : this.chatTitle;
       });
     this.route.paramMap
       .pipe(
@@ -78,6 +104,9 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   sendMessage(event: any) {
     event.preventDefault();
+    if (this.chatMetadata.type == 'dm' && this.messages.length == 0) {
+      this.subService.addSubscription(this.chatId, this.recipientUser.uid);
+    }
     if (this.imageUrl) {
       this.imageLoading = true;
       this.imageUploadService

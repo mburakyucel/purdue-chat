@@ -10,11 +10,12 @@
         <img
           class="rounded-circle"
           height="56px"
-          [src]="chatMetadata.groupImageUrl"
+          [src]="imageUrl"
+          *ngIf="imageUrl"
         />
       </div>
       <div class="col">
-        <span>{{ chatMetadata.groupName }}</span>
+        <span *ngIf="chatTitle">{{ chatTitle }}</span>
         <span *ngIf="lastMessage" style="float: right">{{
           lastMessage.createdAt | date: "shortTime"
         }}</span>
