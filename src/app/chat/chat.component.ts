@@ -32,7 +32,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   imageLoading = false;
   messageControl = new FormControl('');
   unsubscribe$: Subject<void> = new Subject<void>();
-
   recipientUser: any;
 
   @ViewChild('messageSection', { read: ElementRef })
