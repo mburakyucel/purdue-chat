@@ -59,7 +59,9 @@ export class ChatComponent implements OnInit, OnDestroy {
           if (data.type === 'dm') {
             /* Get the other user's ID */
             const myId = this.auth.getUid();
-            const recipientId = data.participants.filter((userId: string) => userId !== myId)[0];
+            const recipientId = data.participants.filter(
+              (userId: string) => userId !== myId
+            )[0];
             return this.chatService.getUser(recipientId);
           } else {
             return of(null);

@@ -36,14 +36,14 @@ export class ChatListItemComponent implements OnInit {
       if (!this.isRecipientSubscribed && data.type == 'dm') {
         this.isRecipientSubscribed = true;
         /* Get the other user's ID */
-        const recipientId = data.participants.filter((userId: string) => userId !== this.myId)[0];
-        this.chatService
-          .getUser(recipientId)
-          .subscribe((user: any) => {
-            this.dmRecipient = user;
-            this.imageUrl = user.profileImage;
-            this.chatTitle = user.displayName;
-          });
+        const recipientId = data.participants.filter(
+          (userId: string) => userId !== this.myId
+        )[0];
+        this.chatService.getUser(recipientId).subscribe((user: any) => {
+          this.dmRecipient = user;
+          this.imageUrl = user.profileImage;
+          this.chatTitle = user.displayName;
+        });
       }
     });
     this.chatService.getMessagesWithLimit(this.chatId, 1).subscribe(
