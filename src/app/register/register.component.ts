@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
           duration: 2000,
         });
         this.loading = false;
-        this.router.navigate(['login']);
+        this.router.navigate(['']);
       },
       (error) => {
         console.log(error);

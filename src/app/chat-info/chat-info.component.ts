@@ -54,18 +54,13 @@ export class ChatInfoComponent implements OnInit {
     const participants = [myId, user.uid].sort();
     this.dmDocId = `${participants[0]}_${participants[1]}`;
 
-    this.cgService.getDmMetadata(this.dmDocId).subscribe((docDm) => {
+    this.cgService.getDmMetadata(this.dmDocId).subscribe(async (docDm) => {
       if (!docDm.exists) {
-        this.cgService.createDm(this.dmDocId, participants).then(() => {
-          this.subService.addSubscription(this.dmDocId, myId);
-          this.router.navigate([`/chat/${this.dmDocId}`]);
-          this.dialogRef.close();
-        });
-      } else {
-        this.subService.addSubscription(this.dmDocId, myId);
-        this.router.navigate([`/chat/${this.dmDocId}`]);
-        this.dialogRef.close();
+        await this.cgService.createDm(this.dmDocId, participants);
       }
+      await this.subService.addSubscription(this.dmDocId, myId);
+      this.router.navigate([`/chat/${this.dmDocId}`]);
+      this.dialogRef.close();
     });
   }
 }
