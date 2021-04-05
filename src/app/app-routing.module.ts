@@ -7,6 +7,7 @@ import { GroupsComponent } from './groups/groups.component';
 import { MainComponent } from './main/main.component';
 import { AuthGuard } from './auth.guard';
 import { UnauthGuard } from './unauth.guard';
+import { ChatGuard } from './chat.guard';
 import { HomeComponent } from './home/home.component';
 import { ChatComponent } from './chat/chat.component';
 
@@ -30,6 +31,7 @@ const routes: Routes = [
       },
       {
         path: 'chat/:chatId',
+        canActivate: [ChatGuard],
         component: ChatComponent,
       },
     ],

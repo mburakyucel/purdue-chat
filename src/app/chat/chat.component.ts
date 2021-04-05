@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { DocumentData } from '@angular/fire/firestore';
 import { FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { of, Subject } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
@@ -41,6 +41,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   constructor(
     private chatService: ChatService,
     private route: ActivatedRoute,
+    private router: Router,
     private imageUploadService: ImageUploadService,
     private subService: SubscriptionService,
     private auth: AuthService
@@ -100,6 +101,18 @@ export class ChatComponent implements OnInit, OnDestroy {
         console.log(users);
         this.usersArrayToJson(users);
       });
+      
+      //This correctly compares to the current URL
+      this.route.paramMap
+        .pipe(
+          switchMap(() => this.subService.getSubscriptions())
+        )
+        .subscribe((subs) => {
+          var ind = this.router.url.toString().indexOf("t/");
+          var chatID = this.router.url.toString().substring(ind+2);
+          console.log(chatID)
+          console.log(subs.includes(chatID))
+          })
   }
 
   sendMessage(event: any) {
