@@ -8,12 +8,12 @@ import {
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { AuthService } from './services/auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UnauthGuard implements CanActivate {
+export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -25,7 +25,7 @@ export class UnauthGuard implements CanActivate {
     | UrlTree {
     return this.authService.isSignedIn().pipe(
       switchMap((isSignedIn) => {
-        if (isSignedIn) return of(this.router.parseUrl('/chat'));
+        if (!isSignedIn) return of(this.router.parseUrl('/home'));
         return of(true);
       })
     );

@@ -5,9 +5,9 @@ import { RegisterComponent } from './register/register.component';
 import { SubscriptionsComponent } from './subscriptions/subscriptions.component';
 import { GroupsComponent } from './groups/groups.component';
 import { MainComponent } from './main/main.component';
-import { AuthGuard } from './auth.guard';
-import { UnauthGuard } from './unauth.guard';
-import { ChatGuard } from './chat.guard';
+import { AuthGuard } from './guards/auth.guard';
+import { UnauthGuard } from './guards/unauth.guard';
+import { ChatGuard } from './guards/chat.guard';
 import { HomeComponent } from './home/home.component';
 import { ChatComponent } from './chat/chat.component';
 

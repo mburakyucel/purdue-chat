@@ -8,7 +8,7 @@ import {
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { SubscriptionService } from './services/subscription.service';
+import { SubscriptionService } from '../services/subscription.service';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,8 @@ export class ChatGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree { 
-    return this.subService.isSubscribed().pipe(
+    var chatId = route.paramMap.get('chatId')
+    return this.subService.isSubscribed(chatId).pipe(
       switchMap((isSubscribed) => {
         if(!isSubscribed) return of(this.router.parseUrl('/'));
         return of(true);

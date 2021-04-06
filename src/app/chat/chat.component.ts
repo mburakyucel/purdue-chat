@@ -101,18 +101,6 @@ export class ChatComponent implements OnInit, OnDestroy {
         console.log(users);
         this.usersArrayToJson(users);
       });
-      
-      //This correctly compares to the current URL
-      this.route.paramMap
-        .pipe(
-          switchMap(() => this.subService.getSubscriptions())
-        )
-        .subscribe((subs) => {
-          var ind = this.router.url.toString().indexOf("t/");
-          var chatID = this.router.url.toString().substring(ind+2);
-          console.log(chatID)
-          console.log(subs.includes(chatID))
-          })
   }
 
   sendMessage(event: any) {

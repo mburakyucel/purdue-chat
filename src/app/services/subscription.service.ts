@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import firebase from 'firebase/app';
-import { Router } from '@angular/router';
 
 import { Observable, of} from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -15,8 +15,8 @@ export class SubscriptionService {
   constructor(
     public afs: AngularFirestore, 
     public authService: AuthService,
-    private router: Router
-    ) {}
+    private _snackBar: MatSnackBar
+    ) { }
 
   //Show all groups a user is subscribed too
   getSubscriptions(): Observable<any> {
@@ -59,17 +59,15 @@ export class SubscriptionService {
   }
 
   //Checks if the user is subscribed to the chat being accessed through the URL
-  //INCORRECTLY compares to the previous URL. Not sure why it's lagging behind
-  isSubscribed(): Observable<boolean>{
+  isSubscribed(chatId: any): Observable<boolean>{
     return this.getSubscriptions().pipe(
       switchMap((subscriptions) => {
-        var chatIDStartInd = this.router.url.toString().indexOf("t/");
-        var chatIDAccessed = this.router.url.toString().substring(chatIDStartInd+2);
-        if (subscriptions.includes(chatIDAccessed) || chatIDAccessed === '') {
-          //console.log(chatIDAccessed);
+        if (subscriptions.includes(chatId)) {
           return of(true);
         } else {
-          //console.log(chatIDAccessed);
+          this._snackBar.open('Access Denied', 'Close', {
+            duration: 2000,
+          });
           return of(false);
         }
       })
