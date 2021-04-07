@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { ChatInfoComponent } from '../chat-info/chat-info.component';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-groups',
@@ -21,7 +22,8 @@ export class GroupsComponent implements OnInit {
     private subService: SubscriptionService,
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router,
   ) {}
 
   ngOnInit() {

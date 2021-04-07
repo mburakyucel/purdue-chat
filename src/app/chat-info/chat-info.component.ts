@@ -36,6 +36,7 @@ export class ChatInfoComponent implements OnInit {
     this.subService
       .addSubscription(this.data.selectedGroup.id, this.authService.getUid())
       .then(() => {
+        this.router.navigate([`/chat/${this.data.selectedGroup.id}`]);
         this._snackBar.open(
           `Subscribed to ${this.data.selectedGroup.groupName}`,
           'Close',
@@ -67,7 +68,11 @@ export class ChatInfoComponent implements OnInit {
   unSubscribe(){
     if(this.data.isSubscribed){
       this.subService.removeSubscription(this.data.selectedGroup.id)
-      this.router.navigate([``]);
+
+      //If router is not at /groups page then navigate back to home
+      if(this.router.routerState.snapshot.url != '/groups'){
+        this.router.navigate([``]);
+      }
     }
   }
 }

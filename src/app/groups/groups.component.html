@@ -31,12 +31,12 @@
     </div>
     <div class="col align-self-center">
       <div *ngIf="subscribedGroups.includes(group.id); else join">
-        <button mat-raised-button color="primary" (click)="unSubscribe(group)">
+        <button mat-raised-button class="btn-custom" color="primary" (click)="unSubscribe(group)">
           Unsubscribe
         </button>
       </div>
       <ng-template #join>
-        <button mat-raised-button color="primary" (click)="onJoin(group)">
+        <button mat-raised-button class="btn-custom" color="primary" (click)="onJoin(group)">
           Join
         </button>
       </ng-template>
