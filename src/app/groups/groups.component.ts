@@ -60,7 +60,6 @@ export class GroupsComponent implements OnInit {
         item.groupName.toLowerCase().includes(this.searchText.toLowerCase()) &&
         !this.subscribedGroups.includes(item.id)
       ) {
-        console.log(item)
         this.displayedGroups.push(item);
       }
     }
