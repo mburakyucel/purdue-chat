@@ -157,5 +157,4 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.users[user.uid] = user;
     });
   }
-
 }

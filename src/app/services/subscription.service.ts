@@ -14,7 +14,9 @@ export class SubscriptionService {
 
   //Get all group Ids a user is subscribed too
   getSubscriptions(): Observable<any> {
-    return this.authService.user$.pipe(map((doc) => doc ? Object.keys(doc.chats): []));
+    return this.authService.user$.pipe(
+      map((doc) => (doc ? Object.keys(doc.chats) : []))
+    );
   }
 
   //Add a subscription to the user chats array
@@ -47,9 +49,7 @@ export class SubscriptionService {
   getSubscribedUsers(chatId: string): Observable<any> {
     // User is subscribed if the key is defined
     return this.afs
-      .collection('users', (ref) =>
-        ref.where(`chats.${chatId}`, '>', 0)
-      )
+      .collection('users', (ref) => ref.where(`chats.${chatId}`, '>', 0))
       .valueChanges();
   }
 }

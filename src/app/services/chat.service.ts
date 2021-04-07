@@ -12,7 +12,7 @@ export class ChatService {
   constructor(
     private afs: AngularFirestore,
     private authService: AuthService,
-    private subscriptionService: SubscriptionService,
+    private subscriptionService: SubscriptionService
   ) {}
 
   getMessages(chatId: string) {
@@ -53,16 +53,16 @@ export class ChatService {
   getChatMetadatas(): Observable<any> {
     return this.subscriptionService.getSubscriptions().pipe(
       switchMap((chatIds: string[]) => {
-        return combineLatest(chatIds.map(
-          (chatID: string) => {
+        return combineLatest(
+          chatIds.map((chatID: string) => {
             return this.afs
               .collection<any>('chats')
               .doc(chatID)
               .valueChanges({ idField: 'id' });
-          }
-        ))
+          })
+        );
       })
-    )
+    );
   }
 
   getUser(userId: string) {

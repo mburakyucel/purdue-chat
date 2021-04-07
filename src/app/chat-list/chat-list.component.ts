@@ -25,10 +25,9 @@ export class ChatListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subscriptionService.getSubscriptions()
-      .pipe(
-        takeUntil(this.unsubscribe$)
-      )
+    this.subscriptionService
+      .getSubscriptions()
+      .pipe(takeUntil(this.unsubscribe$))
       .subscribe((chatIds: string[]) => {
         this.chatIds = chatIds;
       });

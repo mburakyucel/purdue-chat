@@ -29,7 +29,7 @@ export class ChatListItemComponent implements OnInit {
     private chatService: ChatService,
     private subService: SubscriptionService,
     private authService: AuthService,
-    private profileService: ProfileService,
+    private profileService: ProfileService
   ) {}
 
   ngOnInit(): void {
@@ -52,25 +52,29 @@ export class ChatListItemComponent implements OnInit {
         });
       }
     });
-    this.chatService.getMessagesWithLimit(this.chatId, this.MESSAGE_LIMIT).subscribe(
-      (messages: Array<any>) => {
-        if (messages.length) {
-          this.lastMessage = messages[0];
-          this.messages = messages;
-          this.setNotificationCount();
+    this.chatService
+      .getMessagesWithLimit(this.chatId, this.MESSAGE_LIMIT)
+      .subscribe(
+        (messages: Array<any>) => {
+          if (messages.length) {
+            this.lastMessage = messages[0];
+            this.messages = messages;
+            this.setNotificationCount();
+          }
+        },
+        (error) => {
+          console.log(error);
         }
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+      );
     this.subService.getSubscribedUsers(this.chatId).subscribe((users) => {
       this.usersArrayToJson(users);
     });
-    this.profileService.getLastReadTime(this.chatId).subscribe((time: number) => {
-      this.lastReadTime = time;
-      this.setNotificationCount();
-    })
+    this.profileService
+      .getLastReadTime(this.chatId)
+      .subscribe((time: number) => {
+        this.lastReadTime = time;
+        this.setNotificationCount();
+      });
   }
 
   onClick() {
@@ -79,11 +83,11 @@ export class ChatListItemComponent implements OnInit {
 
   private setNotificationCount() {
     let count = 0;
-    for(let i=0; i<this.messages.length; i++) {
-      if(this.messages[i].createdAt < this.lastReadTime) {
+    for (let i = 0; i < this.messages.length; i++) {
+      if (this.messages[i].createdAt < this.lastReadTime) {
         break;
       }
-      count++
+      count++;
     }
     this.unreadCount = count;
   }
