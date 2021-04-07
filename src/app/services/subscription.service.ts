@@ -4,9 +4,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import firebase from 'firebase/app';
 
 import { Observable, of} from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
+import { ChatService } from '../services/chat.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +16,7 @@ export class SubscriptionService {
   constructor(
     public afs: AngularFirestore, 
     public authService: AuthService,
+    private chatService: ChatService,
     private _snackBar: MatSnackBar
     ) { }
 
@@ -59,18 +61,22 @@ export class SubscriptionService {
   }
 
   //Checks if the user is subscribed to the chat being accessed through the URL
-  isSubscribed(chatId: any): Observable<boolean>{
+  subscriptionCheck(chatId: any): Observable<any>{
+    let isSubscribed = false;
     return this.getSubscriptions().pipe(
-      switchMap((subscriptions) => {
-        if (subscriptions.includes(chatId)) {
-          return of(true);
-        } else {
-          this._snackBar.open('Access Denied', 'Close', {
-            duration: 2000,
-          });
-          return of(false);
-        }
-      })
+      tap((subscriptions) => {
+        if(subscriptions.includes(chatId)){ isSubscribed = true }}),
+      switchMap(() => this.chatService.getChatMetadata(chatId)),
+      switchMap((chat: any) => { 
+        //Accessing a subscribed group or dm -> do nothing
+        if(isSubscribed) { return of(1) } 
+        //Accessing an un-subscribed group -> route to chat info
+        else if (chat.type === 'group') { return of(chat) }
+        //Accessing an un-subscribed dm -> route to main
+        else {
+          return of(0);
+        }         
+      }),
     );
   }
 }

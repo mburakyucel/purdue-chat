@@ -27,6 +27,7 @@ export class ChatInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log(this.selectedGroup);
     this.subService
       .getSubscribedUsers(this.selectedGroup.id)
       .subscribe((userData) => (this.chatMembers = userData));

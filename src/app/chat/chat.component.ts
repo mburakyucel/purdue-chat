@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { DocumentData } from '@angular/fire/firestore';
 import { FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { of, Subject } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
@@ -41,7 +41,6 @@ export class ChatComponent implements OnInit, OnDestroy {
   constructor(
     private chatService: ChatService,
     private route: ActivatedRoute,
-    private router: Router,
     private imageUploadService: ImageUploadService,
     private subService: SubscriptionService,
     private auth: AuthService

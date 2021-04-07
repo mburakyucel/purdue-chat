@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { 
   CanActivate, 
   ActivatedRouteSnapshot, 
@@ -9,12 +10,17 @@ import {
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { SubscriptionService } from '../services/subscription.service';
+import { ChatInfoComponent } from '../chat-info/chat-info.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatGuard implements CanActivate {
-  constructor(private subService: SubscriptionService, private router: Router) {}
+  constructor(
+    private subService: SubscriptionService, 
+    private router: Router,
+    public dialog: MatDialog
+    ) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -24,12 +30,21 @@ export class ChatGuard implements CanActivate {
     | boolean
     | UrlTree { 
     var chatId = route.paramMap.get('chatId')
-    return this.subService.isSubscribed(chatId).pipe(
-      switchMap((isSubscribed) => {
-        if(!isSubscribed) return of(this.router.parseUrl('/'));
-        return of(true);
+    return this.subService.subscriptionCheck(chatId).pipe(
+      switchMap((accessType) => {
+        console.log(accessType)
+        //Accessing a subscribed group or dm -> do nothing
+        if (accessType === 1) return of(true);
+        //Accessing an un-subscribed dm -> Access denied, route to main
+        else if(accessType === 0) return of(this.router.parseUrl('/'));
+        //Accessing an un-subscribed group -> route to chat info
+        else {
+          this.dialog.open(ChatInfoComponent, {
+            data: accessType,
+          }); 
+          return of(this.router.parseUrl('/'));
+        }
       })
     );
-  }
-  
+  } 
 }
