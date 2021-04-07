@@ -57,8 +57,7 @@ export class GroupsComponent implements OnInit {
 
     for (let item of this.allGroups) {
       if (
-        item.groupName.toLowerCase().includes(this.searchText.toLowerCase()) &&
-        !this.subscribedGroups.includes(item.id)
+        item.groupName.toLowerCase().includes(this.searchText.toLowerCase())
       ) {
         this.displayedGroups.push(item);
       }
@@ -67,8 +66,18 @@ export class GroupsComponent implements OnInit {
 
   //Triggered when the group name is pressed by user to view its info
   onGroupInfo(selectedGroup: any) {
+    console.log(this.subscribedGroups)
+    let isSubscribed = false;
+    if(this.subscribedGroups.includes(selectedGroup.id))
+    {
+        isSubscribed = true;
+    }
     this.dialog.open(ChatInfoComponent, {
-      data: {selectedGroup: selectedGroup, isSubscribed: false},
+      data: {selectedGroup: selectedGroup, isSubscribed: isSubscribed},
     });
+  }
+
+  unSubscribe(selectedGroup:any){
+    this.subService.removeSubscription(selectedGroup.id)
   }
 }
