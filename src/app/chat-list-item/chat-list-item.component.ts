@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { ChatService } from '../services/chat.service';
+import { ProfileService } from '../services/profile.service';
 import { SubscriptionService } from '../services/subscription.service';
 
 @Component({
@@ -11,7 +12,9 @@ import { SubscriptionService } from '../services/subscription.service';
 export class ChatListItemComponent implements OnInit {
   @Input() chatId: string;
   @Output() chatSelect = new EventEmitter<string>();
+  readonly MESSAGE_LIMIT = 20;
   chatMetadata: any;
+  messages: any[] = [];
   lastMessage: any;
   users: any = {};
   myId = this.authService.getUid();
@@ -19,11 +22,14 @@ export class ChatListItemComponent implements OnInit {
   imageUrl = '';
   chatTitle = '';
   isRecipientSubscribed = false;
+  lastReadTime = Infinity;
+  unreadCount = 0;
 
   constructor(
     private chatService: ChatService,
     private subService: SubscriptionService,
-    private authService: AuthService
+    private authService: AuthService,
+    private profileService: ProfileService,
   ) {}
 
   ngOnInit(): void {
@@ -46,10 +52,12 @@ export class ChatListItemComponent implements OnInit {
         });
       }
     });
-    this.chatService.getMessagesWithLimit(this.chatId, 1).subscribe(
-      (data: Array<any>) => {
-        if (data.length) {
-          this.lastMessage = data[0];
+    this.chatService.getMessagesWithLimit(this.chatId, this.MESSAGE_LIMIT).subscribe(
+      (messages: Array<any>) => {
+        if (messages.length) {
+          this.lastMessage = messages[0];
+          this.messages = messages;
+          this.setNotificationCount();
         }
       },
       (error) => {
@@ -59,10 +67,25 @@ export class ChatListItemComponent implements OnInit {
     this.subService.getSubscribedUsers(this.chatId).subscribe((users) => {
       this.usersArrayToJson(users);
     });
+    this.profileService.getLastReadTime(this.chatId).subscribe((time: number) => {
+      this.lastReadTime = time;
+      this.setNotificationCount();
+    })
   }
 
   onClick() {
     this.chatSelect.emit(this.chatId);
+  }
+
+  private setNotificationCount() {
+    let count = 0;
+    for(let i=0; i<this.messages.length; i++) {
+      if(this.messages[i].createdAt < this.lastReadTime) {
+        break;
+      }
+      count++
+    }
+    this.unreadCount = count;
   }
 
   private usersArrayToJson(usersArray: Array<any>) {

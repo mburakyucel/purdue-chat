@@ -15,13 +15,15 @@
         />
       </div>
       <div class="col">
-        <span *ngIf="chatTitle">{{ chatTitle }}</span>
-        <span *ngIf="lastMessage" style="float: right">{{
-          lastMessage.createdAt | date: "shortTime"
-        }}</span>
+        <div>
+          <span *ngIf="chatTitle">{{ chatTitle }}</span>
+          <span *ngIf="lastMessage" style="float: right">{{
+            lastMessage.createdAt | date: "shortTime"
+          }}</span>
+        </div>
         <p
           *ngIf="lastMessage && users[lastMessage.uid]"
-          class="pt-2 text-muted"
+          class="pt-2 d-inline text-muted"
         >
           {{ users[lastMessage.uid].displayName }}:
           <ng-container *ngIf="lastMessage.type == 'text'">{{
@@ -30,6 +32,9 @@
           <ng-container *ngIf="lastMessage.type == 'image'"
             >shared an image</ng-container
           >
+        </p>
+        <p *ngIf="unreadCount" class="d-inline" style="float: right">
+          <span [matBadge]="unreadCount" matBadgePosition="below before">&zwnj;</span>
         </p>
       </div>
     </div>

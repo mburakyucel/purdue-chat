@@ -100,14 +100,13 @@ export class ChatComponent implements OnInit, OnDestroy {
         takeUntil(this.unsubscribe$)
       )
       .subscribe((users: any) => {
-        console.log(users);
         this.usersArrayToJson(users);
       });
   }
 
   sendMessage(event: any) {
     event.preventDefault();
-    if (this.chatMetadata.type == 'dm' && this.messages.length == 0) {
+    if (this.chatMetadata.type === 'dm' && this.messages.length === 0) {
       this.subService.addSubscription(this.chatId, this.recipientUser.uid);
     }
     if (this.imageUrl) {
@@ -118,7 +117,6 @@ export class ChatComponent implements OnInit, OnDestroy {
           this.chatService.sendMessage(imageUrl, this.chatId, 'image');
           this.imageLoading = false;
           this.imageUrl = null;
-          console.log(imageUrl);
         });
     } else {
       if (this.messageControl.value.trim()) {
@@ -129,7 +127,6 @@ export class ChatComponent implements OnInit, OnDestroy {
         );
         this.inputMessage.nativeElement.value = '';
         this.messageControl.setValue('');
-        console.log('Sent');
       }
     }
   }

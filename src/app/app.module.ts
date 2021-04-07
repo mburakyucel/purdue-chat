@@ -20,6 +20,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatBadgeModule } from '@angular/material/badge';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -82,6 +83,7 @@ import { ChatListItemComponent } from './chat-list-item/chat-list-item.component
     MatSidenavModule,
     MatTooltipModule,
     MatProgressSpinnerModule,
+    MatBadgeModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

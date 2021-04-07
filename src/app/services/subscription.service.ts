@@ -12,7 +12,7 @@ import { AuthService } from '../services/auth.service';
 export class SubscriptionService {
   constructor(public afs: AngularFirestore, public authService: AuthService) {}
 
-  //Show all groups a user is subscribed too
+  //Get all group Ids a user is subscribed too
   getSubscriptions(): Observable<any> {
     return this.authService.user$.pipe(map((doc) => doc ? Object.keys(doc.chats): []));
   }
