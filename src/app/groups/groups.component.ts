@@ -69,7 +69,7 @@ export class GroupsComponent implements OnInit {
   //Triggered when the group name is pressed by user to view its info
   onGroupInfo(selectedGroup: any) {
     this.dialog.open(ChatInfoComponent, {
-      data: selectedGroup,
+      data: {selectedGroup: selectedGroup, isSubscribed: false},
     });
   }
 }

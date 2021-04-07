@@ -161,20 +161,11 @@ export class ChatComponent implements OnInit, OnDestroy {
     });
   }
 
-  onGroupInfo() {
-    console.log(this.chatMetadata)
+  onChatInfo() {
     if(this.chatMetadata.type == "group"){
-      console.log("Open Dialog")
-      let selectedGroup = this.chatMetadata
-      console.log(selectedGroup.id)
       this.dialog.open(ChatInfoComponent, {
-        data: selectedGroup,
+        data: {selectedGroup: this.chatMetadata, isSubscribed: true},
       });
     }
-    /*
-    this.dialog.open(ChatInfoComponent, {
-      data: selectedGroup,
-    });
-    */
   }
 }

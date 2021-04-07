@@ -23,21 +23,22 @@ export class ChatInfoComponent implements OnInit {
     public cgService: CreateGroupService,
     private router: Router,
     public dialogRef: MatDialogRef<GroupsComponent>,
-    @Inject(MAT_DIALOG_DATA) public selectedGroup: any
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {
+    console.log(this.data.isSubscribed)
     this.subService
-      .getSubscribedUsers(this.selectedGroup.id)
+      .getSubscribedUsers(this.data.selectedGroup.id)
       .subscribe((userData) => (this.chatMembers = userData));
   }
 
   onJoin(): void {
     this.subService
-      .addSubscription(this.selectedGroup.id, this.authService.getUid())
+      .addSubscription(this.data.selectedGroup.id, this.authService.getUid())
       .then(() => {
         this._snackBar.open(
-          `Subscribed to ${this.selectedGroup.groupName}`,
+          `Subscribed to ${this.data.selectedGroup.groupName}`,
           'Close',
           {
             duration: 2000,
@@ -65,6 +66,9 @@ export class ChatInfoComponent implements OnInit {
   }
 
   unSubscribe(){
-    this.subService.removeSubscription(this.selectedGroup.id)
+    if(this.data.isSubscribed){
+      this.subService.removeSubscription(this.data.selectedGroup.id)
+      this.router.navigate([``]);
+    }
   }
 }
