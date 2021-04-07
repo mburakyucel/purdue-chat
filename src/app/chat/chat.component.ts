@@ -14,6 +14,7 @@ import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { ChatService } from '../services/chat.service';
 import { ImageUploadService } from '../services/image-upload.service';
 import { SubscriptionService } from '../services/subscription.service';
+import { ProfileService } from '../services/profile.service';
 
 @Component({
   selector: 'app-chat',
@@ -40,6 +41,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   constructor(
     private chatService: ChatService,
+    private profileService: ProfileService,
     private route: ActivatedRoute,
     private imageUploadService: ImageUploadService,
     private subService: SubscriptionService,
@@ -82,6 +84,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         takeUntil(this.unsubscribe$)
       )
       .subscribe((data: Array<DocumentData>) => {
+        this.profileService.updateLastReadTime(this.chatId);
         this.messages = data.sort((m1, m2) => m1.createdAt - m2.createdAt);
         // Scroll down after the DOM is updated
         setTimeout(() => {
@@ -157,4 +160,5 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.users[user.uid] = user;
     });
   }
+
 }

@@ -6,9 +6,9 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeUntil, takeWhile } from 'rxjs/operators';
-import { AuthService } from '../services/auth.service';
+import { takeUntil } from 'rxjs/operators';
 import { ChatService } from '../services/chat.service';
+import { SubscriptionService } from '../services/subscription.service';
 
 @Component({
   selector: 'app-chat-list',
@@ -21,17 +21,16 @@ export class ChatListComponent implements OnInit, OnDestroy {
   unsubscribe$: Subject<void> = new Subject<void>();
   constructor(
     public chatService: ChatService,
-    private authService: AuthService
+    private subscriptionService: SubscriptionService
   ) {}
 
   ngOnInit(): void {
-    this.authService.user$
+    this.subscriptionService.getSubscriptions()
       .pipe(
-        takeUntil(this.unsubscribe$),
-        takeWhile((val) => !!val)
+        takeUntil(this.unsubscribe$)
       )
-      .subscribe((data) => {
-        this.chatIds = data.chats;
+      .subscribe((chatIds: string[]) => {
+        this.chatIds = chatIds;
       });
   }
 
