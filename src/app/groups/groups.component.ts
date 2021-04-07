@@ -26,7 +26,6 @@ export class GroupsComponent implements OnInit {
 
   ngOnInit() {
     this.subService.getGroups().subscribe((groups) => {
-      console.log(groups);
       this.allGroups = groups;
       this.filterDisplayedGroups();
     });
@@ -61,6 +60,7 @@ export class GroupsComponent implements OnInit {
         item.groupName.toLowerCase().includes(this.searchText.toLowerCase()) &&
         !this.subscribedGroups.includes(item.id)
       ) {
+        console.log(item)
         this.displayedGroups.push(item);
       }
     }

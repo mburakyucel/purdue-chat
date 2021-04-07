@@ -11,9 +11,13 @@
         />
       </div>
       <div class="col">
-        <h1 *ngIf="chatTitle">
-          {{ chatTitle }}
-        </h1>
+        <button
+        type="button"
+        class="btn bg-transparent btn-lg"
+        (click)="onGroupInfo()"
+        >
+          <h1>{{ chatTitle }}</h1>
+        </button>
       </div>
     </div>
     <mat-divider></mat-divider>

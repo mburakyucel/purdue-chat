@@ -63,4 +63,8 @@ export class ChatInfoComponent implements OnInit {
       this.dialogRef.close();
     });
   }
+
+  unSubscribe(){
+    this.subService.removeSubscription(this.selectedGroup.id)
+  }
 }
