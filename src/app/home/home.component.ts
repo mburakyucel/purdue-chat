@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -6,7 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
+  constructor(private route: ActivatedRoute) {}
+  
+  inviteId: string
+  ngOnInit(): void {
+    this.route
+      .queryParams
+      .subscribe(params => this.inviteId = params['inviteId']);
+  }
 }

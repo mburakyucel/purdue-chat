@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ChatInfoComponent } from '../chat-info/chat-info.component';
 import { AuthService } from '../services/auth.service';
+import { ChatService } from '../services/chat.service';
+import { SubscriptionService } from '../services/subscription.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +15,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  @Input() chatId: string;
   passwordHide = true;
   loading = false;
   loginForm = new FormGroup({
@@ -25,23 +31,59 @@ export class LoginComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
+    private chatService: ChatService,
+    private subService: SubscriptionService,
     private _snackBar: MatSnackBar,
-    private router: Router
+    public dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {}
+  inviteId: string
+  inviteMetadata: any
+  chatMembers: any[] = [];
+  dialogRef: any;
+  ngOnInit(): void {
+    this.route
+      .queryParams
+      .subscribe(params => this.inviteId = params['inviteId']);
+
+    //Don't fetch data below if you login without an invitation
+    if(this.inviteId != null) {
+      this.chatService.getChatMetadata(this.inviteId).subscribe((chatMetadata => this.inviteMetadata = chatMetadata));
+    }  
+  }
 
   async login() {
     this.loading = true;
     (
       await this.authService.login(this.email.value, this.password.value)
+    ).pipe(
+      switchMap(() => this.subService.getSubscriptions()),
     ).subscribe(
-      () => {
+      (subscriptions) => {
         this._snackBar.open('Login successful', 'Close', {
           duration: 2000,
         });
         this.loading = false;
-        this.router.navigate(['']);
+        //User gets invited to a group they are not subscribed to -> route to chat info dialog
+        if(this.inviteId != null && !subscriptions.includes(this.inviteId)) {
+          //Prevent multiple dialogs from opening
+          if(!this.dialogRef) {
+            this.dialogRef = this.dialog.open(ChatInfoComponent, {
+            data: this.inviteMetadata,
+            });
+            this.router.navigate(['/groups']); 
+          }
+        }
+        //Gets invited to a group they are subscribed to -> route to group chat
+        else if(this.inviteId != null) {
+          this.router.navigate(['/chat/', this.inviteId]);
+        }
+        //Login with no invite -> route to main page
+        else {
+          this.router.navigate(['']);
+        }
       },
       (error) => {
         switch (error.code) {

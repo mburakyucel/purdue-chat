@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { AuthService } from '../services/auth.service';
+import { ChatService } from '../services/chat.service';
+import { ChatInfoComponent } from '../chat-info/chat-info.component';
+import { SubscriptionService } from '../services/subscription.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register',
@@ -24,23 +29,55 @@ export class RegisterComponent implements OnInit {
   loading = false;
   constructor(
     public authService: AuthService,
+    private subService: SubscriptionService,
     private router: Router,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog,
+    private route: ActivatedRoute,
+    private chatService: ChatService
   ) {}
 
-  ngOnInit(): void {}
+  inviteId: string
+  inviteMetadata: any
+  chatMembers: any[] = [];
+  dialogRef: any;
+  ngOnInit(): void {
+    this.route
+      .queryParams
+      .subscribe(params => this.inviteId = params['inviteId']);
+
+    //Don't fetch data below if you login without an invitation
+    if(this.inviteId != null) {
+      this.chatService.getChatMetadata(this.inviteId).subscribe((chatMetadata => this.inviteMetadata = chatMetadata));
+    }
+  }
 
   async register() {
     this.loading = true;
     (
       await this.authService.register(this.email.value, this.password.value)
-    ).subscribe(
-      () => {
-        this._snackBar.open('Registration successful', 'Close', {
-          duration: 2000,
-        });
-        this.loading = false;
-        this.router.navigate(['']);
+      ).pipe(
+        switchMap(() => this.subService.getSubscriptions()),
+      ).subscribe(
+        (subscriptions) => {
+          this._snackBar.open('Login successful', 'Close', {
+            duration: 2000,
+          });
+          this.loading = false;
+          //User gets invited to a group they are not subscribed to -> route to chat info dialog
+          if(this.inviteId != null && !subscriptions.includes(this.inviteId)) {
+            //Prevent multiple dialogs from opening
+            if(!this.dialogRef) {
+              this.dialogRef = this.dialog.open(ChatInfoComponent, {
+                data: this.inviteMetadata,
+              });
+              this.router.navigate(['/groups']); 
+            }
+          }
+          //Register with no invite -> route to main page
+          else {
+            this.router.navigate(['']);
+          }
       },
       (error) => {
         switch (error.code) {
