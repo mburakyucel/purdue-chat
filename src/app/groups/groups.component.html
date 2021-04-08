@@ -33,7 +33,7 @@
       <div *ngIf="subscribedGroups.includes(group.id); else join">
         <button
           mat-raised-button
-          class="btn-custom"
+          class="w-25"
           color="primary"
           (click)="unSubscribe(group)"
         >
@@ -43,7 +43,7 @@
       <ng-template #join>
         <button
           mat-raised-button
-          class="btn-custom"
+          class="w-25"
           color="primary"
           (click)="onJoin(group)"
         >
