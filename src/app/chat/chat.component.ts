@@ -8,9 +8,12 @@ import {
 import { DocumentData } from '@angular/fire/firestore';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Clipboard } from '@angular/cdk/clipboard';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { of, Subject } from 'rxjs';
-import { AuthService } from '../services/auth.service';
 import { map, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { AuthService } from '../services/auth.service';
 import { ChatService } from '../services/chat.service';
 import { ImageUploadService } from '../services/image-upload.service';
 import { SubscriptionService } from '../services/subscription.service';
@@ -43,7 +46,9 @@ export class ChatComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private imageUploadService: ImageUploadService,
     private subService: SubscriptionService,
-    private auth: AuthService
+    private auth: AuthService,
+    private clipboard: Clipboard,
+    private _snackBar: MatSnackBar  
   ) {}
 
   ngOnInit(): void {
@@ -155,6 +160,19 @@ export class ChatComponent implements OnInit, OnDestroy {
   private usersArrayToJson(usersArray: Array<any>) {
     usersArray.forEach((user) => {
       this.users[user.uid] = user;
+    });
+  }
+
+  onInvite() {
+    this.clipboard.copy(
+      "You've been invited to join the " + 
+      this.chatTitle + 
+      " group chat through PChat!\n" + 
+      "Enter the link below to continue:\n" + 
+      window.location.href
+      );
+    this._snackBar.open('Invite link copied to clipboard', 'Close', {
+      duration: 2000,
     });
   }
 }

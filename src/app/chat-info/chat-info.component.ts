@@ -27,7 +27,7 @@ export class ChatInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.selectedGroup);
+    console.log(this.selectedGroup)
     this.subService
       .getSubscribedUsers(this.selectedGroup.id)
       .subscribe((userData) => (this.chatMembers = userData));
@@ -44,6 +44,7 @@ export class ChatInfoComponent implements OnInit {
             duration: 2000,
           }
         );
+        this.router.navigate(['/chat/', this.selectedGroup.id]);
       })
       .catch((error) => {
         console.log(error);
