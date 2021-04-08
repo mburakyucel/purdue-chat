@@ -15,3 +15,8 @@ textarea.mat-input-element.cdk-textarea-autosize {
   height: calc(100% - 170px);
   overflow: auto;
 }
+
+.btn:focus, .btn:active{
+  outline:none !important;
+  box-shadow: none;
+}
