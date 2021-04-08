@@ -69,8 +69,7 @@ export class GroupsComponent implements OnInit {
   //Triggered when the group name is pressed by user to view its info
   onGroupInfo(selectedGroup: any) {
     let isSubscribed = false;
-    if(this.subscribedGroups.includes(selectedGroup.id))
-    {
+    if (this.subscribedGroups.includes(selectedGroup.id)) {
       isSubscribed = true;
     }
     this.dialog.open(ChatInfoComponent, {
