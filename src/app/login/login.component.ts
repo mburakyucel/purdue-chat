@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit {
 
   inviteId: string;
   inviteMetadata: any;
-  chatMembers: any[] = [];
   dialogRef: any;
   ngOnInit(): void {
     this.route.queryParams.subscribe(
