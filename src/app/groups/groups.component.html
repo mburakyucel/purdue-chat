@@ -30,26 +30,14 @@
       </button>
     </div>
     <div class="col align-self-center">
-      <div *ngIf="subscribedGroups.includes(group.id); else join">
-        <button
-          mat-raised-button
-          class="w-25"
-          color="primary"
-          (click)="unSubscribe(group)"
-        >
-          Leave
-        </button>
-      </div>
-      <ng-template #join>
-        <button
-          mat-raised-button
-          class="w-25"
-          color="primary"
-          (click)="onJoin(group)"
-        >
-          Join
-        </button>
-      </ng-template>
+      <button
+      mat-raised-button
+      color="primary"
+      [disabled]="subscribedGroups.includes(group.id)"
+      (click)="onJoin(group)"
+      >
+        Join
+      </button>
     </div>
   </div>
 </div>

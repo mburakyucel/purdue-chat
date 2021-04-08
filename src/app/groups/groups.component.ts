@@ -56,7 +56,6 @@ export class GroupsComponent implements OnInit {
 
   filterDisplayedGroups() {
     this.displayedGroups = [];
-
     for (let item of this.allGroups) {
       if (
         item.groupName.toLowerCase().includes(this.searchText.toLowerCase())
@@ -75,9 +74,5 @@ export class GroupsComponent implements OnInit {
     this.dialog.open(ChatInfoComponent, {
       data: { selectedGroup: selectedGroup, isSubscribed: isSubscribed },
     });
-  }
-
-  unSubscribe(selectedGroup: any) {
-    this.subService.removeSubscription(selectedGroup.id);
   }
 }
