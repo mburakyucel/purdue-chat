@@ -15,7 +15,10 @@
           {{ chatTitle }}
         </h1>
       </div>
-      <div *ngIf="this.chatMetadata.type === 'group'" class="col align-self-center">
+      <div
+        *ngIf="this.chatMetadata.type === 'group'"
+        class="col align-self-center"
+      >
         <button
           mat-raised-button
           class="btn float-end"

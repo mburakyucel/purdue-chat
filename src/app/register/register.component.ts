@@ -37,60 +37,60 @@ export class RegisterComponent implements OnInit {
     private chatService: ChatService
   ) {}
 
-  inviteId: string
-  inviteMetadata: any
+  inviteId: string;
+  inviteMetadata: any;
   chatMembers: any[] = [];
   dialogRef: any;
   ngOnInit(): void {
-    this.route
-      .queryParams
-      .subscribe(params => this.inviteId = params['inviteId']);
+    this.route.queryParams.subscribe(
+      (params) => (this.inviteId = params['inviteId'])
+    );
 
     //Don't fetch data below if you login without an invitation
-    if(this.inviteId != null) {
-      this.chatService.getChatMetadata(this.inviteId).subscribe((chatMetadata => this.inviteMetadata = chatMetadata));
+    if (this.inviteId != null) {
+      this.chatService
+        .getChatMetadata(this.inviteId)
+        .subscribe((chatMetadata) => (this.inviteMetadata = chatMetadata));
     }
   }
 
   async register() {
     this.loading = true;
-    (
-      await this.authService.register(this.email.value, this.password.value)
-      ).pipe(
-        switchMap(() => this.subService.getSubscriptions()),
-      ).subscribe(
+    (await this.authService.register(this.email.value, this.password.value))
+      .pipe(switchMap(() => this.subService.getSubscriptions()))
+      .subscribe(
         (subscriptions) => {
           this._snackBar.open('Login successful', 'Close', {
             duration: 2000,
           });
           this.loading = false;
           //User gets invited to a group they are not subscribed to -> route to chat info dialog
-          if(this.inviteId != null && !subscriptions.includes(this.inviteId)) {
+          if (this.inviteId != null && !subscriptions.includes(this.inviteId)) {
             //Prevent multiple dialogs from opening
-            if(!this.dialogRef) {
+            if (!this.dialogRef) {
               this.dialogRef = this.dialog.open(ChatInfoComponent, {
                 data: this.inviteMetadata,
               });
-              this.router.navigate(['/groups']); 
+              this.router.navigate(['/groups']);
             }
           }
           //Register with no invite -> route to main page
           else {
             this.router.navigate(['']);
           }
-      },
-      (error) => {
-        switch (error.code) {
-          case 'auth/email-already-in-use':
-            this.email.setErrors({ existingUser: true });
-            break;
-          default:
-            this.email.setErrors(null);
-            break;
+        },
+        (error) => {
+          switch (error.code) {
+            case 'auth/email-already-in-use':
+              this.email.setErrors({ existingUser: true });
+              break;
+            default:
+              this.email.setErrors(null);
+              break;
+          }
+          this.loading = false;
         }
-        this.loading = false;
-      }
-    );
+      );
   }
 
   get email() {

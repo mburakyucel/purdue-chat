@@ -8,11 +8,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
-  
-  inviteId: string
+
+  inviteId: string;
   ngOnInit(): void {
-    this.route
-      .queryParams
-      .subscribe(params => this.inviteId = params['inviteId']);
+    this.route.queryParams.subscribe(
+      (params) => (this.inviteId = params['inviteId'])
+    );
   }
 }

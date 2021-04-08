@@ -1,4 +1,4 @@
-import { Injectable, Output} from '@angular/core';
+import { Injectable, Output } from '@angular/core';
 import {
   CanActivate,
   ActivatedRouteSnapshot,
@@ -14,10 +14,7 @@ import { AuthService } from '../services/auth.service';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(
-    private authService: AuthService, 
-    private router: Router
-    ) {}
+  constructor(private authService: AuthService, private router: Router) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -29,7 +26,9 @@ export class AuthGuard implements CanActivate {
     return this.authService.isSignedIn().pipe(
       switchMap((isSignedIn) => {
         if (!isSignedIn) {
-          this.router.navigate(['/home'], { queryParams: { inviteId: state.url.split("/chat/", 2)[1] } });
+          this.router.navigate(['/home'], {
+            queryParams: { inviteId: state.url.split('/chat/', 2)[1] },
+          });
           return of(false);
         }
         return of(true);

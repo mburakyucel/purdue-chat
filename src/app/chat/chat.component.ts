@@ -48,7 +48,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     private subService: SubscriptionService,
     private auth: AuthService,
     private clipboard: Clipboard,
-    private _snackBar: MatSnackBar  
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -165,12 +165,12 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   onInvite() {
     this.clipboard.copy(
-      "You've been invited to join the " + 
-      this.chatTitle + 
-      " group chat through PChat!\n" + 
-      "Enter the link below to continue:\n" + 
-      window.location.href
-      );
+      "You've been invited to join the " +
+        this.chatTitle +
+        ' group chat through PChat!\n' +
+        'Enter the link below to continue:\n' +
+        window.location.href
+    );
     this._snackBar.open('Invite link copied to clipboard', 'Close', {
       duration: 2000,
     });
