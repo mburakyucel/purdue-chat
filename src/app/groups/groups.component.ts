@@ -58,8 +58,11 @@ export class GroupsComponent implements OnInit {
     this.displayedGroups = [];
     for (let item of this.allGroups) {
       if (
-        item.groupName.toLowerCase().includes(this.searchText.toLowerCase())
+        item.groupName.toLowerCase().includes(this.searchText.toLowerCase()) && !this.subscribedGroups.includes(item.id)
       ) {
+        this.displayedGroups.unshift(item);
+      }
+      else{
         this.displayedGroups.push(item);
       }
     }
