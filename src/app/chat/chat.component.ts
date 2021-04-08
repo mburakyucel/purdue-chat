@@ -46,7 +46,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     private imageUploadService: ImageUploadService,
     private subService: SubscriptionService,
     private auth: AuthService,
-    private dialog: MatDialog,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -162,9 +162,9 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   onChatInfo() {
-    if(this.chatMetadata.type == "group"){
+    if (this.chatMetadata.type == 'group') {
       this.dialog.open(ChatInfoComponent, {
-        data: {selectedGroup: this.chatMetadata, isSubscribed: true},
+        data: { selectedGroup: this.chatMetadata, isSubscribed: true },
       });
     }
   }

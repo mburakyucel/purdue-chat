@@ -65,12 +65,12 @@ export class ChatInfoComponent implements OnInit {
     });
   }
 
-  unSubscribe(){
-    if(this.data.isSubscribed){
-      this.subService.removeSubscription(this.data.selectedGroup.id)
+  unSubscribe() {
+    if (this.data.isSubscribed) {
+      this.subService.removeSubscription(this.data.selectedGroup.id);
 
       //If router is not at /groups page then navigate back to home
-      if(this.router.routerState.snapshot.url != '/groups'){
+      if (this.router.routerState.snapshot.url != '/groups') {
         this.router.navigate([``]);
       }
     }

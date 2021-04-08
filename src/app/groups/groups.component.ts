@@ -23,7 +23,7 @@ export class GroupsComponent implements OnInit {
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
     private authService: AuthService,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -68,17 +68,23 @@ export class GroupsComponent implements OnInit {
 
   //Triggered when the group name is pressed by user to view its info
   onGroupInfo(selectedGroup: any) {
+<<<<<<< HEAD
     let isSubscribed = false;
     if(this.subscribedGroups.includes(selectedGroup.id))
     {
+=======
+    console.log(this.subscribedGroups);
+    let isSubscribed = false;
+    if (this.subscribedGroups.includes(selectedGroup.id)) {
+>>>>>>> b7678050a149f09ad27bd1b86ef5e55973a9c92e
       isSubscribed = true;
     }
     this.dialog.open(ChatInfoComponent, {
-      data: {selectedGroup: selectedGroup, isSubscribed: isSubscribed},
+      data: { selectedGroup: selectedGroup, isSubscribed: isSubscribed },
     });
   }
 
-  unSubscribe(selectedGroup:any){
-    this.subService.removeSubscription(selectedGroup.id)
+  unSubscribe(selectedGroup: any) {
+    this.subService.removeSubscription(selectedGroup.id);
   }
 }
