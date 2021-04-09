@@ -28,6 +28,8 @@ export class ChatListItemComponent implements OnInit {
   isRecipientSubscribed = false;
   lastReadTime = Infinity;
   unreadCount = 0;
+  // unreadLabel is either unreadCount or unreadCount+ as string
+  unreadLabel = '';
 
   constructor(
     private chatService: ChatService,
@@ -99,6 +101,7 @@ export class ChatListItemComponent implements OnInit {
       count++;
     }
     this.unreadCount = count;
+    this.unreadLabel = (this.unreadCount >= this.MESSAGE_LIMIT)? `${this.unreadCount}+`: `${this.unreadCount}`;
   }
 
   private usersArrayToJson(usersArray: Array<any>) {

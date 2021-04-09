@@ -33,10 +33,8 @@
             >shared an image</ng-container
           >
         </p>
-        <p *ngIf="unreadCount" class="d-inline" style="float: right">
-          <span [matBadge]="unreadCount" matBadgePosition="below before"
-            >&#8205;</span
-          >
+        <p *ngIf="unreadCount" style="float: right;">
+          <span class="badge bg-primary">{{unreadLabel}}</span>
         </p>
       </div>
     </div>
