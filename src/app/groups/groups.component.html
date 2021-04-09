@@ -37,12 +37,8 @@
         [disabled]="subscribedGroups.includes(group.id)"
         (click)="onJoin(group)"
       >
-        <div *ngIf="subscribedGroups.includes(group.id); else join">
-          Joined
-        </div>
-        <ng-template #join>
-          Join
-        </ng-template>
+        <div *ngIf="subscribedGroups.includes(group.id); else join">Joined</div>
+        <ng-template #join> Join </ng-template>
       </button>
     </div>
   </div>
