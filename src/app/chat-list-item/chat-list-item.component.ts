@@ -33,7 +33,7 @@ export class ChatListItemComponent implements OnInit {
       this.imageUrl = data?.groupImageUrl;
       this.chatTitle = data?.groupName;
       /* Subscribe to the recipient only once by checking the isRecipientSubscribed */
-      if (!this.isRecipientSubscribed && data && data.type == 'dm') {
+      if (!this.isRecipientSubscribed && data.type == 'dm') {
         this.isRecipientSubscribed = true;
         /* Get the other user's ID */
         const recipientId = data.participants.filter(

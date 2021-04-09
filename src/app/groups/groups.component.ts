@@ -55,15 +55,14 @@ export class GroupsComponent implements OnInit {
   filterDisplayedGroups() {
     this.displayedGroups = [];
     for (let item of this.allGroups) {
-      if (
-        item.groupName.toLowerCase().includes(this.searchText.toLowerCase()) &&
-        !this.subscribedGroups.includes(item.id)
-      ) {
-        //Puts unsubscribed groups onto front of displayedGroups array
-        this.displayedGroups.unshift(item);
-      } else {
-        //Puts subscribed groups onton back of displayedGroups array
-        this.displayedGroups.push(item);
+      if (item.groupName.toLowerCase().includes(this.searchText.toLowerCase())) {
+        if(!this.subscribedGroups.includes(item.id)){
+          //Puts unsubscribed groups onto front of displayedGroups array
+          this.displayedGroups.unshift(item);
+        } else {
+          //Puts subscribed groups onton back of displayedGroups array
+          this.displayedGroups.push(item);
+        }
       }
     }
   }
