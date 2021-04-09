@@ -101,7 +101,10 @@ export class ChatListItemComponent implements OnInit {
       count++;
     }
     this.unreadCount = count;
-    this.unreadLabel = (this.unreadCount >= this.MESSAGE_LIMIT)? `${this.unreadCount}+`: `${this.unreadCount}`;
+    this.unreadLabel =
+      this.unreadCount >= this.MESSAGE_LIMIT
+        ? `${this.unreadCount}+`
+        : `${this.unreadCount}`;
   }
 
   private usersArrayToJson(usersArray: Array<any>) {
