@@ -12,7 +12,10 @@ import { SubscriptionService } from '../services/subscription.service';
 export class ChatListItemComponent implements OnInit {
   @Input() chatId: string;
   @Output() chatSelect = new EventEmitter<string>();
-  @Output() lastMessageTime$ = new EventEmitter<{chatId: string, lastMessageTime: number}>();
+  @Output() lastMessageTime$ = new EventEmitter<{
+    chatId: string;
+    lastMessageTime: number;
+  }>();
   readonly MESSAGE_LIMIT = 20;
   chatMetadata: any;
   messages: any[] = [];
@@ -34,7 +37,7 @@ export class ChatListItemComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log("chat-list-item init");
+    console.log('chat-list-item init');
     this.chatService.getChatMetadata(this.chatId).subscribe((data: any) => {
       this.chatMetadata = data;
       /* imageUrl and chatTitle will get assigned null if it is a DM */
@@ -62,7 +65,10 @@ export class ChatListItemComponent implements OnInit {
             this.lastMessage = messages[0];
             this.messages = messages;
             this.setNotificationCount();
-            this.lastMessageTime$.emit({ chatId: this.chatId, lastMessageTime: this.lastMessage.createdAt});
+            this.lastMessageTime$.emit({
+              chatId: this.chatId,
+              lastMessageTime: this.lastMessage.createdAt,
+            });
           }
         },
         (error) => {

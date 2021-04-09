@@ -29,14 +29,14 @@ export class ChatListComponent implements OnInit, OnDestroy {
       .getSubscriptions()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((chatIds: string[]) => {
-        chatIds.forEach(chatId => {
+        chatIds.forEach((chatId) => {
           /* Set the last message time to infinity initially
              Push the item into the array if it is unique
           */
-          if(!this.isChatIdExist(chatId)) {
-            this.chatItems.push({chatId, lastMessageTime: Infinity});
+          if (!this.isChatIdExist(chatId)) {
+            this.chatItems.push({ chatId, lastMessageTime: Infinity });
           }
-        })
+        });
       });
   }
 
@@ -44,9 +44,15 @@ export class ChatListComponent implements OnInit, OnDestroy {
     this.chatSelect.emit(chatId);
   }
 
-  updateLastMessageTime({chatId, lastMessageTime}: {chatId: string, lastMessageTime: number}) {
-    for(let i=0; i<this.chatItems.length; i++) {
-      if(this.chatItems[i].chatId === chatId) {
+  updateLastMessageTime({
+    chatId,
+    lastMessageTime,
+  }: {
+    chatId: string;
+    lastMessageTime: number;
+  }) {
+    for (let i = 0; i < this.chatItems.length; i++) {
+      if (this.chatItems[i].chatId === chatId) {
         this.chatItems[i].lastMessageTime = lastMessageTime;
         break;
       }
@@ -55,12 +61,14 @@ export class ChatListComponent implements OnInit, OnDestroy {
   }
 
   sortChatListItems() {
-    this.chatItems.sort((a: any, b: any) => b.lastMessageTime - a.lastMessageTime)
+    this.chatItems.sort(
+      (a: any, b: any) => b.lastMessageTime - a.lastMessageTime
+    );
   }
 
   isChatIdExist(chatId: string) {
-    for(let i=0; i<this.chatItems.length; i++) {
-      if(this.chatItems[i].chatId === chatId) {
+    for (let i = 0; i < this.chatItems.length; i++) {
+      if (this.chatItems[i].chatId === chatId) {
         return true;
       }
     }
