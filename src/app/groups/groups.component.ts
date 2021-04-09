@@ -21,7 +21,7 @@ export class GroupsComponent implements OnInit {
     private subService: SubscriptionService,
     private _snackBar: MatSnackBar,
     public dialog: MatDialog,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
