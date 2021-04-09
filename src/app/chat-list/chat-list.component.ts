@@ -16,8 +16,8 @@ import { SubscriptionService } from '../services/subscription.service';
   styleUrls: ['./chat-list.component.css'],
 })
 export class ChatListComponent implements OnInit, OnDestroy {
-  chatIds: Array<string>;
   @Output() chatSelect = new EventEmitter();
+  chatItems: Array<any> = [];
   unsubscribe$: Subject<void> = new Subject<void>();
   constructor(
     public chatService: ChatService,
@@ -29,12 +29,42 @@ export class ChatListComponent implements OnInit, OnDestroy {
       .getSubscriptions()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((chatIds: string[]) => {
-        this.chatIds = chatIds;
+        chatIds.forEach(chatId => {
+          /* Set the last message time to infinity initially
+             Push the item into the array if it is unique
+          */
+          if(!this.isChatIdExist(chatId)) {
+            this.chatItems.push({chatId, lastMessageTime: Infinity});
+          }
+        })
       });
   }
 
   onChatSelect(chatId: string) {
     this.chatSelect.emit(chatId);
+  }
+
+  updateLastMessageTime({chatId, lastMessageTime}: {chatId: string, lastMessageTime: number}) {
+    for(let i=0; i<this.chatItems.length; i++) {
+      if(this.chatItems[i].chatId === chatId) {
+        this.chatItems[i].lastMessageTime = lastMessageTime;
+        break;
+      }
+    }
+    this.sortChatListItems();
+  }
+
+  sortChatListItems() {
+    this.chatItems.sort((a: any, b: any) => b.lastMessageTime - a.lastMessageTime)
+  }
+
+  isChatIdExist(chatId: string) {
+    for(let i=0; i<this.chatItems.length; i++) {
+      if(this.chatItems[i].chatId === chatId) {
+        return true;
+      }
+    }
+    return false;
   }
 
   ngOnDestroy() {

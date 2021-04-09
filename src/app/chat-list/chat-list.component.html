@@ -1,8 +1,9 @@
 <mat-action-list>
-  <ng-container *ngFor="let chatId of chatIds">
+  <ng-container *ngFor="let chatItem of chatItems">
     <app-chat-list-item
-      [chatId]="chatId"
+      [chatId]="chatItem.chatId"
       (chatSelect)="onChatSelect($event)"
+      (lastMessageTime$)="updateLastMessageTime($event)"
     ></app-chat-list-item>
   </ng-container>
 </mat-action-list>
