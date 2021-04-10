@@ -16,7 +16,7 @@ export class ChatInfoComponent implements OnInit {
   chatMembers: any[] = [];
   dmDocId: any;
   chatMetaData: any;
-  isSubscribed: any;
+  isSubscribed: boolean;
 
   constructor(
     private subService: SubscriptionService,

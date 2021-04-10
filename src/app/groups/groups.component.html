@@ -13,22 +13,18 @@
     </mat-form-field>
   </div>
   <div class="row py-2" *ngFor="let group of displayedGroups">
-    <div class="col">
-      <div class="d-grid">
-        <button class="btn" (click)="onGroupInfo(group)">
-          <div class="row">
-            <div class="col-auto">
-              <img
-                class="rounded profile-img"
-                src="{{ group.groupImageUrl }}"
-                alt="http://placehold.it/256/163a63"
-              />
-            </div>
-            <div class="col-auto align-self-start">
-              <b class="h4">{{ group.groupName }}</b>
-            </div>
-          </div>
-        </button>
+    <div class="col group-info-col" (click)="onGroupInfo(group)">
+      <div class="row">
+        <div class="col-auto">
+          <img
+            class="rounded profile-img"
+            src="{{ group.groupImageUrl }}"
+            alt="http://placehold.it/256/163a63"
+          />
+        </div>
+        <div class="col-auto align-self-start">
+          <b class="h4">{{ group.groupName }}</b>
+        </div>
       </div>
     </div>
     <div class="col align-self-center">
