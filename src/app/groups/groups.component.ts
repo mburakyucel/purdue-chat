@@ -58,13 +58,7 @@ export class GroupsComponent implements OnInit {
       if (
         item.groupName.toLowerCase().includes(this.searchText.toLowerCase())
       ) {
-        if (!this.subscribedGroups.includes(item.id)) {
-          //Puts unsubscribed groups onto front of displayedGroups array
-          this.displayedGroups.unshift(item);
-        } else {
-          //Puts subscribed groups onton back of displayedGroups array
-          this.displayedGroups.push(item);
-        }
+        this.displayedGroups.push(item);
       }
     }
   }
@@ -76,7 +70,7 @@ export class GroupsComponent implements OnInit {
       isSubscribed = true;
     }
     this.dialog.open(ChatInfoComponent, {
-      data: { selectedGroup: selectedGroup, isSubscribed: isSubscribed },
+      data: { chatMetaData: selectedGroup, isSubscribed: isSubscribed },
     });
   }
 }

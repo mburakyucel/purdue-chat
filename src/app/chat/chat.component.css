@@ -8,16 +8,10 @@ textarea.mat-input-element.cdk-textarea-autosize {
 }
 
 .chat-container {
-  height: calc(100% - 80px);
+  height: calc(100% - 110px);
 }
 
 .message-section {
   height: calc(100% - 170px);
   overflow: auto;
-}
-
-.btn:focus,
-.btn:active {
-  outline: none !important;
-  box-shadow: none;
 }
