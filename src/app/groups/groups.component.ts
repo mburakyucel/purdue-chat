@@ -67,7 +67,7 @@ export class GroupsComponent implements OnInit {
   onGroupInfo(selectedGroup: any) {
     const isSubscribed = this.subscribedGroups.includes(selectedGroup.id);
     this.dialog.open(ChatInfoComponent, {
-      data: { chatMetaData: selectedGroup, isSubscribed: isSubscribed },
+      data: { chatMetaData: selectedGroup, isSubscribed },
     });
   }
 }
