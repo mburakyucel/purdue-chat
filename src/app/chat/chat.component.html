@@ -1,22 +1,18 @@
 <div class="container my-2 border chat-container">
   <ng-container *ngIf="chatMetadata">
-    <div class="row p-2">
-      <button class="btn btn-block" (click)="onChatInfo()">
-        <div class="row">
-          <div class="col-auto px-2">
-            <img
-              class="rounded-circle"
-              height="72px"
-              width="72px"
-              [src]="chatImageUrl"
-              *ngIf="chatImageUrl"
-            />
-          </div>
-          <div class="col-auto">
-            <h1>{{ chatTitle }}</h1>
-          </div>
-        </div>
-      </button>
+    <div class="row p-2 chat-header" (click)="onChatInfo()">
+      <div class="col-auto px-2">
+        <img
+          class="rounded-circle"
+          height="72px"
+          width="72px"
+          [src]="chatImageUrl"
+          *ngIf="chatImageUrl"
+        />
+      </div>
+      <div class="col-auto">
+        <h1>{{ chatTitle }}</h1>
+      </div>
     </div>
     <mat-divider></mat-divider>
     <div #messageSection class="row message-section">
