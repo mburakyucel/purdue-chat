@@ -3,24 +3,24 @@
     <div class="col-auto">
       <img
         class="groupImage-dimension rounded"
-        src="{{ selectedGroup.groupImageUrl }}"
+        src="{{ chatMetaData.groupImageUrl }}"
       />
     </div>
   </div>
   <div class="row pt-1 justify-content-center">
     <div class="col-auto">
-      <h2 class="m-1">{{ selectedGroup.groupName }}</h2>
+      <h2 class="m-1">{{ chatMetaData.groupName }}</h2>
     </div>
     <div class="row pb-2 justify-content-center">
       <div class="col-auto text-muted">
-        <small>{{ selectedGroup.createdAt | date: "short" }}</small>
+        <small>{{ chatMetaData.createdAt | date: "short" }}</small>
       </div>
     </div>
   </div>
   <mat-card class="mb-1">
     <mat-card-title class="pb-2">About</mat-card-title>
     <mat-card-content>
-      <p>{{ selectedGroup.groupDescription }}</p>
+      <p>{{ chatMetaData.groupDescription }}</p>
     </mat-card-content>
   </mat-card>
   <mat-card>
@@ -51,14 +51,26 @@
   </mat-card>
   <div class="row pt-3 justify-content-center">
     <div class="col-auto pb-4">
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="onJoin()"
-        [mat-dialog-close]="true"
-      >
-        Join
-      </button>
+      <div *ngIf="!isSubscribed; else Unsubscribe">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onJoin()"
+          [mat-dialog-close]="true"
+        >
+          Join
+        </button>
+      </div>
+      <ng-template #Unsubscribe>
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="unSubscribe()"
+          [mat-dialog-close]="true"
+        >
+          Leave
+        </button>
+      </ng-template>
     </div>
   </div>
 </div>

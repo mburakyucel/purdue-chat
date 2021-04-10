@@ -45,7 +45,10 @@ export class ChatService {
   }
 
   getChatMetadata(chatId: string): Observable<any> {
-    return this.afs.collection<any>('chats').doc(chatId).valueChanges();
+    return this.afs
+      .collection<any>('chats')
+      .doc(chatId)
+      .valueChanges({ idField: 'id' });
   }
 
   getChatMetadatas(): Observable<any> {

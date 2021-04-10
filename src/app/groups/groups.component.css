@@ -2,3 +2,7 @@
   height: 128px;
   width: 128px;
 }
+
+.group-info-col {
+  cursor: pointer;
+}
