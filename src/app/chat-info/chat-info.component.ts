@@ -49,7 +49,6 @@ export class ChatInfoComponent implements OnInit {
             duration: 2000,
           }
         );
-        this.router.navigate(['/chat/', this.selectedGroup.id]);
       })
       .catch((error) => {
         console.log(error);
