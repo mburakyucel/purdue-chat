@@ -15,3 +15,7 @@ textarea.mat-input-element.cdk-textarea-autosize {
   height: calc(100% - 170px);
   overflow: auto;
 }
+
+.chat-header {
+  cursor: pointer;
+}

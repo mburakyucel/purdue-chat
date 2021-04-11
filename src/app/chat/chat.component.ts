@@ -17,6 +17,8 @@ import { AuthService } from '../services/auth.service';
 import { ChatService } from '../services/chat.service';
 import { ImageUploadService } from '../services/image-upload.service';
 import { SubscriptionService } from '../services/subscription.service';
+import { ChatInfoComponent } from '../chat-info/chat-info.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-chat',
@@ -48,7 +50,8 @@ export class ChatComponent implements OnInit, OnDestroy {
     private subService: SubscriptionService,
     private auth: AuthService,
     private clipboard: Clipboard,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -174,5 +177,13 @@ export class ChatComponent implements OnInit, OnDestroy {
     this._snackBar.open('Invite link copied to clipboard', 'Close', {
       duration: 2000,
     });
+  }
+  
+  onChatInfo() {
+    if (this.chatMetadata.type === 'group') {
+      this.dialog.open(ChatInfoComponent, {
+        data: { chatMetaData: this.chatMetadata, isSubscribed: true },
+      });
+    }
   }
 }

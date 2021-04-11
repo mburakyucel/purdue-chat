@@ -26,7 +26,6 @@ export class GroupsComponent implements OnInit {
 
   ngOnInit() {
     this.subService.getGroups().subscribe((groups) => {
-      console.log(groups);
       this.allGroups = groups;
       this.filterDisplayedGroups();
     });
@@ -55,11 +54,9 @@ export class GroupsComponent implements OnInit {
 
   filterDisplayedGroups() {
     this.displayedGroups = [];
-
     for (let item of this.allGroups) {
       if (
-        item.groupName.toLowerCase().includes(this.searchText.toLowerCase()) &&
-        !this.subscribedGroups.includes(item.id)
+        item.groupName.toLowerCase().includes(this.searchText.toLowerCase())
       ) {
         this.displayedGroups.push(item);
       }
@@ -68,8 +65,9 @@ export class GroupsComponent implements OnInit {
 
   //Triggered when the group name is pressed by user to view its info
   onGroupInfo(selectedGroup: any) {
+    const isSubscribed = this.subscribedGroups.includes(selectedGroup.id);
     this.dialog.open(ChatInfoComponent, {
-      data: selectedGroup,
+      data: { chatMetaData: selectedGroup, isSubscribed },
     });
   }
 }

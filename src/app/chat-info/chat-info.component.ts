@@ -15,6 +15,8 @@ import { GroupsComponent } from '../groups/groups.component';
 export class ChatInfoComponent implements OnInit {
   chatMembers: any[] = [];
   dmDocId: any;
+  chatMetaData: any;
+  isSubscribed: boolean;
 
   constructor(
     private subService: SubscriptionService,
@@ -23,21 +25,25 @@ export class ChatInfoComponent implements OnInit {
     public cgService: CreateGroupService,
     private router: Router,
     public dialogRef: MatDialogRef<GroupsComponent>,
-    @Inject(MAT_DIALOG_DATA) public selectedGroup: any
+    @Inject(MAT_DIALOG_DATA) public chatInfoDialogData: any
   ) {}
 
   ngOnInit(): void {
+    this.chatMetaData = this.chatInfoDialogData.chatMetaData;
+    this.isSubscribed = this.chatInfoDialogData.isSubscribed;
+
     this.subService
-      .getSubscribedUsers(this.selectedGroup.id)
+      .getSubscribedUsers(this.chatMetaData.id)
       .subscribe((userData) => (this.chatMembers = userData));
   }
 
   onJoin(): void {
     this.subService
-      .addSubscription(this.selectedGroup.id, this.authService.getUid())
+      .addSubscription(this.chatMetaData.id, this.authService.getUid())
       .then(() => {
+        this.router.navigate([`/chat/${this.chatMetaData.id}`]);
         this._snackBar.open(
-          `Subscribed to ${this.selectedGroup.groupName}`,
+          `Subscribed to ${this.chatMetaData.groupName}`,
           'Close',
           {
             duration: 2000,
@@ -63,5 +69,16 @@ export class ChatInfoComponent implements OnInit {
       this.router.navigate([`/chat/${this.dmDocId}`]);
       this.dialogRef.close();
     });
+  }
+
+  unSubscribe() {
+    if (this.isSubscribed) {
+      this.subService.removeSubscription(this.chatMetaData.id);
+
+      //If router is not at /groups page then navigate back to home
+      if (this.router.routerState.snapshot.url != '/groups') {
+        this.router.navigate([``]);
+      }
+    }
   }
 }
