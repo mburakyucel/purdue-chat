@@ -73,7 +73,7 @@ export class SubscriptionService {
       switchMap((chat: any) => {
         //Accessing a subscribed group or dm -> do nothing
         if (isSubscribed) {
-          return of(1);
+          return of('subscribed');
         }
         //Accessing an un-subscribed group -> route to chat info
         else if (chat.type === 'group') {
@@ -81,7 +81,7 @@ export class SubscriptionService {
         }
         //Accessing an un-subscribed dm -> route to main
         else {
-          return of(0);
+          return of('unsubscribedDM');
         }
       })
     );

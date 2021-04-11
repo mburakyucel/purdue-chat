@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { RerouteService } from '../services/reroute.service'
 
 @Component({
   selector: 'app-register',
@@ -11,6 +12,8 @@ import { AuthService } from '../services/auth.service';
 })
 export class RegisterComponent implements OnInit {
   passwordHide = true;
+  loading = false;
+  cachedRoute = '';
   registerForm = new FormGroup({
     email: new FormControl('', [
       Validators.required,
@@ -21,9 +24,9 @@ export class RegisterComponent implements OnInit {
       Validators.minLength(6),
     ]),
   });
-  loading = false;
   constructor(
     public authService: AuthService,
+    private rerouteService: RerouteService,
     private router: Router,
     private _snackBar: MatSnackBar
   ) {}
@@ -32,6 +35,7 @@ export class RegisterComponent implements OnInit {
 
   async register() {
     this.loading = true;
+    this.cachedRoute = this.rerouteService.getCachedRoute();
     (await this.authService.register(this.email.value, this.password.value)
     ).subscribe(
       () => {
@@ -39,7 +43,11 @@ export class RegisterComponent implements OnInit {
           duration: 2000,
         });
         this.loading = false;
-        this.router.navigate(['']);
+        if(this.cachedRoute !== '') {
+          this.router.navigate([this.cachedRoute]);
+          this.rerouteService.clearCachedRoute();
+        }
+        else this.router.navigate(['']);
         },
         (error) => {
           switch (error.code) {
