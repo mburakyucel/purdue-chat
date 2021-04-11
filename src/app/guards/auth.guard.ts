@@ -25,12 +25,7 @@ export class AuthGuard implements CanActivate {
     | UrlTree {
     return this.authService.isSignedIn().pipe(
       switchMap((isSignedIn) => {
-        if (!isSignedIn) {
-          this.router.navigate(['/home'], {
-            queryParams: { inviteId: state.url.split('/chat/', 2)[1] },
-          });
-          return of(false);
-        }
+        if (!isSignedIn) return of(this.router.parseUrl('/home'));
         return of(true);
       })
     );

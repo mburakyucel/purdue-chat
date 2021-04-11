@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { ChatInfoComponent } from '../chat-info/chat-info.component';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { ChatService } from '../services/chat.service';
-import { SubscriptionService } from '../services/subscription.service';
-import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -30,76 +25,40 @@ export class LoginComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    private chatService: ChatService,
-    private subService: SubscriptionService,
     private _snackBar: MatSnackBar,
-    public dialog: MatDialog,
-    private router: Router,
-    private route: ActivatedRoute
+    private router: Router
   ) {}
 
-  inviteId: string;
-  inviteMetadata: any;
-  dialogRef: any;
-  ngOnInit(): void {
-    this.route.queryParams.subscribe(
-      (params) => (this.inviteId = params['inviteId'])
-    );
-
-    //Don't fetch data below if you login without an invitation
-    if (this.inviteId != null) {
-      this.chatService
-        .getChatMetadata(this.inviteId)
-        .subscribe((chatMetadata) => (this.inviteMetadata = chatMetadata));
-    }
-  }
+  ngOnInit(): void {}
 
   async login() {
     this.loading = true;
-    (await this.authService.login(this.email.value, this.password.value))
-      .pipe(switchMap(() => this.subService.getSubscriptions()))
-      .subscribe(
-        (subscriptions) => {
-          this._snackBar.open('Login successful', 'Close', {
-            duration: 2000,
-          });
-          this.loading = false;
-          //User gets invited to a group they are not subscribed to -> route to chat info dialog
-          if (this.inviteId != null && !subscriptions.includes(this.inviteId)) {
-            //Prevent multiple dialogs from opening
-            if (!this.dialogRef) {
-              this.dialogRef = this.dialog.open(ChatInfoComponent, {
-                data: this.inviteMetadata,
-              });
-              this.router.navigate(['/groups']);
-            }
+    (await this.authService.login(this.email.value, this.password.value)
+    ).subscribe(
+      () => {
+        this._snackBar.open('Login successful', 'Close', {
+          duration: 2000,
+        });
+        this.loading = false;
+        this.router.navigate(['']);
+      },
+      (error) => {
+        switch (error.code) {
+          case 'auth/user-not-found':
+            this.email.setErrors({ noUser: true });
+            break;
+          case 'auth/wrong-password':
+            this.password.setErrors({ incorrectPassword: true });
+            break;
+          case 'auth/too-many-requests':
+            this.password.setErrors({ toManyIncorrectAttempts: true });
+            break;
+          default:
+            this.email.setErrors(null);
+            this.password.setErrors(null);
+            break;
           }
-          //Gets invited to a group they are subscribed to -> route to group chat
-          else if (this.inviteId != null) {
-            this.router.navigate(['/chat/', this.inviteId]);
-          }
-          //Login with no invite -> route to main page
-          else {
-            this.router.navigate(['']);
-          }
-        },
-        (error) => {
-          switch (error.code) {
-            case 'auth/user-not-found':
-              this.email.setErrors({ noUser: true });
-              break;
-            case 'auth/wrong-password':
-              this.password.setErrors({ incorrectPassword: true });
-              break;
-            case 'auth/too-many-requests':
-              this.password.setErrors({ toManyIncorrectAttempts: true });
-              break;
-            default:
-              this.email.setErrors(null);
-              this.password.setErrors(null);
-              break;
-          }
-          this.loading = false;
+        this.loading = false;
         }
       );
   }
