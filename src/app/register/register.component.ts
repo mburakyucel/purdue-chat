@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { RerouteService } from '../services/reroute.service'
+import { RerouteService } from '../services/reroute.service';
 
 @Component({
   selector: 'app-register',
@@ -36,31 +36,31 @@ export class RegisterComponent implements OnInit {
   async register() {
     this.loading = true;
     this.cachedRoute = this.rerouteService.getCachedRoute();
-    (await this.authService.register(this.email.value, this.password.value)
+    (
+      await this.authService.register(this.email.value, this.password.value)
     ).subscribe(
       () => {
         this._snackBar.open('Registration successful', 'Close', {
           duration: 2000,
         });
         this.loading = false;
-        if(this.cachedRoute !== '') {
+        if (this.cachedRoute !== '') {
           this.router.navigate([this.cachedRoute]);
           this.rerouteService.clearCachedRoute();
+        } else this.router.navigate(['']);
+      },
+      (error) => {
+        switch (error.code) {
+          case 'auth/email-already-in-use':
+            this.email.setErrors({ existingUser: true });
+            break;
+          default:
+            this.email.setErrors(null);
+            break;
         }
-        else this.router.navigate(['']);
-        },
-        (error) => {
-          switch (error.code) {
-            case 'auth/email-already-in-use':
-              this.email.setErrors({ existingUser: true });
-              break;
-            default:
-              this.email.setErrors(null);
-              break;
-          }
-          this.loading = false;
-        }
-      );
+        this.loading = false;
+      }
+    );
   }
 
   get email() {

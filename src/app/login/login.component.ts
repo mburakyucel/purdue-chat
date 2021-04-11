@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { RerouteService } from '../services/reroute.service'
+import { RerouteService } from '../services/reroute.service';
 
 @Component({
   selector: 'app-login',
@@ -37,18 +37,18 @@ export class LoginComponent implements OnInit {
   async login() {
     this.loading = true;
     this.cachedRoute = this.rerouteService.getCachedRoute();
-    (await this.authService.login(this.email.value, this.password.value)
+    (
+      await this.authService.login(this.email.value, this.password.value)
     ).subscribe(
       () => {
         this._snackBar.open('Login successful', 'Close', {
           duration: 2000,
         });
         this.loading = false;
-        if(this.cachedRoute !== '') {
+        if (this.cachedRoute !== '') {
           this.router.navigate([this.cachedRoute]);
           this.rerouteService.clearCachedRoute();
-        }
-        else this.router.navigate(['']);
+        } else this.router.navigate(['']);
       },
       (error) => {
         switch (error.code) {
@@ -65,10 +65,10 @@ export class LoginComponent implements OnInit {
             this.email.setErrors(null);
             this.password.setErrors(null);
             break;
-          }
-        this.loading = false;
         }
-      );
+        this.loading = false;
+      }
+    );
   }
 
   get email() {

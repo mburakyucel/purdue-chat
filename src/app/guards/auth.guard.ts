@@ -9,17 +9,17 @@ import {
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
-import { RerouteService } from '../services/reroute.service'
+import { RerouteService } from '../services/reroute.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
   constructor(
-    private authService: AuthService, 
+    private authService: AuthService,
     private rerouteService: RerouteService,
-    private router: Router,
-    ) {}
+    private router: Router
+  ) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot

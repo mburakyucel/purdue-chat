@@ -178,7 +178,7 @@ export class ChatComponent implements OnInit, OnDestroy {
       duration: 2000,
     });
   }
-  
+
   onChatInfo() {
     if (this.chatMetadata.type === 'group') {
       this.dialog.open(ChatInfoComponent, {
