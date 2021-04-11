@@ -35,7 +35,8 @@ export class ChatGuard implements CanActivate {
         //Accessing a subscribed group or dm -> do nothing
         if (accessType === 'subscribed') return of(true);
         //Accessing an un-subscribed dm -> Access denied, route to main
-        else if (accessType === "unsubscribedDM") return of(this.router.parseUrl('/'));
+        else if (accessType === 'unsubscribedDM')
+          return of(this.router.parseUrl('/'));
         //Accessing an un-subscribed group -> route to chat info
         else {
           this.dialog.open(ChatInfoComponent, {
