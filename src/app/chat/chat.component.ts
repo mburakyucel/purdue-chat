@@ -15,6 +15,8 @@ import { ChatService } from '../services/chat.service';
 import { ImageUploadService } from '../services/image-upload.service';
 import { SubscriptionService } from '../services/subscription.service';
 import { ProfileService } from '../services/profile.service';
+import { ChatInfoComponent } from '../chat-info/chat-info.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-chat',
@@ -45,7 +47,8 @@ export class ChatComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private imageUploadService: ImageUploadService,
     private subService: SubscriptionService,
-    private auth: AuthService
+    private auth: AuthService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -156,5 +159,13 @@ export class ChatComponent implements OnInit, OnDestroy {
     usersArray.forEach((user) => {
       this.users[user.uid] = user;
     });
+  }
+
+  onChatInfo() {
+    if (this.chatMetadata.type === 'group') {
+      this.dialog.open(ChatInfoComponent, {
+        data: { chatMetaData: this.chatMetadata, isSubscribed: true },
+      });
+    }
   }
 }

@@ -1,6 +1,6 @@
 <div class="container my-2 border chat-container">
   <ng-container *ngIf="chatMetadata">
-    <div class="row p-2">
+    <div class="row p-2 chat-header" (click)="onChatInfo()">
       <div class="col-auto px-2">
         <img
           class="rounded-circle"
@@ -10,10 +10,8 @@
           *ngIf="chatImageUrl"
         />
       </div>
-      <div class="col">
-        <h1 *ngIf="chatTitle">
-          {{ chatTitle }}
-        </h1>
+      <div class="col-auto">
+        <h1>{{ chatTitle }}</h1>
       </div>
     </div>
     <mat-divider></mat-divider>
@@ -72,11 +70,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <mat-form-field
-          class="w-100"
-          hintLabel="Max 1024 characters"
-          [style.fontSize]="'20px'"
-        >
+        <mat-form-field class="w-100" [style.fontSize]="'20px'">
           <mat-label>Message</mat-label>
           <textarea
             #inputMessage
