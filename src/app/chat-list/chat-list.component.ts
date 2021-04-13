@@ -29,6 +29,15 @@ export class ChatListComponent implements OnInit, OnDestroy {
       .getSubscriptions()
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((chatIds: string[]) => {
+        /* Cannot assign the new items directly. Operations need to be done in place
+         * to avoid reconstructing the chat-list-items.
+         * First, remove the elements that doesn't exist in the returned result.
+         */
+        this.chatItems.forEach(({chatId, lastMessageTime}, index) => {
+          if(!chatIds.includes(chatId)) {
+            this.chatItems.splice(index, 1);
+          }
+        })
         chatIds.forEach((chatId) => {
           /* Set the last message time to infinity initially
              Push the item into the array if it is unique
