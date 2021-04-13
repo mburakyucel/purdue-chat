@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { ChatService } from '../services/chat.service';
 import { ProfileService } from '../services/profile.service';
@@ -35,7 +36,8 @@ export class ChatListItemComponent implements OnInit {
     private chatService: ChatService,
     private subService: SubscriptionService,
     private authService: AuthService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -101,10 +103,15 @@ export class ChatListItemComponent implements OnInit {
       count++;
     }
     this.unreadCount = count;
-    this.unreadLabel =
+    /* Because this component's activatedRoute doesn't contain the chatId route variable, check from the absolute url */
+    if(this.router.url.includes(this.chatId)) {
+      this.unreadLabel = '';
+    } else {
+      this.unreadLabel =
       this.unreadCount >= this.MESSAGE_LIMIT
         ? `${this.unreadCount}+`
         : `${this.unreadCount}`;
+    }
   }
 
   private usersArrayToJson(usersArray: Array<any>) {
