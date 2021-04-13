@@ -104,13 +104,13 @@ export class ChatListItemComponent implements OnInit {
     }
     this.unreadCount = count;
     /* Because this component's activatedRoute doesn't contain the chatId route variable, check from the absolute url */
-    if(this.router.url.includes(this.chatId)) {
+    if (this.router.url.includes(this.chatId)) {
       this.unreadLabel = '';
     } else {
       this.unreadLabel =
-      this.unreadCount >= this.MESSAGE_LIMIT
-        ? `${this.unreadCount}+`
-        : `${this.unreadCount}`;
+        this.unreadCount >= this.MESSAGE_LIMIT
+          ? `${this.unreadCount}+`
+          : `${this.unreadCount}`;
     }
   }
 
