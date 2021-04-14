@@ -52,7 +52,7 @@ export class ChatService {
       .doc(chatId)
       .valueChanges({ idField: 'id' });
   }
-
+  
   getChatMetadatas(): Observable<any> {
     return this.subscriptionService.getSubscriptions().pipe(
       switchMap((chatIds: string[]) => {
