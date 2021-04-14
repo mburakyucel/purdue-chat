@@ -15,25 +15,18 @@
 </mat-toolbar>
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
-    #drawer
+    #sidenav
     class="sidenav"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
+    [disableClose]="true"
+    [autoFocus]="false"
+    (swipeLeft)="sidenav.close()"
   >
     <app-chat-list (chatSelect)="onChatSelect($event)"></app-chat-list>
   </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button
-        type="button"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async"
-      >
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-    </mat-toolbar>
+  <mat-sidenav-content (swipeRight)="sidenav.open()" (swipeLeft)="sidenav.close()">
     <!-- Add Content Here -->
     <router-outlet></router-outlet>
   </mat-sidenav-content>

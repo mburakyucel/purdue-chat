@@ -44,4 +44,12 @@ export class MainComponent implements OnInit {
   createNewGroup() {
     this.dialog.open(CreateGroupComponent);
   }
+
+  swipeLeft(event: any) {
+    console.log(event);
+  }
+
+  swipeRight(event: any) {
+    console.log(event);
+  }
 }
