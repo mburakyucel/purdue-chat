@@ -21,7 +21,6 @@ export class RouteService {
     if (this.previousRoute !== '') {
       this.router.navigate([this.previousRoute]);
       this.previousRoute = '';
-    } 
-    else this.router.navigate(['']);
+    } else this.router.navigate(['']);
   }
 }

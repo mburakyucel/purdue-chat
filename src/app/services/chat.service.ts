@@ -10,7 +10,7 @@ import { AuthService } from './auth.service';
 export class ChatService {
   constructor(
     private afs: AngularFirestore,
-    private authService: AuthService,
+    private authService: AuthService
   ) {}
 
   getMessages(chatId: string) {
@@ -50,7 +50,7 @@ export class ChatService {
       .doc(chatId)
       .valueChanges({ idField: 'id' });
   }
-  
+
   /* Not used anywhere, causing a cyclical dependency error
   getChatMetadatas(): Observable<any> {
     return this.subscriptionService.getSubscriptions().pipe(

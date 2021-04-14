@@ -58,7 +58,7 @@ export class SubscriptionService {
       .collection('users', (ref) => ref.where(`chats.${chatId}`, '>', 0))
       .valueChanges();
   }
-  
+
   //Checks if the user is subscribed to the chat being accessed through the URL
   checkSubscription(chatId: any): Observable<any> {
     let isSubscribed = false;
