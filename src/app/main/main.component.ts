@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, tap } from 'rxjs/operators';
 import { CreateGroupComponent } from '../create-group/create-group.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { AuthService } from '../services/auth.service';
@@ -16,10 +16,12 @@ import { AuthService } from '../services/auth.service';
 })
 export class MainComponent implements OnInit {
   @ViewChild('sidenav') sidenav: MatSidenav;
+  isHandset: boolean;
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
       map((result: any) => result.matches),
+      tap(result => (this.isHandset = result)),
       shareReplay()
     );
 
@@ -33,6 +35,9 @@ export class MainComponent implements OnInit {
 
   onChatSelect(chatId: string) {
     this.router.navigate([`/chat/${chatId}`]);
+    if(this.isHandset) {
+      this.sidenav.close();
+    }
   }
 
   openProfileDialog() {
