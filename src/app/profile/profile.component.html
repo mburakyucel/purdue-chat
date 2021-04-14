@@ -1,182 +1,43 @@
 <div class="container">
-  <div *ngIf="!toggleEdit; else editFields">
-    <div class="row">
-      <div class="image">
-        <img src="{{ imageURL }}" alt="Image not available">
-      </div>
+  <div class="row">
+    <div class="image">
+      <img src="{{ imageURL }}" alt="Image not available">
     </div>
-    <mat-divider></mat-divider>
-    <div class="row my-2">
-      <div class="col-auto">
-        Email:
-      </div>
-      <div class="col px-0">
-        {{ email }}
-      </div>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="row my-2 align-items-center">
-      <div class="col-auto">
-        Name:
-      </div>
-      <div class="col px-0">
-        {{ displayName.value }}
-      </div>
-      <div class="col-auto px-0">
-        <mat-icon class="custom-icon">edit</mat-icon>
-      </div>
-    </div>
-    <mat-divider></mat-divider>
-    <div class="row my-2">
-      <div class="col-auto">
-        Password:
-      </div>
-      <div class="col px-0">
-        ******
-      </div>
-      <div class="col-auto px-0">
-        <mat-icon class="custom-icon">edit</mat-icon>
-      </div>
-    </div>
-    <mat-divider></mat-divider>
   </div>
-  <ng-template #editFields>
-    <div class="row my-2">
-      <div class="image">
-        <img src="{{ imageURL }}" (click)="onImageClick()" alt="Image not available">
-      </div>
+  <mat-divider></mat-divider>
+  <div class="row my-2 py-1 align-items-center">
+    <div class="col-auto">
+      Email:
     </div>
-    <mat-divider></mat-divider>
-    <div class="row my-3">
-      <div class="col">
-        Email:
-      </div>
-      <div class="col">
-        {{ email }}
-      </div>
+    <div class="col ps-4 pe-0">
+      {{ email }}
     </div>
-    <mat-divider></mat-divider>
-    <div class="row my-2">
-      <mat-form-field appearance="outline">
-        <mat-label>Name:</mat-label>
-        <input
-          matInput
-          #name
-          maxlength="32"
-          type="text"
-          class="form-control"
-          [formControl]="displayName"
-        />
-        <mat-error *ngIf="displayName.invalid"
-          >At least 1 character required</mat-error
-        >
-        <mat-hint align="end">{{ name.value?.length || 0 }}/32</mat-hint>
-      </mat-form-field>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="row my-2 align-items-center">
+    <div class="col-auto">
+      Name:
     </div>
-    <mat-divider></mat-divider>
-    <form [formGroup]="passwordForm">
-      <div class="row mt-2">
-        <div class="formGroup">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Old Password</mat-label>
-            <input
-              matInput
-              [type]="oldPasswordHide ? 'password' : 'text'"
-              formControlName="oldPassword"
-              autocomplete="new-password"
-            />
-            <button
-              mat-icon-button
-              matSuffix
-              (click)="oldPasswordHide = !oldPasswordHide"
-              [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="oldPasswordHide"
-            >
-              <mat-icon>{{
-                oldPasswordHide ? "visibility_off" : "visibility"
-              }}</mat-icon>
-            </button>
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
-        <div class="formGroup">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>New Password</mat-label>
-            <input
-              matInput
-              [type]="newPasswordHide ? 'password' : 'text'"
-              formControlName="newPassword"
-              autocomplete="new-password"
-            />
-            <button
-              mat-icon-button
-              matSuffix
-              (click)="newPasswordHide = !newPasswordHide"
-              [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="newPasswordHide"
-            >
-              <mat-icon>{{
-                newPasswordHide ? "visibility_off" : "visibility"
-              }}</mat-icon>
-            </button>
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
-        <div class="formGroup">
-          <mat-form-field appearance="outline" class="w-100">
-            <mat-label>Confirm Password</mat-label>
-            <input
-              matInput
-              [type]="confirmPasswordHide ? 'password' : 'text'"
-              formControlName="confirmPassword"
-              autocomplete="new-password"
-            />
-            <button
-              mat-icon-button
-              matSuffix
-              (click)="confirmPasswordHide = !confirmPasswordHide"
-              [attr.aria-label]="'Hide password'"
-              [attr.aria-pressed]="confirmPasswordHide"
-            >
-              <mat-icon>{{
-                confirmPasswordHide ? "visibility_off" : "visibility"
-              }}</mat-icon>
-            </button>
-          </mat-form-field>
-        </div>
-        <div class="row">
-          <div class="col w-100">
-            <div
-            class="alert alert-danger"
-            *ngIf="passwordForm.errors?.match"
-            >
-              Same new and old passwords
-            </div>
-            <div
-              class="alert alert-danger"
-              *ngIf="passwordForm.errors?.noMatch && !passwordForm.errors?.match"
-            >
-              Passwords do not match
-            </div>
-          </div>
-        </div>
-      </div>
-    </form>
-    <div class="row">
-      <div class="col">
-        <button mat-stroked-button style="width: 100%;">
-          Save
-        </button>
-      </div>
-      <div class="col">
-        <button mat-stroked-button style="width: 100%;">
-          Cancel
-        </button>
-      </div>
-    </div>    
-  </ng-template>
+    <div class="col ps-4 pe-0">
+      {{ displayName.value }}
+    </div>
+    <div class="col-auto px-0">
+      <mat-icon class="custom-icon">edit</mat-icon>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div class="row my-2 align-items-center">
+    <div class="col-auto">
+      Password:
+    </div>
+    <div class="col px-0">
+      ******
+    </div>
+    <div class="col-auto px-0">
+      <mat-icon class="custom-icon">edit</mat-icon>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
 </div>
 
 <!--
