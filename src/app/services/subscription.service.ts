@@ -60,9 +60,7 @@ export class SubscriptionService {
   }
   
   //Checks if the user is subscribed to the chat being accessed through the URL
-  subscriptionCheck(chatId: any): Observable<any> {
-    return of('subscribed')
-    /*
+  checkSubscription(chatId: any): Observable<any> {
     let isSubscribed = false;
     return this.getSubscriptions().pipe(
       tap((subscriptions) => {
@@ -86,6 +84,5 @@ export class SubscriptionService {
         }
       })
     );
-    */
   }
 }

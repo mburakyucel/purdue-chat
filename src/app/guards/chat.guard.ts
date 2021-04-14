@@ -30,7 +30,7 @@ export class ChatGuard implements CanActivate {
     | boolean
     | UrlTree {
     var chatId = route.paramMap.get('chatId');
-    return this.subService.subscriptionCheck(chatId).pipe(
+    return this.subService.checkSubscription(chatId).pipe(
       switchMap((accessType) => {
         //Accessing a subscribed group or dm -> do nothing
         if (accessType === 'subscribed') return of(true);
@@ -39,8 +39,9 @@ export class ChatGuard implements CanActivate {
           return of(this.router.parseUrl('/'));
         //Accessing an un-subscribed group -> route to chat info
         else {
+          const isSubscribed = false;
           this.dialog.open(ChatInfoComponent, {
-            data: accessType,
+            data: { chatMetaData: accessType, isSubscribed },
           });
           return of(this.router.parseUrl('/groups'));
         }

@@ -9,7 +9,7 @@ import {
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
-import { RerouteService } from '../services/reroute.service';
+import { RouteService } from '../services/route.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,7 @@ import { RerouteService } from '../services/reroute.service';
 export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
-    private rerouteService: RerouteService,
+    private routeService: RouteService,
     private router: Router
   ) {}
   canActivate(
@@ -31,7 +31,7 @@ export class AuthGuard implements CanActivate {
     return this.authService.isSignedIn().pipe(
       switchMap((isSignedIn) => {
         if (!isSignedIn) {
-          this.rerouteService.cacheRoute(state.url);
+          this.routeService.saveRoute(state.url);
           return of(this.router.parseUrl('/home'));
         }
         return of(true);

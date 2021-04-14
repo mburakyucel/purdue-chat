@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import { RerouteService } from '../services/reroute.service';
+import { RouteService } from '../services/route.service';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
   registerForm = new FormGroup({
     email: new FormControl('', [
       Validators.required,
-      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+      Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
     ]),
     password: new FormControl('', [
       Validators.required,
@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
   });
   constructor(
     public authService: AuthService,
-    private rerouteService: RerouteService,
+    private routeService: RouteService,
     private router: Router,
     private _snackBar: MatSnackBar
   ) {}
@@ -35,7 +35,6 @@ export class RegisterComponent implements OnInit {
 
   async register() {
     this.loading = true;
-    this.cachedRoute = this.rerouteService.getCachedRoute();
     (
       await this.authService.register(this.email.value, this.password.value)
     ).subscribe(
@@ -44,10 +43,7 @@ export class RegisterComponent implements OnInit {
           duration: 2000,
         });
         this.loading = false;
-        if (this.cachedRoute !== '') {
-          this.router.navigate([this.cachedRoute]);
-          this.rerouteService.clearCachedRoute();
-        } else this.router.navigate(['']);
+        this.routeService.routeUser();
       },
       (error) => {
         switch (error.code) {
