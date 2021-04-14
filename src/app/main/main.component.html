@@ -22,11 +22,11 @@
     [opened]="(isHandset$ | async) === false"
     [disableClose]="true"
     [autoFocus]="false"
-    (swipeLeft)="sidenav.close()"
+    (swipeLeft)="swipeLeft($event)"
   >
     <app-chat-list (chatSelect)="onChatSelect($event)"></app-chat-list>
   </mat-sidenav>
-  <mat-sidenav-content (swipeRight)="sidenav.open()" (swipeLeft)="sidenav.close()">
+  <mat-sidenav-content (swipeRight)="swipeRight($event)">
     <!-- Add Content Here -->
     <router-outlet></router-outlet>
   </mat-sidenav-content>

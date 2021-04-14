@@ -1,6 +1,7 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -14,6 +15,7 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./main.component.css'],
 })
 export class MainComponent implements OnInit {
+  @ViewChild('sidenav') sidenav: MatSidenav;
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe(Breakpoints.Handset)
     .pipe(
@@ -46,10 +48,14 @@ export class MainComponent implements OnInit {
   }
 
   swipeLeft(event: any) {
-    console.log(event);
+    if(event.pointerType !== 'mouse') {
+      this.sidenav.close()
+    }
   }
 
   swipeRight(event: any) {
-    console.log(event);
+    if(event.pointerType !== 'mouse') {
+      this.sidenav.open()
+    }
   }
 }
