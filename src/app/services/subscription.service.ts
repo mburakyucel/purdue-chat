@@ -20,28 +20,46 @@ export class SubscriptionService {
     private _snackBar: MatSnackBar
   ) {}
 
-  //Show all groups a user is subscribed too
-  getSubscriptions(): Observable<any> {
-    return this.authService.user$.pipe(map((doc) => doc.chats));
+  //Get all group Ids a user is subscribed too
+  getSubscriptions(): Observable<string[]> {
+    return this.authService.user$.pipe(
+      map((doc) => (doc ? Object.keys(doc.chats) : []))
+    );
   }
 
   //Add a subscription to the user chats array
+<<<<<<< HEAD
   addSubscription(chatID: string, userId: string) {
+=======
+  addSubscription(chatId: string, userId: string) {
+>>>>>>> main
     return this.afs
       .collection('users')
       .doc(userId)
       .update({
+<<<<<<< HEAD
         chats: firebase.firestore.FieldValue.arrayUnion(chatID),
+=======
+        [`chats.${chatId}`]: Date.now(),
+>>>>>>> main
       });
   }
 
   //Remove a subscription from the user chats array
+<<<<<<< HEAD
   removeSubscription(chatID: string) {
+=======
+  removeSubscription(chatId: string) {
+>>>>>>> main
     return this.afs
       .collection('users')
       .doc(this.authService.getUid())
       .update({
+<<<<<<< HEAD
         chats: firebase.firestore.FieldValue.arrayRemove(chatID),
+=======
+        [`chats.${chatId}`]: firebase.firestore.FieldValue.delete(),
+>>>>>>> main
       });
   }
 
@@ -53,10 +71,9 @@ export class SubscriptionService {
   }
 
   getSubscribedUsers(chatId: string): Observable<any> {
+    // User is subscribed if the key is defined
     return this.afs
-      .collection('users', (ref) =>
-        ref.where('chats', 'array-contains', chatId)
-      )
+      .collection('users', (ref) => ref.where(`chats.${chatId}`, '>', 0))
       .valueChanges();
   }
 

@@ -17,6 +17,7 @@ import { AuthService } from '../services/auth.service';
 import { ChatService } from '../services/chat.service';
 import { ImageUploadService } from '../services/image-upload.service';
 import { SubscriptionService } from '../services/subscription.service';
+import { ProfileService } from '../services/profile.service';
 import { ChatInfoComponent } from '../chat-info/chat-info.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -45,6 +46,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   constructor(
     private chatService: ChatService,
+    private profileService: ProfileService,
     private route: ActivatedRoute,
     private imageUploadService: ImageUploadService,
     private subService: SubscriptionService,
@@ -90,6 +92,7 @@ export class ChatComponent implements OnInit, OnDestroy {
         takeUntil(this.unsubscribe$)
       )
       .subscribe((data: Array<DocumentData>) => {
+        this.profileService.updateLastReadTime(this.chatId);
         this.messages = data.sort((m1, m2) => m1.createdAt - m2.createdAt);
         // Scroll down after the DOM is updated
         setTimeout(() => {
@@ -105,14 +108,13 @@ export class ChatComponent implements OnInit, OnDestroy {
         takeUntil(this.unsubscribe$)
       )
       .subscribe((users: any) => {
-        console.log(users);
         this.usersArrayToJson(users);
       });
   }
 
   sendMessage(event: any) {
     event.preventDefault();
-    if (this.chatMetadata.type == 'dm' && this.messages.length == 0) {
+    if (this.chatMetadata.type === 'dm' && this.messages.length === 0) {
       this.subService.addSubscription(this.chatId, this.recipientUser.uid);
     }
     if (this.imageUrl) {
@@ -123,7 +125,6 @@ export class ChatComponent implements OnInit, OnDestroy {
           this.chatService.sendMessage(imageUrl, this.chatId, 'image');
           this.imageLoading = false;
           this.imageUrl = null;
-          console.log(imageUrl);
         });
     } else {
       if (this.messageControl.value.trim()) {
@@ -134,7 +135,6 @@ export class ChatComponent implements OnInit, OnDestroy {
         );
         this.inputMessage.nativeElement.value = '';
         this.messageControl.setValue('');
-        console.log('Sent');
       }
     }
   }
