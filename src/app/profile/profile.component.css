@@ -27,6 +27,8 @@ img {
 
 .formGroup {
   margin-bottom: -20px;
-  font-size: 14px;
-  margin-left: 33%;
+}
+
+.custom-icon {
+  transform: scale(0.75);
 }

@@ -57,6 +57,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     enableZoom: true,
   };
 
+  public toggleEdit = false;
   public imageUploadDialogRef: MatDialogRef<ImageUploadComponent>;
 
   constructor(
