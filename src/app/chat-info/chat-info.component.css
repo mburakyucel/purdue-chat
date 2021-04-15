@@ -12,3 +12,24 @@
   height: 550px;
   min-width: 480px;
 }
+
+.image {
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+  margin-bottom: 10%;
+}
+
+img {
+  border-radius: 50%;
+  width: 50%;
+}
+
+.display-image {
+  width: 60px;
+}
+
+.members{
+  height: 200px;
+  overflow: auto;
+}
