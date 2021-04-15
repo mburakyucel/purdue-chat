@@ -11,21 +11,6 @@ img {
   margin-bottom: 10%;
 }
 
-.tab1 {
-  display: inline-block;
-  margin-left: 60px;
-}
-
-.tab2 {
-  display: inline-block;
-  margin-left: 40px;
-}
-
-.custom.mat-card {
-  padding: 0%;
-  width: 400px;
-}
-
 .formGroup {
   margin-bottom: -20px;
 }

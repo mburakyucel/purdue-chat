@@ -47,8 +47,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   public newPasswordHide = true;
   public confirmPasswordHide = true;
 
-  public toggle_displayName: any = true;
-  public toggle_password: any = true;
   public croppieOptions: CroppieOptions = {
     viewport: { width: 100, height: 100, type: 'circle' },
     boundary: { width: 300, height: 300 },
@@ -107,7 +105,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .catch((error) => {
         console.log(error);
       });
-    this.toggle_displayName = true;
   }
 
   async onPasswordChange() {
@@ -124,7 +121,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
           this._snackBar.open('Password Change Successful', 'Close', {
             duration: 2000,
           });
-          this.toggle_password = true;
           this.passwordForm.setValue({
             oldPassword: '',
             newPassword: '',
@@ -144,7 +140,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   cancelPassword() {
-    this.toggle_password = true;
     this.oldPasswordHide = true;
     this.newPasswordHide = true;
     this.confirmPasswordHide = true;
@@ -156,7 +151,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   cancelDisplayName() {
-    this.toggle_displayName = true;
     this.displayName.setValue(this.currentDisplayName);
   }
 

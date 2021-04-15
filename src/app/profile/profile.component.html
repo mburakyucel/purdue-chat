@@ -156,7 +156,7 @@
       </div>
       <div class="row py-2 justify-content-center">
         <div class="col-auto">
-          <button mat-stroked-button type="submit" (click)="onPasswordChange()" [disabled]="!passwordForm.valid">
+          <button mat-stroked-button type="submit" (click)="selectEditPassword = false; onPasswordChange()" [disabled]="!passwordForm.valid">
             <mat-icon>check</mat-icon>
           </button>
         </div>
