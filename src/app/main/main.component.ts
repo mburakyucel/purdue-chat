@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
@@ -24,14 +24,25 @@ export class MainComponent implements OnInit {
       tap(result => (this.isHandset = result)),
       shareReplay()
     );
-
+  windowa: any;
   constructor(
     public authService: AuthService,
     public dialog: MatDialog,
     private router: Router,
-    private breakpointObserver: BreakpointObserver
-  ) {}
-  ngOnInit(): void {}
+    private breakpointObserver: BreakpointObserver,
+    private cd: ChangeDetectorRef,
+  ) {
+    this.windowa = window;
+  }
+  vv: any;
+  vHeight: any;
+  ngOnInit(): void {
+    this.vv = visualViewport;
+    window.visualViewport.addEventListener('resize', (event: any) => {
+      console.log(event);
+      this.vHeight = event.currentTarget.height;
+    });
+  }
 
   onChatSelect(chatId: string) {
     this.router.navigate([`/chat/${chatId}`]);
@@ -62,5 +73,19 @@ export class MainComponent implements OnInit {
     if(event.pointerType !== 'mouse') {
       this.sidenav.open()
     }
+  }
+
+  onResize(event: any) {
+    // this.windowa = event;
+    // this.vvHeight = visualViewport.height;
+    // this.cd.detectChanges();
+    console.log(window);
+    console.log(visualViewport)
+  }
+
+  onResizee() {
+    // this.windowa = event;
+    // this.cd.detectChanges();
+    console.log(window);
   }
 }

@@ -1,4 +1,4 @@
-<mat-toolbar>
+<mat-toolbar (window:resize)="onResize($event)">
   <a class="text-reset" routerLink="/groups">
     <button mat-button>
       <span>Groups</span>
@@ -13,7 +13,7 @@
   <button mat-button (click)="openProfileDialog()">Profile</button>
   <button mat-button (click)="onLogout()">Logout</button>
 </mat-toolbar>
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="sidenav-container" [style.height.px]="vHeight - 56">
   <mat-sidenav
     #sidenav
     class="sidenav"
@@ -29,5 +29,12 @@
   <mat-sidenav-content (swipeRight)="swipeRight($event)">
     <!-- Add Content Here -->
     <router-outlet></router-outlet>
+    <!-- <code>
+      <pre>{{windowa |json}}</pre>
+    </code> -->
+    <!-- <p>{{windowa.innerHeight}}</p> -->
+    <!-- <p>{{windowa.outerHeight}}</p> -->
+    <!-- <p>{{vHeight}}</p> -->
+    <!-- <button (click)="onResizee()">onResize</button> -->
   </mat-sidenav-content>
 </mat-sidenav-container>
