@@ -1,11 +1,86 @@
-<h1>Purdue chat</h1>
-<a routerLink="/login">
-  <button mat-button>
-    <span>Login</span>
-  </button>
-</a>
-<a routerLink="/register">
-  <button mat-button>
-    <span>Register</span>
-  </button>
-</a>
+<body>
+  <nav class="navbar navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+      <div class="row">
+        <div class="col navbar-brand">
+          Home
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid text-center text-white m-0" style="padding: 125px 0 90px; background: rgb(0, 140, 255)">
+    <div style="font-size: 80px">Welcome to PChat</div>
+    <p class="lead">A reliable, free-to-use college group chat application</p>
+    <div class="row w-100 justify-content-center pt-5 m-0">
+      <div class="col-auto">
+        <a routerLink="/login">
+          <button class="btn-lg btn-dark">
+            <span>Login</span>
+          </button>
+        </a>
+      </div>
+        <div class="col-auto">
+        <a routerLink="/register">
+          <button class="btn-lg btn-dark">
+            <span>Register</span>
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div id="about" class="container-fluid" style="padding: 50px 0;">
+    <div class="row w-100">
+      <div class="col-lg-8 mx-auto">
+        <h1>About PChat</h1>
+        <p class="lead" align="justify">
+          Our PChat web application seeks to be a public chat application made by and for college students.
+          A place to have public group chats for each class, including clubs and organizations, where current and prospective
+          students can join and interact with one another. Each group is created to facilitate easier interactions among like 
+          minded peers and be a place for discussion.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div id="services" class="container-fluid bg-light" style="padding: 50px 0;">
+    <div class="row w-100">
+      <div class="col-lg-8 mx-auto">
+        <h1>Services Offered</h1>
+        <ul class="lead">
+          <li>Group chat creation and messaging</li> 
+          <li>Direct messaging between registered members</li>
+          <li>Image sharing through any chat</li>
+          <li>Group invites and notifications</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div id="project" class="container-fluid" style="padding: 50px 0;">
+    <div class="row w-100">
+      <div class="col-lg-8 mx-auto">
+        <h1>Project Repository</h1>
+          <div class="row w-100">
+              <div class="col-auto">
+                <a href="https://github.com/mburakyucel/purdue-chat" target="_blank" style="text-decoration: none;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                  </svg>
+                </a>
+              </div>
+              <div class="col-auto p-0">
+                <a href="https://github.com/mburakyucel/purdue-chat" target="_blank" style="text-decoration: none;"><h1>Github</h1></a>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-4 bg-dark">
+    <div class="container">
+      <div class="row w-100 text-center text-white">
+        <p>PChat 2021</p>
+      </div> 
+    </div>
+  </footer>
+</body>
+
