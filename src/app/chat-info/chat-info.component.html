@@ -17,14 +17,18 @@
     </div>
   </div>
   <mat-divider></mat-divider>
-  <div class="row pt-1 test">
+  <div class="row pt-1">
     <div class="col px-0">
-      <h2>About</h2>
+      <h2 class="mb-0">About</h2>
     </div>
   </div>
   <div class="row">
     <div class="col px-0">
-      <p>{{ chatMetaData.groupDescription }}</p>
+      <mat-card class="group-description">
+        <mat-card-content>
+          {{ chatMetaData.groupDescription }}
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
   <mat-divider class="w-100"></mat-divider>
