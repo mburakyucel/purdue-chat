@@ -36,11 +36,16 @@ export class MainComponent implements OnInit {
   }
   vv: any;
   vHeight: any;
+  windowHeight: any;
   ngOnInit(): void {
     this.vv = visualViewport;
     window.visualViewport.addEventListener('resize', (event: any) => {
       console.log(event);
       this.vHeight = event.currentTarget.height;
+    });
+    window.addEventListener('resize', () => {
+      console.log(window.innerHeight);
+      this.windowHeight = window.innerHeight;
     });
   }
 
