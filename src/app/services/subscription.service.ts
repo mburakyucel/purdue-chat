@@ -72,15 +72,15 @@ export class SubscriptionService {
       switchMap((chat: any) => {
         //Accessing a subscribed group or dm -> do nothing
         if (isSubscribed) {
-          return of('subscribed');
+          return of({accessType: "subscribed", metaData: chat});
         }
         //Accessing an un-subscribed group -> route to chat info
         else if (chat.type === 'group') {
-          return of(chat);
+          return of({accessType: "unsubscribedChat", metaData: chat});
         }
         //Accessing an un-subscribed dm -> route to main
         else {
-          return of('unsubscribedDM');
+          return of({accessType: "unsubscribedDM", metaData: chat});
         }
       })
     );
