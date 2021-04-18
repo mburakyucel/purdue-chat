@@ -37,31 +37,12 @@
       <h2 class="my-0">Members</h2>
     </div>
   </div>
-<<<<<<< HEAD
   <mat-card class="members">
     <div *ngFor="let user of chatMembers">
       <mat-card-content>
         <div class="row align-items-center">
           <div class="col-auto px-0">
             <img style="width: 60px;"src="{{ user.profileImage }}"/>
-=======
-  <div class="row d-none d-sm-block">
-    <mat-card class="members">
-      <div *ngFor="let user of chatMembers">
-        <mat-card-content>
-          <div class="row align-items-center">
-            <div class="col-auto px-0">
-              <img style="width: 60px" src="{{ user.profileImage }}" />
-            </div>
-            <div class="col">
-              <h2>{{ user.displayName }}</h2>
-            </div>
-            <div class="col-auto">
-              <button mat-raised-button color="primary">
-                <mat-icon>message</mat-icon>
-              </button>
-            </div>
->>>>>>> f29edaeb6b08e7865211dbddba3266abef033998
           </div>
           <div class="col-auto">
             <h2 class="text-truncate">{{ user.displayName }}</h2>
