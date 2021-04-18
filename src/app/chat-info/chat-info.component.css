@@ -1,26 +1,48 @@
-.image {
-  display: flex;
-  justify-content: center;
-  margin-top: 10%;
-  margin-bottom: 10%;
+.group-image {
+  height: 200px;
+  width: 200px;
 }
 
 img {
   border-radius: 50%;
-  width: 50%;
 }
 
 .display-image {
-  width: 60px;
+  width: 30px;
 }
 
-.members {
-  height: 200px;
+.display-name {
+  max-width: 132px;
+}
+
+.members{
+  max-height: 150px;
   overflow: auto;
 }
 
-.group-description {
-  max-width: 385px;
+.group-description{
+  width: 260px;
   max-height: 100px;
   overflow: auto;
+}
+
+@media (min-width: 600px) {
+  .display-image {
+    width: 60px;
+  }
+
+  .members {
+    max-height: 200px;
+    overflow: auto;
+  }
+
+  .display-name{
+    max-width: 300px;
+  }
+  
+  .group-description {
+    width: 475px;
+    max-height: 100px;
+    overflow: auto;
+  }
 }

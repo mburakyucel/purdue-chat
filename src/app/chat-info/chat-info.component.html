@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col">
-      <div class="image my-0">
-        <img src="{{ chatMetaData.groupImageUrl }}" />
+    <div class="col-auto">
+      <div class="group-image my-0">
+        <img src="{{ chatMetaData.groupImageUrl }}" class="img-fluid"/>
       </div>
     </div>
   </div>
@@ -22,8 +22,8 @@
       <h2 class="mb-0">About</h2>
     </div>
   </div>
-  <div class="row">
-    <div class="col px-0">
+  <div class="row pb-2 justify-content-center">
+    <div class="col">
       <mat-card class="group-description">
         <mat-card-content>
           {{ chatMetaData.groupDescription }}
@@ -40,11 +40,11 @@
   <mat-card class="members">
     <div *ngFor="let user of chatMembers">
       <mat-card-content>
-        <div class="row align-items-center">
+        <div class="row justify-content-center">
           <div class="col-auto px-0">
-            <img style="width: 60px;"src="{{ user.profileImage }}"/>
+            <img class="display-image" src="{{ user.profileImage }}"/>
           </div>
-          <div class="col-auto">
+          <div class="col pe-0 display-name">
             <h2 class="text-truncate">{{ user.displayName }}</h2>
           </div>
           <div class="col-auto">
