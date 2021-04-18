@@ -15,12 +15,12 @@ img {
   max-width: 132px;
 }
 
-.members{
+.members {
   max-height: 150px;
   overflow: auto;
 }
 
-.group-description{
+.group-description {
   width: 260px;
   max-height: 100px;
   overflow: auto;
@@ -36,10 +36,10 @@ img {
     overflow: auto;
   }
 
-  .display-name{
+  .display-name {
     max-width: 300px;
   }
-  
+
   .group-description {
     width: 475px;
     max-height: 100px;
