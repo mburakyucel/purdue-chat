@@ -57,9 +57,28 @@
     </div>
   </mat-card>
   <mat-divider></mat-divider>
-  <div class="row pt-2 justify-content-center">
+  <div class="row pt-2 pb-0 justify-content-center">
     <div class="col-auto">
-      <button mat-raised-button color="primary" (click)="onJoin()">Join</button>
+      <div *ngIf="!isSubscribed; else Unsubscribe">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="onJoin()"
+          [mat-dialog-close]="true"
+        >
+          Join
+        </button>
+      </div>
+      <ng-template #Unsubscribe>
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="unSubscribe()"
+          [mat-dialog-close]="true"
+        >
+          Leave
+        </button>
+      </ng-template>
     </div>
   </div>
 </div>
