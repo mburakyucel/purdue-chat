@@ -1,6 +1,14 @@
 <div class="container-flex w-100 h-100" style="background: rgb(0, 140, 255)">
-  <div class="row w-100 m-0 py-4 bg-dark"></div>
-  <div class="row w-100 m-0 justify-content-center text-center" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -65%);">
+  <div class="row w-100 m-0 pt-1 bg-dark">
+    <div class="col text-light">
+      <a routerLink="/home">
+        <button class="btn lg bg-dark text-light">
+          <mat-icon style="font-size: xx-large;">keyboard_backspace</mat-icon>
+        </button>
+      </a>
+    </div>
+  </div>
+  <div class="row w-100 m-0 justify-content-center text-center transform-card">
     <div class="col col-lg-3 px-2 m-0">
       <mat-card class="pt-5 pb-4">
         <mat-card-title style="font-size: xx-large; line-height: 40px"> Welcome to PChat</mat-card-title>
@@ -9,7 +17,7 @@
           <form [formGroup]="loginForm">
             <div class="row">
               <div class="col">
-                <mat-form-field class="w-100" style="font-size: x-large;">
+                <mat-form-field class="w-100 pb-2" style="font-size: x-large;">
                   <mat-label>Email</mat-label>
                   <input
                     matInput
