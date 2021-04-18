@@ -1,13 +1,15 @@
 .transform-card {
-    position: absolute;
-    transform: translate(-50%, -52%);
-    top: 50%; left: 50%;
+  position: absolute;
+  transform: translate(-50%, -52%);
+  top: 50%;
+  left: 50%;
 }
 
 @media (min-width: 600px) and (min-height: 800px) {
-    .transform-card {
-        position: absolute;
-        transform: translate(-50%, -75%);
-        top: 50%; left: 50%;
-    }
+  .transform-card {
+    position: absolute;
+    transform: translate(-50%, -75%);
+    top: 50%;
+    left: 50%;
+  }
 }
