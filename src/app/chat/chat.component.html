@@ -10,8 +10,23 @@
           *ngIf="chatImageUrl"
         />
       </div>
-      <div class="col-auto">
-        <h1>{{ chatTitle }}</h1>
+      <div class="col-auto align-self-center">
+        <h1 class="m-0">
+          {{ chatTitle }}
+        </h1>
+      </div>
+      <div
+        *ngIf="this.chatMetadata.type === 'group'"
+        class="col align-self-center"
+      >
+        <button
+          mat-raised-button
+          class="btn float-end"
+          color="primary"
+          (click)="onInvite()"
+        >
+          Invite
+        </button>
       </div>
     </div>
     <mat-divider></mat-divider>

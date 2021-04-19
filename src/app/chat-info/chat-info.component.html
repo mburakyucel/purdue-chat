@@ -1,13 +1,21 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-auto">
+<<<<<<< HEAD
       <div class="group-image my-0">
         <img src="{{ chatMetaData.groupImageUrl }}" class="img-fluid" />
       </div>
+=======
+      <img
+        class="groupImage-dimension rounded"
+        src="{{ chatMetadata.groupImageUrl }}"
+      />
+>>>>>>> main
     </div>
   </div>
   <div class="row justify-content-center">
     <div class="col-auto">
+<<<<<<< HEAD
       <h2 class="m-1 text-center">{{ chatMetaData.groupName }}</h2>
     </div>
   </div>
@@ -38,6 +46,24 @@
     </div>
   </div>
   <mat-card class="members">
+=======
+      <h2 class="m-1">{{ chatMetadata.groupName }}</h2>
+    </div>
+    <div class="row pb-2 justify-content-center">
+      <div class="col-auto text-muted">
+        <small>{{ chatMetadata.createdAt | date: "short" }}</small>
+      </div>
+    </div>
+  </div>
+  <mat-card class="mb-1">
+    <mat-card-title class="pb-2">About</mat-card-title>
+    <mat-card-content>
+      <p>{{ chatMetadata.groupDescription }}</p>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-title class="pb-2">Members</mat-card-title>
+>>>>>>> main
     <mat-card-content>
       <div *ngFor="let user of chatMembers">
         <div class="row justify-content-center">
