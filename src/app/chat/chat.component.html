@@ -71,18 +71,6 @@
         </div>
       </div>
     </div>
-    <div *ngIf="imageUrl" class="row py-4">
-      <div class="col-auto">
-        <img class="chat-image" src="{{ imageUrl }}" />
-      </div>
-      <div class="col-auto">
-        <mat-spinner
-          *ngIf="imageLoading"
-          [diameter]="50"
-          mode="indeterminate"
-        ></mat-spinner>
-      </div>
-    </div>
     <div class="row">
       <div class="col">
         <mat-form-field class="w-100" [style.fontSize]="'20px'">

@@ -1,4 +1,4 @@
-<ng-container *ngIf="uploadCropImage; else uploadUnCropImage">
+<ng-container *ngIf="isCropImage; else uploadUnCropImage">
   <input
   type="file"
   id="userImage"
@@ -17,6 +17,41 @@
   <button mat-button mat-dialog-close id="cancel">Cancel</button>
 </ng-container>
 <ng-template #uploadUnCropImage>
-
+  <div class="container custom-container">
+    <div class="row align-items-center">
+      <div class="col">
+        <h1>{{ recipient }}</h1>
+      </div>
+      <div class="col-auto align-self-end pb-3">
+        <button mat-flat-button mat-dialog-close>
+          <mat-icon>
+            close
+          </mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-auto">
+        <img src="{{ imageUrl }}" class="img-fluid"/>
+      </div>
+    </div>
+    <div class="row pt-2">
+      <div class="col w-100">
+        <mat-progress-bar
+        *ngIf="loading"
+        mode="indeterminate"
+        ></mat-progress-bar>
+      </div>
+    </div>
+    <div class="row justify-content-end pt-3">
+      <div class="col-auto">
+        <button mat-flat-button class="pe-0" (click)="sendImage()">
+          <mat-icon>
+            send
+          </mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
 </ng-template>
 

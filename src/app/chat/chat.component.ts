@@ -20,6 +20,7 @@ import { SubscriptionService } from '../services/subscription.service';
 import { ProfileService } from '../services/profile.service';
 import { ChatInfoComponent } from '../chat-info/chat-info.component';
 import { MatDialog } from '@angular/material/dialog';
+import { ImageUploadComponent } from '../image-upload/image-upload.component';
 
 @Component({
   selector: 'app-chat',
@@ -117,25 +118,14 @@ export class ChatComponent implements OnInit, OnDestroy {
     if (this.chatMetadata.type === 'dm' && this.messages.length === 0) {
       this.subService.addSubscription(this.chatId, this.recipientUser.uid);
     }
-    if (this.imageUrl) {
-      this.imageLoading = true;
-      this.imageUploadService
-        .uploadImage(this.imageUrl)
-        .subscribe((imageUrl: string) => {
-          this.chatService.sendMessage(imageUrl, this.chatId, 'image');
-          this.imageLoading = false;
-          this.imageUrl = null;
-        });
-    } else {
-      if (this.messageControl.value.trim()) {
-        this.chatService.sendMessage(
-          this.messageControl.value,
-          this.chatId,
-          'text'
-        );
-        this.inputMessage.nativeElement.value = '';
-        this.messageControl.setValue('');
-      }
+    if (this.messageControl.value.trim()) {
+      this.chatService.sendMessage(
+        this.messageControl.value,
+        this.chatId,
+        'text'
+      );
+      this.inputMessage.nativeElement.value = '';
+      this.messageControl.setValue('');
     }
   }
 
@@ -155,6 +145,9 @@ export class ChatComponent implements OnInit, OnDestroy {
 
     reader.onload = (url: any) => {
       this.imageUrl = url.target.result;
+      this.dialog.open(ImageUploadComponent, {
+        data: { croppieOptions: null, isCroppedImage: false, initalSelectedImage: this.imageUrl, recipient: this.chatTitle, chatId: this.chatId},
+      });
     };
 
     reader.readAsDataURL(this.selectedImageFile);

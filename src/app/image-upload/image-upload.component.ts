@@ -12,6 +12,7 @@ import { CroppieOptions } from 'croppie';
 
 import { ImageUploadService } from 'src/app/services/image-upload.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ChatService } from '../services/chat.service';
 
 @Component({
   selector: 'app-crop',
@@ -24,18 +25,25 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
   private points: number[];
   private defaultZoom = 0;
   private file: any;
-  private imageUrl: string;
+  public imageUrl: string;
   public loading = false;
   public croppie: Croppie;
-  public uploadCropImage: boolean;
+  public isCropImage: boolean;
+  public recipient: string;
 
   constructor(
     private uploadService: ImageUploadService,
+    private chatService: ChatService,
     public dialogRef: MatDialogRef<ImageUploadComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { croppieOptions: CroppieOptions }
+    @Inject(MAT_DIALOG_DATA) public data: { croppieOptions: any, isCroppedImage: boolean, initalSelectedImage: string, recipient: string, chatId: string }
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isCropImage = this.data.isCroppedImage;
+    this.imageUrl = this.data.initalSelectedImage;
+    this.recipient = this.data.recipient;
+    console.log(this.data)
+  }
 
   enterImage(): any {
     this.croppie = new Croppie(
@@ -91,6 +99,18 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
             this.dialogRef.close(imageUrl);
           });
       });
+  }
+
+  sendImage(){
+    this.loading = true;
+    this.uploadService
+    .uploadImage(this.imageUrl)
+    .subscribe((imageUrl: string) => {
+      this.chatService.sendMessage(imageUrl, this.data.chatId, 'image');
+      this.loading = false;
+      this.imageUrl = null;
+      this.dialogRef.close()
+    });
   }
 
   ngOnDestroy() {
