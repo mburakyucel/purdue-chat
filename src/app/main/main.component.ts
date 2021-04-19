@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSidenav } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
@@ -24,28 +24,18 @@ export class MainComponent implements OnInit {
       tap(result => (this.isHandset = result)),
       shareReplay()
     );
-  windowa: any;
+  visualViewport: any;
   constructor(
     public authService: AuthService,
     public dialog: MatDialog,
     private router: Router,
     private breakpointObserver: BreakpointObserver,
-    private cd: ChangeDetectorRef,
   ) {
-    this.windowa = window;
+    this.visualViewport = visualViewport;
   }
-  vv: any;
-  vHeight: any;
-  windowHeight: any;
   ngOnInit(): void {
-    this.vv = visualViewport;
     window.visualViewport.addEventListener('resize', (event: any) => {
-      console.log(event);
-      this.vHeight = event.currentTarget.height;
-    });
-    window.addEventListener('resize', () => {
-      console.log(window.innerHeight);
-      this.windowHeight = window.innerHeight;
+      window.scrollTo(0,0);
     });
   }
 
@@ -80,17 +70,4 @@ export class MainComponent implements OnInit {
     }
   }
 
-  onResize(event: any) {
-    // this.windowa = event;
-    // this.vvHeight = visualViewport.height;
-    // this.cd.detectChanges();
-    console.log(window);
-    console.log(visualViewport)
-  }
-
-  onResizee() {
-    // this.windowa = event;
-    // this.cd.detectChanges();
-    console.log(window);
-  }
 }
