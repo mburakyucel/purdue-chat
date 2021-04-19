@@ -105,7 +105,7 @@
           </button>
         </mat-form-field>
       </div>
-      <div class="col-auto pb-4 align-self-end">
+      <div class="col-auto pb-4 ps-0 align-self-end">
         <input
           style="display: none"
           type="file"
@@ -113,9 +113,9 @@
           (change)="onImageSelect($event)"
           #hiddenImageInput
         />
-        <button mat-flat-button (click)="hiddenImageInput.click()">
-          Image
-        </button>
+        <mat-icon class="custom-icon" mat-flat-button (click)="hiddenImageInput.click()">
+          add_a_photo
+        </mat-icon>
       </div>
     </div>
   </ng-container>

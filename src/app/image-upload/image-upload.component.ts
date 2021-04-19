@@ -27,6 +27,7 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
   private imageUrl: string;
   public loading = false;
   public croppie: Croppie;
+  public uploadCropImage: boolean;
 
   constructor(
     private uploadService: ImageUploadService,

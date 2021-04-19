@@ -19,3 +19,7 @@ textarea.mat-input-element.cdk-textarea-autosize {
 .chat-header {
   cursor: pointer;
 }
+
+.custom-icon{
+  cursor: pointer;
+}
