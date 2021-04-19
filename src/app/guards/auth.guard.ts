@@ -6,16 +6,20 @@ import {
   UrlTree,
   Router,
 } from '@angular/router';
-import { of } from 'rxjs';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { AuthService } from './services/auth.service';
+import { AuthService } from '../services/auth.service';
+import { RouteService } from '../services/route.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private routeService: RouteService,
+    private router: Router
+  ) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -26,7 +30,10 @@ export class AuthGuard implements CanActivate {
     | UrlTree {
     return this.authService.isSignedIn().pipe(
       switchMap((isSignedIn) => {
-        if (!isSignedIn) return of(this.router.parseUrl('/home'));
+        if (!isSignedIn) {
+          this.routeService.saveRoute(state.url);
+          return of(this.router.parseUrl('/home'));
+        }
         return of(true);
       })
     );

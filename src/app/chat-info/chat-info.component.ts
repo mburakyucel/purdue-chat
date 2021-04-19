@@ -15,7 +15,7 @@ import { GroupsComponent } from '../groups/groups.component';
 export class ChatInfoComponent implements OnInit {
   chatMembers: any[] = [];
   dmDocId: any;
-  chatMetaData: any;
+  chatMetadata: any;
   isSubscribed: boolean;
 
   constructor(
@@ -29,21 +29,21 @@ export class ChatInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.chatMetaData = this.chatInfoDialogData.chatMetaData;
+    this.chatMetadata = this.chatInfoDialogData.chatMetadata;
     this.isSubscribed = this.chatInfoDialogData.isSubscribed;
 
     this.subService
-      .getSubscribedUsers(this.chatMetaData.id)
+      .getSubscribedUsers(this.chatMetadata.id)
       .subscribe((userData) => (this.chatMembers = userData));
   }
 
   onJoin(): void {
     this.subService
-      .addSubscription(this.chatMetaData.id, this.authService.getUid())
+      .addSubscription(this.chatMetadata.id, this.authService.getUid())
       .then(() => {
-        this.router.navigate([`/chat/${this.chatMetaData.id}`]);
+        this.router.navigate([`/chat/${this.chatMetadata.id}`]);
         this._snackBar.open(
-          `Subscribed to ${this.chatMetaData.groupName}`,
+          `Subscribed to ${this.chatMetadata.groupName}`,
           'Close',
           {
             duration: 2000,
@@ -72,7 +72,7 @@ export class ChatInfoComponent implements OnInit {
 
   unSubscribe() {
     if (this.isSubscribed) {
-      this.subService.removeSubscription(this.chatMetaData.id);
+      this.subService.removeSubscription(this.chatMetadata.id);
 
       //If router is not at /groups page then navigate back to home
       if (this.router.routerState.snapshot.url != '/groups') {
