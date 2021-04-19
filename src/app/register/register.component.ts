@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
+import { RouteService } from '../services/route.service';
 
 @Component({
   selector: 'app-register',
@@ -11,19 +12,21 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   passwordHide = true;
+  loading = false;
+  cachedRoute = '';
   registerForm = new FormGroup({
     email: new FormControl('', [
       Validators.required,
-      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+      Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
     ]),
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(6),
     ]),
   });
-  loading = false;
   constructor(
     public authService: AuthService,
+    private routeService: RouteService,
     private router: Router,
     private _snackBar: MatSnackBar
   ) {}
@@ -40,7 +43,7 @@ export class RegisterComponent implements OnInit {
           duration: 2000,
         });
         this.loading = false;
-        this.router.navigate(['']);
+        this.routeService.routeUser();
       },
       (error) => {
         switch (error.code) {

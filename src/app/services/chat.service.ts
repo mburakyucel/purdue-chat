@@ -3,7 +3,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { combineLatest, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
-import { SubscriptionService } from './subscription.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +10,7 @@ import { SubscriptionService } from './subscription.service';
 export class ChatService {
   constructor(
     private afs: AngularFirestore,
-    private authService: AuthService,
-    private subscriptionService: SubscriptionService
+    private authService: AuthService
   ) {}
 
   getMessages(chatId: string) {
@@ -53,6 +51,7 @@ export class ChatService {
       .valueChanges({ idField: 'id' });
   }
 
+  /* Not used anywhere, causing a cyclical dependency error
   getChatMetadatas(): Observable<any> {
     return this.subscriptionService.getSubscriptions().pipe(
       switchMap((chatIds: string[]) => {
@@ -67,6 +66,7 @@ export class ChatService {
       })
     );
   }
+  */
 
   getUser(userId: string) {
     return this.afs.collection('users').doc(userId).valueChanges();
