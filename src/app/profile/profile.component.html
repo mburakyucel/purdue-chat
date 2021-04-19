@@ -19,19 +19,17 @@
     </div>
   </div>
   <mat-divider></mat-divider>
-  <div *ngIf="!selectEditName; else displayEditName">
-    <div class="row my-2 align-items-center">
-      <div class="col-auto">Name:</div>
-      <div class="col ps-4 pe-0 text-truncate">
-        {{ displayName.value }}
-      </div>
-      <div class="col-auto px-0">
-        <mat-icon
-          class="custom-icon"
-          (click)="selectEditName = true; selectEditPassword = false"
-          >edit</mat-icon
-        >
-      </div>
+  <div class="row my-2 align-items-center" *ngIf="!selectEditName; else displayEditName">
+    <div class="col-auto">Name:</div>
+    <div class="col ps-4 pe-0 text-truncate">
+      {{ displayName.value }}
+    </div>
+    <div class="col-auto px-0">
+      <mat-icon
+        class="custom-icon"
+        (click)="selectEditName = true; selectEditPassword = false"
+        >edit</mat-icon
+      >
     </div>
   </div>
   <ng-template #displayEditName>
