@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, HammerModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  HammerModule,
+  HAMMER_GESTURE_CONFIG,
+} from '@angular/platform-browser';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -87,10 +91,12 @@ import { HammerConfig } from './shared/hammer-config';
     MatBadgeModule,
     HammerModule,
   ],
-  providers: [{
-    provide: HAMMER_GESTURE_CONFIG,
-    useClass: HammerConfig
-  }],
+  providers: [
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: HammerConfig,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

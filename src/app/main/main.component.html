@@ -13,7 +13,10 @@
   <button mat-button (click)="openProfileDialog()">Profile</button>
   <button mat-button (click)="onLogout()">Logout</button>
 </mat-toolbar>
-<mat-sidenav-container class="sidenav-container" [style.height.px]="visualViewport.height - 56">
+<mat-sidenav-container
+  class="sidenav-container"
+  [style.height.px]="visualViewport.height - 56"
+>
   <mat-sidenav
     #sidenav
     class="sidenav"

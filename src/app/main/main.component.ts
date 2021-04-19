@@ -21,7 +21,7 @@ export class MainComponent implements OnInit {
     .observe(Breakpoints.Handset)
     .pipe(
       map((result: any) => result.matches),
-      tap(result => (this.isHandset = result)),
+      tap((result) => (this.isHandset = result)),
       shareReplay()
     );
   visualViewport: any;
@@ -29,19 +29,19 @@ export class MainComponent implements OnInit {
     public authService: AuthService,
     public dialog: MatDialog,
     private router: Router,
-    private breakpointObserver: BreakpointObserver,
+    private breakpointObserver: BreakpointObserver
   ) {
     this.visualViewport = visualViewport;
   }
   ngOnInit(): void {
     window.visualViewport.addEventListener('resize', (event: any) => {
-      window.scrollTo(0,0);
+      window.scrollTo(0, 0);
     });
   }
 
   onChatSelect(chatId: string) {
     this.router.navigate([`/chat/${chatId}`]);
-    if(this.isHandset) {
+    if (this.isHandset) {
       this.sidenav.close();
     }
   }
@@ -59,15 +59,14 @@ export class MainComponent implements OnInit {
   }
 
   swipeLeft(event: any) {
-    if(event.pointerType !== 'mouse') {
-      this.sidenav.close()
+    if (event.pointerType !== 'mouse') {
+      this.sidenav.close();
     }
   }
 
   swipeRight(event: any) {
-    if(event.pointerType !== 'mouse') {
-      this.sidenav.open()
+    if (event.pointerType !== 'mouse') {
+      this.sidenav.open();
     }
   }
-
 }

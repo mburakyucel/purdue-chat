@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { HammerGestureConfig } from "@angular/platform-browser";
+import { Injectable } from '@angular/core';
+import { HammerGestureConfig } from '@angular/platform-browser';
 
 /**
  * @hidden
@@ -11,8 +11,8 @@ export class HammerConfig extends HammerGestureConfig {
     const mc = new (<any>window).Hammer(element, {
       cssProps: {
         // This allows text highlighting
-        userSelect: true
-      }
+        userSelect: true,
+      },
     });
 
     for (const eventName in this.overrides) {
