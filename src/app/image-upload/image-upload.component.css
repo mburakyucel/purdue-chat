@@ -1,4 +1,11 @@
 .custom-container{
-    width: 700px;
+    width: 300px;
     height: auto;
+}
+
+@media (min-width: 600px) {
+    .custom-container{
+        width: 700px;
+        height: auto;
+    }
 }

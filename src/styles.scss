@@ -14,3 +14,7 @@ button:active {
   border: none;
   outline: none;
 }
+
+.zero-padding-dialog .mat-dialog-container {
+  padding: 0;
+}
