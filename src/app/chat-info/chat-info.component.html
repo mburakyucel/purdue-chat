@@ -3,24 +3,24 @@
     <div class="col-auto">
       <img
         class="groupImage-dimension rounded"
-        src="{{ chatMetaData.groupImageUrl }}"
+        src="{{ chatMetadata.groupImageUrl }}"
       />
     </div>
   </div>
   <div class="row pt-1 justify-content-center">
     <div class="col-auto">
-      <h2 class="m-1">{{ chatMetaData.groupName }}</h2>
+      <h2 class="m-1">{{ chatMetadata.groupName }}</h2>
     </div>
     <div class="row pb-2 justify-content-center">
       <div class="col-auto text-muted">
-        <small>{{ chatMetaData.createdAt | date: "short" }}</small>
+        <small>{{ chatMetadata.createdAt | date: "short" }}</small>
       </div>
     </div>
   </div>
   <mat-card class="mb-1">
     <mat-card-title class="pb-2">About</mat-card-title>
     <mat-card-content>
-      <p>{{ chatMetaData.groupDescription }}</p>
+      <p>{{ chatMetadata.groupDescription }}</p>
     </mat-card-content>
   </mat-card>
   <mat-card>

@@ -42,7 +42,7 @@ export class ChatGuard implements CanActivate {
         else {
           const isSubscribed = false;
           this.dialog.open(ChatInfoComponent, {
-            data: { chatMetaData: routing.metaData, isSubscribed },
+            data: { chatMetadata: routing.metadata, isSubscribed },
           });
           return of(this.router.parseUrl('/groups'));
         }
