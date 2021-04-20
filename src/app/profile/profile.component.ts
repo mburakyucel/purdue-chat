@@ -158,7 +158,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     if (this.passwordForm.hasError('match')) {
       return 'Same new and old passwords';
     } else if (this.passwordForm.hasError('noMatch')) {
-      return 'Passwords do not match';
+      return 'New passwords do not match';
+    } else if (this.passwordForm.get('newPassword').hasError('minlength')) {
+      return 'Enter a 6 or more character password';
     } else return 'An error occurred';
   }
 

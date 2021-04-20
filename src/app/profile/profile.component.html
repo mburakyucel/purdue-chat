@@ -192,7 +192,9 @@
           <div
             class="alert alert-danger pt-3"
             *ngIf="
-              passwordForm.errors && !(passwordForm.value.oldPassword === '')
+              passwordForm.invalid && 
+              !(passwordForm.value.oldPassword === '') &&
+              !(passwordForm.value.newPassword === '')
             "
           >
             {{ getPasswordErrorMsg() }}
