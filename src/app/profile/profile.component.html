@@ -191,8 +191,11 @@
         <div class="col text-center">
           <div
             class="alert alert-danger pt-3"
-            *ngIf="passwordForm.errors && !(passwordForm.value.oldPassword === '')"
-          >{{ getPasswordErrorMsg()}}
+            *ngIf="
+              passwordForm.errors && !(passwordForm.value.oldPassword === '')
+            "
+          >
+            {{ getPasswordErrorMsg() }}
           </div>
         </div>
       </div>
