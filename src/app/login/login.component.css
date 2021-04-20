@@ -15,11 +15,11 @@
 
 .mat-card-title {
   font-size: x-large;
-  line-height: 40px;  
+  line-height: 40px;
 }
 @media (min-width: 321px) {
   .mat-card-title {
-    font-size: xx-large; 
+    font-size: xx-large;
   }
 }
 
@@ -28,6 +28,6 @@
 }
 @media (min-width: 360px) {
   .mat-card-subtitle {
-    font-size: large; 
+    font-size: large;
   }
 }
