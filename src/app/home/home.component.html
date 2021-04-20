@@ -1,65 +1,82 @@
-<div class="container-fluid p-0 h-100">
-  <div class="row w-100 m-0 py-4 bg-dark"></div>
+<div class="container-fluid p-0">
+  <div class="row m-0 py-4 bg-dark"></div>
   <div
-    class="row w-100 m-0 justify-content-center text-center text-white"
-    style="font-size: 80px; padding: 50px 0 50px; background: rgb(0, 140, 255)"
+    class="row py-5 m-0 justify-content-center text-white"
+    style="font-size: 80px; background: rgb(0, 140, 255)"
   >
-    <div class="col-auto" style="line-height: 80px">Welcome to PChat</div>
-    <div class="w-100 py-3"></div>
-    <div class="col-auto lead">
-      A reliable, free-to-use college group chat application
+    <div class="col">
+      <div class="row justify-content-center">
+        <div class="col-auto text-center" style="line-height: 80px">Welcome to PChat</div>
+      </div>
+      <div class="row py-3 justify-content-center">
+        <div class="col-auto text-center lead">
+          A reliable, free-to-use college group chat application
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-auto">
+          <a routerLink="/login">
+            <button class="btn-lg btn-dark">
+              <span>Login</span>
+            </button>
+          </a>
+        </div>
+        <div class="col-auto">
+          <a routerLink="/register">
+            <button class="btn-lg btn-dark">
+              <span>Register</span>
+            </button>
+          </a>
+        </div>
+      </div>
     </div>
-    <div class="w-100 py-4"></div>
-    <div class="col-auto">
-      <a routerLink="/login">
-        <button class="btn-lg btn-dark">
-          <span>Login</span>
-        </button>
-      </a>
-    </div>
-    <div class="col-auto">
-      <a routerLink="/register">
-        <button class="btn-lg btn-dark">
-          <span>Register</span>
-        </button>
-      </a>
+  </div>
+  <div class="row px-3 py-5 m-0">
+    <div class="col col-lg-8 mx-auto">
+      <div class="row">
+        <div class="col h3">About PChat</div>
+      </div>
+      <div class="row">
+        <div
+        class="col lead"
+        style="line-height: 30px"
+        align="justify"
+      >
+        Our PChat web application seeks to be a public chat application made by
+        and for college students. A place to have public group chats for each
+        class, including clubs and organizations, where current and prospective
+        students can join and interact with one another. Each group is created to
+        facilitate easier interactions among like minded peers and be a place for
+        discussion.
+      </div>
+      </div>
     </div>
   </div>
 
-  <div class="row w-100 px-3 m-0" style="padding: 50px 0">
-    <div class="col-lg-8 mx-auto h3">About PChat</div>
-    <div
-      class="col-lg-8 mx-auto lead"
-      style="line-height: 30px"
-      align="justify"
-    >
-      Our PChat web application seeks to be a public chat application made by
-      and for college students. A place to have public group chats for each
-      class, including clubs and organizations, where current and prospective
-      students can join and interact with one another. Each group is created to
-      facilitate easier interactions among like minded peers and be a place for
-      discussion.
+  <div class="row px-3 py-5 m-0 bg-light">
+    <div class="col">
+      <div class="row">
+        <div class="col col-lg-8 mx-auto h3">Features</div>
+      </div>
+      <div class="row">
+        <div class="col col-lg-8 mx-auto lead" style="line-height: 30px">
+          <ul>
+            <li>Group chat creation and messaging</li>
+            <li>Direct messaging between registered members</li>
+            <li>Image sharing through any chat</li>
+            <li>Group invites and notifications</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="row w-100 px-3 m-0 bg-light" style="padding: 50px 0">
-    <div class="col-lg-8 mx-auto h3">Features</div>
-    <div class="w-100"></div>
-    <div class="col-lg-8 mx-auto lead" style="line-height: 30px">
-      <ul>
-        <li>Group chat creation and messaging</li>
-        <li>Direct messaging between registered members</li>
-        <li>Image sharing through any chat</li>
-        <li>Group invites and notifications</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="row w-100 px-3 m-0" style="padding: 50px 0">
-    <div class="col-lg-8 mx-auto h3">Project Repository</div>
-    <div class="w-100"></div>
-    <div class="col-lg-8 mx-auto">
-      <div class="row w-100">
+  <div class="row px-3 m-0" style="padding: 50px 0">
+    <div class="col col-lg-8 mx-auto">
+      <div class="row">
+        <div class="col h3">Project Repository</div>
+      </div>
+      <div class="row">
         <div class="col-auto">
           <a
             href="https://github.com/mburakyucel/purdue-chat"
@@ -80,7 +97,7 @@
             </svg>
           </a>
         </div>
-        <div class="col-auto align-self-center h4 p-0 m-0">
+        <div class="col-auto h4 p-0 m-0">
           <a
             href="https://github.com/mburakyucel/purdue-chat"
             target="_blank"
@@ -91,7 +108,8 @@
       </div>
     </div>
   </div>
-  <div class="row w-100 pt-4 pb-5 m-0"></div>
+
+  <div class="row m-0 py-5"></div>
   <div
     class="row w-100 m-0 py-4 bg-dark justify-content-center text-white"
     style="position: fixed; bottom: 0"
