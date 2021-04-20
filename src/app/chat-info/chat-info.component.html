@@ -2,7 +2,7 @@
   <div class="row justify-content-center">
     <div class="col-auto">
       <div class="group-image my-0">
-        <img src="{{ chatMetadata.groupImageUrl }}" class="img-fluid" />
+        <img src="{{ chatMetadata.groupImageUrl }}" class="img-fluid"/>
       </div>
     </div>
   </div>
@@ -17,47 +17,46 @@
     </div>
   </div>
   <mat-divider></mat-divider>
-  <div class="row pt-1">
-    <div class="col px-0">
-      <h2 class="mb-0">About</h2>
-    </div>
-  </div>
   <div class="row pb-2 justify-content-center">
     <div class="col">
-      <mat-card class="group-description">
-        <mat-card-content>
+      <mat-card class="custom-card">
+        <mat-card-title>
+          About
+        </mat-card-title>
+        <mat-divider></mat-divider>
+        <mat-card-content class="pt-2">
           {{ chatMetadata.groupDescription }}
         </mat-card-content>
       </mat-card>
     </div>
   </div>
-  <mat-divider class="w-100"></mat-divider>
-  <div class="row pt-1 justify-content-center">
-    <div class="col px-0">
-      <h2 class="my-0">Members</h2>
+  <div class="row">
+    <div class="col">
+      <mat-card class="custom-card"> 
+        <mat-card-title>Members</mat-card-title>
+        <mat-divider></mat-divider>
+        <mat-card-content class="pt-2">
+          <div *ngFor="let user of chatMembers">
+            <div class="row justify-content-center">
+              <div class="col-auto px-0">
+                <img class="display-image" src="{{ user.profileImage }}" />
+              </div>
+              <div class="col pe-0 text-truncate">
+                <h2 class="text-truncate">{{ user.displayName }}</h2>
+              </div>
+              <div class="col-auto">
+                <button mat-raised-button color="primary">
+                  <mat-icon>message</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
-  <mat-card class="members">
-    <mat-card-content>
-      <div *ngFor="let user of chatMembers">
-        <div class="row justify-content-center">
-          <div class="col-auto px-0">
-            <img class="display-image" src="{{ user.profileImage }}" />
-          </div>
-          <div class="col pe-0 display-name">
-            <h2 class="text-truncate">{{ user.displayName }}</h2>
-          </div>
-          <div class="col-auto">
-            <button mat-raised-button color="primary">
-              <mat-icon>message</mat-icon>
-            </button>
-          </div>
-        </div>
-      </div>
-    </mat-card-content>
-  </mat-card>
   <mat-divider></mat-divider>
-  <div class="row pt-2 pb-0 justify-content-center">
+  <div class="row py-2 justify-content-center">
     <div class="col-auto">
       <div *ngIf="!isSubscribed; else Unsubscribe">
         <button
