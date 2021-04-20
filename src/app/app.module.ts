@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  HammerModule,
+  HAMMER_GESTURE_CONFIG,
+} from '@angular/platform-browser';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -40,6 +44,7 @@ import { HomeComponent } from './home/home.component';
 import { ChatInfoComponent } from './chat-info/chat-info.component';
 import { CreateGroupComponent } from './create-group/create-group.component';
 import { ChatListItemComponent } from './chat-list-item/chat-list-item.component';
+import { HammerConfig } from './shared/hammer-config';
 
 @NgModule({
   declarations: [
@@ -84,8 +89,14 @@ import { ChatListItemComponent } from './chat-list-item/chat-list-item.component
     MatTooltipModule,
     MatProgressSpinnerModule,
     MatBadgeModule,
+    HammerModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: HammerConfig,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

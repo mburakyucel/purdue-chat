@@ -1,9 +1,9 @@
 .sidenav-container {
-  height: calc(100vh - 64px);
+  height: calc(100% - 56px);
 }
 
 .sidenav {
-  width: 350px;
+  width: 100%;
 }
 
 .sidenav .mat-toolbar {
@@ -18,4 +18,14 @@
 
 .spacer {
   flex: 1 1 auto;
+}
+
+@media (min-width: 600px) {
+  .sidenav-container {
+    height: calc(100% - 64px);
+  }
+
+  .sidenav {
+    width: 350px;
+  }
 }
