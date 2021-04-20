@@ -30,7 +30,4 @@ textarea.mat-input-element.cdk-textarea-autosize {
     height: 64px;
     width: 64px;
   }
-  /* .chat-container {
-    height: calc(100% - 80px);
-  } */
 }
