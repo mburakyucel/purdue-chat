@@ -35,14 +35,21 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
     private uploadService: ImageUploadService,
     private chatService: ChatService,
     public dialogRef: MatDialogRef<ImageUploadComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { croppieOptions: any, isCroppedImage: boolean, initalSelectedImage: string, recipient: string, chatId: string }
+    @Inject(MAT_DIALOG_DATA)
+    public data: {
+      croppieOptions: any;
+      isCroppedImage: boolean;
+      initalSelectedImage: string;
+      recipient: string;
+      chatId: string;
+    }
   ) {}
 
   ngOnInit(): void {
     this.isCropImage = this.data.isCroppedImage;
     this.imageUrl = this.data.initalSelectedImage;
     this.recipient = this.data.recipient;
-    console.log(this.data)
+    console.log(this.data);
   }
 
   enterImage(): any {
@@ -101,16 +108,16 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
       });
   }
 
-  sendImage(){
+  sendImage() {
     this.loading = true;
     this.uploadService
-    .uploadImage(this.imageUrl)
-    .subscribe((imageUrl: string) => {
-      this.chatService.sendMessage(imageUrl, this.data.chatId, 'image');
-      this.loading = false;
-      this.imageUrl = null;
-      this.dialogRef.close()
-    });
+      .uploadImage(this.imageUrl)
+      .subscribe((imageUrl: string) => {
+        this.chatService.sendMessage(imageUrl, this.data.chatId, 'image');
+        this.loading = false;
+        this.imageUrl = null;
+        this.dialogRef.close();
+      });
   }
 
   ngOnDestroy() {
