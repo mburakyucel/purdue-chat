@@ -182,8 +182,8 @@ export class ChatComponent implements OnInit, OnDestroy {
   onChatInfo() {
     if (this.chatMetadata.type === 'group') {
       this.dialog.open(ChatInfoComponent, {
-        maxWidth: "90vw",
-        maxHeight: "90vh",
+        maxWidth: '90vw',
+        maxHeight: '90vh',
         data: { chatMetaData: this.chatMetadata, isSubscribed: true },
       });
     }
