@@ -188,18 +188,11 @@
         </div>
       </div>
       <div class="row">
-        <div class="col">
+        <div class="col text-center">
           <div
             class="alert alert-danger pt-3"
-            *ngIf="passwordForm.errors?.match"
-          >
-            Same new and old passwords
-          </div>
-          <div
-            class="alert alert-danger pt-3"
-            *ngIf="passwordForm.errors?.noMatch && !passwordForm.errors?.match"
-          >
-            Passwords do not match
+            *ngIf="passwordForm.errors && !(passwordForm.value.oldPassword === '')"
+          >{{ getPasswordErrorMsg()}}
           </div>
         </div>
       </div>

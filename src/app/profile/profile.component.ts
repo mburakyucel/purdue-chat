@@ -154,6 +154,14 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.displayName.setValue(this.currentDisplayName);
   }
 
+  getPasswordErrorMsg() {
+    if (this.passwordForm.hasError('match')) {
+      return 'Same new and old passwords';
+    } else if (this.passwordForm.hasError('noMatch')) {
+      return 'Passwords do not match';
+    } else return 'An error occurred';
+  }
+
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
