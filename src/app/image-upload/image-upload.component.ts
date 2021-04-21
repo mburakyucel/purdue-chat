@@ -112,7 +112,7 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
   }
 
   sendImage() {
-    if(!this.loading) {
+    if (!this.loading) {
       this.loading = true;
       this.uploadService
         .uploadImage(this.imageUrl)
