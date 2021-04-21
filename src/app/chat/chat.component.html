@@ -3,15 +3,30 @@
     <div class="row p-2 chat-header" (click)="onChatInfo()">
       <div class="col-auto px-2">
         <img
-          class="rounded-circle"
-          height="72px"
-          width="72px"
+          class="rounded-circle header-image"
+          height="48px"
+          width="48px"
           [src]="chatImageUrl"
           *ngIf="chatImageUrl"
         />
       </div>
-      <div class="col-auto">
-        <h1>{{ chatTitle }}</h1>
+      <div class="col-auto align-self-center">
+        <h1 class="m-0">
+          {{ chatTitle }}
+        </h1>
+      </div>
+      <div
+        *ngIf="this.chatMetadata.type === 'group'"
+        class="col align-self-center"
+      >
+        <button
+          mat-raised-button
+          class="btn float-end"
+          color="primary"
+          (click)="onInvite()"
+        >
+          Invite
+        </button>
       </div>
     </div>
     <mat-divider></mat-divider>
@@ -56,18 +71,6 @@
         </div>
       </div>
     </div>
-    <div *ngIf="imageUrl" class="row py-4">
-      <div class="col-auto">
-        <img class="chat-image" src="{{ imageUrl }}" />
-      </div>
-      <div class="col-auto">
-        <mat-spinner
-          *ngIf="imageLoading"
-          [diameter]="50"
-          mode="indeterminate"
-        ></mat-spinner>
-      </div>
-    </div>
     <div class="row">
       <div class="col">
         <mat-form-field class="w-100" [style.fontSize]="'20px'">
@@ -90,7 +93,7 @@
           </button>
         </mat-form-field>
       </div>
-      <div class="col-auto pb-4 align-self-end">
+      <div class="col-auto pb-4 ps-0 align-self-end">
         <input
           style="display: none"
           type="file"
@@ -98,9 +101,13 @@
           (change)="onImageSelect($event)"
           #hiddenImageInput
         />
-        <button mat-flat-button (click)="hiddenImageInput.click()">
-          Image
-        </button>
+        <mat-icon
+          class="custom-icon"
+          mat-flat-button
+          (click)="hiddenImageInput.click()"
+        >
+          add_photo_alternate
+        </mat-icon>
       </div>
     </div>
   </ng-container>

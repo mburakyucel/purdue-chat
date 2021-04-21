@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { RouteService } from '../services/route.service';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +13,11 @@ import { AuthService } from '../services/auth.service';
 export class LoginComponent implements OnInit {
   passwordHide = true;
   loading = false;
+  cachedRoute = '';
   loginForm = new FormGroup({
     email: new FormControl('', [
       Validators.required,
-      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+      Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
     ]),
     password: new FormControl('', [
       Validators.required,
@@ -25,6 +27,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
+    private routeService: RouteService,
     private _snackBar: MatSnackBar,
     private router: Router
   ) {}
@@ -41,7 +44,7 @@ export class LoginComponent implements OnInit {
           duration: 2000,
         });
         this.loading = false;
-        this.router.navigate(['']);
+        this.routeService.routeUser();
       },
       (error) => {
         switch (error.code) {

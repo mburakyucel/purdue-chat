@@ -8,7 +8,7 @@ textarea.mat-input-element.cdk-textarea-autosize {
 }
 
 .chat-container {
-  height: calc(100% - 80px);
+  height: calc(100% - 16px);
 }
 
 .message-section {
@@ -18,4 +18,20 @@ textarea.mat-input-element.cdk-textarea-autosize {
 
 .chat-header {
   cursor: pointer;
+}
+
+.custom-icon {
+  cursor: pointer;
+}
+
+.header-image {
+  height: 48px;
+  width: 48px;
+}
+
+@media (min-width: 600px) {
+  .header-image {
+    height: 64px;
+    width: 64px;
+  }
 }

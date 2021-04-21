@@ -1,0 +1,11 @@
+.chat-image {
+  max-width: 75vw;
+  max-height: 75vh;
+}
+
+@media (min-width: 600px) {
+  .chat-image {
+    max-width: 60vw;
+    max-height: 60vh;
+  }
+}

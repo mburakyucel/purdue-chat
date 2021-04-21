@@ -3,6 +3,7 @@
 html,
 body {
   height: 100%;
+  overflow: hidden;
 }
 body {
   margin: 0;
@@ -13,4 +14,8 @@ button:focus,
 button:active {
   border: none;
   outline: none;
+}
+
+.zero-padding-dialog .mat-dialog-container {
+  padding: 0;
 }

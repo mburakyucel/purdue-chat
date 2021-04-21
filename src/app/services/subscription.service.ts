@@ -2,15 +2,21 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import firebase from 'firebase/app';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
+import { ChatService } from '../services/chat.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SubscriptionService {
-  constructor(public afs: AngularFirestore, public authService: AuthService) {}
+  constructor(
+    public afs: AngularFirestore,
+    public authService: AuthService,
+    private chatService: ChatService
+  ) {}
 
   //Get all group Ids a user is subscribed too
   getSubscriptions(): Observable<string[]> {
@@ -51,5 +57,32 @@ export class SubscriptionService {
     return this.afs
       .collection('users', (ref) => ref.where(`chats.${chatId}`, '>', 0))
       .valueChanges();
+  }
+
+  //Checks if the user is subscribed to the chat being accessed through the URL
+  checkSubscription(chatId: any): Observable<any> {
+    let isSubscribed = false;
+    return this.getSubscriptions().pipe(
+      tap((subscriptions) => {
+        if (subscriptions.includes(chatId)) {
+          isSubscribed = true;
+        }
+      }),
+      switchMap(() => this.chatService.getChatMetadata(chatId)),
+      switchMap((chat: any) => {
+        //Accessing a subscribed group or dm -> do nothing
+        if (isSubscribed) {
+          return of({ accessType: 'subscribed', metadata: chat });
+        }
+        //Accessing an un-subscribed group -> route to chat info
+        else if (chat.type === 'group') {
+          return of({ accessType: 'unsubscribedChat', metadata: chat });
+        }
+        //Accessing an un-subscribed dm -> route to main
+        else {
+          return of({ accessType: 'unsubscribedDM', metadata: chat });
+        }
+      })
+    );
   }
 }
