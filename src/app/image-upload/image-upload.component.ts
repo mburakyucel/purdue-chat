@@ -48,6 +48,11 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
     this.isCropImage = this.data.isCroppedImage;
     this.imageUrl = this.data.initalSelectedImage;
     this.recipient = this.data.recipient;
+    this.dialogRef.keydownEvents().subscribe(event => {
+      if (event.key === "Enter") {
+        this.sendImage();
+      }
+    });
   }
 
   enterImage(): any {
