@@ -49,7 +49,6 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
     this.isCropImage = this.data.isCroppedImage;
     this.imageUrl = this.data.initalSelectedImage;
     this.recipient = this.data.recipient;
-    console.log(this.data);
   }
 
   enterImage(): any {
