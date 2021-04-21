@@ -8,7 +8,6 @@ import {
 } from '@angular/core';
 
 import * as Croppie from 'croppie';
-import { CroppieOptions } from 'croppie';
 
 import { ImageUploadService } from 'src/app/services/image-upload.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';

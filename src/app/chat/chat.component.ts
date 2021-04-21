@@ -146,7 +146,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     reader.onload = (url: any) => {
       this.imageUrl = url.target.result;
       this.dialog.open(ImageUploadComponent, {
-        maxWidth: '100vw',
+        maxWidth: '90vw',
         data: {
           croppieOptions: null,
           isCroppedImage: false,
