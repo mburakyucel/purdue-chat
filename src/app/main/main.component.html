@@ -13,27 +13,23 @@
   <button mat-button (click)="openProfileDialog()">Profile</button>
   <button mat-button (click)="onLogout()">Logout</button>
 </mat-toolbar>
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container
+  class="sidenav-container"
+  [style.height.px]="visualViewport.height - 56"
+>
   <mat-sidenav
-    #drawer
+    #sidenav
     class="sidenav"
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
+    [disableClose]="true"
+    [autoFocus]="false"
+    (swipeLeft)="swipeLeft($event)"
   >
     <app-chat-list (chatSelect)="onChatSelect($event)"></app-chat-list>
   </mat-sidenav>
-  <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button
-        type="button"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async"
-      >
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
-    </mat-toolbar>
+  <mat-sidenav-content (swipeRight)="swipeRight($event)">
     <!-- Add Content Here -->
     <router-outlet></router-outlet>
   </mat-sidenav-content>
