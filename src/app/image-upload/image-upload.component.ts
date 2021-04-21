@@ -112,15 +112,17 @@ export class ImageUploadComponent implements OnInit, OnDestroy {
   }
 
   sendImage() {
-    this.loading = true;
-    this.uploadService
-      .uploadImage(this.imageUrl)
-      .subscribe((imageUrl: string) => {
-        this.chatService.sendMessage(imageUrl, this.data.chatId, 'image');
-        this.loading = false;
-        this.imageUrl = null;
-        this.dialogRef.close();
-      });
+    if(!this.loading) {
+      this.loading = true;
+      this.uploadService
+        .uploadImage(this.imageUrl)
+        .subscribe((imageUrl: string) => {
+          this.chatService.sendMessage(imageUrl, this.data.chatId, 'image');
+          this.loading = false;
+          this.imageUrl = null;
+          this.dialogRef.close();
+        });
+    }
   }
 
   ngOnDestroy() {
