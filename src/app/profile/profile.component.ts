@@ -78,7 +78,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   onImageClick() {
     this.imageUploadDialogRef = this.dialog.open(ImageUploadComponent, {
-      data: { croppieOptions: this.croppieOptions },
+      maxWidth: '95vw',
+      panelClass: 'zero-padding-dialog',
+      data: { croppieOptions: this.croppieOptions, isCroppedImage: true },
     });
     this.imageUploadDialogRef.afterClosed().subscribe((imageurl) => {
       if (imageurl) {

@@ -20,6 +20,10 @@ textarea.mat-input-element.cdk-textarea-autosize {
   cursor: pointer;
 }
 
+.custom-icon {
+  cursor: pointer;
+}
+
 .header-image {
   height: 48px;
   width: 48px;
