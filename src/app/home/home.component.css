@@ -1,0 +1,11 @@
+.home-title {
+  line-height: 80px;
+  font-size: 60px;
+}
+
+@media (min-width: 600px) {
+  .home-title {
+    line-height: 80px;
+    font-size: 80px;
+  }
+}

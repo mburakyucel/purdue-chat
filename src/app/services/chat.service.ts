@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { combineLatest, Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -50,23 +49,6 @@ export class ChatService {
       .doc(chatId)
       .valueChanges({ idField: 'id' });
   }
-
-  /* Not used anywhere, causing a cyclical dependency error
-  getChatMetadatas(): Observable<any> {
-    return this.subscriptionService.getSubscriptions().pipe(
-      switchMap((chatIds: string[]) => {
-        return combineLatest(
-          chatIds.map((chatID: string) => {
-            return this.afs
-              .collection<any>('chats')
-              .doc(chatID)
-              .valueChanges({ idField: 'id' });
-          })
-        );
-      })
-    );
-  }
-  */
 
   getUser(userId: string) {
     return this.afs.collection('users').doc(userId).valueChanges();

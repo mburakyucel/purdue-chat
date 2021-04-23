@@ -1,0 +1,30 @@
+.transform-card {
+  position: absolute;
+  transform: translate(-50%, -52%);
+  top: 50%;
+  left: 50%;
+}
+
+.mat-card-title {
+  font-size: x-large;
+  line-height: 40px;
+}
+
+.mat-card-subtitle {
+  font-size: smaller;
+}
+
+@media (min-width: 600px) and (min-height: 800px) {
+  .transform-card {
+    position: absolute;
+    transform: translate(-50%, -75%);
+    top: 50%;
+    left: 50%;
+  }
+  .mat-card-title {
+    font-size: xx-large;
+  }
+  .mat-card-subtitle {
+    font-size: large;
+  }
+}
