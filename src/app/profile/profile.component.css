@@ -1,32 +1,18 @@
 img {
   border-radius: 50%;
-  width: 50%;
+  cursor: pointer;
 }
 
-.image {
-  display: flex;
-  justify-content: center;
-  margin-top: 10%;
-  margin-bottom: 10%;
-}
-
-.tab1 {
-  display: inline-block;
-  margin-left: 60px;
-}
-
-.tab2 {
-  display: inline-block;
-  margin-left: 40px;
-}
-
-.custom.mat-card {
-  padding: 0%;
-  width: 400px;
+.profile-image {
+  height: 200px;
+  width: 200px;
 }
 
 .formGroup {
   margin-bottom: -20px;
-  font-size: 14px;
-  margin-left: 33%;
+}
+
+.custom-icon {
+  transform: scale(0.75);
+  cursor: pointer;
 }

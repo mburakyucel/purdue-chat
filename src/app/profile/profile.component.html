@@ -1,89 +1,98 @@
-<mat-card class="custom">
-  <div class="image">
-    <img
-      src="{{ imageURL }}"
-      (click)="onImageClick()"
-      alt="Image not available"
-    />
+<div class="container">
+  <div class="row pb-2 justify-content-center">
+    <div class="col-auto">
+      <div class="profile-image">
+        <img
+          src="{{ imageURL }}"
+          alt="Image not available"
+          (click)="onImageClick()"
+          class="img-fluid"
+        />
+      </div>
+    </div>
   </div>
-  <mat-list>
-    <mat-divider></mat-divider>
-    <mat-list-item>
-      <span style="flex: 1 1 auto">
-        Email: <span class="tab1">{{ email }}</span>
-      </span>
-    </mat-list-item>
-    <mat-divider></mat-divider>
-    <mat-list-item style="height: auto">
-      <div *ngIf="toggle_displayName; else toggleOff" style="flex: 1 1 auto">
-        <p style="float: left; margin-top: 12px">
-          Display Name: &nbsp;{{ displayName.value }}
-        </p>
-        <button
-          mat-stroked-button
-          (click)="
-            toggle_displayName = !toggle_displayName; toggle_password = true
-          "
-          style="float: right; margin-top: 5px"
-        >
-          edit
-        </button>
-      </div>
-      <ng-template #toggleOff>
-        <form class="display_name" style="margin-top: 24px">
-          <mat-form-field appearance="outline">
-            <mat-label>Display Name:</mat-label>
-            <input
-              matInput
-              #name
-              maxlength="32"
-              type="text"
-              class="form-control"
-              [formControl]="displayName"
-            />
-            <mat-error *ngIf="displayName.invalid"
-              >At least 1 character required</mat-error
-            >
-            <mat-hint align="end">{{ name.value?.length || 0 }}/32</mat-hint>
-          </mat-form-field>
-        </form>
-        <button
-          mat-stroked-button
-          [disabled]="!displayName.valid"
-          (click)="onDisplayNameClick()"
-          style="margin-left: 10px"
-        >
-          Save
-        </button>
-        <button mat-stroked-button (click)="cancelDisplayName()">Cancel</button>
-      </ng-template>
-    </mat-list-item>
-    <mat-divider></mat-divider>
-    <mat-list-item style="height: auto">
-      <div
-        *ngIf="toggle_password; else toggleOff_password"
-        style="flex: 1 1 auto"
+  <mat-divider></mat-divider>
+  <div class="row my-2 py-1 align-items-center">
+    <div class="col-auto">Email:</div>
+    <div class="col ps-4 pe-0">
+      {{ email }}
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <div
+    class="row my-2 align-items-center"
+    *ngIf="!selectEditName; else displayEditName"
+  >
+    <div class="col-auto">Name:</div>
+    <div class="col ps-4 pe-0 text-truncate">
+      {{ displayName.value }}
+    </div>
+    <div class="col-auto px-0">
+      <mat-icon
+        class="custom-icon"
+        (click)="selectEditName = true; selectEditPassword = false"
+        >edit</mat-icon
       >
-        <p style="float: left; margin-top: 12px">
-          Password:<span class="tab2">********</span>
-        </p>
+    </div>
+  </div>
+  <ng-template #displayEditName>
+    <div class="row my-2 align-items-center">
+      <div class="col">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Display Name:</mat-label>
+          <input
+            matInput
+            #name
+            maxlength="32"
+            type="text"
+            class="form-control"
+            [formControl]="displayName"
+          />
+          <mat-error *ngIf="displayName.invalid"
+            >At least 1 character required</mat-error
+          >
+          <mat-hint align="end">{{ name.value?.length || 0 }}/32</mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row mb-2 mt-0 justify-content-center">
+      <div class="col-auto">
         <button
           mat-stroked-button
-          (click)="
-            toggle_password = !toggle_password; toggle_displayName = true
-          "
-          style="float: right; margin-top: 5px"
+          type="submit"
+          (click)="selectEditName = false; onDisplayNameClick()"
+          [disabled]="!displayName.valid"
         >
-          edit
+          <mat-icon>check</mat-icon>
         </button>
       </div>
-      <ng-template #toggleOff_password>
-        <form
-          [formGroup]="passwordForm"
-          style="margin-top: 12px; margin-bottom: 5px"
+      <div class="col-auto">
+        <button mat-stroked-button (click)="selectEditName = false">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+  </ng-template>
+  <mat-divider></mat-divider>
+  <div *ngIf="!selectEditPassword; else displayEditPassword">
+    <div class="row my-2 align-items-center">
+      <div class="col-auto">Password:</div>
+      <div class="col px-0">******</div>
+      <div class="col-auto px-0">
+        <mat-icon
+          class="custom-icon"
+          (click)="selectEditPassword = true; selectEditName = false"
+          >edit</mat-icon
         >
+      </div>
+    </div>
+  </div>
+  <ng-template #displayEditPassword>
+    <form [formGroup]="passwordForm">
+      <div class="row">
+        <div class="col">
           <div class="formGroup">
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" class="w-100">
               <mat-label>Old Password</mat-label>
               <input
                 matInput
@@ -104,8 +113,12 @@
               </button>
             </mat-form-field>
           </div>
-          <div class="formGroup">
-            <mat-form-field appearance="outline">
+        </div>
+      </div>
+      <div class="formGroup">
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="outline" class="w-100">
               <mat-label>New Password</mat-label>
               <input
                 matInput
@@ -126,8 +139,12 @@
               </button>
             </mat-form-field>
           </div>
-          <div class="formGroup">
-            <mat-form-field appearance="outline">
+        </div>
+      </div>
+      <div class="formGroup">
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="outline" class="w-100">
               <mat-label>Confirm Password</mat-label>
               <input
                 matInput
@@ -148,30 +165,43 @@
               </button>
             </mat-form-field>
           </div>
+        </div>
+      </div>
+      <div class="row py-2 justify-content-center">
+        <div class="col-auto">
           <button
             mat-stroked-button
             type="submit"
-            (click)="onPasswordChange()"
+            (click)="selectEditPassword = false; onPasswordChange()"
             [disabled]="!passwordForm.valid"
-            style="margin-left: 115px"
           >
-            Save
+            <mat-icon>check</mat-icon>
           </button>
-          <button mat-stroked-button (click)="cancelPassword()">Cancel</button>
+        </div>
+        <div class="col-auto">
+          <button
+            mat-stroked-button
+            (click)="selectEditPassword = false; cancelPassword()"
+          >
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text-center">
           <div
             class="alert alert-danger pt-3"
-            *ngIf="passwordForm.errors?.match"
+            *ngIf="
+              passwordForm.invalid &&
+              !(passwordForm.value.oldPassword === '') &&
+              !(passwordForm.value.newPassword === '')
+            "
           >
-            Same new and old passwords
+            {{ getPasswordErrorMsg() }}
           </div>
-          <div
-            class="alert alert-danger pt-3"
-            *ngIf="passwordForm.errors?.noMatch && !passwordForm.errors?.match"
-          >
-            Passwords do not match
-          </div>
-        </form>
-      </ng-template>
-    </mat-list-item>
-  </mat-list>
-</mat-card>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+  <mat-divider></mat-divider>
+</div>
