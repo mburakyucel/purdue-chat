@@ -1,7 +1,7 @@
 <div class="container my-2 border chat-container">
   <ng-container *ngIf="chatMetadata">
-    <div class="row p-2 chat-header" (click)="onChatInfo()">
-      <div class="col-auto px-2">
+    <div class="row p-2 chat-header">
+      <div class="col-auto px-2" (click)="onChatInfo()">
         <img
           class="rounded-circle header-image"
           height="48px"
@@ -10,14 +10,14 @@
           *ngIf="chatImageUrl"
         />
       </div>
-      <div class="col-auto align-self-center">
-        <h1 class="m-0">
+      <div class="col align-self-center text-truncate" (click)="onChatInfo()">
+        <h1 class="m-0 text-truncate">
           {{ chatTitle }}
         </h1>
       </div>
       <div
         *ngIf="this.chatMetadata.type === 'group'"
-        class="col align-self-center"
+        class="col-auto align-self-center"
       >
         <button
           mat-raised-button
