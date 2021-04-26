@@ -9,6 +9,8 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   title = 'purdue-chat';
-  constructor(public authService: AuthService,
-    private swUpdate: AppUpdateService) {}
+  constructor(
+    public authService: AuthService,
+    private swUpdate: AppUpdateService
+  ) {}
 }
