@@ -14,9 +14,9 @@
           *ngIf="imageUrl"
         />
       </div>
-      <div class="col">
+      <div class="col text-truncate">
         <div>
-          <span *ngIf="chatTitle">{{ chatTitle }}</span>
+          <span *ngIf="chatTitle" class="text-truncate">{{ chatTitle }}</span>
           <span *ngIf="lastMessage" style="float: right">{{
             lastMessage.createdAt | date: "shortTime"
           }}</span>
