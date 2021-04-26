@@ -9,3 +9,10 @@
     font-size: 80px;
   }
 }
+
+/* This is a hack to allow scrolling on main page */
+.home-container {
+  height: 100%;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch; /* enables “momentum” (smooth) scrolling */
+}
