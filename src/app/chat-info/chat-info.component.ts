@@ -29,7 +29,7 @@ export class ChatInfoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.chatMetadata = this.chatInfoDialogData.chatMetaData;
+    this.chatMetadata = this.chatInfoDialogData.chatMetadata;
     this.isSubscribed = this.chatInfoDialogData.isSubscribed;
     this.subService
       .getSubscribedUsers(this.chatMetadata.id)

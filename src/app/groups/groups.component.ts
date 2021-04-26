@@ -69,7 +69,7 @@ export class GroupsComponent implements OnInit {
     this.dialog.open(ChatInfoComponent, {
       maxWidth: '80vw',
       maxHeight: '90vh',
-      data: { chatMetaData: selectedGroup, isSubscribed },
+      data: { chatMetadata: selectedGroup, isSubscribed },
     });
   }
 }
