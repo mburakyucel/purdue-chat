@@ -45,6 +45,7 @@ import { ChatInfoComponent } from './chat-info/chat-info.component';
 import { CreateGroupComponent } from './create-group/create-group.component';
 import { ChatListItemComponent } from './chat-list-item/chat-list-item.component';
 import { HammerConfig } from './shared/hammer-config';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,12 @@ import { HammerConfig } from './shared/hammer-config';
     MatProgressSpinnerModule,
     MatBadgeModule,
     HammerModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the app is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [
     {
