@@ -49,7 +49,6 @@ export class ChatComponent implements OnInit, OnDestroy {
     private chatService: ChatService,
     private profileService: ProfileService,
     private route: ActivatedRoute,
-    private imageUploadService: ImageUploadService,
     private subService: SubscriptionService,
     private auth: AuthService,
     private clipboard: Clipboard,
@@ -185,7 +184,7 @@ export class ChatComponent implements OnInit, OnDestroy {
       this.dialog.open(ChatInfoComponent, {
         maxWidth: '80vw',
         maxHeight: '90vh',
-        data: { chatMetaData: this.chatMetadata, isSubscribed: true },
+        data: { chatMetadata: this.chatMetadata, isSubscribed: true },
       });
     }
   }
