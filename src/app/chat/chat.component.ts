@@ -49,7 +49,6 @@ export class ChatComponent implements OnInit, OnDestroy {
     private chatService: ChatService,
     private profileService: ProfileService,
     private route: ActivatedRoute,
-    private imageUploadService: ImageUploadService,
     private subService: SubscriptionService,
     private auth: AuthService,
     private clipboard: Clipboard,

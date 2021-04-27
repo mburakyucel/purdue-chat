@@ -24,6 +24,7 @@ export class MainComponent implements OnInit {
       tap((result) => (this.isHandset = result)),
       shareReplay()
     );
+  contentHeight: number;
   visualViewport: any;
   constructor(
     public authService: AuthService,
@@ -31,10 +32,27 @@ export class MainComponent implements OnInit {
     private router: Router,
     private breakpointObserver: BreakpointObserver
   ) {
-    this.visualViewport = visualViewport;
+    this.visualViewport = window.visualViewport;
   }
   ngOnInit(): void {
-    window.visualViewport.addEventListener('resize', (event: any) => {
+    /* On Firefox, visualViewport is not enabled by default.
+    *  This is a hack to determine the height using window innerHeight in case 
+    *  visualViewport is not enabled
+    */
+    if(this.visualViewport) {
+      window.visualViewport.addEventListener('resize', (event: any) => {
+        this.contentHeight = window.visualViewport.height;
+        window.scrollTo(0, 0);
+      });
+    } else {
+      window.addEventListener('resize', (event: any) => {
+        this.contentHeight = window.innerHeight;
+        window.scrollTo(0, 0);
+      });
+    }
+    /* This is a hack to disable elastic scroll bounce delay */
+    window.addEventListener("scroll", (e) => {
+      e.preventDefault();
       window.scrollTo(0, 0);
     });
   }
