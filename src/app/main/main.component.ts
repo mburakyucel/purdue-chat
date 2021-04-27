@@ -36,10 +36,10 @@ export class MainComponent implements OnInit {
   }
   ngOnInit(): void {
     /* On Firefox, visualViewport is not enabled by default.
-    *  This is a hack to determine the height using window innerHeight in case 
-    *  visualViewport is not enabled
-    */
-    if(this.visualViewport) {
+     *  This is a hack to determine the height using window innerHeight in case
+     *  visualViewport is not enabled
+     */
+    if (this.visualViewport) {
       window.visualViewport.addEventListener('resize', (event: any) => {
         this.contentHeight = window.visualViewport.height;
         window.scrollTo(0, 0);
@@ -51,7 +51,7 @@ export class MainComponent implements OnInit {
       });
     }
     /* This is a hack to disable elastic scroll bounce delay */
-    window.addEventListener("scroll", (e) => {
+    window.addEventListener('scroll', (e) => {
       e.preventDefault();
       window.scrollTo(0, 0);
     });
